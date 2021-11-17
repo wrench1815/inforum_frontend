@@ -170,6 +170,6 @@ export default {
 }
 
 #nav .navbar-nav .nuxt-link-exact-active {
-  color: #0d6efd;
+  color: #e91e63;
 }
 </style>
