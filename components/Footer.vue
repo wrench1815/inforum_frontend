@@ -6,13 +6,13 @@
         <!-- upper -->
         <div class="row row-cols-lg-5 pt-4 pt-lg-5 my-5 border-top">
           <div class="col-lg d-flex flex-column align-items-center">
-            <a href="#" class="d-flex align-items-center">
+            <NuxtLink to="/" class="d-flex align-items-center">
               <p class="text-muted d-block text-2xl text-center text-lg-start">
                 <img src="../assets/icon.jpg" alt="logo" class="w-15 w-lg-25" />
                 Inforum
               </p>
-            </a>
-            <a href="#" class="link-dark"
+            </NuxtLink>
+            <a href="mailto:contact@inforum.com" class="link-dark"
               ><span class="badge bg-secondary mb-2">Email</span>
               contact@inforum.com</a
             >
@@ -23,48 +23,66 @@
           <div class="col-lg" :class="linksClasses">
             <ul class="nav flex-column">
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Home</a>
+                <NuxtLink to="/" class="nav-link p-0 text-muted">Home</NuxtLink>
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">About</a>
+                <NuxtLink to="/about" class="nav-link p-0 text-muted"
+                  >About</NuxtLink
+                >
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Blog</a>
+                <NuxtLink to="/blog" class="nav-link p-0 text-muted"
+                  >Blog</NuxtLink
+                >
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Contact</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg" :class="linksClasses">
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Home</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">About</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Blog</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Contact</a>
+                <NuxtLink to="/contact" class="nav-link p-0 text-muted"
+                  >Contact</NuxtLink
+                >
               </li>
             </ul>
           </div>
           <div class="col-lg" :class="linksClasses">
             <ul class="nav flex-column">
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Home</a>
+                <NuxtLink to="/" class="nav-link p-0 text-muted">Home</NuxtLink>
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">About</a>
+                <NuxtLink to="/about" class="nav-link p-0 text-muted"
+                  >About</NuxtLink
+                >
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Blog</a>
+                <NuxtLink to="/blog" class="nav-link p-0 text-muted"
+                  >Blog</NuxtLink
+                >
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-muted">Contact</a>
+                <NuxtLink to="/contact" class="nav-link p-0 text-muted"
+                  >Contact</NuxtLink
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg" :class="linksClasses">
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2">
+                <NuxtLink to="/" class="nav-link p-0 text-muted">Home</NuxtLink>
+              </li>
+              <li class="nav-item mb-2">
+                <NuxtLink to="/about" class="nav-link p-0 text-muted"
+                  >About</NuxtLink
+                >
+              </li>
+              <li class="nav-item mb-2">
+                <NuxtLink to="/blog" class="nav-link p-0 text-muted"
+                  >Blog</NuxtLink
+                >
+              </li>
+              <li class="nav-item mb-2">
+                <NuxtLink to="/contact" class="nav-link p-0 text-muted"
+                  >Contact</NuxtLink
+                >
               </li>
             </ul>
           </div>
