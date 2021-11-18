@@ -11,6 +11,9 @@ export default {
     htmlAttrs: {
       lang: 'en',
     },
+    bodyAttrs: {
+      class: 'bg-light',
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -42,11 +45,11 @@ export default {
       },
 
       // Font Awesome css
-      {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: '/material_kit/css/font-awesome.min.css',
-      },
+      // {
+      //   rel: 'stylesheet',
+      //   type: 'text/css',
+      //   href: '/material_kit/css/font-awesome.min.css',
+      // },
 
       // Material Design css
       {
@@ -57,6 +60,10 @@ export default {
     ],
 
     script: [
+      {
+        type: 'text/javascript',
+        src: '/material_kit/js/plugins/font-awesome.js',
+      },
       // Popper js
       {
         type: 'text/javascript',
