@@ -93,8 +93,8 @@
                   <div class="card-body position-relative">
                     <div class="row mt-4">
                       <div class="col-md-6">
-                        <div class="input-group input-group-dynamic my-4">
-                          <label class="form-label">Full Name</label>
+                        <div class="input-group input-group-static my-4">
+                          <label>Full Name</label>
                           <input
                             class="form-control"
                             aria-label="Full Name..."
@@ -103,8 +103,8 @@
                         </div>
                       </div>
                       <div class="col-md-6 ps-2">
-                        <div class="input-group input-group-dynamic my-4">
-                          <label class="form-label">Email</label>
+                        <div class="input-group input-group-static my-4">
+                          <label>Email</label>
                           <input
                             type="email"
                             class="form-control"
