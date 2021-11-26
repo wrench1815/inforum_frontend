@@ -1,11 +1,6 @@
 <template>
   <section class="py-7 position-relative">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6 mx-auto text-center">
-          <h1>Contact Us</h1>
-        </div>
-      </div>
       <div class="row mt-6">
         <div class="col-lg-12 mx-auto">
           <div class="card">
@@ -94,7 +89,7 @@
                     <div class="row mt-4">
                       <div class="col-md-6">
                         <div class="input-group input-group-static my-4">
-                          <label>Full Name</label>
+                          <label class="text-primary">Full Name</label>
                           <input
                             class="form-control"
                             aria-label="Full Name..."
@@ -104,7 +99,7 @@
                       </div>
                       <div class="col-md-6 ps-2">
                         <div class="input-group input-group-static my-4">
-                          <label>Email</label>
+                          <label class="text-primary">Email</label>
                           <input
                             type="email"
                             class="form-control"
@@ -115,7 +110,7 @@
                     </div>
 
                     <div class="input-group input-group-static mt-4">
-                      <label>Your message</label>
+                      <label class="text-primary">Your message</label>
                       <textarea
                         name="message"
                         class="form-control"
