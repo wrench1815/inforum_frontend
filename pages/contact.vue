@@ -1,11 +1,6 @@
 <template>
   <section class="py-7 position-relative">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6 mx-auto text-center">
-          <h1>Contact Us</h1>
-        </div>
-      </div>
       <div class="row mt-6">
         <div class="col-lg-12 mx-auto">
           <div class="card">
