@@ -4,7 +4,7 @@
     <footer class="">
       <div class="container">
         <!-- upper -->
-        <div class="row row-cols-lg-5 pt-4 pt-lg-5 my-5 border-top">
+        <div class="row pt-4 pt-lg-5 my-5 border-top">
           <div class="col-lg d-flex flex-column align-items-center">
             <NuxtLink to="/" class="d-flex align-items-center">
               <p class="text-muted d-block text-2xl text-center text-lg-start">
@@ -20,7 +20,7 @@
 
           <div class="col-lg"></div>
 
-          <div class="col-lg" :class="linksClasses">
+          <div class="col-lg col-md-4" :class="linksClasses">
             <ul class="nav flex-column">
               <li class="nav-item mb-2">
                 <NuxtLink to="/" class="nav-link p-0 text-muted">Home</NuxtLink>
@@ -42,7 +42,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg" :class="linksClasses">
+          <div class="col-lg col-md-4" :class="linksClasses">
             <ul class="nav flex-column">
               <li class="nav-item mb-2">
                 <NuxtLink to="/" class="nav-link p-0 text-muted">Home</NuxtLink>
@@ -64,7 +64,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg" :class="linksClasses">
+          <div class="col-lg col-md-4" :class="linksClasses">
             <ul class="nav flex-column">
               <li class="nav-item mb-2">
                 <NuxtLink to="/" class="nav-link p-0 text-muted">Home</NuxtLink>
