@@ -7,8 +7,7 @@
         <div class="col-12">
           <nav
             class="
-              bg-white
-              navbar navbar-expand-lg
+              navbar-light navbar navbar-expand-lg
               border-radius-xl
               position-absolute
               my-3
@@ -132,6 +131,23 @@
                     >
                       About
                     </NuxtLink>
+                  </li>
+
+                  <li class="nav-item mx-2">
+                    <a
+                      class="
+                        nav-link
+                        ps-2
+                        d-flex
+                        justify-content-between
+                        cursor-pointer
+                        align-items-center
+                        text-md
+                      "
+                      href="/admin"
+                    >
+                      Admin
+                    </a>
                   </li>
                 </ul>
               </div>

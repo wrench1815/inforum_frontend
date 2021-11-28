@@ -5,6 +5,7 @@
       <div class="page-header min-vh-100">
         <div
           class="
+            header-bg-image
             w-lg-55 w-md-50 w-sm-100 w-100
             position-absolute
             fixed-top
@@ -12,7 +13,7 @@
             h-100
             z-index-0
           "
-          style="background-image: url(/images/img-1.jpg)"
+          id="HeaderBgImage"
           loading="lazy"
         ></div>
         <div class="container">
@@ -64,7 +65,10 @@ export default {}
 </script>
 
 <style scoped>
-.header-bg-blur {
-  filter: blur(30px);
+.header-bg-image {
+  background-image: url(~assets/images/img-1.jpg);
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: fit;
 }
 </style>

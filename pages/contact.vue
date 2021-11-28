@@ -141,8 +141,4 @@
 export default {}
 </script>
 
-<style scoped>
-.blur-bg {
-  backdrop-filter: blur(8px);
-}
-</style>
+<style scoped></style>
