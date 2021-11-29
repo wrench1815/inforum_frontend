@@ -43,8 +43,28 @@
       id="sidenav-collapse-main"
     >
       <ul class="navbar-nav">
+        <!-- Start: Dashboard Home -->
         <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin">
+            <div
+              class="
+                text-dark text-center
+                me-2
+                d-flex
+                align-items-center
+                justify-content-center
+              "
+            >
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard Home</span>
+          </NuxtLink>
+        </li>
+        <!-- End: Dashboard Home -->
+
+        <!-- Start: Home -->
+        <li class="nav-item">
+          <NuxtLink class="nav-link text-dark" to="/admin/home">
             <div
               class="
                 text-dark text-center
@@ -59,6 +79,9 @@
             <span class="nav-link-text ms-1">Home</span>
           </NuxtLink>
         </li>
+        <!-- End: Home -->
+
+        <!-- Start: Test Page -->
         <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin/test">
             <div
@@ -75,6 +98,7 @@
             <span class="nav-link-text ms-1">Test Page</span>
           </NuxtLink>
         </li>
+        <!-- End: Test Page -->
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">
