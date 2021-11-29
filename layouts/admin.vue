@@ -10,7 +10,7 @@
         border-radius-lg
       "
     >
-      <AdminNavBar />
+      <!-- <AdminNavBar /> -->
       <Nuxt />
       <AdminFooter />
     </main>
