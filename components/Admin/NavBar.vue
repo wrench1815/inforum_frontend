@@ -15,19 +15,22 @@
     <div class="container-fluid py-1 px-3">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <!-- Default crumb -->
           <li class="breadcrumb-item text-sm">
             <NuxtLink class="opacity-5 text-dark" to="/admin"
               >Dashboard</NuxtLink
             >
           </li>
+
+          <!-- Active crumb -->
           <li
             class="breadcrumb-item text-sm text-dark active"
             aria-current="page"
           >
-            Home
+            Dashboard Home
           </li>
         </ol>
-        <h6 class="font-weight-bolder mb-0">Home</h6>
+        <h6 class="font-weight-bolder mb-0">Dashboard Home</h6>
       </nav>
       <div
         class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
@@ -58,7 +61,19 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: ['crumbs'],
+  computed: {
+    crumbClass: function () {
+      for (let item = 0; item < crumbs.length; item++) {
+        if ((item = this.crumbs.length - 1)) {
+          return 'active'
+        }
+        return ''
+      }
+    },
+  },
+}
 </script>
 
 <style></style>
