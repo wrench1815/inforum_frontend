@@ -1,0 +1,79 @@
+<template>
+  <nav
+    class="
+      mt-4
+      bg-white
+      shadow-blur
+      navbar navbar-main navbar-expand-lg
+      px-0
+      mx-4
+      border-radius-xl
+    "
+    id="navbarBlur"
+    navbar-scroll="true"
+  >
+    <div class="container-fluid py-1 px-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <!-- Default crumb -->
+          <li class="breadcrumb-item text-sm">
+            <NuxtLink class="opacity-5 text-dark" to="/admin"
+              >Dashboard</NuxtLink
+            >
+          </li>
+
+          <!-- Active crumb -->
+          <li
+            class="breadcrumb-item text-sm text-dark active"
+            aria-current="page"
+          >
+            Dashboard Home
+          </li>
+        </ol>
+        <h6 class="font-weight-bolder mb-0">Dashboard Home</h6>
+      </nav>
+      <div
+        class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+        id="navbar"
+      >
+        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group input-group-outline">
+            <label class="form-label">Type here...</label>
+            <input type="text" class="form-control" />
+          </div>
+        </div>
+        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+          <a
+            href="javascript:;"
+            class="nav-link text-body p-0"
+            id="iconNavbarSidenav"
+          >
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+            </div>
+          </a>
+        </li>
+      </div>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  props: ['crumbs'],
+  computed: {
+    crumbClass: function () {
+      for (let item = 0; item < crumbs.length; item++) {
+        if ((item = this.crumbs.length - 1)) {
+          return 'active'
+        }
+        return ''
+      }
+    },
+  },
+}
+</script>
+
+<style></style>

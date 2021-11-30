@@ -11,68 +11,49 @@ export default {
     htmlAttrs: {
       lang: 'en',
     },
+
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
+
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-
-      // Font
+      // Roboto Font
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href: '/material_kit/css/fonts.css',
+        href: '/global/css/fonts.css',
       },
 
       // Nucleo Icons css
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href: '/material_kit/css/nucleo-icons.css',
+        href: '/global/css/nucleo-icons.css',
       },
 
       // Nucleo Icons svg
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href: '/material_kit/css/nucleo-svg.css',
-      },
-
-      // Font Awesome css
-      {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: '/material_kit/css/font-awesome.min.css',
-      },
-
-      // Material Design css
-      {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: '/material_kit/css/material-kit.min.css',
+        href: '/global/css/nucleo-svg.css',
       },
     ],
 
     script: [
-      // Popper js
+      // Font Awesome
       {
         type: 'text/javascript',
-        src: '/material_kit/js/core/popper.min.js',
+        src: '/global/js/font-awesome.js',
       },
 
-      // Bootstrap js
+      // Bootstrap Bundle js
       {
         type: 'text/javascript',
-        src: '/material_kit/js/core/bootstrap.min.js',
-      },
-
-      // Material Design js
-      {
-        type: 'text/javascript',
-        src: '/material_kit/js/material-kit.min.js',
+        src: '/global/js/bootstrap.bundle.min.js',
       },
     ],
   },
@@ -100,4 +81,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  publicRuntimeConfig: {
+    axios: {
+      baseUrl: 'http://localhost:5064/api',
+    },
+  },
 }
