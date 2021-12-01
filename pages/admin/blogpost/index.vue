@@ -13,7 +13,7 @@
           </div>
           <!-- create fking table: id , title,author,dateposted,actions:(icons: edit,delete) -->
           <div class="col-12" v-else>
-            <div class="">
+            <div class="mx-4">
               <div class="table-responsive">
                 <table class="table align-items-center mb-0">
                   <thead>
