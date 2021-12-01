@@ -25,7 +25,8 @@
                   <span class="text-gradient bg-gradient-primary">Inforum</span>
                 </h1>
                 <p class="lead text-bold">
-                  An Information Exchange for Students by Students.
+                  {{ homeData[0].subHeading }}
+                  <!-- An Information Exchange for Students by Students. -->
                 </p>
                 <div class="buttons">
                   <button type="button" class="btn bg-gradient-primary mt-4">
@@ -61,7 +62,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  // Fetch Data for Home
+  async asyncData({ $axios, $config }) {
+    const homeData = await $axios.$get('/home')
+    return { homeData }
+  },
+}
 </script>
 
 <style scoped>
