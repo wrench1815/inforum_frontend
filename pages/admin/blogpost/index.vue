@@ -1,34 +1,6 @@
 <template>
   <div>
     <AdminNavBar />
-    <!-- Links -->
-    <div class="container-fluid py-4">
-      <div class="card py-2">
-        <div class="row">
-          <div class="col-12">
-            <ul
-              class="d-flex list-unstyled gap-4 ms-4 h-100 align-items-center"
-            >
-              <li class="badge badge-pill badge-lg bg-gradient-success">
-                <NuxtLink class="link-light" to="/admin/blogpost/add"
-                  >Add Post</NuxtLink
-                >
-              </li>
-              <li class="badge badge-pill badge-md bg-gradient-warning">
-                <NuxtLink class="link-light" to="/admin/blogpost/update"
-                  >Update Post</NuxtLink
-                >
-              </li>
-              <li class="badge badge-pill badge-md bg-gradient-danger">
-                <NuxtLink class="link-light" to="/admin/blogpost/delete"
-                  >Delete Post</NuxtLink
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- content -->
     <div class="container-fluid py-4">
@@ -80,7 +52,7 @@
                       <td>
                         <div class="d-flex justify-content-evenly">
                           <a>
-                            <i class="fas fa-edit text-success"></i>
+                            <i class="fas fa-edit text-warning"></i>
                           </a>
                           <a>
                             <i class="fas fa-trash text-danger"></i>
@@ -92,6 +64,13 @@
                 </table>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="d-flex justify-content-end mx-4 mt-4">
+            <NuxtLink class="btn btn-success" to="/admin/blogpost/add"
+              >Add Post</NuxtLink
+            >
           </div>
         </div>
       </div>
