@@ -1,13 +1,42 @@
 <template>
   <div>
     <AdminNavBar />
+    <!-- Links -->
+    <div class="container-fluid py-4">
+      <div class="card py-2">
+        <div class="row">
+          <div class="col-12">
+            <ul
+              class="d-flex list-unstyled gap-4 ms-4 h-100 align-items-center"
+            >
+              <li class="badge badge-pill badge-lg bg-gradient-success">
+                <NuxtLink class="link-light" to="/admin/blogpost/add"
+                  >Add Post</NuxtLink
+                >
+              </li>
+              <li class="badge badge-pill badge-md bg-gradient-warning">
+                <NuxtLink class="link-light" to="/admin/blogpost/update"
+                  >Update Post</NuxtLink
+                >
+              </li>
+              <li class="badge badge-pill badge-md bg-gradient-danger">
+                <NuxtLink class="link-light" to="/admin/blogpost/delete"
+                  >Delete Post</NuxtLink
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- content -->
     <div class="container-fluid py-4">
       <div class="card py-4">
         <div class="row">
           <div class="col-12">
             <h2 class="mx-4">Blog Posts</h2>
           </div>
-
           <div class="col-12" v-if="blogPosts.length == 0">
             <h1>No posts available</h1>
           </div>
