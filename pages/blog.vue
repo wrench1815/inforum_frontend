@@ -1,11 +1,12 @@
 <template>
-  <div class="container mt-7">
-    <!-- 01 Heading -->
+  <div class="container-fluid mt-7">
+    <!-- Start:Heading -->
     <h1>The Blog</h1>
+    <!-- End:Heading -->
 
-    <!-- 02 Recent Posts -->
-
+    <!-- Start:Latest Posts -->
     <div class="row g-4 mt-4">
+      <!-- Start:Full size post -->
       <div class="col-12 mb-0 mb-sm-3">
         <div class="row g-0">
           <div class="col-sm-6 ps-sm-0 d-flex align-items-center">
@@ -65,10 +66,24 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-image">
-            <img class="img-fluid" src="/images/img-1.jpg" alt="" />
+      <!-- End:Full size post -->
+
+      <div class="col-lg-4 col-md-6" v-for="i in 9" :key="i">
+        <div class="card border-radius-2xl">
+          <div
+            class="
+              card-image
+              border-radius-top-start-2xl border-radius-top-end-2xl
+            "
+          >
+            <img
+              class="
+                img-fluid
+                border-radius-top-start-2xl border-radius-top-end-2xl
+              "
+              src="@/assets/images/img-1.jpg"
+              alt=""
+            />
           </div>
           <div class="card-body">
             <h2>Title</h2>
@@ -78,90 +93,16 @@
               libero rem neque voluptatibus nisi ea accusantium, totam
               voluptatum. Totam tempora commodi officiis.
             </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-image">
-            <img class="img-fluid" src="/images/img-1.jpg" alt="" />
-          </div>
-          <div class="card-body">
-            <h2>Title</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit quaerat qui voluptatem modi ab, minus quibusdam iste
-              libero rem neque voluptatibus nisi ea accusantium, totam
-              voluptatum. Totam tempora commodi officiis.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-image">
-            <img class="img-fluid" src="/images/img-1.jpg" alt="" />
-          </div>
-          <div class="card-body">
-            <h2>Title</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit quaerat qui voluptatem modi ab, minus quibusdam iste
-              libero rem neque voluptatibus nisi ea accusantium, totam
-              voluptatum. Totam tempora commodi officiis.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-image">
-            <img class="img-fluid" src="/images/img-1.jpg" alt="" />
-          </div>
-          <div class="card-body">
-            <h2>Title</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit quaerat qui voluptatem modi ab, minus quibusdam iste
-              libero rem neque voluptatibus nisi ea accusantium, totam
-              voluptatum. Totam tempora commodi officiis.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-image">
-            <img class="img-fluid" src="/images/img-1.jpg" alt="" />
-          </div>
-          <div class="card-body">
-            <h2>Title</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit quaerat qui voluptatem modi ab, minus quibusdam iste
-              libero rem neque voluptatibus nisi ea accusantium, totam
-              voluptatum. Totam tempora commodi officiis.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-image">
-            <img class="img-fluid" src="/images/img-1.jpg" alt="" />
-          </div>
-          <div class="card-body">
-            <h2>Title</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit quaerat qui voluptatem modi ab, minus quibusdam iste
-              libero rem neque voluptatibus nisi ea accusantium, totam
-              voluptatum. Totam tempora commodi officiis.
+            <div class="border-top border-primary mb-1"></div>
+            <p class="card-text d-flex justify-content-between">
+              <small class="text-muted">March 02, 2021</small>
+              <small class="text-muted">John Doe</small>
             </p>
           </div>
         </div>
       </div>
     </div>
+    <!-- End:Latest Posts -->
   </div>
 </template>
 
