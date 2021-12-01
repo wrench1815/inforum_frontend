@@ -99,6 +99,25 @@
           </NuxtLink>
         </li>
         <!-- End: Test Page -->
+
+        <!-- Start: Blogpost -->
+        <li class="nav-item">
+          <NuxtLink class="nav-link text-dark" to="/admin/blogpost">
+            <div
+              class="
+                text-dark text-center
+                me-2
+                d-flex
+                align-items-center
+                justify-content-center
+              "
+            >
+              <i class="fas fa-vial opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Blog Post</span>
+          </NuxtLink>
+        </li>
+        <!-- End: Blogpost -->
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">

@@ -9,7 +9,7 @@
           <!-- Home Data -->
           <div class="card">
             <div class="card-body">
-              <div v-for="data in homeData" key="data.id">
+              <div v-for="data in homeData" :key="data.id">
                 <div>
                   <span class="h4">Heading: </span>
                   <span class="ms-2 text-lg">{{ data.heading }}</span>
