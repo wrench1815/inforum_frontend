@@ -80,7 +80,9 @@ export default {
   methods: {
     formattedDate(inputDate) {
       const myDate = new Date(inputDate)
-      return `${myDate.getDay()}, ${myDate.getDate()}-${myDate.getMonth()}-${myDate.getFullYear()}`
+      return `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth()}-${myDate.getFullYear()}`
     },
   },
 }
