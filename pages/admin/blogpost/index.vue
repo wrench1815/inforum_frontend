@@ -102,10 +102,12 @@
 <script>
 export default {
   layout: 'admin',
+
   async asyncData({ $axios, $config }) {
     const blogPosts = await $axios.$get('/BlogPosts')
     return { blogPosts }
   },
+
   methods: {
     formattedDate(inputDate) {
       const myDate = new Date(inputDate)
