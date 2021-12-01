@@ -10,72 +10,81 @@
 
           <!-- Start:Post Add Form -->
           <div class="col-12">
-            <form>
-              <div class="card-body position-relative">
+            <div class="card-body position-relative">
+              <form v-on:submit.prevent="addPost">
                 <div class="row mt-4">
                   <!-- Start:Title -->
                   <div class="col-12">
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Title</label>
-                      <input class="form-control" type="text" />
+                      <input
+                        class="form-control"
+                        type="text"
+                        v-model="postTitle"
+                      />
                     </div>
                   </div>
-                </div>
-                <!-- End:Title -->
 
-                <!-- Start:Content -->
-                <div class="col-12">
-                  <div class="input-group input-group-static mt-4">
-                    <label class="text-primary">Content</label>
-                    <textarea
-                      name="content"
-                      class="form-control"
-                      rows="10"
-                    ></textarea>
+                  <!-- End:Title -->
+
+                  <!-- Start:Content -->
+                  <div class="col-12">
+                    <div class="input-group input-group-static mt-4">
+                      <label class="text-primary">Content</label>
+                      <textarea
+                        name="content"
+                        class="form-control"
+                        rows="10"
+                        v-model="postContent"
+                      ></textarea>
+                    </div>
                   </div>
-                </div>
-                <!-- End:Title -->
+                  <!-- End:Title -->
 
-                <!-- Start:Excerpt -->
-                <div class="col-12">
-                  <div class="input-group input-group-static mt-4">
-                    <label class="text-primary">Excerpt</label>
-                    <textarea
-                      name="exerpt"
-                      class="form-control"
-                      rows="4"
-                    ></textarea>
+                  <!-- Start:Excerpt -->
+                  <div class="col-12">
+                    <div class="input-group input-group-static mt-4">
+                      <label class="text-primary">Excerpt</label>
+                      <textarea
+                        name="exerpt"
+                        class="form-control"
+                        rows="4"
+                        v-model="postExcerpt"
+                      ></textarea>
+                    </div>
                   </div>
-                </div>
-                <!-- End:Excerpt -->
+                  <!-- End:Excerpt -->
 
-                <!-- Start:Category -->
-                <div class="col">
-                  <div class="input-group input-group-static my-4">
-                    <label class="text-primary">Category</label>
-                    <select class="form-select form-control w-100 ps-3 mt-3">
-                      <option>Select Post Category</option>
-                      <option
-                        v-for="cat in categories"
-                        :key="cat.id"
-                        v-bind:value="cat.id"
+                  <!-- Start:Category -->
+                  <div class="col">
+                    <div class="input-group input-group-static my-4">
+                      <label class="text-primary">Category</label>
+                      <select
+                        class="form-select form-control w-100 ps-3 mt-3"
+                        v-model="postCategory"
                       >
-                        {{ cat.name }}
-                      </option>
-                    </select>
+                        <option disabled>Select Post Category</option>
+                        <option
+                          v-for="cat in categories"
+                          :key="cat.id"
+                          v-bind:value="cat.id"
+                        >
+                          {{ cat.name }}
+                        </option>
+                      </select>
+                    </div>
                   </div>
+                  <!-- End:Category -->
                 </div>
-                <!-- Start:Category -->
-
                 <!-- Start:Submit Button -->
                 <div class="text-end mt-4">
-                  <button type="button" class="btn bg-gradient-primary mb-0">
+                  <button type="submit" class="btn bg-gradient-primary mb-0">
                     Add Post
                   </button>
                 </div>
                 <!-- Start:Submit Button -->
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
           <!-- End:Post Add Form -->
         </div>
@@ -88,12 +97,33 @@
 export default {
   layout: 'admin',
 
+  data() {
+    return {
+      postTitle: '',
+      postContent: '',
+      postExcerpt: '',
+      postCategory: '',
+    }
+  },
+
   async asyncData({ $axios, $config }) {
     const categories = await $axios.$get('/Categories')
     return { categories }
   },
 
-  methods: {},
+  methods: {
+    async addPost() {
+      const data = {
+        title: this.postTitle,
+        description: this.postContent,
+        excerpt: this.postExcerpt,
+        slug: 'test-nuxt',
+        categoryId: parseInt(this.postCategory),
+      }
+      await this.$axios.$post('/BlogPosts', data)
+      this.$router.push('/admin/blogpost')
+    },
+  },
 }
 </script>
 
