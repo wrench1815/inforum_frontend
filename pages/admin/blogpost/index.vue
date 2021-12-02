@@ -42,7 +42,7 @@
                           cursor-pointer
                         "
                       >
-                        <NuxtLink :to="`/admin/blogpost/${post.id}`">{{
+                        <NuxtLink :to="`/admin/blogpost/preview/${post.id}`">{{
                           post.title
                         }}</NuxtLink>
                       </td>
