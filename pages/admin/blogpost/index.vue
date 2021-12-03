@@ -42,9 +42,11 @@
                           cursor-pointer
                         "
                       >
-                        <NuxtLink :to="`/admin/blogpost/preview/${post.id}`">{{
-                          post.title
-                        }}</NuxtLink>
+                        <NuxtLink
+                          class="link-info text-bold"
+                          :to="`/admin/blogpost/preview/${post.id}`"
+                          >{{ post.title }}</NuxtLink
+                        >
                       </td>
                       <td class="text-capitalize">Hardeep Kumar</td>
 
