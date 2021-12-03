@@ -117,7 +117,6 @@ export default {
         title: this.postTitle,
         description: this.postContent,
         excerpt: this.postExcerpt,
-        slug: 'test-nuxt',
         categoryId: parseInt(this.postCategory),
       }
       await this.$axios.$post('/BlogPosts', data)

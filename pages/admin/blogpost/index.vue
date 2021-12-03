@@ -53,9 +53,9 @@
                       </td>
                       <td>
                         <div class="d-flex justify-content-evenly">
-                          <a>
+                          <NuxtLink :to="`/admin/blogpost/edit/${post.id}`">
                             <i class="fas fa-edit text-warning"></i>
-                          </a>
+                          </NuxtLink>
                           <a>
                             <i class="fas fa-trash text-danger"></i>
                           </a>
