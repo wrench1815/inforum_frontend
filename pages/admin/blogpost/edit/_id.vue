@@ -117,7 +117,7 @@ export default {
     }
   },
 
-  async asyncData({ $axios, $config, params }) {
+  async asyncData({ $axios, $config }) {
     const categories = await $axios.$get('/Categories')
     return { categories }
   },
@@ -128,15 +128,19 @@ export default {
       this.postData = res
     })
   },
+
   methods: {
     async updatePost() {
-      const data = {
+      const formData = {
+        id: this.$route.params.id,
         title: this.postData.title,
         description: this.postData.description,
         excerpt: this.postData.excerpt,
         categoryId: parseInt(this.postData.categoryId),
       }
-      console.log(data)
+
+      await this.$axios.$put(`/BlogPosts/${formData.id}`, formData)
+      this.$router.push(`/admin/blogpost/preview/${formData.id}`)
     },
   },
 }
