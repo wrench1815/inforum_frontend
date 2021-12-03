@@ -23,7 +23,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        :value="blogPost.title"
+                        v-model="postData.title"
                       />
                     </div>
                   </div>
@@ -38,7 +38,7 @@
                         name="content"
                         class="form-control"
                         rows="10"
-                        v-text="blogPost.description"
+                        v-model="postData.description"
                       ></textarea>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
                         name="exerpt"
                         class="form-control"
                         rows="4"
-                        v-text="blogPost.excerpt"
+                        v-model="postData.excerpt"
                       ></textarea>
                     </div>
                   </div>
@@ -62,11 +62,14 @@
                   <div class="col">
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Category</label>
-                      <select class="form-select form-control w-100 ps-3 mt-3">
+                      <select
+                        class="form-select form-control w-100 ps-3 mt-3"
+                        v-model="postData.categoryId"
+                      >
                         <option disabled>Select Post Category</option>
                         <template v-for="category in categories">
                           <option
-                            v-if="category.id == blogPost.categoryId"
+                            v-if="category.id == postData.categoryId"
                             :key="category.id"
                             :value="category.id"
                             selected
@@ -108,15 +111,32 @@
 export default {
   layout: 'admin',
 
-  async asyncData({ $axios, $config, params }) {
-    const blogPost = await $axios.$get(`/BlogPosts/${params.id}`)
-    const categories = await $axios.$get('/Categories')
-    return { blogPost, categories }
+  data() {
+    return {
+      postData: {},
+    }
   },
 
+  async asyncData({ $axios, $config, params }) {
+    const categories = await $axios.$get('/Categories')
+    return { categories }
+  },
+
+  created() {
+    const blogPost = this.$axios.$get(`/BlogPosts/${this.$route.params.id}`)
+    blogPost.then((res) => {
+      this.postData = res
+    })
+  },
   methods: {
     async updatePost() {
-      alert('test successfull')
+      const data = {
+        title: this.postData.title,
+        description: this.postData.description,
+        excerpt: this.postData.excerpt,
+        categoryId: parseInt(this.postData.categoryId),
+      }
+      console.log(data)
     },
   },
 }
