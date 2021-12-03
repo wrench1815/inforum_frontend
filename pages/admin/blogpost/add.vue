@@ -120,7 +120,7 @@ export default {
         categoryId: parseInt(this.postCategory),
       }
       await this.$axios.$post('/BlogPosts', data)
-      this.$router.push('/admin/blogpost')
+      this.$router.push(`/admin/blogpost`)
     },
   },
 }
