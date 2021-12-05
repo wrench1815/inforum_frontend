@@ -7,6 +7,7 @@
       :clipped="clipped"
       fixed
       app
+      right
     >
       <v-list>
         <v-list-item
@@ -28,13 +29,14 @@
     </v-navigation-drawer>
 
     <v-app-bar
-      :clipped-left="clipped"
+      class="mx-4 mt-4 rounded-lg"
+      :elevate-on-scroll="true"
+      :clipped-right="clipped"
       color="white"
       fixed
       app
-      class="mx-4 mt-4 rounded-lg"
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-lg-none" />
+      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-lg-none" /> -->
       <v-list dense>
         <v-list-item class="text-lg-h4 text-h5" color="blue">{{
           title
@@ -42,6 +44,7 @@
       </v-list>
 
       <v-spacer />
+
       <v-list class="d-inline-flex" dense>
         <v-list-item
           class="d-none d-lg-flex px-0 mx-3"
@@ -60,6 +63,8 @@
             /> </v-list-item-content
         ></v-list-item>
       </v-list>
+
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-lg-none" />
     </v-app-bar>
 
     <v-main class="mt-4">
@@ -113,7 +118,7 @@ export default {
           to: '/about',
         },
         {
-          icon: 'mdi-information-outline',
+          icon: 'mdi-view-dashboard-outline',
           title: 'Admin',
           to: '/admin',
         },
