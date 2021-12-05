@@ -5,6 +5,7 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      :disable-resize-watcher="true"
       fixed
       app
       right
