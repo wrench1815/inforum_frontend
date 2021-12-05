@@ -112,6 +112,11 @@ export default {
           title: 'About',
           to: '/about',
         },
+        {
+          icon: 'mdi-information-outline',
+          title: 'Admin',
+          to: '/admin',
+        },
       ],
       miniVariant: false,
       title: 'Inforum',
