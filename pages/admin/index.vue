@@ -8,7 +8,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  layout: 'admin',
+}
 </script>
 
 <style scoped></style>

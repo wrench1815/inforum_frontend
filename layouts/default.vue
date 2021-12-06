@@ -34,18 +34,20 @@
 
     <!-- Start:Nav Bar -->
     <v-app-bar
-      class="mx-4 mt-4 rounded-lg"
+      class="mx-4 mt-4"
       :elevate-on-scroll="true"
       :clipped-right="clipped"
       color="white"
+      shaped
       fixed
       app
     >
       <!-- Start:Site Title -->
       <v-list dense>
-        <v-list-item class="text-lg-h4 text-h5" color="blue">{{
-          title
-        }}</v-list-item>
+        <v-list-item class="text-lg-h4 text-h5 blue--text">
+          <img class="site-logo" src="../assets/img/icon.jpg" alt="" />
+          <span class="ms-1">{{ title }}</span></v-list-item
+        >
       </v-list>
       <!-- End:Site Title -->
 
@@ -87,16 +89,19 @@
     <!-- End:Main -->
 
     <!-- Start:Footer -->
-    <v-footer :absolute="!fixed" app color="white" max-height="40vh">
+    <v-footer :absolute="!fixed" color="white" max-height="40vh" app>
       <v-row>
         <v-col cols="12" md="3">
           <div class="d-flex flex-column align-center align-md-start">
             <p class="text-h4 d-flex align-center">
               <img class="foot-image" src="../assets/img/icon.jpg" alt="" />
-              Inforum
+              <span class="ms-1 blue--text">Inforum</span>
             </p>
-            <a href="mailto:contact@inforum.com"
-              ><span class="">Email</span> contact@inforum.com</a
+            <a
+              class="red--text text-decoration-none"
+              href="mailto:contact@inforum.com"
+            >
+              <span class="black--text">Email: </span> contact@inforum.com</a
             >
           </div>
         </v-col>
@@ -215,5 +220,9 @@ export default {
 
 .foot-image {
   width: 2rem !important;
+}
+
+.site-logo {
+  width: 1.7rem;
 }
 </style>
