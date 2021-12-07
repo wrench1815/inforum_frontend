@@ -14,7 +14,7 @@
                 >{{ blogPost.category.name }}</span
               >
             </div>
-            <p class="mx-4 text-capitalize">{{ blogPost.description }}</p>
+            <p class="mx-4" v-html="blogPost.description"></p>
           </div>
         </div>
       </div>
