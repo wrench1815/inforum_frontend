@@ -29,17 +29,12 @@
 
                   <!-- Start:Content -->
                   <div class="col-12">
-                    <div class="input-group input-group-static mt-4">
+                    <div class="input-group input-group-static mt-4 mb-2">
                       <label class="text-primary">Content</label>
-                      <textarea
-                        name="content"
-                        class="form-control"
-                        rows="10"
-                        v-model="postContent"
-                      ></textarea>
                     </div>
+                    <RichTextEditor v-model="postContent" />
                   </div>
-                  <!-- End:Title -->
+                  <!-- End:Content -->
 
                   <!-- Start:Excerpt -->
                   <div class="col-12">
@@ -94,8 +89,14 @@
 </template>
 
 <script>
+import RichTextEditor from '../../../components/Admin/Utils/RichTextEditor'
+
 export default {
   layout: 'admin',
+
+  components: {
+    RichTextEditor,
+  },
 
   data() {
     return {
