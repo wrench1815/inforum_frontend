@@ -34,12 +34,10 @@
                   <div class="col-12">
                     <div class="input-group input-group-static mt-4">
                       <label class="text-primary">Content</label>
-                      <textarea
-                        name="content"
-                        class="form-control"
-                        rows="10"
+                      <RichTextEditor
                         v-model="postData.description"
-                      ></textarea>
+                        :content="postData.description"
+                      />
                     </div>
                   </div>
                   <!-- End:Title -->
@@ -108,8 +106,14 @@
 </template>
 
 <script>
+import RichTextEditor from '../../../../components/Admin/Utils/RichTextEditor'
+
 export default {
   layout: 'admin',
+
+  components: {
+    RichTextEditor,
+  },
 
   data() {
     return {
