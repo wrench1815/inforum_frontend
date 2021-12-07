@@ -1,32 +1,13 @@
 <template>
   <aside
-    class="
-      sidenav
-      navbar navbar-vertical navbar-expand-xs
-      border-0 border-radius-xl
-      my-3
-      fixed-start
-      ms-3
-      bg-white
-    "
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white"
     id="sidenav-main"
   >
     <div class="sidenav-header">
       <i
-        class="
-          fas
-          fa-times
-          p-3
-          cursor-pointer
-          text-dark
-          opacity-5
-          position-absolute
-          end-0
-          top-0
-          d-none d-xl-none
-        "
+        class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-xl-none"
         aria-hidden="true"
-        id="iconSidenav"
+        @click="sideBarToggler"
       ></i>
       <NuxtLink class="navbar-brand m-0" to="/admin">
         <img
@@ -47,13 +28,7 @@
         <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin">
             <div
-              class="
-                text-dark text-center
-                me-2
-                d-flex
-                align-items-center
-                justify-content-center
-              "
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
               <i class="fas fa-tachometer-alt"></i>
             </div>
@@ -66,13 +41,7 @@
         <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin/home">
             <div
-              class="
-                text-dark text-center
-                me-2
-                d-flex
-                align-items-center
-                justify-content-center
-              "
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
               <i class="fas fa-home opacity-10"></i>
             </div>
@@ -85,13 +54,7 @@
         <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin/test">
             <div
-              class="
-                text-dark text-center
-                me-2
-                d-flex
-                align-items-center
-                justify-content-center
-              "
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
               <i class="fas fa-vial opacity-10"></i>
             </div>
@@ -104,13 +67,7 @@
         <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin/blogpost">
             <div
-              class="
-                text-dark text-center
-                me-2
-                d-flex
-                align-items-center
-                justify-content-center
-              "
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
               <i class="fas fa-vial opacity-10"></i>
             </div>
@@ -129,7 +86,20 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'AsideNav',
+  methods: {
+    sideBarToggler() {
+      document.body.classList.toggle('g-sidenav-pinned')
+    },
+  },
+  watch: {
+    $route() {
+      // document.body.classList.toggle('g-sidenav-pinned')
+      this.sideBarToggler()
+    },
+  },
+}
 </script>
 
 <style scoped>

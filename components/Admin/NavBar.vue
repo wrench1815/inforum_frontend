@@ -1,14 +1,6 @@
 <template>
   <nav
-    class="
-      mt-4
-      bg-white
-      shadow-blur
-      navbar navbar-main navbar-expand-lg
-      px-0
-      mx-4
-      border-radius-xl
-    "
+    class="mt-4 bg-white shadow-blur navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl"
     id="navbarBlur"
     navbar-scroll="true"
   >
@@ -46,7 +38,7 @@
           <a
             href="javascript:;"
             class="nav-link text-body p-0"
-            id="iconNavbarSidenav"
+            @click="sideBarToggler"
           >
             <div class="sidenav-toggler-inner">
               <i class="sidenav-toggler-line"></i>
@@ -71,6 +63,11 @@ export default {
         }
         return ''
       }
+    },
+  },
+  methods: {
+    sideBarToggler() {
+      document.body.classList.toggle('g-sidenav-pinned')
     },
   },
 }
