@@ -4,6 +4,7 @@
       :config="editorConfig"
       v-model="content"
       @input="$emit('input', $event)"
+      :class="customClasses"
     />
   </client-only>
 </template>
@@ -25,6 +26,7 @@ export default {
 
   data() {
     return {
+      customClasses: 'customWidth',
       editorConfig: {
         width: 'auto',
         height: '500',
@@ -79,4 +81,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.customWidth + div.ck.ck-editor.ck-reset.ck-rounded-corners {
+  width: 100% !important;
+}
+</style>
