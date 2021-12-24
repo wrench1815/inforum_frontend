@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white shadow-dark custom-shadow"
     id="sidenav-main"
   >
     <div class="sidenav-header">
@@ -114,5 +114,11 @@ export default {
 
 #sidenav-main .navbar-nav .nuxt-link-exact-active i {
   color: white !important;
+}
+
+@media (min-width: 1200px) {
+  .custom-shadow {
+    box-shadow: none !important;
+  }
 }
 </style>
