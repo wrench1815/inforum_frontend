@@ -27,12 +27,6 @@ export default {
         },
       ],
       script: [
-        // Perfect Scrollbar js
-        {
-          type: 'text/javascript',
-          src: '/material_dashboard/js/plugins/perfect-scrollbar.min.js',
-        },
-
         // Material Design js
         {
           type: 'text/javascript',

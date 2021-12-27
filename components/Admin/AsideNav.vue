@@ -95,8 +95,9 @@ export default {
   },
   watch: {
     $route() {
-      // document.body.classList.toggle('g-sidenav-pinned')
-      this.sideBarToggler()
+      if (document.body.classList.contains('g-sidenav-pinned')) {
+        this.sideBarToggler()
+      }
     },
   },
 }

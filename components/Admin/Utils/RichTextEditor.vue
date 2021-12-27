@@ -1,12 +1,11 @@
 <template>
-  <client-only placeholder="loading..." class="w-100">
+  <div placeholder="loading..." class="w-100">
     <ckeditor-nuxt
       :config="editorConfig"
       v-model="content"
       @input="$emit('input', $event)"
-      :class="customClasses"
     />
-  </client-only>
+  </div>
 </template>
 
 <script>
@@ -15,21 +14,16 @@ export default {
 
   components: {
     'ckeditor-nuxt': () => {
-      if (process.client) {
-        return import('@blowstack/ckeditor-nuxt')
-      }
+      return import('@blowstack/ckeditor-nuxt')
     },
-  },
-  props: {
-    content: '',
   },
 
   data() {
     return {
-      customClasses: 'customWidth',
+      content: '',
+
       editorConfig: {
         width: 'auto',
-        height: '500',
         toolbar: [
           'heading',
           '|',
@@ -59,7 +53,6 @@ export default {
           '|',
           'codeBlock',
           'code',
-          'sourceEditing',
           '|',
           'subscript',
           'superscript',
@@ -74,15 +67,18 @@ export default {
             'tableProperties',
           ],
         },
-        removePlugins: ['Title'],
+        removePlugins: ['Title', 'MediaEmbedToolbar'],
       },
     }
   },
 }
 </script>
 
-<style>
+<style scoped>
 .customWidth + div.ck.ck-editor.ck-reset.ck-rounded-corners {
   width: 100% !important;
+}
+.ck-editor__editable_inline {
+  min-height: 400px;
 }
 </style>
