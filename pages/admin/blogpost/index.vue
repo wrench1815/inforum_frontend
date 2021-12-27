@@ -29,20 +29,20 @@
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark text-"
-                      v-for="post in blogPosts"
+                      v-for="post in blogPosts.posts"
                       :key="post.id"
                     >
                       <td class="text-bold">
                         {{ post.id }}
                       </td>
                       <td
-                        class="
-                          text-capitalize text-start
-                          link-info
-                          cursor-pointer
-                        "
+                        class="text-capitalize text-start link-info cursor-pointer"
                       >
-                        {{ post.title }}
+                        <NuxtLink
+                          class="link-info text-bold"
+                          :to="`/admin/blogpost/preview/${post.id}`"
+                          >{{ post.title }}</NuxtLink
+                        >
                       </td>
                       <td class="text-capitalize">Hardeep Kumar</td>
 
@@ -51,9 +51,9 @@
                       </td>
                       <td>
                         <div class="d-flex justify-content-evenly">
-                          <a>
+                          <NuxtLink :to="`/admin/blogpost/edit/${post.id}`">
                             <i class="fas fa-edit text-warning"></i>
-                          </a>
+                          </NuxtLink>
                           <a>
                             <i class="fas fa-trash text-danger"></i>
                           </a>

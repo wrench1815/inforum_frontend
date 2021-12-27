@@ -6,19 +6,7 @@
       <div class="row">
         <div class="col-12">
           <nav
-            class="
-              navbar-light navbar navbar-expand-lg
-              border-radius-xl
-              position-absolute
-              my-3
-              start-0
-              end-0
-              top-0
-              border-bottom
-              z-index-3
-              shadow
-              mx-4
-            "
+            class="navbar-light navbar navbar-expand-lg border-radius-xl position-absolute my-3 start-0 end-0 top-0 border-bottom z-index-3 shadow mx-4"
             id="nav"
           >
             <div class="container">
@@ -47,15 +35,7 @@
                   <!-- Home Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/"
                     >
                       Home
@@ -65,15 +45,7 @@
                   <!-- Forum Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/forum"
                     >
                       Forum
@@ -83,15 +55,7 @@
                   <!-- Blog Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/blog"
                     >
                       Blog
@@ -101,15 +65,7 @@
                   <!-- Contact Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/contact"
                     >
                       Contact
@@ -118,15 +74,7 @@
                   <!-- About Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/about"
                     >
                       About
@@ -135,19 +83,29 @@
 
                   <li class="nav-item mx-2">
                     <a
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       href="/admin"
                     >
                       Admin
                     </a>
+                  </li>
+
+                  <li class="nav-item mx-2">
+                    <NuxtLink
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
+                      to="/signup"
+                    >
+                      Signup
+                    </NuxtLink>
+                  </li>
+
+                  <li class="nav-item mx-2">
+                    <NuxtLink
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
+                      to="/login"
+                    >
+                      Login
+                    </NuxtLink>
                   </li>
                 </ul>
               </div>
