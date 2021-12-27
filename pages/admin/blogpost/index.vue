@@ -29,18 +29,14 @@
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark text-"
-                      v-for="post in blogPosts"
+                      v-for="post in blogPosts.posts"
                       :key="post.id"
                     >
                       <td class="text-bold">
                         {{ post.id }}
                       </td>
                       <td
-                        class="
-                          text-capitalize text-start
-                          link-info
-                          cursor-pointer
-                        "
+                        class="text-capitalize text-start link-info cursor-pointer"
                       >
                         <NuxtLink
                           class="link-info text-bold"
