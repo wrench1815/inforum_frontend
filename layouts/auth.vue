@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LazyNavBar />
+    <LazyAuthNavBar />
     <Nuxt />
     <LazyFooter />
   </div>
