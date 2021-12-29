@@ -1,5 +1,5 @@
 <template>
-  <section class="py-7 bg-gradient-dark position-relative overflow-hidden">
+  <section class="bg-gradient-dark position-relative overflow-hidden pb-6">
     <img
       class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-img"
       src="../assets/curved-images/curved5.jpg"
@@ -11,15 +11,17 @@
     <div class="container position-relative z-index-1">
       <div class="row">
         <div
-          class="col-lg-6 col-md-12 d-flex justify-content-center flex-column"
+          class="col-lg-6 col-md-12 d-flex justify-content-cente flex-column mt-6"
         >
           <section class="">
-            <h2 class="text-white">Not Signed Up yet?</h2>
             <h2 class="text-white">
-              What are you waiting for,<span class="ms-2 text-primary"
-                >Join Now!</span
+              Not Signed Up on
+              <router-link class="text-primary bg-white p-1 rounded-3" to="/"
+                >Inforum</router-link
               >
+              yet?
             </h2>
+            <h2 class="text-white mt-">What are you waiting for, Join Now!</h2>
             <p class="pe-5 text-white opacity-8 z-index-1 text-lg">
               Signup today to get access to a lot of great features.
             </p>
@@ -30,14 +32,6 @@
             </ul>
 
             <div class="text-white text-2xl">
-              Changed Mood? No worry, get back to
-              <router-link
-                class="text-primary bg-white p-1 rounded-3 text-bolder"
-                to="/"
-                >Home</router-link
-              >
-            </div>
-            <div class="text-white text-2xl mt-2">
               Already have an Account? Great,
               <router-link
                 class="text-primary bg-white p-1 rounded-3 text-bolder"
@@ -45,12 +39,20 @@
                 >Login!</router-link
               >
             </div>
+            <div class="text-white text-2xl mt-2">
+              Changed Mood? No worry, get back to
+              <router-link
+                class="text-primary bg-white p-1 rounded-3 text-bolder"
+                to="/"
+                >Home</router-link
+              >
+            </div>
           </section>
         </div>
         <div class="col-lg-6">
           <div class="row">
             <div class="col-lg-12 col-md-10 col-12 mx-auto mt-6">
-              <div class="card z-index-0 fadeIn3 fadeInBottom">
+              <div class="card z-index-0">
                 <div
                   class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
                 >
@@ -128,6 +130,7 @@
                         type="password"
                         class="form-control"
                         v-model="password"
+                        placeholder="********"
                       />
                       <div class="text-muted text-sm mt-2">
                         {{ FormHelpTexts.passwordText }}
@@ -142,6 +145,7 @@
                         type="password"
                         class="form-control"
                         v-model="confirmPassword"
+                        placeholder="********"
                       />
                       <div class="text-muted text-sm mt-2">
                         {{ FormHelpTexts.confirmPasswordText }}
