@@ -73,12 +73,6 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div
-                    class="text-center text-danger text-lg text-bold"
-                    v-if="FormHelpTexts.errorText"
-                  >
-                    {{ FormHelpTexts.errorText }}
-                  </div>
                   <!-- Start:Form -->
                   <form role="form" class="text-start">
                     <!-- Start:First Name -->
@@ -257,7 +251,6 @@ export default {
         genderText: '',
         passwordText: '',
         confirmPasswordText: '',
-        errorText: '',
       },
     }
   },
@@ -291,17 +284,31 @@ export default {
         this.FormHelpTexts.passwordText == '' &&
         this.FormHelpTexts.confirmPasswordText == ''
       ) {
-        this.FormHelpTexts.errorText = ''
-
         try {
           var result = await this.$axios.$post('/user/register', data)
 
-          this.$router.push(`/`)
+          this.$swal({
+            title: 'Success',
+            text: 'You have successfully registered!',
+            icon: 'success',
+            button: 'OK',
+          }).then(() => {
+            this.$router.push('/login')
+          })
         } catch (err) {
-          console.log(err)
+          this.$swal({
+            title: 'Error',
+            text: err.response.data.message,
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+          })
         }
       } else {
-        this.FormHelpTexts.errorText = 'Please fix the errors below'
+        this.$swal({
+          title: 'Error',
+          text: 'Please fill all the fields!',
+          icon: 'error',
+        })
         return
       }
     },
