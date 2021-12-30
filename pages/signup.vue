@@ -269,7 +269,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.loadParticles = true
-    }, 500)
+    }, 1000)
   },
   methods: {
     async signup() {
