@@ -11,7 +11,16 @@
     <!-- Start:BG Overlay Mask -->
     <div
       class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-gradient-dark"
-    ></div>
+    >
+      <LazyParticles
+        v-if="loadParticles"
+        class="w-100 h-100 position-fixe"
+        :lineLinked="false"
+        :particleOpacity="0.5"
+        movementDirection="none"
+        out_mode="bounce"
+      ></LazyParticles>
+    </div>
     <!-- End:BG Overlay Mask -->
 
     <div class="container position-relative z-index-1">
@@ -244,6 +253,9 @@ export default {
       password: '',
       confirmPassword: '',
 
+      // fix to particle shape stretch
+      loadParticles: false,
+
       FormHelpTexts: {
         firstNameText: '',
         lastNameText: '',
@@ -254,7 +266,11 @@ export default {
       },
     }
   },
-
+  mounted() {
+    setTimeout(() => {
+      this.loadParticles = true
+    }, 500)
+  },
   methods: {
     async signup() {
       if (this.password == this.confirmPassword) {
@@ -383,7 +399,3 @@ export default {
   -o-object-position: center !important;
 }
 </style>
-
-// Regex for password validation. must have 1 capital, 1 small, 1 number and 1
-special character password length 6-50
-/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,50}$/gm
