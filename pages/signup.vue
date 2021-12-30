@@ -1,13 +1,19 @@
 <template>
   <section class="bg-gradient-dark position-relative overflow-hidden pb-6">
+    <!-- Start:BG Image -->
     <img
       class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-img"
       src="../assets/curved-images/curved5.jpg"
       alt="curves"
     />
+    <!-- End:BG Image -->
+
+    <!-- Start:BG Overlay Mask -->
     <div
       class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-gradient-dark"
     ></div>
+    <!-- End:BG Overlay Mask -->
+
     <div class="container position-relative z-index-1">
       <div class="row">
         <div
@@ -67,6 +73,12 @@
                   </div>
                 </div>
                 <div class="card-body">
+                  <div
+                    class="text-center text-danger text-lg text-bold"
+                    v-if="FormHelpTexts.errorText"
+                  >
+                    {{ FormHelpTexts.errorText }}
+                  </div>
                   <!-- Start:Form -->
                   <form role="form" class="text-start">
                     <!-- Start:First Name -->
@@ -77,7 +89,15 @@
                         class="form-control"
                         placeholder="John"
                         v-model="firstName"
+                        @keyup="validateFirstName"
                       />
+                      <!-- Validation -->
+                      <div
+                        class="text-sm mt-2 text-danger text-bold"
+                        v-if="FormHelpTexts.firstNameText"
+                      >
+                        {{ FormHelpTexts.firstNameText }}
+                      </div>
                     </div>
                     <!-- End:First Name -->
 
@@ -89,7 +109,15 @@
                         class="form-control"
                         placeholder="Doe"
                         v-model="lastName"
+                        @keyup="validateLastName"
                       />
+                      <!-- Validation -->
+                      <div
+                        class="text-sm mt-2 text-danger text-bold"
+                        v-if="FormHelpTexts.lastNameText"
+                      >
+                        {{ FormHelpTexts.lastNameText }}
+                      </div>
                     </div>
                     <!-- End:Last Name -->
 
@@ -101,8 +129,13 @@
                         class="form-control"
                         placeholder="johndoe@mail.com"
                         v-model="email"
+                        @keyup="validateEmail"
                       />
-                      <div class="text-muted text-sm mt-2">
+                      <!-- Validation -->
+                      <div
+                        class="text-danger text-sm mt-2 text-bold"
+                        v-if="FormHelpTexts.emailText"
+                      >
                         {{ FormHelpTexts.emailText }}
                       </div>
                     </div>
@@ -114,12 +147,20 @@
                       <select
                         class="form-select form-control w-100 ps-3 mt-3"
                         v-model="gender"
+                        @change="validateGender"
                       >
                         <option disabled value="">Select Your Gender</option>
                         <option value="0">Male</option>
                         <option value="1">Female</option>
                         <option value="2">Unspecified</option>
                       </select>
+                      <!-- Validation -->
+                      <div
+                        class="text-sm mt-2 text-danger text-bold"
+                        v-if="FormHelpTexts.genderText"
+                      >
+                        {{ FormHelpTexts.genderText }}
+                      </div>
                     </div>
                     <!-- End:Gender -->
 
@@ -131,14 +172,19 @@
                         class="form-control"
                         v-model="password"
                         placeholder="********"
+                        @keyup="validatePassword"
                       />
-                      <div class="text-muted text-sm mt-2">
+                      <!-- Validation -->
+                      <div
+                        class="text-danger text-sm mt-2 text-bold"
+                        v-if="FormHelpTexts.passwordText"
+                      >
                         {{ FormHelpTexts.passwordText }}
                       </div>
                     </div>
                     <!-- End:Password -->
 
-                    <!-- Start:COnfirm Password -->
+                    <!-- Start:Confirm Password -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Confirm Password</label>
                       <input
@@ -146,8 +192,13 @@
                         class="form-control"
                         v-model="confirmPassword"
                         placeholder="********"
+                        @keyup="validateConfirmPassword"
                       />
-                      <div class="text-muted text-sm mt-2">
+                      <!-- Validation -->
+                      <div
+                        class="text-danger text-sm mt-2 text-bold"
+                        v-if="FormHelpTexts.confirmPasswordText"
+                      >
                         {{ FormHelpTexts.confirmPasswordText }}
                       </div>
                     </div>
@@ -202,11 +253,11 @@ export default {
       FormHelpTexts: {
         firstNameText: '',
         lastNameText: '',
-        emailText: 'must be a valid Email Address',
+        emailText: '',
         genderText: '',
-        passwordText:
-          'must be 6 characters long, containing atleast 1 of Capital, Small, Numeric and Special Character',
-        confirmPasswordText: 'must be same as password',
+        passwordText: '',
+        confirmPasswordText: '',
+        errorText: '',
       },
     }
   },
@@ -225,12 +276,92 @@ export default {
         gender: Number(this.gender),
         password: this.password,
       }
-      try {
-        var result = await this.$axios.$post('/user/register', data)
+      this.validateFirstName()
+      this.validateLastName()
+      this.validateEmail()
+      this.validateGender()
+      this.validatePassword()
+      this.validateConfirmPassword()
 
-        this.$router.push(`/`)
-      } catch (err) {
-        console.log(err)
+      if (
+        this.FormHelpTexts.firstNameText == '' &&
+        this.FormHelpTexts.lastNameText == '' &&
+        this.FormHelpTexts.emailText == '' &&
+        this.FormHelpTexts.genderText == '' &&
+        this.FormHelpTexts.passwordText == '' &&
+        this.FormHelpTexts.confirmPasswordText == ''
+      ) {
+        this.FormHelpTexts.errorText = ''
+
+        try {
+          var result = await this.$axios.$post('/user/register', data)
+
+          this.$router.push(`/`)
+        } catch (err) {
+          console.log(err)
+        }
+      } else {
+        this.FormHelpTexts.errorText = 'Please fix the errors below'
+        return
+      }
+    },
+
+    // for firstname validation
+    validateFirstName() {
+      if (this.firstName.length < 3) {
+        this.FormHelpTexts.firstNameText = 'Must be atleast 3 Characters long'
+      } else {
+        this.FormHelpTexts.firstNameText = ''
+      }
+    },
+
+    // for lastname validation
+    validateLastName() {
+      if (this.lastName.length < 3) {
+        this.FormHelpTexts.lastNameText = 'Must be atleast 3 Characters long'
+      } else {
+        this.FormHelpTexts.lastNameText = ''
+      }
+    },
+
+    // for email validation
+    validateEmail() {
+      var re =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (!re.test(this.email)) {
+        this.FormHelpTexts.emailText = 'Must be a valid Email Address'
+      } else {
+        this.FormHelpTexts.emailText = ''
+      }
+    },
+
+    // for password validation
+    validatePassword() {
+      var re =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
+      if (!re.test(this.password)) {
+        this.FormHelpTexts.passwordText =
+          'Must be 6 characters long, containing atleast 1 of Capital, Small, Numeric and Special Character'
+      } else {
+        this.FormHelpTexts.passwordText = ''
+      }
+    },
+
+    // for confirm password validation
+    validateConfirmPassword() {
+      if (this.password != this.confirmPassword) {
+        this.FormHelpTexts.confirmPasswordText = 'Password does not match'
+      } else {
+        this.FormHelpTexts.confirmPasswordText = ''
+      }
+    },
+
+    // for gender selector validation
+    validateGender() {
+      if (this.gender == '') {
+        this.FormHelpTexts.genderText = 'Select one from the list'
+      } else {
+        this.FormHelpTexts.genderText = ''
       }
     },
   },
