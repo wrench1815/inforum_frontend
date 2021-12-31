@@ -74,10 +74,21 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
+    // https://github.com/avil13/vue-sweetalert2
+    'vue-sweetalert2/nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  // sweetalert2 configuration: https://sweetalert2.github.io
+  sweetalert: {
+    confirmButtonColor: '#4caf50',
+    cancelButtonColor: '#f44335',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
