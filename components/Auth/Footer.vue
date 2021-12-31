@@ -1,13 +1,11 @@
 <template>
-  <!-- Footer -->
+  <!-- Start:Footer -->
   <div>
-    <footer>
+    <footer class="">
       <div class="container">
         <!-- upper -->
         <div class="row pt-4 pt-lg-5 my-5 border-top">
-          <div
-            class="col-lg d-flex flex-column align-items-lg-start align-items-center"
-          >
+          <div class="col-lg d-flex flex-column align-items-center">
             <NuxtLink to="/" class="d-flex align-items-center">
               <p class="text-muted d-block text-2xl text-center text-lg-start">
                 <img src="@/assets/icon.jpg" alt="logo" class="w-15 w-lg-25" />
@@ -21,6 +19,10 @@
           </div>
 
           <div class="col-lg"></div>
+
+          <div class="col-lg col-md-4" :class="linksClasses"></div>
+          <div class="col-lg col-md-4" :class="linksClasses"></div>
+          <div class="col-lg col-md-4" :class="linksClasses"></div>
         </div>
 
         <!-- lower -->
@@ -30,7 +32,7 @@
       </div>
     </footer>
   </div>
-  <!-- Footer -->
+  <!-- End:Footer -->
 </template>
 
 <script>
