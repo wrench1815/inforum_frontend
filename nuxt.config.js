@@ -77,6 +77,9 @@ export default {
 
     // https://github.com/avil13/vue-sweetalert2
     'vue-sweetalert2/nuxt',
+
+    // https://auth.nuxtjs.org
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -88,6 +91,29 @@ export default {
     cancelButtonColor: '#f44335',
     allowOutsideClick: false,
     allowEscapeKey: false,
+  },
+
+  // Auth module configuration: https://auth.nuxtjs.org/setup
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          maxAge: 604800, // 1 week
+        },
+        user: {
+          property: false,
+        },
+        endpoints: {
+          login: {
+            url: '/User/login',
+            method: 'post',
+            propertyName: 'token',
+          },
+          user: { url: '/User/me', method: 'get', propertyName: 'user' },
+          logout: false,
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

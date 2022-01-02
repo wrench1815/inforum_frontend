@@ -81,7 +81,7 @@
                     </NuxtLink>
                   </li>
 
-                  <li class="nav-item mx-2">
+                  <li class="nav-item mx-2" v-if="loggedInUser">
                     <a
                       class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       href="/admin"
@@ -107,6 +107,15 @@
                       Login
                     </NuxtLink>
                   </li>
+
+                  <li class="nav-item mx-2" v-if="isAuthenticated">
+                    <a
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
+                      @click="logout"
+                    >
+                      Logout
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -120,6 +129,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'NavBar',
   props: {},
@@ -132,6 +143,25 @@ export default {
           .querySelector('.navbar-toggler')
           .setAttribute('aria-expanded', false)
       })
+    },
+  },
+
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser']),
+  },
+
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+
+      this.$swal({
+        title: 'Logged out',
+        text: 'You have been logged out',
+        type: 'success',
+        timer: 2000,
+      })
+
+      this.$router.push('/')
     },
   },
 }

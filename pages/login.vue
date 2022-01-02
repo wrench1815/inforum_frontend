@@ -16,11 +16,22 @@
             <form role="form" class="text-start">
               <div class="input-group input-group-static my-4">
                 <label class="text-primary">Email</label>
-                <input type="email" class="form-control" />
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="johndoe@mail.com"
+                  v-model="email"
+                />
               </div>
+
               <div class="input-group input-group-static my-4">
                 <label class="text-primary">Password</label>
-                <input type="password" class="form-control" />
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="********"
+                  v-model="password"
+                />
               </div>
               <div
                 class="form-check form-switch d-flex align-items-center mb-3 is-filled"
@@ -38,6 +49,7 @@
                 <button
                   type="button"
                   class="btn bg-gradient-primary w-100 my-4 mb-2"
+                  @click="login"
                 >
                   Sign in
                 </button>
@@ -59,7 +71,41 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+
+  methods: {
+    async login() {
+      try {
+        await this.$auth.login({
+          data: {
+            email: this.email,
+            password: this.password,
+          },
+        })
+
+        this.$swal({
+          title: 'Logged in',
+          text: 'You have been logged in',
+          type: 'success',
+        })
+
+        // this.$router.push('/')
+      } catch (err) {
+        this.$swal({
+          title: 'Error',
+          text: err.response.data.message,
+          icon: 'error',
+        })
+      }
+    },
+  },
+}
 </script>
 
 <style></style>
