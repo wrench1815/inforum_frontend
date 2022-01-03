@@ -8,20 +8,20 @@
         <div class="row">
           <div class="col-12">
             <!-- Edit page -->
-            <h2 class="mx-4">Add Home</h2>
+            <h2 class="mx-4">Edit Home</h2>
           </div>
 
           <div class="col-12">
             <div class="card-body position-relative">
-              <form v-on:submit.prevent="addHome">
-                <div class="row">
+              <form v-on:submit.prevent="updateHome">
+                <div class="row mt-4">
                   <div class="col-12">
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Heading</label>
                       <input
                         class="form-control"
                         type="text"
-                        v-model="home.heading"
+                        v-model="homeData.heading"
                       />
                     </div>
                   </div>
@@ -32,7 +32,7 @@
                       <input
                         class="form-control"
                         type="text"
-                        v-model="home.subHeading"
+                        v-model="homeData.subHeading"
                       />
                     </div>
                   </div>
@@ -46,20 +46,22 @@
                     </div>
                   </div>
 
-                  <template v-if="home.headerImageLink">
-                    <div class="col">
-                      <div class="input-group input-group-static my-4">
-                        <label class="text-primary">Preview Image</label>
-                        <div class="form-control">
-                          <img class="img-fluid" src="" alt="heading image" />
-                        </div>
+                  <div class="col">
+                    <div class="input-group input-group-static my-4">
+                      <label class="text-primary">Preview Image</label>
+                      <div class="form-control">
+                        <img
+                          class="img-fluid"
+                          :src="homeData.headerImageLink"
+                          alt="heading image"
+                        />
                       </div>
                     </div>
-                  </template>
+                  </div>
                 </div>
                 <div class="text-end mt-4">
                   <button type="submit" class="btn bg-gradient-primary mb-0">
-                    Add Home
+                    Update Home
                   </button>
                 </div>
               </form>
@@ -77,32 +79,37 @@ export default {
   layout: 'admin',
   data() {
     return {
-      home: {
-        heading: '',
-        subHeading: '',
-        headerImageLink: '',
-      },
+      homeData: {},
     }
   },
 
+  created() {
+    const blogPost = this.$axios.$get(`/Home/${this.$route.params.id}`)
+    blogPost.then((res) => {
+      this.homeData = res
+    })
+  },
+
   methods: {
-    async addHome() {
+    async updateHome() {
       const formData = {
-        heading: this.home.heading,
-        subHeading: this.home.subHeading,
+        id: this.$route.params.id,
+        heading: this.homeData.heading,
+        subHeading: this.homeData.subHeading,
 
         // this is hard coded untill we implement image upload
         headerImageLink:
           'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8YmxvZ3x8fHx8fDE2NDExNzQ2MTg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800',
       }
 
+      // form validation
       if (
         formData.heading !== '' &&
         formData.subHeading !== '' &&
         formData.headerImageLink !== ''
       ) {
-        await this.$axios.$post(`/Home`, formData)
-        this.$router.push(`/admin/Home`)
+        await this.$axios.$put(`/Home/${formData.id}`, formData)
+        this.$router.push(`/admin/Home/preview/${formData.id}`)
       } else {
         this.$swal.fire({
           icon: 'error',
