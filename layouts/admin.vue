@@ -1,5 +1,5 @@
 <template>
-  <div v-if="display">
+  <div>
     <AdminAsideNav class="aside-index" />
     <main
       class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
@@ -12,23 +12,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
-  computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser']),
-  },
-  data() {
-    return {
-      display: false,
-    }
-  },
-  created() {
-    if (!(this.isAuthenticated && this.loggedInUser)) {
-      this.$router.push('/login')
-    } else {
-      this.display = true
-    }
-  },
+  middleware: ['auth', 'isAdmin'],
+
   head() {
     return {
       bodyAttrs: {
