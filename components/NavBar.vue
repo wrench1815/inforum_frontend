@@ -81,7 +81,7 @@
                     </NuxtLink>
                   </li>
 
-                  <li class="nav-item mx-2" v-if="loggedInUser">
+                  <li class="nav-item mx-2" v-if="loggedInUserRole == 'Admin'">
                     <a
                       class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       href="/admin"
@@ -90,16 +90,16 @@
                     </a>
                   </li>
 
-                  <li class="nav-item mx-2" v-if="!loggedInUser">
+                  <!-- <li class="nav-item mx-2" v-if="!loggedInUser">
                     <NuxtLink
                       class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/signup"
                     >
                       Signup
                     </NuxtLink>
-                  </li>
+                  </li> -->
 
-                  <li class="nav-item mx-2" v-if="!loggedInUser">
+                  <li class="nav-item mx-2" v-if="!isAuthenticated">
                     <NuxtLink
                       class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/login"
@@ -147,7 +147,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser']),
+    ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
   },
 
   methods: {
