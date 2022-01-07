@@ -107,9 +107,8 @@ export default {
           login: {
             url: '/User/login',
             method: 'post',
-            propertyName: 'token',
           },
-          user: { url: '/User/me', method: 'get', propertyName: 'user' },
+          user: { url: '/User/me', method: 'get' },
           logout: false,
         },
       },
