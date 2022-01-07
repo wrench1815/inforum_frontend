@@ -45,7 +45,7 @@
                       <td class="text-capitalize text-start custom-paragraph">
                         {{ home.subHeading }}
                       </td>
-                      <td class="text-start custom-paragraph">
+                      <td class="text-center custom-paragraph">
                         {{ home.headerImageLink }}
                       </td>
                       <td>
