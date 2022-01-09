@@ -243,7 +243,9 @@
 
 <script>
 export default {
+  middleware: 'guest',
   layout: 'auth',
+
   data() {
     return {
       firstName: '',
