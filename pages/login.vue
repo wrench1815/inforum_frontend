@@ -172,7 +172,7 @@ export default {
   methods: {
     async login() {
       if (this.email != '' && this.password != '') {
-        userLogin()
+        this.userLogin()
       } else {
         this.$swal({
           title: 'Error',
