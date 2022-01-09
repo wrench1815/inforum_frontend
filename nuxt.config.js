@@ -87,10 +87,16 @@ export default {
 
   // sweetalert2 configuration: https://sweetalert2.github.io
   sweetalert: {
-    confirmButtonColor: '#4caf50',
-    cancelButtonColor: '#f44335',
+    // confirmButtonColor: '#4caf50',
+    // cancelButtonColor: '#f44335',
     allowOutsideClick: false,
     allowEscapeKey: false,
+    buttonsStyling: false,
+    customClass: {
+      confirmButton: 'btn btn-success mx-2',
+      cancelButton: 'btn btn-danger mx-2',
+      denyButton: 'btn btn-warning mx-2',
+    },
   },
 
   // Auth module configuration: https://auth.nuxtjs.org/setup
