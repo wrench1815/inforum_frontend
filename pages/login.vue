@@ -1,5 +1,7 @@
 <template>
-  <section class="bg-gradient-dark position-relative overflow-hidden pb-6 vh-100">
+  <section
+    class="bg-gradient-dark position-relative overflow-hidden pb-6 vh-100"
+  >
     <!-- Start:BG Image -->
     <img
       class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-img"
