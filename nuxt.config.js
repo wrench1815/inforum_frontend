@@ -77,6 +77,9 @@ export default {
 
     // https://github.com/avil13/vue-sweetalert2
     'vue-sweetalert2/nuxt',
+
+    // https://auth.nuxtjs.org
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -84,10 +87,38 @@ export default {
 
   // sweetalert2 configuration: https://sweetalert2.github.io
   sweetalert: {
-    confirmButtonColor: '#4caf50',
-    cancelButtonColor: '#f44335',
+    // confirmButtonColor: '#4caf50',
+    // cancelButtonColor: '#f44335',
     allowOutsideClick: false,
     allowEscapeKey: false,
+    buttonsStyling: false,
+    customClass: {
+      confirmButton: 'btn btn-success mx-2',
+      cancelButton: 'btn btn-danger mx-2',
+      denyButton: 'btn btn-warning mx-2',
+    },
+  },
+
+  // Auth module configuration: https://auth.nuxtjs.org/setup
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          maxAge: 604800, // 1 week
+        },
+        user: {
+          property: false,
+        },
+        endpoints: {
+          login: {
+            url: '/User/login',
+            method: 'post',
+          },
+          user: { url: '/User/me', method: 'get' },
+          logout: false,
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

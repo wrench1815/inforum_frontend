@@ -12,7 +12,6 @@
           <div class="col-12" v-if="blogPosts.length == 0">
             <h1>No posts available</h1>
           </div>
-          <!-- create fking table: id , title,author,dateposted,actions:(icons: edit,delete) -->
           <div class="col-12" v-else>
             <div class="mx-4">
               <div class="table-responsive">
@@ -92,7 +91,7 @@ export default {
       const myDate = new Date(inputDate)
       return `${myDate.toLocaleString('default', {
         weekday: 'short',
-      })}, ${myDate.getDate()}-${myDate.getMonth()}-${myDate.getFullYear()}`
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
     },
   },
 }

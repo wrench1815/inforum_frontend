@@ -13,6 +13,8 @@
 
 <script>
 export default {
+  middleware: ['auth', 'isAdmin'],
+
   head() {
     return {
       bodyAttrs: {
