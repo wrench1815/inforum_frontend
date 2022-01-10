@@ -83,7 +83,7 @@
                 </div>
                 <div class="card-body">
                   <!-- Start:Form -->
-                  <form role="form" class="text-start">
+                  <form role="form" class="text-start" @submit="signup">
                     <!-- Start:First Name -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">First Name</label>
@@ -210,9 +210,8 @@
                     <div class="text-center">
                       <!-- Start:Action Button -->
                       <button
-                        type="button"
+                        type="submit"
                         class="btn bg-gradient-primary w-100 my-4 mb-2"
-                        @click="signup"
                       >
                         Sign up
                       </button>
@@ -274,7 +273,8 @@ export default {
     }, 1000)
   },
   methods: {
-    async signup() {
+    async signup(e) {
+      e.preventDefault()
       if (this.password == this.confirmPassword) {
         this.userSignup()
       }

@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="bg-gradient-dark position-relative overflow-hidden pb-6 vh-100"
-  >
+  <section class="bg-gradient-dark position-relative overflow-hidden pb-6 min-vh-100">
     <!-- Start:BG Image -->
     <img
       class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-img"
@@ -70,7 +68,7 @@
                 </div>
                 <div class="card-body">
                   <!-- Start:Form -->
-                  <form role="form" class="text-start">
+                  <form role="form" class="text-start" @submit="login">
                     <!-- Start:Email -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Email</label>
@@ -114,9 +112,8 @@
                     <div class="text-center">
                       <!-- Start:Action Button -->
                       <button
-                        type="button"
+                        type="submit"
                         class="btn bg-gradient-primary w-100 my-4 mb-2"
-                        @click="login"
                       >
                         Login
                       </button>
@@ -172,7 +169,9 @@ export default {
   },
 
   methods: {
-    async login() {
+    async login(e) {
+      e.preventDefault()
+
       if (this.email != '' && this.password != '') {
         this.userLogin()
       } else {
