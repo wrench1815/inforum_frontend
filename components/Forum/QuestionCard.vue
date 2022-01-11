@@ -1,6 +1,6 @@
 <template>
   <!-- card -->
-  <div class="border border-radius-2xl bg-white mb-3">
+  <div class="border border-radius-2xl bg-white mb-3 shadow-lg">
     <!-- card top -->
     <div class="p-3 border-bottom">
       <NuxtLink class="d-flex justify-content-start gap-3" to="/">
