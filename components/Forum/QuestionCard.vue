@@ -49,17 +49,46 @@
       <button
         type="button"
         class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
+        @click="showComments"
       >
         <i class="fa fa-comment" />
         5 Comments
       </button>
     </div>
+
+    <!-- Comments -->
+    <div v-show="isCommentsVisible">
+      <!-- Comments Meta Data -->
+      <CommentHeading />
+      <!-- Actual Comments -->
+      <div>
+        <Comment />
+        <Comment />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import CommentHeading from '~/components/Forum/CommentHeading.vue'
+import Comment from '~/components/Forum/Comment.vue'
 export default {
   name: 'QuestionCard',
+  components: {
+    CommentHeading,
+    Comment,
+  },
+  data() {
+    return {
+      isCommentsVisible: false,
+    }
+  },
+
+  methods: {
+    showComments() {
+      this.isCommentsVisible = !this.isCommentsVisible
+    },
+  },
 }
 </script>
 
