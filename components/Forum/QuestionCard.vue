@@ -26,11 +26,9 @@
         ullam, velit ipsam dolores voluptates enim voluptatum exercitationem
         fugiat a impedit quas. Similique nihil, nesciunt aut recusandae, fugit
         tempore sint sed est vel amet suscipit quod earum ratione repellendus
-        mollitia iusto labore perferendis! Fugiat sit quasi ex ratione dolorum
-        odio, delectus reiciendis atque doloremque consequatur eligendi, rem
-        nisi? Suscipit similique repellat, fugiat aliquid sapiente quod
-        doloribus debitis quam illo sequi at ullam aspernatur. Vel facere magni,
-        voluptates consequuntur beatae doloribus excepturi!
+        fugit tempore sint sed est vel amet suscipit quod earum ratione
+        repellendus fugit tempore sint sed est vel amet suscipit quod earum
+        ratione repellendus
       </p>
     </div>
 
@@ -45,7 +43,7 @@
         10 Votes
       </button>
 
-      <!-- comments -->
+      <!-- actions-->
       <button
         type="button"
         class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
@@ -58,13 +56,27 @@
 
     <!-- Comments -->
     <div v-show="isCommentsVisible">
+      <!-- Create Comment -->
+      <CommentBox />
+
       <!-- Comments Meta Data -->
       <CommentHeading />
+
       <!-- Actual Comments -->
-      <div>
-        <Comment />
-        <Comment />
-      </div>
+      <template v-if="comments.length">
+        <div>
+          <Comment
+            v-for="comment in comments"
+            :key="comment.id"
+            :content="comment.content"
+          />
+        </div>
+      </template>
+      <template v-else>
+        <div class="p-3">
+          <p class="text-center text-capitalize">No comments yet</p>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -72,15 +84,34 @@
 <script>
 import CommentHeading from '~/components/Forum/CommentHeading.vue'
 import Comment from '~/components/Forum/Comment.vue'
+import CommentBox from '~/components/Forum/CommentBox.vue'
 export default {
   name: 'QuestionCard',
   components: {
     CommentHeading,
     Comment,
+    CommentBox,
   },
   data() {
     return {
       isCommentsVisible: false,
+      comments: [
+        {
+          id: 1,
+          content:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit modi obcaecati id atque. Explicabo fugit quide delectus consectetur! ',
+        },
+        {
+          id: 2,
+          content:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit modi obcaecati id atque. Explicabo fugit quide delectus consectetur! ',
+        },
+        {
+          id: 3,
+          content:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit modi obcaecati id atque. Explicabo fugit quide delectus consectetur! ',
+        },
+      ],
     }
   },
 

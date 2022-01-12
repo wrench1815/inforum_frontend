@@ -25,9 +25,7 @@
         <div class="col-10">
           <!-- Comment -->
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit alias
-            modi obcaecati id atque. Explicabo fugit quidem delectus quo
-            consectetur!
+            {{ content }}
           </p>
 
           <!-- comment meta data -->
@@ -62,6 +60,9 @@
 <script>
 export default {
   name: 'Comment',
+  props: {
+    content: String,
+  },
 }
 </script>
 
