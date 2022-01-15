@@ -51,6 +51,11 @@
               </button>
             </div>
           </div>
+
+          <div class="">
+            <!-- SubComments -->
+            <SubComment v-for="subComment in subComments" :key="subComment" />
+          </div>
         </div>
       </div>
     </div>
@@ -58,10 +63,20 @@
 </template>
 
 <script>
+import SubComment from '~/components/Forum/SubComment.vue'
+
 export default {
   name: 'Comment',
   props: {
     content: String,
+  },
+  components: {
+    SubComment,
+  },
+  data() {
+    return {
+      subComments: [...Array(5).keys()],
+    }
   },
 }
 </script>
