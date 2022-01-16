@@ -38,6 +38,7 @@
               <button
                 type="button"
                 class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
+                @click="toggleSubComments"
               >
                 <i class="fa fa-reply" />
                 5 Replies
@@ -45,6 +46,7 @@
               <button
                 type="button"
                 class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
+                @click="toggleSubCommentBox"
               >
                 <i class="fa fa-comment" />
                 Comment
@@ -52,7 +54,11 @@
             </div>
           </div>
 
-          <div class="">
+          <div v-show="isSubCommentBoxVisible">
+            <AddSubComment />
+          </div>
+
+          <div v-show="isSubCommentsVisible">
             <!-- SubComments -->
             <SubComment v-for="subComment in subComments" :key="subComment" />
           </div>
@@ -64,6 +70,7 @@
 
 <script>
 import SubComment from '~/components/Forum/SubComment.vue'
+import AddSubComment from '~/components/Forum/AddSubComment.vue'
 
 export default {
   name: 'Comment',
@@ -72,11 +79,22 @@ export default {
   },
   components: {
     SubComment,
+    AddSubComment,
   },
   data() {
     return {
       subComments: [...Array(5).keys()],
+      isSubCommentsVisible: false,
+      isSubCommentBoxVisible: false,
     }
+  },
+  methods: {
+    toggleSubComments() {
+      this.isSubCommentsVisible = !this.isSubCommentsVisible
+    },
+    toggleSubCommentBox() {
+      this.isSubCommentBoxVisible = !this.isSubCommentBoxVisible
+    },
   },
 }
 </script>
