@@ -1,89 +1,49 @@
 <template>
-  <section class="bg-gradient-dark position-relative overflow-hidden pb-6">
-    <!-- Start:BG Image -->
-    <img
-      class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-img"
-      src="../assets/curved-images/curved5.jpg"
-      alt="curves"
-    />
-    <!-- End:BG Image -->
-
-    <!-- Start:BG Overlay Mask -->
+  <div class="page-header">
     <div
-      class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-gradient-dark"
+      class="position-absolute fixed-top ms-auto w-lg-55 w-md-100 w-100 h-100 rounded-3 z-index-0 me-lg-n4 header-img"
     >
-      <LazyParticles
-        v-if="loadParticles"
-        class="w-100 h-100 position-fixe"
-        :lineLinked="false"
-        :particleOpacity="0.5"
-        movementDirection="none"
-        out_mode="bounce"
-      ></LazyParticles>
+      <!-- Start:BG Overlay Mask -->
+      <div
+        class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-gradient-dark rounded-3"
+      >
+        <LazyParticles
+          v-if="loadParticles"
+          class="w-100 h-100 opacity-100"
+          :lineLinked="false"
+          :particleOpacity="0.5"
+          movementDirection="none"
+          out_mode="bounce"
+        ></LazyParticles>
+      </div>
+      <!-- End:BG Overlay Mask -->
     </div>
-    <!-- End:BG Overlay Mask -->
-
-    <div class="container position-relative z-index-1">
+    <div class="container py-9">
       <div class="row">
-        <div
-          class="col-lg-6 col-md-12 d-flex justify-content-cente flex-column mt-6"
-        >
-          <section class="">
-            <h2 class="text-white">
-              Not Signed Up on
-              <router-link class="text-primary bg-white p-1 rounded-3" to="/"
-                >Inforum</router-link
+        <div class="col-lg-7 d-flex justify-content-center flex-column">
+          <div
+            class="card card-body d-flex justify-content-center shadow-lg pt-1 blur align-items-center"
+          >
+            <div
+              class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 w-100 mb-3"
+            >
+              <div
+                class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1"
               >
-              yet?
-            </h2>
-            <h2 class="text-white mt-">What are you waiting for, Join Now!</h2>
-            <p class="pe-5 text-white opacity-8 z-index-1 text-lg">
-              Signup today to get access to a lot of great features.
-            </p>
-            <ul class="pe-5 text-white opacity-8 z-index-1 text-lg">
-              <li>Create Forum Posts</li>
-              <li>Leave Comments</li>
-              <li>Upvote your favourite Answer and much more...</li>
-            </ul>
+                <h3 class="text-white text-center mt-2 mb-0">Sign Up</h3>
+              </div>
+            </div>
 
-            <div class="text-white text-2xl">
-              Already have an Account? Great,
-              <router-link
-                class="text-primary bg-white p-1 rounded-3 text-bolder"
-                to="/login"
-                >Login!</router-link
-              >
-            </div>
-            <div class="text-white text-2xl mt-2">
-              Changed Mood? No worry, get back to
-              <router-link
-                class="text-primary bg-white p-1 rounded-3 text-bolder"
-                to="/"
-                >Home</router-link
-              >
-            </div>
-          </section>
-        </div>
-        <div class="col-lg-6">
-          <div class="row">
-            <div class="col-lg-12 col-md-10 col-12 mx-auto mt-6">
-              <div class="card z-index-0">
-                <div
-                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-                >
-                  <div
-                    class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1"
-                  >
-                    <h4
-                      class="text-white font-weight-bolder text-center mt-2 mb-0"
-                    >
-                      Sign Up
-                    </h4>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <!-- Start:Form -->
-                  <form role="form" class="text-start" @submit="signup">
+            <!-- Start:Signup Form -->
+            <form
+              role="form"
+              class="px-md-5"
+              @submit="signup"
+              autocomplete="off"
+            >
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
                     <!-- Start:First Name -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">First Name</label>
@@ -103,7 +63,9 @@
                       </div>
                     </div>
                     <!-- End:First Name -->
+                  </div>
 
+                  <div class="col-md-6">
                     <!-- Start:Last Name -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Last Name</label>
@@ -123,7 +85,9 @@
                       </div>
                     </div>
                     <!-- End:Last Name -->
+                  </div>
 
+                  <div class="col-12">
                     <!-- Start:Email -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Email</label>
@@ -143,7 +107,9 @@
                       </div>
                     </div>
                     <!-- End:Email -->
+                  </div>
 
+                  <div class="col-12">
                     <!-- Start:Gender -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Gender</label>
@@ -166,7 +132,9 @@
                       </div>
                     </div>
                     <!-- End:Gender -->
+                  </div>
 
+                  <div class="col-12">
                     <!-- Start:Password -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Password</label>
@@ -186,7 +154,9 @@
                       </div>
                     </div>
                     <!-- End:Password -->
+                  </div>
 
+                  <div class="col-12">
                     <!-- Start:Confirm Password -->
                     <div class="input-group input-group-static my-4">
                       <label class="text-primary">Confirm Password</label>
@@ -206,18 +176,21 @@
                       </div>
                     </div>
                     <!-- End:Confirm Password -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <!-- Start:Action Button -->
+                    <button
+                      type="submit"
+                      class="btn bg-gradient-primary w-100 my-4 mb-2"
+                    >
+                      Sign up
+                    </button>
+                    <!-- End:Action Button -->
+                  </div>
 
-                    <div class="text-center">
-                      <!-- Start:Action Button -->
-                      <button
-                        type="submit"
-                        class="btn bg-gradient-primary w-100 my-4 mb-2"
-                      >
-                        Sign up
-                      </button>
-                      <!-- End:Action Button -->
-                    </div>
-
+                  <div class="col-12">
                     <!-- Start:Login Link -->
                     <p class="mt-4 text-sm text-center">
                       Already have an account?
@@ -228,16 +201,16 @@
                       >
                     </p>
                     <!-- End:Login Link -->
-                  </form>
-                  <!-- End:Form -->
+                  </div>
                 </div>
               </div>
-            </div>
+            </form>
+            <!-- End:Signup Form -->
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -394,10 +367,8 @@ export default {
 </script>
 
 <style scoped>
-.bg-img {
-  object-fit: fill !important;
-  object-position: center !important;
-  -o-object-fit: fill !important;
-  -o-object-position: center !important;
+.header-img {
+  background-image: url('~/assets/curved-images/curved13.jpg');
+  background-size: cover;
 }
 </style>
