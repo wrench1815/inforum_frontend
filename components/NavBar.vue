@@ -10,7 +10,15 @@
             id="nav"
           >
             <div class="container">
-              <NuxtLink class="navbar-brand fs-4" to="/"> Inforum </NuxtLink>
+              <NuxtLink class="navbar-brand fs-4" to="/">
+                <img
+                  src="@/assets/icon.jpg"
+                  width="25rem"
+                  alt="logo"
+                  class="mb-1"
+                />
+                <span>Inforum</span>
+              </NuxtLink>
 
               <button
                 class="navbar-toggler shadow-none ms-2"
