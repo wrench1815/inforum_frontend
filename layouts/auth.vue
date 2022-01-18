@@ -1,8 +1,8 @@
 <template>
   <div>
-    <AuthNavBar />
+    <LazyAuthNavBar />
     <Nuxt />
-    <LazyAuthFooter />
+    <!-- <LazyAuthFooter /> -->
   </div>
 </template>
 
