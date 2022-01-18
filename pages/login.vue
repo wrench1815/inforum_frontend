@@ -1,7 +1,7 @@
 <template>
   <div class="page-header">
     <div
-      class="position-absolute fixed-top ms-auto w-lg-55 w-md-50 w-sm-100 w-100 h-100 rounded-3 z-index-0 me-md-n4 header-img"
+      class="position-absolute fixed-top ms-auto w-lg-55 w-md-100 w-100 h-100 rounded-3 z-index-0 me-lg-n4 header-img"
     >
       <!-- Start:BG Overlay Mask -->
       <div
@@ -16,12 +16,13 @@
           out_mode="bounce"
         ></LazyParticles>
       </div>
+      <!-- End:BG Overlay Mask -->
     </div>
     <div class="container py-9">
       <div class="row">
         <div class="col-lg-7 d-flex justify-content-center flex-column">
           <div
-            class="card card-body d-flex justify-content-center shadow-lg pt-1 blur align-items-center"
+            class="card card-body d-flex justify-content-center shadow-xl pt-1 blur align-items-center"
           >
             <div
               class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 w-100 mb-3"
@@ -32,6 +33,8 @@
                 <h3 class="text-white text-center mt-2 mb-0">Log In</h3>
               </div>
             </div>
+
+            <!-- Start:Login Form -->
             <form
               role="form"
               class="px-md-5"
@@ -84,14 +87,15 @@
                   </div>
                 </div>
                 <div class="row">
-                  <!-- Start:Action Button -->
                   <div class="col-12">
+                    <!-- Start:Action Button -->
                     <button
                       type="submit"
                       class="btn bg-gradient-primary w-100 my-4 mb-2"
                     >
                       Login
                     </button>
+                    <!-- End:Action Button -->
                   </div>
 
                   <div class="col-12">
@@ -106,10 +110,10 @@
                     </p>
                     <!-- End:Signup Link -->
                   </div>
-                  <!-- End:Action Button -->
                 </div>
               </div>
             </form>
+            <!-- End:Login Form -->
           </div>
         </div>
       </div>
@@ -222,13 +226,6 @@ export default {
 </script>
 
 <style scoped>
-/* .bg-img {
-  object-fit: fill !important;
-  object-position: center !important;
-  -o-object-fit: fill !important;
-  -o-object-position: center !important;
-} */
-
 .header-img {
   background-image: url('~/assets/curved-images/curved5.jpg');
   background-size: cover;
