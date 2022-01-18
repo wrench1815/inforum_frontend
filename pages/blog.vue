@@ -103,10 +103,6 @@
       </div>
     </section>
     <!-- End:Pagination -->
-
-    <div>
-      {{ blogPosts }}
-    </div>
   </div>
 </template>
 
