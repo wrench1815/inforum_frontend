@@ -52,35 +52,12 @@
       </div>
       <!-- End:Full size post -->
 
-      <div class="col-lg-4 col-md-6" v-for="i in 9" :key="i">
-        <div class="card border-radius-2xl">
-          <div
-            class="card-image border-radius-top-start-2xl border-radius-top-end-2xl cursor-pointer img-hover-zoom"
-          >
-            <img
-              class="img-fluid border-radius-top-start-2xl border-radius-top-end-2xl"
-              src="@/assets/images/img-1.jpg"
-              alt=""
-            />
-          </div>
-          <div class="card-body">
-            <NuxtLink class="card-title h3" to="/"
-              >Learn Python In 30 Minutes - In Depth Guide</NuxtLink
-            >
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit quaerat qui voluptatem modi ab, minus quibusdam iste
-              libero rem neque voluptatibus nisi ea accusantium, totam
-              voluptatum. Totam tempora commodi officiis.
-            </p>
-            <a href="#" class="btn btn-primary">Read More</a>
-            <div class="border-top border-primary mb-1"></div>
-            <p class="card-text d-flex justify-content-between">
-              <small class="text-info">March 02, 2021</small>
-              <small class="text-info">John Doe</small>
-            </p>
-          </div>
-        </div>
+      <div
+        class="col-lg-4 col-md-6"
+        v-for="post in blogPosts.posts"
+        :key="post.id"
+      >
+        <LazyBlogPostCard :post="post" />
       </div>
     </div>
     <!-- End:Latest Posts -->
@@ -126,11 +103,21 @@
       </div>
     </section>
     <!-- End:Pagination -->
+
+    <div>
+      {{ blogPosts }}
+    </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  // Fetch Blog Posts
+  async asyncData({ $axios, $config }) {
+    const blogPosts = await $axios.$get('/BlogPosts', $config)
+    return { blogPosts }
+  },
+}
 </script>
 
 <style>
