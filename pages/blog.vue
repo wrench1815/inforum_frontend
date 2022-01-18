@@ -10,43 +10,27 @@
       <div class="col-12 mb-0 mb-sm-3">
         <div class="row g-0">
           <div class="col-sm-6 ps-sm-0 d-flex align-items-center">
-            <div class="card-image cursor-pointer h-100 w-100 ratio ratio-16x9">
+            <div
+              class="card-image cursor-pointer h-100 w-100 ratio ratio-16x9 img-hover-zoom"
+            >
               <img
-                class="
-                  shadow-lg
-                  border-radius-top-end-2xl
-                  border-radius-top-end-md-0
-                  border-radius-top-start-2xl
-                  border-radius-bottom-start-md-2xl
-                  img-fluid
-                  cover-img
-                "
-                src="@/assets/demo-post.jpg"
+                class="shadow-lg border-radius-top-end-2xl border-radius-top-end-md-0 border-radius-top-start-2xl border-radius-bottom-start-md-2xl img-fluid cover-img"
+                src="@/assets/images/img-1.jpg"
               />
             </div>
           </div>
           <div
-            class="
-              shadow-lg
-              border-radius-bottom-start-2xl
-              border-radius-bottom-start-md-0
-              border-radius-bottom-end-2xl
-              border-radius-top-end-md-2xl
-              border-radius-top-end-0
-              border-radius-top-start-0
-              border-radius-bottom-start-0
-              col-sm-6
-              ps-sm-0
-              card
-            "
+            class="shadow-lg border-radius-bottom-start-2xl border-radius-bottom-start-md-0 border-radius-bottom-end-2xl border-radius-top-end-md-2xl border-radius-top-end-0 border-radius-top-start-0 border-radius-bottom-start-0 col-sm-6 ps-sm-0 card"
           >
             <div class="card-body">
               <p class="card-text">
-                <small class="text-muted">March 02, 2021</small>
+                <small class="text-info">March 02, 2021</small>
+                <span class="text-primary">|</span>
+                <span class="text-info"> John Doe</span>
               </p>
-              <h3 class="card-title pb-3">
-                Learn Python In 30 Minutes - In Depth Guide
-              </h3>
+              <NuxtLink class="card-title h3 pb-3" to="/"
+                >Learn Python In 30 Minutes - In Depth Guide</NuxtLink
+              >
               <p class="card-text custom-paragraph">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Recusandae iste ex adipisci cumque architecto explicabo quas,
@@ -71,38 +55,77 @@
       <div class="col-lg-4 col-md-6" v-for="i in 9" :key="i">
         <div class="card border-radius-2xl">
           <div
-            class="
-              card-image
-              border-radius-top-start-2xl border-radius-top-end-2xl
-            "
+            class="card-image border-radius-top-start-2xl border-radius-top-end-2xl cursor-pointer img-hover-zoom"
           >
             <img
-              class="
-                img-fluid
-                border-radius-top-start-2xl border-radius-top-end-2xl
-              "
+              class="img-fluid border-radius-top-start-2xl border-radius-top-end-2xl"
               src="@/assets/images/img-1.jpg"
               alt=""
             />
           </div>
           <div class="card-body">
-            <h2>Title</h2>
+            <NuxtLink class="card-title h3" to="/"
+              >Learn Python In 30 Minutes - In Depth Guide</NuxtLink
+            >
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Reprehenderit quaerat qui voluptatem modi ab, minus quibusdam iste
               libero rem neque voluptatibus nisi ea accusantium, totam
               voluptatum. Totam tempora commodi officiis.
             </p>
+            <a href="#" class="btn btn-primary">Read More</a>
             <div class="border-top border-primary mb-1"></div>
             <p class="card-text d-flex justify-content-between">
-              <small class="text-muted">March 02, 2021</small>
-              <small class="text-muted">John Doe</small>
+              <small class="text-info">March 02, 2021</small>
+              <small class="text-info">John Doe</small>
             </p>
           </div>
         </div>
       </div>
     </div>
     <!-- End:Latest Posts -->
+
+    <!-- Start:Pagination -->
+    <section>
+      <div class="container">
+        <div class="row justify-space-between py-2">
+          <div class="col-lg-4 mx-auto">
+            <ul class="pagination pagination-primary m-4">
+              <li class="page-item">
+                <a class="page-link" href="javascript:;" aria-label="Previous">
+                  <span aria-hidden="true"
+                    ><i class="fas fa-chevron-left" aria-hidden="true"></i
+                  ></span>
+                </a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="javascript:;">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:;">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:;">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:;">4</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:;">5</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:;" aria-label="Next">
+                  <span aria-hidden="true"
+                    ><i class="fas fa-chevron-right" aria-hidden="true"></i
+                  ></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End:Pagination -->
   </div>
 </template>
 
@@ -120,5 +143,17 @@ export default {}
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
+}
+
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.8s ease;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.2);
 }
 </style>
