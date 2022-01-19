@@ -77,6 +77,7 @@ export default {
         title: 'Success!',
         html: 'Category updated successfully. <br /> Redirecting in 5 Seconds.',
         type: 'success',
+        icon: 'success',
         timer: 5000,
         showConfirmButton: false,
         timerProgressBar: true,

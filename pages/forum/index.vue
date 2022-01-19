@@ -7,7 +7,13 @@
         <div
           class="bg-white border-radius-xl position-fixed custom-width shadow"
         >
-          Col-1
+          <ul class="list-unstyled text-center">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+          </ul>
         </div>
       </div>
 
@@ -24,9 +30,9 @@
       <!-- right column -->
       <div class="d-none d-lg-block col-lg-3 position-relative">
         <div
-          class="bg-white border-radius-xl position-fixed custom-width shadow"
+          class="bg-white border-radius-xl position-fixed custom-width shadow text-center"
         >
-          Col-3
+          Essential Links or Categories
         </div>
       </div>
     </div>
