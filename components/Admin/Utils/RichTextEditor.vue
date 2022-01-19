@@ -18,6 +18,12 @@ export default {
     },
   },
 
+  props: {
+    content: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       content: '',
