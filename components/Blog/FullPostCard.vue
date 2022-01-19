@@ -17,22 +17,10 @@
           <span class="text-primary">|</span>
           <span class="text-info"> John Doe</span>
         </p>
-        <NuxtLink class="card-title h3 pb-3" :to="`/blog/${post.slug}`"
-          >Learn Python In 30 Minutes - In Depth Guide</NuxtLink
-        >
-        <p class="card-text custom-paragraph">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          iste ex adipisci cumque architecto explicabo quas, dolores quibusdam
-          sapiente fugit repellat expedita sint, maiores assumenda.iAnmi eos
-          voluptatibus placeat nisi. This is a wider card with supporting text
-          below as a natural lead-in to additional content. This content is a
-          little bit longer. This is a wider card with supporting text below as
-          a natural lead-in to additional content. This content is a little bit
-          longer. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Voluptates ex animi earum ipsum quos esse, doloremque asperiores quasi
-          tenetur praesentium temporibus, veniam dignissimos error quo autem
-          libero officiis, beatae architecto.
-        </p>
+        <NuxtLink class="card-title h3 pb-3" :to="`/blog/${post.slug}`">{{
+          post.title
+        }}</NuxtLink>
+        <p class="card-text custom-paragraph" v-html="post.description"></p>
         <NuxtLink :to="`/blog/${post.slug}`" class="btn btn-primary"
           >Read More</NuxtLink
         >
