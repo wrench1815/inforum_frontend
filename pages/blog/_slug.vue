@@ -12,7 +12,7 @@ export default {
     }
   },
   mounted() {
-    const post = this.$axios.$get(`/BlogPosts/${this.$route.params.slug}`)
+    const post = this.$axios.$get(`/BlogPosts/slug/${this.$route.params.slug}`)
     post.then((res) => {
       this.post = res
     })
