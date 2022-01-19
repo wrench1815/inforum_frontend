@@ -1,11 +1,9 @@
 <template>
   <div class="page-header">
-    <div
-      class="position-absolute fixed-top ms-auto w-lg-55 w-md-100 w-100 h-100 rounded-3 z-index-0 me-lg-n4 header-img"
-    >
+    <div class="position-fixed fixed-top w-100 h-100 z-index-0 header-img">
       <!-- Start:BG Overlay Mask -->
       <div
-        class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-gradient-dark rounded-3"
+        class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-gradient-dark"
       >
         <LazyParticles
           v-if="loadParticles"
@@ -20,7 +18,9 @@
     </div>
     <div class="container py-9">
       <div class="row">
-        <div class="col-lg-7 d-flex justify-content-center flex-column">
+        <div
+          class="col-lg-6 col-md-10 mx-auto d-flex justify-content-center align-items-center flex-column"
+        >
           <div
             class="card card-body d-flex justify-content-center shadow-lg pt-1 blur align-items-center"
           >
@@ -37,7 +37,7 @@
             <!-- Start:Signup Form -->
             <form
               role="form"
-              class="px-md-5"
+              class="px-auto"
               @submit="signup"
               autocomplete="off"
             >
