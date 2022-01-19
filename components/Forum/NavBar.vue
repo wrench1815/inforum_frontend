@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-12">
           <nav
-            class="navbar-light navbar navbar-expand-lg border-radius-xl position-absolute my-3 start-0 end-0 top-0 border-bottom z-index-3 shadow mx-4"
+            class="navbar-light navbar navbar-expand-lg border-radius-xl position-absolute start-0 end-0 top-0 border-bottom z-index-3 shadow mx-4"
             id="nav"
           >
             <div class="container">
