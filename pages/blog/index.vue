@@ -13,7 +13,7 @@
       <!-- End:Full size post -->
 
       <!-- Start:Card size post -->
-      <div class="col-lg-4 col-md-6" v-for="post in cardPosts" key="post.id">
+      <div class="col-lg-4 col-md-6" v-for="post in cardPosts">
         <LazyBlogPostCard :post="post" />
       </div>
       <!-- End:Card size post -->
@@ -77,7 +77,7 @@ export default {
     const blogPosts = this.$axios.$get('/BlogPosts')
 
     blogPosts.then((res) => {
-      this.fullPost = res.posts.slice(0, 1)
+      this.fullPost = res.posts.slice(0, 1)[0]
       this.cardPosts = res.posts.slice(1)
     })
   },
