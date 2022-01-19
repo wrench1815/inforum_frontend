@@ -11,7 +11,7 @@
         <div class="row g-0">
           <div class="col-sm-6 ps-sm-0 d-flex align-items-center">
             <div
-              class="card-image cursor-pointer h-100 w-100 ratio ratio-16x9 img-hover-zoom"
+              class="card-image cursor-pointer h-100 w-100 ratio ratio-16x9 border-radius-top-end-2xl border-radius-top-end-md-0 border-radius-top-start-2xl border-radius-bottom-start-md-2xl img-hover-zoom"
             >
               <img
                 class="shadow-lg border-radius-top-end-2xl border-radius-top-end-md-0 border-radius-top-start-2xl border-radius-bottom-start-md-2xl img-fluid cover-img"
