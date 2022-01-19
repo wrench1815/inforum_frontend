@@ -7,17 +7,13 @@
     <!-- Start:Latest Posts -->
     <div class="row gx-4 gy-5">
       <!-- Start:Full size post -->
-      <div class="col-12 mb-0 mb-sm-3">
-        <BlogFullPostCard />
+      <div class="col-12 mb-0 mb-sm-3" v-if="fullPost != ''">
+        <BlogFullPostCard :post="fullPost" />
       </div>
       <!-- End:Full size post -->
 
       <!-- Start:Card size post -->
-      <div
-        class="col-lg-4 col-md-6"
-        v-for="post in blogPosts.posts"
-        :key="post.id"
-      >
+      <div class="col-lg-4 col-md-6" v-for="post in cardPosts" key="post.id">
         <LazyBlogPostCard :post="post" />
       </div>
       <!-- End:Card size post -->
@@ -70,10 +66,20 @@
 
 <script>
 export default {
-  // Fetch Blog Posts
-  async asyncData({ $axios, $config }) {
-    const blogPosts = await $axios.$get('/BlogPosts', $config)
-    return { blogPosts }
+  data() {
+    return {
+      fullPost: '',
+      cardPosts: [],
+    }
+  },
+
+  mounted() {
+    const blogPosts = this.$axios.$get('/BlogPosts')
+
+    blogPosts.then((res) => {
+      this.fullPost = res.posts.slice(0, 1)
+      this.cardPosts = res.posts.slice(1)
+    })
   },
 }
 </script>
