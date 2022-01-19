@@ -43,7 +43,7 @@
                           >{{ post.title }}</NuxtLink
                         >
                       </td>
-                      <td class="text-capitalize">Hardeep Kumar</td>
+                      <td class="text-capitalize">John Doe</td>
 
                       <td class="text-center">
                         {{ formattedDate(post.datePosted) }}
@@ -53,7 +53,10 @@
                           <NuxtLink :to="`/admin/blogpost/edit/${post.id}`">
                             <i class="fas fa-edit text-warning"></i>
                           </NuxtLink>
-                          <a>
+                          <a
+                            class="cursor-pointer"
+                            @click="deleteBlogPost(post.id)"
+                          >
                             <i class="fas fa-trash text-danger"></i>
                           </a>
                         </div>
@@ -92,6 +95,42 @@ export default {
       return `${myDate.toLocaleString('default', {
         weekday: 'short',
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
+    // Delete Blog Post
+    deleteBlogPost(id) {
+      const customAlert = this.$swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-danger me-1',
+          cancelButton: 'btn btn-success ms-1',
+        },
+        buttonsStyling: false,
+      })
+
+      customAlert
+        .fire({
+          icon: 'question',
+          title: 'Are you sure ?',
+          text: `Do you really want to delete this item? This process cannot be undone.`,
+          showCancelButton: true,
+          confirmButtonText: 'Delete',
+          cancelButtonText: 'Cancel',
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            await this.$axios.$delete(`/BlogPosts/${id}`)
+
+            this.$swal.fire({
+              icon: 'success',
+              title: 'Item Deleted',
+              text: 'Item Deleted Successfully',
+            })
+
+            this.blogPosts.posts = this.blogPosts.posts.filter(
+              (item) => item.id != id
+            )
+          }
+        })
     },
   },
 }
