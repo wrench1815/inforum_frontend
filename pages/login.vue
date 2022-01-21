@@ -1,119 +1,102 @@
 <template>
-  <div class="page-header">
-    <div class="position-fixed fixed-top w-100 h-100 z-index-0 header-img">
-      <!-- Start:BG Overlay Mask -->
-      <div
-        class="position-absolute start-0 top-0 h-100 z-index-1 opacity-6 w-100 bg-gradient-dark"
-      >
-        <LazyParticles
-          v-if="loadParticles"
-          class="w-100 h-100 opacity-100"
-          :lineLinked="false"
-          :particleOpacity="0.5"
-          movementDirection="none"
-          out_mode="bounce"
-        ></LazyParticles>
-      </div>
-      <!-- End:BG Overlay Mask -->
-    </div>
-    <div class="container py-9">
+  <div
+    class="page-header align-items-start min-vh-100 header-img"
+    loading="lazy"
+  >
+    <span class="mask bg-gradient-dark opacity-6">
+      <LazyParticles
+        v-if="loadParticles"
+        class="w-100 h-100 opacity-100"
+        :lineLinked="false"
+        :particleOpacity="0.5"
+        movementDirection="none"
+        out_mode="bounce"
+      ></LazyParticles>
+    </span>
+    <div class="container mt-9 mb-4">
       <div class="row">
-        <div
-          class="col-lg-6 col-md-10 mx-auto d-flex justify-content-center align-items-center flex-column"
-        >
-          <div
-            class="card card-body d-flex justify-content-center shadow-xl pt-1 blur align-items-center"
-          >
-            <div
-              class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 w-100 mb-3"
-            >
+        <div class="col-lg-4 col-md-7 col-12 mx-auto">
+          <div class="card z-index-0">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div
                 class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1"
               >
-                <h3 class="text-white text-center mt-2 mb-0">Log In</h3>
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+                  Login
+                </h4>
               </div>
             </div>
-
-            <!-- Start:Login Form -->
-            <form
-              role="form"
-              class="px-auto"
-              @submit="login"
-              autocomplete="off"
-            >
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12">
-                    <!-- Start:Email -->
-                    <div class="input-group input-group-static my-4">
-                      <label class="text-primary">Email</label>
-                      <input
-                        type="email"
-                        class="form-control"
-                        placeholder="johndoe@mail.com"
-                        v-model="email"
-                        @keyup="validateEmail"
-                      />
-                      <!-- Validation -->
-                      <div
-                        class="text-danger text-sm mt-2 text-bold"
-                        v-if="FormHelpTexts.emailText"
-                      >
-                        {{ FormHelpTexts.emailText }}
-                      </div>
-                    </div>
-                    <!-- End:Email -->
-                  </div>
-                  <div class="col-12">
-                    <!-- Start:Password -->
-                    <div class="input-group input-group-static my-4">
-                      <label class="text-primary">Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        v-model="password"
-                        placeholder="********"
-                        @keyup="validatePassword"
-                      />
-                      <!-- Validation -->
-                      <div
-                        class="text-danger text-sm mt-2 text-bold"
-                        v-if="FormHelpTexts.passwordText"
-                      >
-                        {{ FormHelpTexts.passwordText }}
-                      </div>
-                    </div>
-                    <!-- End:Password -->
-                  </div>
+            <div class="card-body">
+              <!-- Start:Login Form -->
+              <form role="form" class="text-start" @submit="login">
+                <!-- Start:Email -->
+                <div class="input-group input-group-static mt-3">
+                  <label class="text-primary">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="person@mail.com"
+                    v-model="email"
+                    @keyup="validateEmail"
+                  />
                 </div>
-                <div class="row">
-                  <div class="col-12">
-                    <!-- Start:Action Button -->
-                    <button
-                      type="submit"
-                      class="btn bg-gradient-primary w-100 my-4 mb-2"
-                    >
-                      Login
-                    </button>
-                    <!-- End:Action Button -->
-                  </div>
+                <!-- End:Email -->
 
-                  <div class="col-12">
-                    <!-- Start:Signup Link -->
-                    <p class="mt-4 text-sm text-center">
-                      Don't have an account?
-                      <NuxtLink
-                        class="text-primary text-gradient font-weight-bold"
-                        to="/signup"
-                        >Sign up</NuxtLink
-                      >
-                    </p>
-                    <!-- End:Signup Link -->
-                  </div>
+                <!-- Start:Email Validation -->
+                <div
+                  class="text-danger text-sm mt-2 text-bold"
+                  v-if="FormHelpTexts.emailText"
+                >
+                  {{ FormHelpTexts.emailText }}
                 </div>
-              </div>
-            </form>
-            <!-- End:Login Form -->
+                <!-- End:Email Validation -->
+
+                <!-- Start:Password -->
+                <div class="input-group input-group-static mt-3">
+                  <label class="text-primary">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    v-model="password"
+                    placeholder="********"
+                    @keyup="validatePassword"
+                  />
+                </div>
+                <!-- End:Password-->
+
+                <!-- Start:Password Validation -->
+                <div
+                  class="text-danger text-sm mt-2 text-bold"
+                  v-if="FormHelpTexts.passwordText"
+                >
+                  {{ FormHelpTexts.passwordText }}
+                </div>
+                <!-- End:Password Validation -->
+
+                <!-- Start:Action Button -->
+                <div class="text-center">
+                  <button
+                    type="submit"
+                    class="btn bg-gradient-primary w-100 my-4 mb-2"
+                  >
+                    Login
+                  </button>
+                </div>
+                <!-- End:Action Button -->
+
+                <!-- Start:Signup Link -->
+                <p class="mt-4 text-sm text-center">
+                  Don't have an account?
+                  <NuxtLink
+                    class="text-primary text-gradient font-weight-bold"
+                    to="/signup"
+                    >Sign up</NuxtLink
+                  >
+                </p>
+                <!-- End:Signup Link -->
+              </form>
+              <!-- End:Login Form -->
+            </div>
           </div>
         </div>
       </div>
@@ -181,8 +164,6 @@ export default {
             text: 'You have been logged in',
             type: 'success',
           })
-
-          // this.$router.push('/')
         } catch (err) {
           this.$swal({
             title: 'Error',
