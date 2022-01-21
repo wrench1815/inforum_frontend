@@ -15,7 +15,7 @@
     </span>
     <div class="container mt-9 mb-4">
       <div class="row">
-        <div class="col-lg-4 col-md-7 col-12 mx-auto">
+        <div class="col-lg-5 col-md-7 col-12 mx-auto">
           <div class="card z-index-0">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div
@@ -24,6 +24,9 @@
                 <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                   Login
                 </h4>
+                <p class="text-white font-weight-bolder text-center mt-2 mb-0">
+                  Enter your Email and Password to Login
+                </p>
               </div>
             </div>
             <div class="card-body">
