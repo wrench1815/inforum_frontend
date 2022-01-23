@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <h1 class="text-center">Forum Home</h1>
-  </div>
+  <div class="text-center">Right Sidebar</div>
 </template>
 
 <script>
 export default {
-  layout: 'forum',
+  name: 'RightSideBar',
 }
 </script>
 
