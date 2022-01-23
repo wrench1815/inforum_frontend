@@ -1,12 +1,19 @@
 <template>
   <div>
-    <h1 class="text-center">Forum Home</h1>
+    <QuestionCard />
+    <QuestionCard />
+    <QuestionCard />
+    <QuestionCard />
   </div>
 </template>
 
 <script>
+import QuestionCard from '~/components/Forum/QuestionCard.vue'
 export default {
   layout: 'forum',
+  components: {
+    QuestionCard,
+  },
 }
 </script>
 

@@ -12,7 +12,7 @@
       </div>
 
       <!-- middle -->
-      <div class="middle bg-white shadow-lg rounded-3">
+      <div class="middle pe-2">
         <nuxt />
       </div>
 
@@ -100,12 +100,12 @@ export default {
 @media (min-width: 992px) {
   .left {
     display: block;
-    grid-column: 1/3;
+    grid-column: 1/2;
     grid-row: 2/13;
   }
 
   .middle {
-    grid-column: 3/11;
+    grid-column: 2/11;
   }
 
   .right {
