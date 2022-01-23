@@ -7,10 +7,10 @@
       <div class="card py-4">
         <div class="row">
           <div class="col-12">
-            <h2 class="mx-4">Blog Posts</h2>
+            <h2 class="mx-4">Site Categories</h2>
           </div>
-          <div class="col-12" v-if="blogPosts.length == 0">
-            <h1>No posts available</h1>
+          <div class="col-12" v-if="categories.length == 0">
+            <h1>No Categories Added</h1>
           </div>
           <div class="col-12" v-else>
             <div class="mx-4">
@@ -18,44 +18,33 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-primary text-center text-md">
-                      <th class="text-uppercase">id</th>
-                      <th class="text-uppercase text-start ps-2">Title</th>
-                      <th class="text-uppercase">Author</th>
-                      <th class="text-uppercase">Date Posted</th>
+                      <th class="text-uppercase">Id</th>
+                      <th class="text-uppercase text-center ps-2">Name</th>
                       <th class="text-uppercase">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark text-"
-                      v-for="post in blogPosts.posts"
-                      :key="post.id"
+                      v-for="category in categories"
+                      :key="category.id"
                     >
                       <td class="text-bold">
-                        {{ post.id }}
+                        {{ category.id }}
                       </td>
                       <td
-                        class="text-capitalize text-start link-info cursor-pointer"
+                        class="text-capitalize text-center text-info text-bold"
                       >
-                        <NuxtLink
-                          class="link-info text-bold"
-                          :to="`/admin/blogpost/preview/${post.id}`"
-                          >{{ post.title }}</NuxtLink
-                        >
-                      </td>
-                      <td class="text-capitalize">John Doe</td>
-
-                      <td class="text-center">
-                        {{ formattedDate(post.datePosted) }}
+                        {{ category.name }}
                       </td>
                       <td>
-                        <div class="d-flex justify-content-evenly">
-                          <NuxtLink :to="`/admin/blogpost/edit/${post.id}`">
-                            <i class="fas fa-edit text-warning"></i>
+                        <div class="d-flex justify-content-center">
+                          <NuxtLink :to="`/admin/category/edit/${category.id}`">
+                            <i class="fas fa-edit text-warning mx-2"></i>
                           </NuxtLink>
                           <a
-                            class="cursor-pointer"
-                            @click="deleteBlogPost(post.id)"
+                            class="cursor-pointer mx-2"
+                            @click="deleteCategory(category.id)"
                           >
                             <i class="fas fa-trash text-danger"></i>
                           </a>
@@ -70,8 +59,8 @@
         </div>
         <div class="col-12">
           <div class="d-flex justify-content-end mx-4 mt-4">
-            <NuxtLink class="btn btn-success" to="/admin/blogpost/add"
-              >Add Post</NuxtLink
+            <NuxtLink class="btn btn-success" to="/admin/category/add"
+              >Add Category</NuxtLink
             >
           </div>
         </div>
@@ -85,20 +74,13 @@ export default {
   layout: 'admin',
 
   async asyncData({ $axios, $config }) {
-    const blogPosts = await $axios.$get('/BlogPosts')
-    return { blogPosts }
+    const categories = await $axios.$get('/Categories')
+    return { categories }
   },
 
   methods: {
-    formattedDate(inputDate) {
-      const myDate = new Date(inputDate)
-      return `${myDate.toLocaleString('default', {
-        weekday: 'short',
-      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
-    },
-
-    // Delete Blog Post
-    deleteBlogPost(id) {
+    // Delete the Category
+    deleteCategory(id) {
       const customAlert = this.$swal.mixin({
         customClass: {
           confirmButton: 'btn btn-danger me-1',
@@ -118,7 +100,7 @@ export default {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
-            await this.$axios.$delete(`/BlogPosts/${id}`)
+            await this.$axios.$delete(`/Categories/${id}`)
 
             this.$swal.fire({
               icon: 'success',
@@ -126,9 +108,7 @@ export default {
               text: 'Item Deleted Successfully',
             })
 
-            this.blogPosts.posts = this.blogPosts.posts.filter(
-              (item) => item.id != id
-            )
+            this.categories = this.categories.filter((item) => item.id != id)
           }
         })
     },
