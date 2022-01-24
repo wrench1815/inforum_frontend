@@ -13,7 +13,7 @@
       <!-- End:Full size post -->
 
       <!-- Start:Card size post -->
-      <div class="col-lg-4 col-md-6" v-for="post in cardPosts">
+      <div class="col-lg-4 col-md-6" v-for="post in cardPosts" :key="post">
         <LazyBlogPostCard :post="post" />
       </div>
       <!-- End:Card size post -->
@@ -66,6 +66,7 @@
 
 <script>
 export default {
+  scrollToTop: true,
   data() {
     return {
       fullPost: '',

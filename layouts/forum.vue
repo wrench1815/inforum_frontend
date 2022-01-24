@@ -105,12 +105,12 @@ export default {
   }
 
   .middle {
-    grid-column: 2/11;
+    grid-column: 2/10;
   }
 
   .right {
     display: block;
-    grid-column: 11/13;
+    grid-column: 10/13;
     grid-row: 2/13;
   }
 }
