@@ -43,18 +43,14 @@
                       <!-- End:Full Name -->
 
                       <!-- Start:Email -->
-                      <td
-                        class="text-capitalize text-center text-info text-bold"
-                      >
+                      <td class="text-center text-info text-bold">
                         {{ form.email }}
                       </td>
                       <!-- End:Email -->
 
                       <!-- Start:Created On -->
-                      <td
-                        class="text-capitalize text-center text-info text-bold"
-                      >
-                        {{ form.createdOn }}
+                      <td class="text-center text-info text-bold">
+                        {{ formattedDate(form.createdOn) }}
                       </td>
                       <!-- End:Created On -->
 
@@ -103,6 +99,13 @@ export default {
   },
 
   methods: {
+    formattedDate(inputDate) {
+      const myDate = new Date(inputDate)
+      return `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
     // Delete the Contact Form
     deleteContactForm(id) {
       const customAlert = this.$swal.mixin({
