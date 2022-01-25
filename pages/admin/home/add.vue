@@ -108,18 +108,34 @@ export default {
             // on success
             if (res.status === 201) {
               const message = res.message
+              let timerInterval
 
               // trigerring modal
-              this.$swal.fire({
-                icon: 'success',
-                title: 'Successfully Added',
-                text:
-                  message.charAt(0).toUpperCase() +
-                  message.slice(1).toLowerCase(),
-              })
-
-              // changing route
-              this.$router.push(`/admin/Home`)
+              this.$swal
+                .fire({
+                  icon: 'success',
+                  type: 'success',
+                  title: 'Successfully Added',
+                  html: `${message}<br />Redirecting in <b></b> Seconds.`,
+                  timer: 5000,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                  didOpen: () => {
+                    this.$swal.showLoading()
+                    const b = this.$swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                      b.textContent = Math.ceil(
+                        this.$swal.getTimerLeft() / 1000
+                      )
+                    }, 100)
+                  },
+                  willClose: () => {
+                    clearInterval(timerInterval)
+                  },
+                })
+                .then(() => {
+                  this.$router.push(`/admin/Home`)
+                })
             }
           })
           // on failure
