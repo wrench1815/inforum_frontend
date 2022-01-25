@@ -106,7 +106,7 @@ export default {
       }
 
       let res = await this.$axios.$post('/ContactForms', data)
-      console.log(res)
+
       if (res.status == 201) {
         let timerInterval
 
@@ -145,4 +145,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped></style>
