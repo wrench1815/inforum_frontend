@@ -50,19 +50,6 @@
         </li>
         <!-- End: Home -->
 
-        <!-- Start: Test Page -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/test">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-vial opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Test Page</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Test Page -->
-
         <!-- Start: Blogpost -->
         <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin/blogpost">
@@ -88,6 +75,19 @@
           </NuxtLink>
         </li>
         <!-- End: Category -->
+
+        <!-- Start: Contact Form -->
+        <li class="nav-item">
+          <NuxtLink class="nav-link text-dark" to="/admin/contact-form">
+            <div
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
+            >
+              <i class="fas fa-envelope-open-text opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Contact Form</span>
+          </NuxtLink>
+        </li>
+        <!-- End: Contact Form -->
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">
