@@ -96,14 +96,46 @@ export default {
           'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8YmxvZ3x8fHx8fDE2NDExNzQ2MTg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800',
       }
 
+      // on successful validation
       if (
         formData.heading !== '' &&
         formData.subHeading !== '' &&
         formData.headerImageLink !== ''
       ) {
-        await this.$axios.$post(`/Home`, formData)
-        this.$router.push(`/admin/Home`)
-      } else {
+        await this.$axios
+          .$post(`/Home`, formData)
+          .then((res) => {
+            // on success
+            if (res.status === 201) {
+              const message = res.message
+
+              // trigerring modal
+              this.$swal.fire({
+                icon: 'success',
+                title: 'Successfully Added',
+                text:
+                  message.charAt(0).toUpperCase() +
+                  message.slice(1).toLowerCase(),
+              })
+
+              // changing route
+              this.$router.push(`/admin/Home`)
+            }
+          })
+          // on failure
+          .catch((err) => {
+            // trigerring modal
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Cannot add home data',
+              showCloseButton: true,
+              showConfirmButton: false,
+            })
+          })
+      }
+      // on unsuccessful validation
+      else {
         this.$swal.fire({
           icon: 'error',
           title: 'Error',
