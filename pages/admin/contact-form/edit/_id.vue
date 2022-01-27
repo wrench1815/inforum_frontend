@@ -191,47 +191,52 @@ export default {
         createdOn: this.contactFormCreatedOn,
       }
 
-      let res = await this.$axios.$put(`/ContactForms/${formData.id}`, formData)
+      await this.$axios
+        .$put(`/ContactForms/${formData.id}`, formData)
+        .then((res) => {
+          if (res.status == 200) {
+            let timerInterval
 
-      if (res.status == 200) {
-        let timerInterval
+            this.$swal({
+              title: 'Success!',
+              html: 'Contact Form updated Successfully. <br /> Redirecting in <b></b> Seconds.',
+              type: 'success',
+              icon: 'success',
+              timer: 5000,
+              showConfirmButton: false,
+              timerProgressBar: true,
+              didOpen: () => {
+                this.$swal.showLoading()
+                const b = this.$swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Math.ceil(this.$swal.getTimerLeft() / 1000)
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              },
+            }).then(() => {
+              this.$router.push(`/admin/contact-form`)
+            })
+          }
+        })
+        .catch((err) => {
+          let msg
 
-        this.$swal({
-          title: 'Success!',
-          html: 'Contact Form updated Successfully. <br /> Redirecting in <b></b> Seconds.',
-          type: 'success',
-          icon: 'success',
-          timer: 5000,
-          showConfirmButton: false,
-          timerProgressBar: true,
-          didOpen: () => {
-            this.$swal.showLoading()
-            const b = this.$swal.getHtmlContainer().querySelector('b')
-            timerInterval = setInterval(() => {
-              b.textContent = Math.ceil(this.$swal.getTimerLeft() / 1000)
-            }, 100)
-          },
-          willClose: () => {
-            clearInterval(timerInterval)
-          },
-        }).then(() => {
-          this.$router.push(`/admin/contact-form`)
+          try {
+            msg = res.message
+          } catch (error) {
+            msg = 'Unable to Update Contact Form.<br/>Please Try Again Later.'
+          }
+
+          this.$swal({
+            title: 'Error!',
+            html: `${msg}`,
+            type: 'error',
+            icon: 'error',
+            showConfirmButton: true,
+          })
         })
-      } else {
-        let msg
-        if (res.message) {
-          msg = res.message
-        } else {
-          msg = 'Unable to Update Contact Form.<br/>Please Try Again Later.'
-        }
-        this.$swal({
-          title: 'Error!',
-          text: `${msg}`,
-          type: 'error',
-          icon: 'error',
-          showConfirmButton: true,
-        })
-      }
     },
   },
 }
