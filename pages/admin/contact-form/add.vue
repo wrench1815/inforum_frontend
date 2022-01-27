@@ -94,11 +94,74 @@ export default {
       contactFormFullName: '',
       contactFormEmail: '',
       contactFormMessage: '',
+
+      // for error handling
+      FormHelpTexts: {
+        fullNameText: '',
+        emailText: '',
+        messageText: '',
+      },
     }
   },
 
   methods: {
+    // for email validation
+    validateEmail() {
+      var re =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (!re.test(this.contactFormEmail)) {
+        this.FormHelpTexts.emailText =
+          '<strong>Email</strong> must be a valid Email Address.<br/>'
+      } else {
+        this.FormHelpTexts.emailText = ''
+      }
+    },
+
+    // for Full Name validation
+    validateFullName() {
+      if (this.contactFormFullName.length < 3) {
+        this.FormHelpTexts.fullNameText =
+          '<strong>Full Name</strong> must be atleast 3 Characters long.<br/>'
+      } else {
+        this.FormHelpTexts.fullNameText = ''
+      }
+    },
+
+    // for Message validation
+    validateMessage() {
+      if (this.contactFormMessage.length < 20) {
+        this.FormHelpTexts.messageText =
+          '<strong>Message</strong> must be atleast 20 Characters long'
+      } else {
+        this.FormHelpTexts.messageText = ''
+      }
+    },
+
+    // Validate data
     async addContactForm() {
+      this.validateFullName()
+      this.validateEmail()
+      this.validateMessage()
+
+      if (
+        this.FormHelpTexts.fullNameText == '' &&
+        this.FormHelpTexts.emailText == '' &&
+        this.FormHelpTexts.messageText == ''
+      ) {
+        this.addForm()
+      } else {
+        this.$swal({
+          title: 'Validation Errors!',
+          icon: 'error',
+          type: 'error',
+          html: `${this.FormHelpTexts.fullNameText}${this.FormHelpTexts.emailText}${this.FormHelpTexts.messageText}`,
+          confirmButtonText: 'Fix',
+        })
+      }
+    },
+
+    // Send data to Backend
+    async addForm() {
       const data = {
         fullName: this.contactFormFullName,
         email: this.contactFormEmail,
@@ -132,9 +195,15 @@ export default {
           this.$router.push(`/admin/contact-form`)
         })
       } else {
+        let msg
+        if (res.message) {
+          msg = res.message
+        } else {
+          msg = 'Unable to add Contact Form.<br/>Please Try Again later.'
+        }
         this.$swal({
           title: 'Error!',
-          text: res.message,
+          html: `${msg}`,
           type: 'error',
           icon: 'error',
           showConfirmButton: true,
