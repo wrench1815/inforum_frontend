@@ -16,7 +16,9 @@
                 <!-- Start:Full Name -->
                 <div class="row mb-4">
                   <div class="col-lg-3">
-                    <label class="col-form-label">Full Name</label>
+                    <label class="col-form-label"
+                      >Full Name<span class="text-danger ms-1">*</span></label
+                    >
                   </div>
 
                   <div class="col-lg-9">
@@ -34,7 +36,9 @@
                 <!-- Start:Email -->
                 <div class="row mb-4">
                   <div class="col-lg-3">
-                    <label class="col-form-label">Email</label>
+                    <label class="col-form-label"
+                      >Email<span class="text-danger ms-1">*</span></label
+                    >
                   </div>
 
                   <div class="col-lg-9">
@@ -52,7 +56,9 @@
                 <!-- Start:Message -->
                 <div class="row mb-4">
                   <div class="col-lg-3">
-                    <label class="col-form-label">Message</label>
+                    <label class="col-form-label"
+                      >Message<span class="text-danger ms-1">*</span></label
+                    >
                   </div>
 
                   <div class="col-lg-9">
