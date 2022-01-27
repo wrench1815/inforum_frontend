@@ -18,7 +18,9 @@
                 <!-- Start:Full Name -->
                 <div class="row mb-4">
                   <div class="col-lg-3">
-                    <label class="col-form-label">Full Name</label>
+                    <label class="col-form-label"
+                      >Full Name<span class="text-danger ms-1">*</span></label
+                    >
                   </div>
 
                   <div class="col-lg-9">
@@ -36,7 +38,9 @@
                 <!-- Start:Email -->
                 <div class="row mb-4">
                   <div class="col-lg-3">
-                    <label class="col-form-label">Email</label>
+                    <label class="col-form-label"
+                      >Email<span class="text-danger ms-1">*</span></label
+                    >
                   </div>
 
                   <div class="col-lg-9">
@@ -54,7 +58,9 @@
                 <!-- Start:Message -->
                 <div class="row mb-4">
                   <div class="col-lg-3">
-                    <label class="col-form-label">Message</label>
+                    <label class="col-form-label"
+                      >Message<span class="text-danger ms-1">*</span></label
+                    >
                   </div>
 
                   <div class="col-lg-9">
@@ -97,6 +103,14 @@ export default {
       contactFormFullName: '',
       contactFormEmail: '',
       contactFormMessage: '',
+      contactFormCreatedOn: '',
+
+      // for error handling
+      FormHelpTexts: {
+        fullNameText: '',
+        emailText: '',
+        messageText: '',
+      },
     }
   },
 
@@ -108,16 +122,73 @@ export default {
       this.contactFormFullName = res.fullName
       this.contactFormEmail = res.email
       this.contactFormMessage = res.message
+      this.contactFormCreatedOn = res.createdOn
     })
   },
 
   methods: {
+    // for email validation
+    validateEmail() {
+      var re =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (!re.test(this.contactFormEmail)) {
+        this.FormHelpTexts.emailText =
+          '<strong>Email</strong> must be a valid Email Address.<br/>'
+      } else {
+        this.FormHelpTexts.emailText = ''
+      }
+    },
+
+    // for Full Name validation
+    validateFullName() {
+      if (this.contactFormFullName.length < 3) {
+        this.FormHelpTexts.fullNameText =
+          '<strong>Full Name</strong> must be atleast 3 Characters long.<br/>'
+      } else {
+        this.FormHelpTexts.fullNameText = ''
+      }
+    },
+
+    // for Message validation
+    validateMessage() {
+      if (this.contactFormMessage.length < 20) {
+        this.FormHelpTexts.messageText =
+          '<strong>Message</strong> must be atleast 20 Characters long'
+      } else {
+        this.FormHelpTexts.messageText = ''
+      }
+    },
+
+    // Validate data
     async updateContactForm() {
+      this.validateFullName()
+      this.validateEmail()
+      this.validateMessage()
+
+      if (
+        this.FormHelpTexts.fullNameText == '' &&
+        this.FormHelpTexts.emailText == '' &&
+        this.FormHelpTexts.messageText == ''
+      ) {
+        this.updateForm()
+      } else {
+        this.$swal({
+          title: 'Validation Errors!',
+          icon: 'error',
+          type: 'error',
+          html: `${this.FormHelpTexts.fullNameText}${this.FormHelpTexts.emailText}${this.FormHelpTexts.messageText}`,
+          confirmButtonText: 'Fix',
+        })
+      }
+    },
+
+    async updateForm() {
       const formData = {
         id: this.$route.params.id,
         fullName: this.contactFormFullName,
         email: this.contactFormEmail,
         message: this.contactFormMessage,
+        createdOn: this.contactFormCreatedOn,
       }
 
       let res = await this.$axios.$put(`/ContactForms/${formData.id}`, formData)
@@ -147,9 +218,15 @@ export default {
           this.$router.push(`/admin/contact-form`)
         })
       } else {
+        let msg
+        if (res.message) {
+          msg = res.message
+        } else {
+          msg = 'Unable to Update Contact Form.<br/>Please Try Again Later.'
+        }
         this.$swal({
           title: 'Error!',
-          text: res.message,
+          text: `${msg}`,
           type: 'error',
           icon: 'error',
           showConfirmButton: true,
