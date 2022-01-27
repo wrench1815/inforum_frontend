@@ -174,47 +174,52 @@ export default {
         message: this.contactFormMessage,
       }
 
-      let res = await this.$axios.$post('/ContactForms', data)
+      await this.$axios
+        .$post('/ContactForms', data)
+        .then((res) => {
+          if (res.status == 201) {
+            let timerInterval
 
-      if (res.status == 201) {
-        let timerInterval
+            this.$swal({
+              title: 'Success!',
+              html: 'Contact Form added successfully. <br /> Redirecting in <b></b> Seconds.',
+              type: 'success',
+              icon: 'success',
+              timer: 5000,
+              showConfirmButton: false,
+              timerProgressBar: true,
+              didOpen: () => {
+                this.$swal.showLoading()
+                const b = this.$swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Math.ceil(this.$swal.getTimerLeft() / 1000)
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              },
+            }).then(() => {
+              this.$router.push(`/admin/contact-form`)
+            })
+          }
+        })
+        .catch((err) => {
+          let msg
 
-        this.$swal({
-          title: 'Success!',
-          html: 'Contact Form added successfully. <br /> Redirecting in <b></b> Seconds.',
-          type: 'success',
-          icon: 'success',
-          timer: 5000,
-          showConfirmButton: false,
-          timerProgressBar: true,
-          didOpen: () => {
-            this.$swal.showLoading()
-            const b = this.$swal.getHtmlContainer().querySelector('b')
-            timerInterval = setInterval(() => {
-              b.textContent = Math.ceil(this.$swal.getTimerLeft() / 1000)
-            }, 100)
-          },
-          willClose: () => {
-            clearInterval(timerInterval)
-          },
-        }).then(() => {
-          this.$router.push(`/admin/contact-form`)
+          try {
+            msg = res.message
+          } catch (error) {
+            msg = 'Unable to Add Contact Form.<br/>Please Try Again Later.'
+          }
+
+          this.$swal({
+            title: 'Error!',
+            html: `${msg}`,
+            type: 'error',
+            icon: 'error',
+            showConfirmButton: true,
+          })
         })
-      } else {
-        let msg
-        if (res.message) {
-          msg = res.message
-        } else {
-          msg = 'Unable to add Contact Form.<br/>Please Try Again later.'
-        }
-        this.$swal({
-          title: 'Error!',
-          html: `${msg}`,
-          type: 'error',
-          icon: 'error',
-          showConfirmButton: true,
-        })
-      }
     },
   },
 }
