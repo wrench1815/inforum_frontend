@@ -119,6 +119,7 @@ export default {
         description: this.postContent,
         excerpt: this.postExcerpt,
         categoryId: parseInt(this.postCategory),
+        authorId: this.$auth.$storage.getUniversal('user').user.id,
       }
       await this.$axios.$post('/BlogPosts', data)
       this.$router.push(`/admin/blogpost`)

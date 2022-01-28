@@ -141,6 +141,7 @@ export default {
         description: this.postData.description,
         excerpt: this.postData.excerpt,
         categoryId: parseInt(this.postData.categoryId),
+        authorId: this.$auth.$storage.getUniversal('user').user.id,
       }
 
       await this.$axios.$put(`/BlogPosts/${formData.id}`, formData)
