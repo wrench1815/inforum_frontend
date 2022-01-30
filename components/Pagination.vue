@@ -88,7 +88,6 @@
 </template>
 
 <script>
-// for component usage: refer blog/index.vue
 export default {
   name: 'Pagination',
   props: ['pagination', 'pageSize', 'pages'],

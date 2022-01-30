@@ -45,7 +45,6 @@ export default {
     return {
       fullPost: '',
       cardPosts: [],
-      // change pageSize from here to test pagination and layout: try with 1 first: after testing set pagesize as you want for your production layout
       pageSize: 10,
       pagination: {},
       pages: [],
@@ -64,7 +63,7 @@ export default {
           this.cardPosts = res.posts.slice(1)
           this.pagination = res.pagination
         })
-        // fixed scrolling: BTW My mind just reminded me of what I have learned in frontend masters.
+        // Scroll to top on page change
         .then(() => {
           setTimeout(() => {
             window.scroll(0, 0)
