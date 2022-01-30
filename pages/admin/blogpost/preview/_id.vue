@@ -42,7 +42,11 @@
 
                 <div class="border-top mt-4"></div>
                 <!-- content -->
-                <div v-html="post.description" class="py-3 px-lg-5"></div>
+                <div
+                  v-html="post.description"
+                  id="postContent"
+                  class="py-3 px-lg-5"
+                ></div>
 
                 <div class="border-top mb-4"></div>
 
@@ -83,6 +87,28 @@ export default {
         weekday: 'short',
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
     },
+  },
+
+  mounted() {
+    const postContent = document.getElementById('postContent')
+
+    // adds classes to images to make them responsive
+    const images = postContent.getElementsByTagName('img')
+    for (let i = 0; i < images.length; i++) {
+      images[i].classList.add('img-fluid', 'shadow-lg')
+    }
+
+    // adds classes to figures and its sub-elements to make them responsive
+    const figures = postContent.getElementsByTagName('figure')
+    for (let i = 0; i < figures.length; i++) {
+      figures[i].classList.add('mx-auto')
+      figures[i]
+        .getElementsByTagName('img')[0]
+        .classList.add('figure-img', 'img-fluid', 'shadow-lg')
+      figures[i]
+        .getElementsByTagName('figcaption')[0]
+        .classList.add('figure-caption', 'text-center', 'text-bold')
+    }
   },
 }
 </script>
