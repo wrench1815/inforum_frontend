@@ -9,7 +9,7 @@
           <div class="col-12">
             <!-- Post -->
             <div class="container py-1">
-              <div class="px-lg-6 px-xl-7 px-xxl-8">
+              <div class="px-auto">
                 <!-- post Featured image  -->
                 <div class="h-100 w-100 ratio ratio-16x9 my-3 my-lg-4">
                   <img
@@ -21,16 +21,14 @@
                 <!-- title -->
                 <h1 class="text-center my-3">{{ post.title }}</h1>
 
-                <div>
-                  <p class="text-center">
-                    By<span class="mx-2 text-bold text-primary"
-                      >{{ author.user.firstName }}
-                      {{ author.user.lastName }} </span
-                    >on<span class="mx-2 text-bold text-info">{{
-                      getDatePosted()
-                    }}</span>
-                  </p>
-                </div>
+                <p class="text-center">
+                  By<span class="mx-2 text-bold text-primary"
+                    >{{ author.user.firstName }}
+                    {{ author.user.lastName }} </span
+                  >on<span class="mx-2 text-bold text-info">{{
+                    getDatePosted()
+                  }}</span>
+                </p>
 
                 <!-- category -->
                 <div class="d-flex justify-content-center">
