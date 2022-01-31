@@ -13,14 +13,14 @@
     >
       <div class="card-body">
         <p class="card-text">
-          <small class="text-info">March 02, 2021</small>
+          <small class="text-info">{{ normalizedDate }}</small>
           <span class="text-primary">|</span>
-          <span class="text-info"> John Doe</span>
+          <span class="text-info">{{ authorFullName }}</span>
         </p>
         <NuxtLink class="card-title h3 pb-3" :to="`/blog/${post.slug}`">{{
           post.title
         }}</NuxtLink>
-        <p class="card-text custom-paragraph" v-html="post.description"></p>
+        <p class="card-text custom-paragraph">{{ post.excerpt }}</p>
         <NuxtLink :to="`/blog/${post.slug}`" class="btn btn-primary"
           >Read More</NuxtLink
         >
@@ -38,7 +38,58 @@ export default {
       required: true,
     },
   },
+
+  data() {
+    return {
+      authorFullName: '',
+      normalizedDate: '',
+    }
+  },
+
+  methods: {
+    getDatePosted(postDate) {
+      const myDate = new Date(postDate)
+      this.normalizedDate = `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
+    getAuthor(authorId) {
+      this.$axios.$get(`/User/single/${authorId}`).then((res) => {
+        var fullName = `${res.user.firstName} ${res.user.lastName}`
+        this.authorFullName = fullName
+      })
+    },
+  },
+
+  created() {
+    this.getDatePosted(this.post.datePosted)
+    this.getAuthor(this.post.authorId)
+  },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.cover-img {
+  object-fit: cover;
+}
+
+.custom-paragraph {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.8s ease;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.2);
+}
+</style>

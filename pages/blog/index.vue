@@ -101,27 +101,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.cover-img {
-  object-fit: cover;
-}
-
-.custom-paragraph {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  overflow: hidden;
-}
-
-.img-hover-zoom {
-  overflow: hidden;
-}
-
-.img-hover-zoom img {
-  transition: transform 0.8s ease;
-}
-
-.img-hover-zoom:hover img {
-  transform: scale(1.2);
-}
-</style>
+<style scoped></style>
