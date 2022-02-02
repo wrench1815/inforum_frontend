@@ -18,13 +18,36 @@
             aria-label="upload image button"
             @change="selectFile"
           />
-          <button class="btn btn-primary" @click="cropImage">Crop</button>
-          <button class="btn btn-primary" @click="saveImage">Save</button>
-          <button class="btn btn-success" @click="uploadFile">Upload</button>
+          <div class="my-3"></div>
+          <button
+            class="btn btn-primary"
+            @click="cropImage"
+            v-if="showCropButton"
+          >
+            Crop
+          </button>
+          <button
+            class="btn btn-primary"
+            @click="resetCrop"
+            v-if="showResetButton"
+          >
+            Reset
+          </button>
+          <button
+            class="btn btn-success"
+            @click="uploadFile"
+            v-if="showUploadButton"
+          >
+            Upload
+          </button>
+
+          <div v-if="showUploading">
+            <h1>Uploading ...</h1>
+          </div>
         </div>
 
-        <div class="col-2"></div>
-        <div class="col-8" v-if="src != ''">
+        <!-- cropper -->
+        <div class="col-12" v-if="src != '' && showCropper">
           <cropper
             class="cropper"
             :src="src"
@@ -35,16 +58,22 @@
             @change="change"
           />
         </div>
-        <div class="col-2"></div>
-        <div class="col-12" v-show="show" id="canvas"></div>
-        <div class="col-12" v-if="savedImage">
-          <h1>Saved Image</h1>
-          <img :src="savedImage" class="img-fluid" alt="saved image" />
+
+        <!-- Cropped Image Preview -->
+        <div class="col-12" v-show="show">
+          <h1>Cropped Image</h1>
+          <div id="canvas"></div>
         </div>
 
+        <!-- Uploaded Image Preview -->
         <div class="col-12" v-if="cloudSource != ''">
-          <h1>Cloudinary Image</h1>
+          <h1>Uploaded Image</h1>
           <img class="img-fluid" :src="cloudSource" alt="Image" />
+          <div>
+            <button class="btn btn-success" @click="copyUrl">
+              {{ isCopied ? 'Copied' : 'Copy' }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -61,21 +90,49 @@ export default {
   components: {
     Cropper,
   },
+
   data() {
     return {
+      // image source from device
       src: '',
+
+      // coordinates of cropper
       coordinates: {},
+
+      // cropped Image from the cropper
       croppedImage: null,
-      show: false,
+
+      // Saved Cropped Image
       savedImage: '',
-      isUpload: false,
+
+      // uploaded Image src
       cloudSource: '',
+
+      // show cropped Image
+      show: false,
+
+      // should crop image
+      isCrop: false,
+
+      // should upload image
+      isUpload: false,
+
+      showCropButton: false,
+      showUploadButton: false,
+      showResetButton: false,
+      showCropper: false,
+      showUploading: false,
+      isCopied: false,
     }
   },
 
   methods: {
     uploadFile() {
-      // upload
+      this.showUploading = true
+      this.show = false
+      this.showResetButton = false
+      this.showUploadButton = false
+      this.saveImage()
       if (this.isUpload) {
         const instance = this.$cloudinary.upload(this.savedImage, {
           folder: 'test',
@@ -83,26 +140,41 @@ export default {
         })
         instance.then((res) => {
           this.cloudSource = res.url
+          this.showUploading = false
         })
       }
     },
+
     change({ coordinates, canvas }) {
-      console.log(coordinates, canvas)
       this.croppedImage = canvas
       this.coordinates = coordinates
+      this.isCrop = true
     },
+
     cropImage() {
-      if (this.croppedImage) {
-        const { left, top, width, height } = this.coordinates
+      if (this.isCrop) {
         const imgCanvas = document.querySelector('#canvas')
         const img = this.croppedImage
         img.style.display = 'block'
+        img.classList.add('img-fluid')
+
+        function removeAllChildNodes(parent) {
+          while (parent.firstChild) {
+            parent.removeChild(parent.firstChild)
+          }
+        }
+        removeAllChildNodes(imgCanvas)
         imgCanvas.appendChild(img)
         this.show = true
+        this.showCropper = false
+        this.showCropButton = false
+        this.showResetButton = true
+        this.showUploadButton = true
       }
     },
+
     saveImage() {
-      if (this.croppedImage) {
+      if (this.isCrop) {
         let image = document
           .querySelector('#canvas canvas')
           .toDataURL('image/png')
@@ -111,23 +183,7 @@ export default {
         this.isUpload = true
       }
     },
-    _cropCanvas(sourceCanvas, left, top, width, height) {
-      let destCanvas = document.createElement('canvas')
-      destCanvas.width = width
-      destCanvas.height = height
-      destCanvas.getContext('2d').drawImage(
-        sourceCanvas,
-        left,
-        top,
-        width,
-        height, // source rect with content to crop
-        0,
-        0,
-        width,
-        height
-      ) // newCanvas, same size as source rect
-      return destCanvas
-    },
+
     async selectFile(e) {
       const file = e.target.files[0]
 
@@ -143,16 +199,35 @@ export default {
         })
 
       const data = await readData(file)
+
       this.src = data
+      this.showCropper = true
+      this.showCropButton = true
+    },
+
+    resetCrop() {
+      this.showCropper = true
+      this.showResetButton = false
+      this.showCropButton = true
+      this.show = false
+      this.showUploadButton = false
+    },
+
+    copyUrl() {
+      if (!this.isCopied) {
+        const result = navigator.clipboard.writeText(this.cloudSource)
+        result.then(() => {
+          this.isCopied = true
+        })
+      }
     },
   },
 }
 </script>
 
 <style scoped>
+/* adjust cropper width and height here */
 .cropper {
-  /* height: 600px;
-  width: 600px; */
   height: 100%;
   width: 100%;
   background: #ddd;
