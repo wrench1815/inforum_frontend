@@ -75,7 +75,159 @@
               </div>
 
               <!-- Start:Pagination -->
-              <section>
+
+              <!-- End:Pagination -->
+            </div>
+          </div>
+
+          <!-- Start:Add Contact Form Button -->
+          <div class="col-12">
+            <div class="border-bottom"></div>
+            <div class="d-flex justify-content-end mx-4 mt-4">
+              <NuxtLink class="btn btn-success" to="/admin/contact-form/add"
+                >Add Contact Form</NuxtLink
+              >
+            </div>
+          </div>
+          <!-- End:Add Contact Form Button -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  layout: 'admin',
+
+  data() {
+    return {
+      contactForms: Object,
+    }
+  },
+
+  async asyncData({ $axios, $config }) {
+    const contactForms = await $axios.$get('/ContactForms')
+    return { contactForms }
+  },
+
+  methods: {
+    // // jumps to previous page
+    // toPrevious() {
+    //   if (this.contactForms.pagination.hasPrevious == true) {
+    //     let prevPage = this.contactForms.pagination.currentPage - 1
+
+    //     this.getContacts(prevPage).then((r) => {
+    //       this.contactForms = r
+    //       this.toTop()
+    //     })
+    //   }
+    // },
+
+    // // jumps to next page
+    // toNext() {
+    //   if (this.contactForms.pagination.hasNext == true) {
+    //     let nextPage = this.contactForms.pagination.currentPage + 1
+
+    //     this.getContacts(nextPage).then((r) => {
+    //       this.contactForms = r
+    //       this.toTop()
+    //     })
+    //   }
+    // },
+
+    // // jumps to a specific page
+    // toNumber(pageNum) {
+    //   this.getContacts(pageNum).then((r) => {
+    //     this.contactForms = r
+    //     this.toTop()
+    //   })
+    // },
+
+    // // Scrolls to top
+    // toTop() {
+    //   window.scrollTo(0, 0)
+    // },
+
+    // fetch new data
+    // async getContacts(pageNum) {
+    //   let res = await this.$axios.$get(`/ContactForms?PageNumber=${pageNum}`)
+
+    //   return res
+    // },
+
+    // formats the date
+    formattedDate(inputDate) {
+      const myDate = new Date(inputDate)
+      return `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
+    // deletes the Contact Form
+    deleteContactForm(id) {
+      const customAlert = this.$swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-danger me-1',
+          cancelButton: 'btn btn-success ms-1',
+        },
+        buttonsStyling: false,
+      })
+
+      customAlert
+        .fire({
+          icon: 'question',
+          title: 'Are you sure ?',
+          text: `Do you really want to delete this item? This process cannot be undone.`,
+          showCancelButton: true,
+          confirmButtonText: 'Delete',
+          cancelButtonText: 'Cancel',
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            await this.$axios
+              .$delete(`/ContactForms/${id}`)
+              .then((res) => {
+                if (res.status == 200) {
+                  this.$swal({
+                    icon: 'success',
+                    title: 'Item Deleted',
+                    text: res.message,
+                  }).then(() => {
+                    this.contactForms.forms = this.contactForms.forms.filter(
+                      (item) => item.id != id
+                    )
+
+                    let currentPage
+
+                    if (this.contactForms.forms.length == 0) {
+                      currentPage = this.contactForms.pagination.currentPage - 1
+                    } else {
+                      currentPage = this.contactForms.pagination.currentPage
+                    }
+
+                    this.getContacts(currentPage).then((r) => {
+                      this.contactForms = r
+                    })
+                  })
+                }
+              })
+              .catch((err) => {
+                this.$swal({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Unable to Delete Contact Form',
+                })
+              })
+          }
+        })
+    },
+  },
+}
+</script>
+
+<style scoped></style>
+<section>
                 <div class="container">
                   <div class="row justify-space-between py-2">
                     <div class="col-md-4 mx-auto">
@@ -175,154 +327,3 @@
                   </div>
                 </div>
               </section>
-              <!-- End:Pagination -->
-            </div>
-          </div>
-
-          <!-- Start:Add Contact Form Button -->
-          <div class="col-12">
-            <div class="border-bottom"></div>
-            <div class="d-flex justify-content-end mx-4 mt-4">
-              <NuxtLink class="btn btn-success" to="/admin/contact-form/add"
-                >Add Contact Form</NuxtLink
-              >
-            </div>
-          </div>
-          <!-- End:Add Contact Form Button -->
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {
-  layout: 'admin',
-
-  data() {
-    return {
-      contactForms: Object,
-    }
-  },
-
-  async asyncData({ $axios, $config }) {
-    const contactForms = await $axios.$get('/ContactForms')
-    return { contactForms }
-  },
-
-  methods: {
-    // jumps to previous page
-    toPrevious() {
-      if (this.contactForms.pagination.hasPrevious == true) {
-        let prevPage = this.contactForms.pagination.currentPage - 1
-
-        this.getContacts(prevPage).then((r) => {
-          this.contactForms = r
-          this.toTop()
-        })
-      }
-    },
-
-    // jumps to next page
-    toNext() {
-      if (this.contactForms.pagination.hasNext == true) {
-        let nextPage = this.contactForms.pagination.currentPage + 1
-
-        this.getContacts(nextPage).then((r) => {
-          this.contactForms = r
-          this.toTop()
-        })
-      }
-    },
-
-    // jumps to a specific page
-    toNumber(pageNum) {
-      this.getContacts(pageNum).then((r) => {
-        this.contactForms = r
-        this.toTop()
-      })
-    },
-
-    // Scrolls to top
-    toTop() {
-      window.scrollTo(0, 0)
-    },
-
-    // fetch new data
-    async getContacts(pageNum) {
-      let res = await this.$axios.$get(`/ContactForms?PageNumber=${pageNum}`)
-
-      return res
-    },
-
-    // formats the date
-    formattedDate(inputDate) {
-      const myDate = new Date(inputDate)
-      return `${myDate.toLocaleString('default', {
-        weekday: 'short',
-      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
-    },
-
-    // deletes the Contact Form
-    deleteContactForm(id) {
-      const customAlert = this.$swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-danger me-1',
-          cancelButton: 'btn btn-success ms-1',
-        },
-        buttonsStyling: false,
-      })
-
-      customAlert
-        .fire({
-          icon: 'question',
-          title: 'Are you sure ?',
-          text: `Do you really want to delete this item? This process cannot be undone.`,
-          showCancelButton: true,
-          confirmButtonText: 'Delete',
-          cancelButtonText: 'Cancel',
-        })
-        .then(async (result) => {
-          if (result.isConfirmed) {
-            await this.$axios
-              .$delete(`/ContactForms/${id}`)
-              .then((res) => {
-                if (res.status == 200) {
-                  this.$swal({
-                    icon: 'success',
-                    title: 'Item Deleted',
-                    text: res.message,
-                  }).then(() => {
-                    this.contactForms.forms = this.contactForms.forms.filter(
-                      (item) => item.id != id
-                    )
-
-                    let currentPage
-
-                    if (this.contactForms.forms.length == 0) {
-                      currentPage = this.contactForms.pagination.currentPage - 1
-                    } else {
-                      currentPage = this.contactForms.pagination.currentPage
-                    }
-
-                    this.getContacts(currentPage).then((r) => {
-                      this.contactForms = r
-                    })
-                  })
-                }
-              })
-              .catch((err) => {
-                this.$swal({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Unable to Delete Contact Form',
-                })
-              })
-          }
-        })
-    },
-  },
-}
-</script>
-
-<style scoped></style>
