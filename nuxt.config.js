@@ -80,6 +80,9 @@ export default {
 
     // https://auth.nuxtjs.org
     '@nuxtjs/auth-next',
+
+    // https://cloudinary.nuxtjs.org
+    '@nuxtjs/cloudinary',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -119,6 +122,14 @@ export default {
         },
       },
     },
+  },
+
+  // Cloudinary Configuration https://cloudinary.nuxtjs.org/options
+  cloudinary: {
+    cloudName: process.env.CLOUDNAME,
+    apiKey: process.env.CLOUD_API_KEY,
+    apiSecret: process.env.CLOUD_API_SECRET,
+    secure: true,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -58,7 +58,7 @@
                         class="form-select form-control w-100 ps-3 mt-3"
                         v-model="postCategory"
                       >
-                        <option disabled>Select Post Category</option>
+                        <option disabled value="">Select Post Category</option>
                         <option
                           v-for="cat in categories"
                           :key="cat.id"
@@ -70,6 +70,27 @@
                     </div>
                   </div>
                   <!-- End:Category -->
+
+                  <!-- Start:Author -->
+                  <div class="col">
+                    <div class="input-group input-group-static my-4">
+                      <label class="text-primary">Author</label>
+                      <select
+                        class="form-select form-control w-100 ps-3 mt-3"
+                        v-model="postAuthor"
+                      >
+                        <option disabled value="">Select Post Author</option>
+                        <option
+                          v-for="user in users"
+                          :key="user.id"
+                          v-bind:value="user.id"
+                        >
+                          {{ user.firstName }} {{ user.lastName }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- End:Author -->
                 </div>
                 <!-- Start:Submit Button -->
                 <div class="text-end mt-4">
@@ -104,12 +125,17 @@ export default {
       postContent: '',
       postExcerpt: '',
       postCategory: '',
+      postAuthor: '',
     }
   },
 
   async asyncData({ $axios, $config }) {
     const categories = await $axios.$get('/Categories')
-    return { categories }
+    const editors = await $axios.$get(`/User/list/editor`)
+    const admins = await $axios.$get(`/User/list/admin`)
+    const users = [...editors.users, ...admins.users]
+
+    return { categories, editors, admins, users }
   },
 
   methods: {
@@ -119,6 +145,7 @@ export default {
         description: this.postContent,
         excerpt: this.postExcerpt,
         categoryId: parseInt(this.postCategory),
+        authorId: this.postAuthor,
       }
       await this.$axios.$post('/BlogPosts', data)
       this.$router.push(`/admin/blogpost`)
