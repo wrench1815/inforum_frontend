@@ -14,7 +14,7 @@
           <span>Upload to Cloudinary</span>
           <input
             type="file"
-            accept=".jpeg,.jpg,.png,image/jpeg,image/png"
+            accept="image/jpeg,image/jpg,image/png"
             aria-label="upload image button"
             @change="selectFile"
           />
@@ -188,6 +188,39 @@ export default {
       const file = e.target.files[0]
 
       if (!file) {
+        return
+      }
+
+      // validations: I may change them in future for now, its ok
+      const pattern = new RegExp(/(jpg|jpeg|png)/)
+
+      if (!pattern.test(file.type)) {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Validation Error',
+          text: 'Only png, jpg, jpeg files are allowed',
+          showCloseButton: true,
+          showConfirmButton: false,
+        })
+        this.src = ''
+        this.showCropButton = false
+        return
+      }
+
+      // mb -> bytes
+      const converter = (sizeInMb) => sizeInMb * 1024 * 1024
+
+      // file should be less than 2 mb
+      if (!(file.size < converter(2))) {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Validation Error',
+          text: 'Image size should be less than 2 MB',
+          showCloseButton: true,
+          showConfirmButton: false,
+        })
+        this.src = ''
+        this.showCropButton = false
         return
       }
 
