@@ -39,7 +39,9 @@
                 class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0"
                 id="navigation"
               >
-                <ul class="navbar-nav navbar-nav-hover ms-auto">
+                <ul
+                  class="navbar-nav navbar-nav-hover ms-auto d-flex align-items-lg-center align-items-start"
+                >
                   <!-- Home Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
@@ -89,41 +91,93 @@
                     </NuxtLink>
                   </li>
 
-                  <li class="nav-item mx-2" v-if="loggedInUserRole == 'Admin'">
-                    <a
-                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
-                      href="/admin"
-                    >
-                      Admin
-                    </a>
-                  </li>
+                  <!-- Start:Profile -->
+                  <li class="nav-item mx-2">
+                    <div class="nav-link ps-2 text-md dropdown">
+                      <img
+                        class="avatar avatar-sm dropdown-toggle p-0 m-0`"
+                        id="profileDropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        src="@/assets/images/img-1.jpg"
+                        alt=""
+                      />
 
-                  <!-- <li class="nav-item mx-2" v-if="!loggedInUser">
-                    <NuxtLink
-                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
-                      to="/signup"
-                    >
-                      Signup
-                    </NuxtLink>
-                  </li> -->
+                      <!-- Start:DropDown Menu Items -->
+                      <ul
+                        class="dropdown-menu position-absolute"
+                        aria-labelledby="profileDropdownMenuButton"
+                      >
+                        <!-- Start:Profile Link -->
+                        <li v-if="isAuthenticated">
+                          <NuxtLink
+                            class="dropdown-item text-dark"
+                            to="/profile"
+                            >Profile</NuxtLink
+                          >
+                        </li>
+                        <!-- End:Profile Link -->
 
-                  <li class="nav-item mx-2" v-if="!isAuthenticated">
-                    <NuxtLink
-                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
-                      to="/login"
-                    >
-                      Login
-                    </NuxtLink>
-                  </li>
+                        <!-- Start:Login Link -->
+                        <li v-if="!isAuthenticated">
+                          <NuxtLink class="dropdown-item text-dark" to="/login"
+                            >Login</NuxtLink
+                          >
+                        </li>
+                        <!-- End:login Link -->
 
-                  <li class="nav-item mx-2" v-if="isAuthenticated">
-                    <a
-                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
-                      @click="logout"
-                    >
-                      Logout
-                    </a>
+                        <!-- Start:Sign Up Link -->
+                        <li v-if="!isAuthenticated">
+                          <NuxtLink class="dropdown-item text-dark" to="/signup"
+                            >Sign Up</NuxtLink
+                          >
+                        </li>
+                        <!-- End:Sign Up Link -->
+
+                        <!-- Start:Dash Link -->
+                        <li
+                          v-if="
+                            loggedInUserRole == 'Editor' ||
+                            loggedInUserRole == 'Admin'
+                          "
+                        >
+                          <NuxtLink
+                            class="dropdown-item text-dark"
+                            to="/profile"
+                            >Dash</NuxtLink
+                          >
+                        </li>
+                        <!-- End:Dash Link -->
+
+                        <!-- Start:Admin Link -->
+                        <li v-if="loggedInUserRole == 'Admin'">
+                          <NuxtLink class="dropdown-item text-dark" to="/admin"
+                            >Admin</NuxtLink
+                          >
+                        </li>
+                        <!-- End:Admin Link -->
+
+                        <li><hr class="dropdown-divider border-dark" /></li>
+
+                        <!-- Start:Logout -->
+                        <li v-if="isAuthenticated">
+                          <div class="dropdown-item">
+                            <div
+                              class="btn btn-sm btn-danger m-0 text-xs"
+                              @click="logout"
+                            >
+                              Logout<i
+                                class="ms-2 fas fa-sign-out-alt text-xs"
+                              ></i>
+                            </div>
+                          </div>
+                        </li>
+                        <!-- End:Logout -->
+                      </ul>
+                      <!-- End:DropDown Menu Items -->
+                    </div>
                   </li>
+                  <!-- End:Profile -->
                 </ul>
               </div>
             </div>
