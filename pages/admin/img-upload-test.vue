@@ -4,19 +4,20 @@
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
-          <h1>Image Upload Test</h1>
-          <p>
+          <h1 v-if="!hideInputField">Image Upload</h1>
+          <p v-if="!hideInputField">
             Upload the Image Below. After uploaded successfully, you can see the
             Image.
           </p>
         </div>
         <div class="col-12">
-          <span>Upload to Cloudinary</span>
+          <span v-if="!hideInputField">Upload to Cloudinary</span>
           <input
             type="file"
             accept="image/jpeg,image/jpg,image/png"
             aria-label="upload image button"
             @change="selectFile"
+            v-if="!hideInputField"
           />
           <div class="my-3"></div>
           <button
@@ -122,12 +123,14 @@ export default {
       showResetButton: false,
       showCropper: false,
       showUploading: false,
+      hideInputField: false,
       isCopied: false,
     }
   },
 
   methods: {
     uploadFile() {
+      this.hideInputField = true
       this.showUploading = true
       this.show = false
       this.showResetButton = false
@@ -204,6 +207,7 @@ export default {
         })
         this.src = ''
         this.showCropButton = false
+        e.target.value = ''
         return
       }
 
@@ -221,6 +225,7 @@ export default {
         })
         this.src = ''
         this.showCropButton = false
+        e.target.value = ''
         return
       }
 
