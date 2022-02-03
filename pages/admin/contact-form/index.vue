@@ -4,13 +4,18 @@
 
     <!-- content -->
     <div class="container-fluid py-4">
-      <div class="card py-4">
+      <!-- Start:Contact Forms -->
+      <div class="card py-4" v-if="loading">
+        <h1 class="text-center">Loading...</h1>
+      </div>
+      <!-- Start:Contact Forms -->
+      <div class="card py-4" v-if="!loading">
         <div class="row">
           <div class="col-12">
             <h2 class="mx-4">Contact Forms</h2>
-            <div class="border-bottom"></div>
+            <!-- <div class="border-bottom"></div> -->
           </div>
-          <div class="col-12 text-center" v-if="contactForms.forms.length == 0">
+          <div class="col-12 text-center" v-if="contactForms.length == 0">
             <img
               class="img-fluid w-50"
               src="~assets/svg/Empty-amico.svg"
@@ -20,8 +25,8 @@
           </div>
           <div class="col-12" v-else>
             <div class="mx-4">
-              <div class="table-responsive">
-                <table class="table align-items-center mb-0">
+              <div class="table-responsive border rounded-3">
+                <table class="table align-items-center">
                   <thead>
                     <tr class="text-primary text-center text-md">
                       <th class="text-uppercase">Full Name</th>
@@ -33,23 +38,28 @@
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark text-"
-                      v-for="form in contactForms.forms"
+                      v-for="form in contactForms"
                       :key="form.id"
                     >
                       <!-- Start:Full Name -->
                       <td class="text-bold">
-                        {{ form.fullName }}
+                        <NuxtLink
+                          class="link-info"
+                          :to="`/admin/contact-form/preview/${form.id}`"
+                        >
+                          {{ form.fullName }}
+                        </NuxtLink>
                       </td>
                       <!-- End:Full Name -->
 
                       <!-- Start:Email -->
-                      <td class="text-center text-info text-bold">
+                      <td class="text-center">
                         {{ form.email }}
                       </td>
                       <!-- End:Email -->
 
                       <!-- Start:Created On -->
-                      <td class="text-center text-info text-bold">
+                      <td class="text-center">
                         {{ formattedDate(form.createdOn) }}
                       </td>
                       <!-- End:Created On -->
@@ -75,6 +85,16 @@
               </div>
 
               <!-- Start:Pagination -->
+              <Pagination
+                :pageSize="this.pageSize"
+                :pagination="this.pagination"
+                :pages="this.pages"
+                @getSelectedPage="selectedPage($event)"
+                @getNextPage="nextPage"
+                @getPreviousPage="previousPage"
+                @getFirstPage="firstPage"
+                @getLastPage="lastPage"
+              />
 
               <!-- End:Pagination -->
             </div>
@@ -82,7 +102,7 @@
 
           <!-- Start:Add Contact Form Button -->
           <div class="col-12">
-            <div class="border-bottom"></div>
+            <!-- <div class="border-bottom"></div> -->
             <div class="d-flex justify-content-end mx-4 mt-4">
               <NuxtLink class="btn btn-success" to="/admin/contact-form/add"
                 >Add Contact Form</NuxtLink
@@ -92,6 +112,7 @@
           <!-- End:Add Contact Form Button -->
         </div>
       </div>
+      <!-- End:Contact Forms -->
     </div>
   </div>
 </template>
@@ -103,58 +124,56 @@ export default {
   data() {
     return {
       contactForms: Object,
+      // handle loading state
+      loading: true,
+      // handle pagination
+      pageSize: 10,
+      pagination: {},
+      pages: [],
     }
   },
 
-  async asyncData({ $axios, $config }) {
-    const contactForms = await $axios.$get('/ContactForms')
-    return { contactForms }
-  },
-
   methods: {
-    // // jumps to previous page
-    // toPrevious() {
-    //   if (this.contactForms.pagination.hasPrevious == true) {
-    //     let prevPage = this.contactForms.pagination.currentPage - 1
+    getData(pageNumber) {
+      const forms = this.$axios.$get(
+        `/ContactForms?PageNumber=${pageNumber}&PageSize=${this.pageSize}`
+      )
 
-    //     this.getContacts(prevPage).then((r) => {
-    //       this.contactForms = r
-    //       this.toTop()
-    //     })
-    //   }
-    // },
+      forms
+        .then((res) => {
+          this.contactForms = res.forms
+          this.pagination = res.pagination
+          this.pages = [...Array(this.pagination.totalPages).keys()].map(
+            (page) => page + 1
+          )
 
-    // // jumps to next page
-    // toNext() {
-    //   if (this.contactForms.pagination.hasNext == true) {
-    //     let nextPage = this.contactForms.pagination.currentPage + 1
-
-    //     this.getContacts(nextPage).then((r) => {
-    //       this.contactForms = r
-    //       this.toTop()
-    //     })
-    //   }
-    // },
-
-    // // jumps to a specific page
-    // toNumber(pageNum) {
-    //   this.getContacts(pageNum).then((r) => {
-    //     this.contactForms = r
-    //     this.toTop()
-    //   })
-    // },
-
-    // // Scrolls to top
-    // toTop() {
-    //   window.scrollTo(0, 0)
-    // },
-
-    // fetch new data
-    // async getContacts(pageNum) {
-    //   let res = await this.$axios.$get(`/ContactForms?PageNumber=${pageNum}`)
-
-    //   return res
-    // },
+          // handle loading state
+          if (this.loading) {
+            this.loading = false
+          }
+        })
+        // Scroll to top on page change
+        .then(() => {
+          setTimeout(() => {
+            window.scroll(0, 0)
+          }, 0)
+        })
+    },
+    firstPage() {
+      this.getData(1)
+    },
+    lastPage() {
+      this.getData(this.pagination.totalPages)
+    },
+    nextPage() {
+      this.getData(this.pagination.currentPage + 1)
+    },
+    previousPage() {
+      this.getData(this.pagination.currentPage - 1)
+    },
+    selectedPage(pageNumber) {
+      this.getData(pageNumber)
+    },
 
     // formats the date
     formattedDate(inputDate) {
@@ -194,21 +213,19 @@ export default {
                     title: 'Item Deleted',
                     text: res.message,
                   }).then(() => {
-                    this.contactForms.forms = this.contactForms.forms.filter(
+                    this.contactForms = this.contactForms.filter(
                       (item) => item.id != id
                     )
 
                     let currentPage
 
-                    if (this.contactForms.forms.length == 0) {
-                      currentPage = this.contactForms.pagination.currentPage - 1
+                    if (this.contactForms.length == 0) {
+                      currentPage = this.pagination.currentPage - 1
                     } else {
-                      currentPage = this.contactForms.pagination.currentPage
+                      currentPage = this.pagination.currentPage
                     }
 
-                    this.getContacts(currentPage).then((r) => {
-                      this.contactForms = r
-                    })
+                    this.getData(currentPage)
                   })
                 }
               })
@@ -223,107 +240,11 @@ export default {
         })
     },
   },
+
+  mounted() {
+    this.getData(1)
+  },
 }
 </script>
 
 <style scoped></style>
-<section>
-                <div class="container">
-                  <div class="row justify-space-between py-2">
-                    <div class="col-md-4 mx-auto">
-                      <ul class="pagination pagination-primary m-4">
-                        <!-- Start:Previous Page Button -->
-                        <li class="page-item cursor-pointer">
-                          <div
-                            class="page-link"
-                            aria-label="Previous"
-                            @click="toPrevious()"
-                          >
-                            <span aria-hidden="true"
-                              ><i
-                                class="fas fa-chevron-left"
-                                aria-hidden="true"
-                              ></i
-                            ></span>
-                          </div>
-                        </li>
-                        <!-- End:Previous Page Button -->
-
-                        <!-- Start:First Page -->
-                        <li
-                          class="page-item cursor-pointer"
-                          v-if="contactForms.pagination.currentPage > 2"
-                        >
-                          <div class="page-link" @click="toNumber(1)">1</div>
-                        </li>
-                        <!-- End:First Page -->
-
-                        <!-- Start:Start Dashes -->
-                        <li
-                          class="page-item"
-                          v-if="contactForms.pagination.currentPage != 1"
-                        >
-                          <div class="d-flex align-items-end m-2">....</div>
-                        </li>
-                        <!-- End:Start Dashes -->
-
-                        <!-- Start:Current Page -->
-                        <li class="page-item active">
-                          <div class="page-link text-white">
-                            {{ contactForms.pagination.currentPage }}
-                          </div>
-                        </li>
-                        <!-- End:Current Page -->
-
-                        <!-- Start:End Dashes -->
-                        <li
-                          class="page-item"
-                          v-if="
-                            contactForms.pagination.currentPage <
-                            contactForms.pagination.totalPages
-                          "
-                        >
-                          <div class="d-flex align-items-end m-2">....</div>
-                        </li>
-                        <!-- End:End Dashes -->
-
-                        <!-- Start:Last Page -->
-                        <li
-                          class="page-item cursor-pointer"
-                          v-if="
-                            contactForms.pagination.currentPage <
-                            contactForms.pagination.totalPages - 1
-                          "
-                        >
-                          <div
-                            class="page-link"
-                            @click="
-                              toNumber(contactForms.pagination.totalPages)
-                            "
-                          >
-                            {{ contactForms.pagination.totalPages }}
-                          </div>
-                        </li>
-                        <!-- End:Last Page -->
-
-                        <!-- Start:Next Page Button -->
-                        <li class="page-item cursor-pointer">
-                          <div
-                            class="page-link"
-                            aria-label="Next"
-                            @click="toNext()"
-                          >
-                            <span aria-hidden="true"
-                              ><i
-                                class="fas fa-chevron-right"
-                                aria-hidden="true"
-                              ></i
-                            ></span>
-                          </div>
-                        </li>
-                        <!-- End:Next Page Button -->
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </section>
