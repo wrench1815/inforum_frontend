@@ -121,16 +121,16 @@
                         <!-- Start:Login Link -->
                         <li v-if="!isAuthenticated">
                           <NuxtLink class="dropdown-item text-dark" to="/login"
-                            >Login</NuxtLink
-                          >
+                            >Login<i class="ms-2 fas fa-sign-in-alt"></i
+                          ></NuxtLink>
                         </li>
                         <!-- End:login Link -->
 
                         <!-- Start:Sign Up Link -->
                         <li v-if="!isAuthenticated">
                           <NuxtLink class="dropdown-item text-dark" to="/signup"
-                            >Sign Up</NuxtLink
-                          >
+                            >Sign Up<i class="ms-2 fas fa-user-plus"></i
+                          ></NuxtLink>
                         </li>
                         <!-- End:Sign Up Link -->
 
@@ -157,7 +157,9 @@
                         </li>
                         <!-- End:Admin Link -->
 
-                        <li><hr class="dropdown-divider border-dark" /></li>
+                        <li v-if="isAuthenticated">
+                          <hr class="dropdown-divider border-dark" />
+                        </li>
 
                         <!-- Start:Logout -->
                         <li v-if="isAuthenticated">
