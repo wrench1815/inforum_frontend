@@ -5,6 +5,7 @@
         <div class="col-lg-12 mx-auto">
           <div class="card">
             <div class="row">
+              <!-- Start:Information -->
               <div class="col-lg-4 d-flex">
                 <div
                   class="bg-gradient-secondary mt-n5 mb-3 ms-lg-3 border-radius-md"
@@ -57,6 +58,9 @@
                   </div>
                 </div>
               </div>
+              <!-- End:Information -->
+
+              <!-- Start:Contact Form -->
               <div class="col-lg-8">
                 <form
                   id="contact-form"
@@ -65,6 +69,7 @@
                 >
                   <div class="card-body position-relative">
                     <div class="row mt-4">
+                      <!-- Start:Full Name -->
                       <div class="col-md-6">
                         <div class="input-group input-group-static my-4">
                           <label class="text-primary">Full Name</label>
@@ -77,6 +82,9 @@
                           />
                         </div>
                       </div>
+                      <!-- End:Full Name -->
+
+                      <!-- Start:Email -->
                       <div class="col-md-6 ps-2">
                         <div class="input-group input-group-static my-4">
                           <label class="text-primary">Email</label>
@@ -89,8 +97,10 @@
                           />
                         </div>
                       </div>
+                      <!-- End:Email -->
                     </div>
 
+                    <!-- Start:Message -->
                     <div class="input-group input-group-static mt-4">
                       <label class="text-primary">Your message</label>
                       <textarea
@@ -102,6 +112,9 @@
                         v-model="message"
                       ></textarea>
                     </div>
+                    <!-- End:Message -->
+
+                    <!-- Start:Action -->
                     <div class="text-end mt-4">
                       <button
                         type="submit"
@@ -110,9 +123,11 @@
                         Send message
                       </button>
                     </div>
+                    <!-- End:Action -->
                   </div>
                 </form>
               </div>
+              <!-- End:Contact Form -->
             </div>
           </div>
         </div>
@@ -129,7 +144,7 @@ export default {
       email: '',
       message: '',
 
-      // for errot handling
+      // for error handling
       FormHelpTexts: {
         fullName: '',
         email: '',
