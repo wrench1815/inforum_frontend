@@ -9,7 +9,7 @@
           :style="`background-image: url(${img})`"
           loading="lazy"
         >
-          <span class="mask bg-gradient-dark opacity-8"></span>
+          <span class="mask bg-gradient-dark opacity-6"></span>
           <div class="container">
             <div class="row">
               <div class="col-lg-7 d-flex justify-content-center flex-column">
@@ -22,10 +22,10 @@
                 <!-- Start:Author -->
                 <div class="mt-3 text-white">
                   <img
-                    src="@/assets/icon.jpg"
+                    :src="author.user.profileImage"
                     width="25rem"
-                    alt="logo"
-                    class="mb-1 avatar"
+                    :alt="`${author.user.firstName} ${author.user.lastName}`"
+                    class="mb-1 avatar img-fit"
                   />
                   <span class=""
                     >{{ author.user.firstName }}
@@ -253,6 +253,21 @@
           </div>
         </section>
 
+        <hr />
+
+        <!-- Start:Comments -->
+        <section class="py-7">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-9 ms-auto me-auto"><h3>Comments</h3></div>
+              <div class="col-lg-9 ms-auto me-auto">
+                <BlogFullComment />
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- End:Comments -->
+
         <!-- Start:Related Articles -->
         <!-- <section class="py-7">
         <div class="container">
@@ -468,7 +483,9 @@ export default {
       post: '',
       author: '',
       loading: true,
-      img: 'https://res.cloudinary.com/inforum/image/upload/v1643628290/img-1_nzeds8.jpg',
+      img: 'https://res.cloudinary.com/inforum/image/upload/v1643628290/Blog/img-1_nzeds8.jpg',
+
+      newComment: '',
     }
   },
 
@@ -525,5 +542,10 @@ export default {
 .header-image {
   background-size: cover;
   transform: translate3d(0px, 0px, 0px);
+}
+
+.img-fit {
+  object-fit: cover;
+  object-position: center;
 }
 </style>
