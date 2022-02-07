@@ -1,17 +1,31 @@
 <template>
-  <div class="p-2 mt-3 bg-gray-200 rounded-3 shadow">
+  <div class="p-2 mt-3 bg-gray-20 rounded-3 shadow border">
     <!-- Start:SubComment -->
-    <p>
-      <div href="#" class="link-primary font-weight-bold me-2">John Doe:</div> Lorem
-      ipsum dolor sit amet consectetur adipisicing elit. Enim ipsa non
+    <div class="p">
+      <div
+        class="text-primary font-weight-bold fs-5 me-2 d-flex gap-2 align-items-end"
+      >
+        <span class="avatar avatar-sm shadow">
+          <img
+            src="@/assets/images/img-1.jpg"
+            alt="logo"
+            class="avatar avatar-sm img-fit"
+          />
+        </span>
+
+        <!-- Start:Full Name -->
+        <span class="text-bold text-lg text-warning"> John Doe </span>
+        <!-- End:Full Name -->
+      </div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ipsa non
       praesentium nobis cum? Earum quae eveniet est adipisci aliquam? Velit
-    </p>
+    </div>
     <!-- End:SubComment -->
 
     <!-- Start:SubComment Date -->
-    <div class="d-flex justify-content-between align-items-center">
-      <span class="text-sm">4d ago</span>
-    </div>
+    <span class="text-sm text-dark border border-warning px-2 py-1 rounded-pill"
+      >01/02/2020</span
+    >
     <!-- End:SubComment Date -->
   </div>
 </template>
@@ -34,4 +48,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.img-fit {
+  object-fit: cover;
+  object-position: center;
+}
+</style>

@@ -11,11 +11,11 @@
 
         <span class="d-flex flex-column justify-content-center custom-gap">
           <!-- Start:Full Name -->
-          <span class="text-bold text-md text-dark"> John Doe </span>
+          <span class="text-bold text-md text-danger"> John Doe </span>
           <!-- End:Full Name -->
 
           <!-- Start:Date Posted -->
-          <span class="text-xs link-dark">01/02/2020</span>
+          <span class="text-xs text-dark">01/02/2020</span>
           <!-- End:Date Posted -->
         </span>
       </div>
