@@ -1,20 +1,89 @@
 <template>
   <div>
-    <!-- Start:COmmnet Input Box -->
-    <BlogAddComment />
-    <!-- End:COmmnet Input Box -->
+    <section v-if="loading">
+      <h3>Loading....</h3>
+    </section>
+    <section v-if="!loading">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 ms-auto me-auto"><h3>Comments</h3></div>
+          <div class="col-12 ms-auto me-auto">
+            <template>
+              <!-- Start:Commnet Input Box -->
+              <BlogAddComment
+                :postId="postId"
+                v-on:comment-added="getComments()"
+              />
+              <!-- End:Commnet Input Box -->
 
-    <!-- Start:Blog Comment -->
-    <BlogComment
-      content="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque blanditiis id quam debitis. Sequi doloribus, eaque voluptas cupiditate eius quam aperiam facere autem a, dolor ullam vitae minima, blanditiis veritatis!"
-    />
-    <!-- Start:Blog Comment -->
+              <template v-for="comment in comments.comments">
+                <!-- Start:Blog Comment -->
+                <BlogComment :comment="comment" />
+                <!-- Start:Blog Comment -->
+              </template>
+            </template>
+          </div>
+          <div class="col-12 ms-auto me-auto">
+            <div
+              class="text-center link-primary cursor-pointer"
+              v-if="comments.pagination.hasNext"
+              @click="loadMoreComments()"
+            >
+              Load more..
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 export default {
   name: 'FullComment',
+
+  props: {
+    postId: Number,
+  },
+
+  data() {
+    return {
+      comments: {},
+      loading: true,
+      pageNumber: 1,
+    }
+  },
+
+  methods: {
+    getComments() {
+      if (!this.loading) {
+        this.loading = true
+      }
+      // Fetch Comments for the Blog Post
+      this.$axios
+        .$get(`Comments/?postId=${this.postId}`)
+        .then((cmts) => {
+          this.comments = cmts
+        })
+        .then(() => {
+          this.loading = false
+        })
+    },
+
+    loadMoreComments() {
+      this.pageNumber = this.pageNumber + 1
+      this.$axios
+        .$get(`Comments/?postId=${this.postId}&pageNumber=${this.pageNumber}`)
+        .then((res) => {
+          this.comments.comments = this.comments.comments.concat(res.comments)
+          this.comments.pagination = res.pagination
+        })
+    },
+  },
+
+  mounted() {
+    this.getComments()
+  },
 }
 </script>
 

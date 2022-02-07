@@ -1,6 +1,6 @@
 <template>
   <div class="py-3">
-    <form v-on:submit.prevent="addComment">
+    <form v-on:submit.prevent="addSubComment">
       <!-- Start:SubComment Input -->
       <div class="input-group input-group-outline">
         <textarea
@@ -24,19 +24,40 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'AddSubComment',
+
+  props: {
+    commentId: Number,
+  },
 
   data() {
     return {
       subCommentInput: '',
     }
   },
+
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
+  },
+
   methods: {
-    addComment() {
+    addSubComment() {
       console.log(this.subCommentInput)
 
-      // TODO: SubComment Logic
+      const subCommentData = {
+        description: this.subCommentInput,
+        commentId: this.commentId,
+        userId: this.loggedInUser.id,
+      }
+      console.log(subCommentData)
+
+      this.$axios.$post(`/SubComments`, subCommentData).then((res) => {
+        console.log(res)
+        this.$emit('sub-comment-added')
+      })
     },
   },
 }

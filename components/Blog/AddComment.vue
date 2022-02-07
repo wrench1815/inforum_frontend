@@ -23,19 +23,40 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'AddComment',
+
+  props: {
+    postId: Number,
+  },
 
   data() {
     return {
       commentInput: '',
     }
   },
+
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
+  },
+
   methods: {
     addComment() {
-      console.log(this.comment)
+      console.log(this.commentInput)
 
-      // TODO: comment post logic
+      const commentData = {
+        description: this.commentInput,
+        postId: this.postId,
+        userId: this.loggedInUser.id,
+      }
+      console.log(commentData)
+
+      this.$axios.$post(`/Comments`, commentData).then((res) => {
+        console.log(res)
+        this.$emit('comment-added')
+      })
     },
   },
 }

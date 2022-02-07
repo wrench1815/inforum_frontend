@@ -259,9 +259,8 @@
         <section class="py-7">
           <div class="container">
             <div class="row">
-              <div class="col-lg-9 ms-auto me-auto"><h3>Comments</h3></div>
               <div class="col-lg-9 ms-auto me-auto">
-                <BlogFullComment />
+                <BlogFullComment :postId="post.id" />
               </div>
             </div>
           </div>
@@ -484,8 +483,6 @@ export default {
       author: '',
       loading: true,
       img: 'https://res.cloudinary.com/inforum/image/upload/v1643628290/Blog/img-1_nzeds8.jpg',
-
-      newComment: '',
     }
   },
 
@@ -510,6 +507,8 @@ export default {
           .$get(`User/single/${this.post.authorId}`)
           .then((u) => {
             this.author = u
+          })
+          .then(() => {
             this.loading = false
           })
           .then(() => {
@@ -517,20 +516,24 @@ export default {
 
             // adds classes to images to make them responsive
             const images = postContent.getElementsByTagName('img')
-            for (let i = 0; i < images.length; i++) {
-              images[i].classList.add('img-fluid', 'shadow-lg')
+            if (images.length > 0) {
+              for (let i = 0; i < images.length; i++) {
+                images[i].classList.add('img-fluid', 'shadow-lg')
+              }
             }
 
             // adds classes to figures and its sub-elements to make them responsive
             const figures = postContent.getElementsByTagName('figure')
-            for (let i = 0; i < figures.length; i++) {
-              figures[i].classList.add('mx-auto')
-              figures[i]
-                .getElementsByTagName('img')[0]
-                .classList.add('figure-img', 'img-fluid', 'shadow-lg')
-              figures[i]
-                .getElementsByTagName('figcaption')[0]
-                .classList.add('figure-caption', 'text-center', 'text-bold')
+            if (figures.length > 0) {
+              for (let i = 0; i < figures.length; i++) {
+                figures[i].classList.add('mx-auto')
+                figures[i]
+                  .getElementsByTagName('img')[0]
+                  .classList.add('figure-img', 'img-fluid', 'shadow-lg')
+                figures[i]
+                  .getElementsByTagName('figcaption')[0]
+                  .classList.add('figure-caption', 'text-center', 'text-bold')
+              }
             }
           })
       })
