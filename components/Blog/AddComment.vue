@@ -46,17 +46,71 @@ export default {
     addComment() {
       console.log(this.commentInput)
 
-      const commentData = {
-        description: this.commentInput,
-        postId: this.postId,
-        userId: this.loggedInUser.id,
-      }
-      console.log(commentData)
+      let commentLength = this.commentInput.length
 
-      this.$axios.$post(`/Comments`, commentData).then((res) => {
-        console.log(res)
-        this.$emit('comment-added')
-      })
+      if (commentLength >= 3) {
+        const commentData = {
+          description: this.commentInput,
+          postId: this.postId,
+          userId: this.loggedInUser.id,
+        }
+        console.log(commentData)
+
+        this.$axios
+          .$post(`/Comments`, commentData)
+          .then((res) => {
+            console.log(res)
+
+            if (res.status == 201) {
+              // emit event to parent component on success
+              this.$emit('comment-added')
+
+              let timerInterval
+
+              this.$swal({
+                title: 'Success!',
+                html: 'Thank you for leaving a comment!',
+                type: 'success',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                didOpen: () => {
+                  this.$swal.showLoading()
+                },
+                willClose: () => {
+                  clearInterval(timerInterval)
+                },
+              })
+            } else {
+              this.$swal({
+                title: 'Error!',
+                html: 'Something went wrong!<br>Please try again.',
+                type: 'error',
+                icon: 'error',
+                showConfirmButton: true,
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+            this.$swal({
+              title: 'Error!',
+              html: 'Something went wrong!<br>Please try again.',
+              type: 'error',
+              icon: 'error',
+              showConfirmButton: true,
+            })
+          })
+      } else {
+        this.$swal({
+          title: 'Too Short!',
+          html: 'Comment must be at least 3 characters long!',
+          type: 'info',
+          icon: 'info',
+          showConfirmButton: true,
+        })
+      }
     },
   },
 }
