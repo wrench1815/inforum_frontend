@@ -1,12 +1,14 @@
 <template>
   <div>
-    <section v-if="loading">
-      <h3>Loading....</h3>
-    </section>
-    <section v-if="!loading">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 ms-auto me-auto"><h3>Comments</h3></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 ms-auto me-auto"><h3>Comments</h3></div>
+        <template v-if="loading">
+          <section class="col-12 ms-auto me-auto">
+            <h3>Loading....</h3>
+          </section>
+        </template>
+        <template v-if="!loading">
           <div class="col-12 ms-auto me-auto">
             <template>
               <!-- Start:Commnet Input Box -->
@@ -32,9 +34,9 @@
               Load more....
             </div>
           </div>
-        </div>
+        </template>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 

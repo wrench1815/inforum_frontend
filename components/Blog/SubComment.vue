@@ -1,7 +1,7 @@
 <template>
   <div class="p-2 mt-3 bg-gray-20 rounded-3 shadow border">
     <div v-if="loading">
-      <h3 class="text-center">Loading....</h3>
+      <h4>Loading....</h4>
     </div>
     <div v-if="!loading">
       <!-- Start:SubComment -->

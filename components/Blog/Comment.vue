@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <h4 class="text-center">Loading...</h4>
+      <h4>Loading...</h4>
     </div>
     <div v-if="!loading">
       <!-- Start:Commenter -->
