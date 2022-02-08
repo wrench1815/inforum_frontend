@@ -9,7 +9,11 @@
         <div class="d-flex justify-content-start gap-3">
           <!-- Start:Profile Image -->
           <span class="avatar avatar-md rounded-circle shadow-card">
-            <img :src="user.user.profileImage" alt="avatar" />
+            <img
+              class="avatar avatar-md rounded-circle"
+              :src="user.user.profileImage"
+              alt="avatar"
+            />
           </span>
           <!-- End:Profile Image -->
 
