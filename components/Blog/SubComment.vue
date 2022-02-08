@@ -13,7 +13,7 @@
             <img
               :src="user.user.profileImage"
               alt="logo"
-              class="avatar avatar-sm img-fit"
+              class="avatar avatar-sm img-fit-cover"
             />
           </span>
 
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style scoped>
-.img-fit {
+.img-fit-cover {
   object-fit: cover;
   object-position: center;
 }

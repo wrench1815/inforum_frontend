@@ -10,7 +10,7 @@
           <!-- Start:Profile Image -->
           <span class="avatar avatar-md rounded-circle shadow-card">
             <img
-              class="avatar avatar-md rounded-circle"
+              class="avatar avatar-md rounded-circle img-fit-cover"
               :src="user.user.profileImage"
               alt="avatar"
             />
@@ -213,4 +213,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.img-fit-cover {
+  object-fit: cover !important;
+  object-position: center !important;
+}
+</style>
