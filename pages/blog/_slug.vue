@@ -12,11 +12,10 @@
           <span class="mask bg-gradient-dark opacity-6"></span>
           <div class="container">
             <div class="row">
-              <div class="col-lg-7 d-flex justify-content-center flex-column">
+              <div class="col-lg-10 d-flex justify-content-center flex-column">
                 <h1 class="text-white mb-0">{{ post.title }}</h1>
                 <p class="lead pe-sm-5 me-sm-5 text-white opacity-8">
-                  The time is now for it be okay to be great. People in this
-                  world shun people for being nice.
+                  {{ post.shortDescription }}
                 </p>
 
                 <!-- Start:Author -->
@@ -482,7 +481,7 @@ export default {
       post: '',
       author: '',
       loading: true,
-      img: 'https://res.cloudinary.com/inforum/image/upload/v1643628290/Blog/img-1_nzeds8.jpg',
+      img: '',
     }
   },
 
@@ -509,6 +508,14 @@ export default {
             this.author = u
           })
           .then(() => {
+            var postFeaturedImage = this.post.featuredImage
+            if (postFeaturedImage != null) {
+              this.img = postFeaturedImage.url
+            } else {
+              this.img =
+                'https://res.cloudinary.com/inforum/image/upload/v1643628290/Blog/img-1_nzeds8.jpg'
+            }
+
             this.loading = false
           })
           .then(() => {
