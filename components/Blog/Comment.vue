@@ -50,10 +50,8 @@
                 >
                   <!-- Start:Reply Count -->
                   <i class="fa fa-reply" />
-                  {{ subComments.subcomments.length }}
-                  <template v-if="subComments.subcomments.length == 1"
-                    >Reply</template
-                  >
+                  {{ replies }}
+                  <template v-if="replies == 1">Reply</template>
                   <template v-else>Replies</template>
                   <!-- End:Reply Count -->
                 </button>
@@ -64,7 +62,7 @@
             <!-- Start:SubComments List -->
             <div v-show="isSubCommentsVisible">
               <SubComment
-                v-for="subComment in subComments.subcomments"
+                v-for="subComment in subComments.subComments"
                 :key="subComment.id"
                 :subComment="subComment"
               />
@@ -120,6 +118,7 @@ export default {
       subComments: {},
       isSubCommentsVisible: false,
       isSubCommentBoxVisible: false,
+      replies: 0,
       // user info
       user: {},
       // SubComments
@@ -167,8 +166,9 @@ export default {
             this.subComments = subcmt
           })
           .then(() => {
+            this.replies = this.subComments.subComments.length
             this.loading = false
-            if (this.subComments.subcomments.length == 0) {
+            if (this.subComments.subComments.length == 0) {
               this.isSubCommentBoxVisible = true
             }
           })
