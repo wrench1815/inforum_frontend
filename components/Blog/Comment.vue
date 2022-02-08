@@ -70,6 +70,14 @@
                 :key="subComment.id"
                 :subComment="subComment"
               />
+              <div class="text-center" v-if="subComments.pagination.hasNext">
+                <span
+                  class="link-primary cursor-pointer d-inline"
+                  @click="loadMoreSubComments()"
+                >
+                  Load more....
+                </span>
+              </div>
 
               <!-- Start:Add SubComment -->
               <div class="d-flex justify-content-end mt-3">
@@ -129,6 +137,7 @@ export default {
       subComments: {},
       // Loading handler
       loading: true,
+      pageNumber: 1,
     }
   },
 
@@ -139,6 +148,20 @@ export default {
 
     toggleSubCommentBox() {
       this.isSubCommentBoxVisible = !this.isSubCommentBoxVisible
+    },
+
+    loadMoreSubComments() {
+      this.pageNumber = this.pageNumber + 1
+      this.$axios
+        .$get(
+          `SubComments?commentId=${this.comment.id}&pageNumber=${this.pageNumber}`
+        )
+        .then((res) => {
+          this.subComments.subComments = this.subComments.subComments.concat(
+            res.subComments
+          )
+          this.subComments.pagination = res.pagination
+        })
     },
 
     refreshSubComments() {
@@ -170,7 +193,7 @@ export default {
             this.subComments = subcmt
           })
           .then(() => {
-            this.replies = this.subComments.subComments.length
+            this.replies = this.subComments.pagination.totalCount
             this.loading = false
             if (this.subComments.subComments.length == 0) {
               this.isSubCommentBoxVisible = true

@@ -23,13 +23,13 @@
               </template>
             </template>
           </div>
-          <div class="col-12 ms-auto me-auto">
+          <div class="col-12 ms-auto me-auto text-center">
             <div
-              class="text-center link-primary cursor-pointer"
+              class="link-primary cursor-pointer d-inline"
               v-if="comments.pagination.hasNext"
               @click="loadMoreComments()"
             >
-              Load more..
+              Load more....
             </div>
           </div>
         </div>

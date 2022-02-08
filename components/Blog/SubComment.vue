@@ -5,7 +5,7 @@
     </div>
     <div v-if="!loading">
       <!-- Start:SubComment -->
-      <div class="p">
+      <div>
         <div
           class="text-primary font-weight-bold fs-5 me-2 d-flex gap-2 align-items-end"
         >
@@ -23,7 +23,9 @@
           }}</span>
           <!-- End:Full Name -->
         </div>
-        {{ subComment.description }}
+        <div class="p p-2">
+          {{ subComment.description }}
+        </div>
       </div>
       <!-- End:SubComment -->
 
