@@ -25,7 +25,9 @@
             <!-- End:Full Name -->
 
             <!-- Start:Date Posted -->
-            <span class="text-xs text-dark">{{ comment.datePosted }}</span>
+            <span class="text-xs text-dark">{{
+              formattedDate(comment.datePosted)
+            }}</span>
             <!-- End:Date Posted -->
           </span>
         </div>
@@ -148,6 +150,13 @@ export default {
 
     toggleSubCommentBox() {
       this.isSubCommentBoxVisible = !this.isSubCommentBoxVisible
+    },
+
+    formattedDate(inputDate) {
+      const myDate = new Date(inputDate)
+      return `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
     },
 
     loadMoreSubComments() {

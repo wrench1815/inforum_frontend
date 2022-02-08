@@ -30,10 +30,9 @@
       <!-- End:SubComment -->
 
       <!-- Start:SubComment Date -->
-      <span
-        class="text-sm text-dark border border-warning px-2 py-1 rounded-pill"
-        >{{ subComment.datePosted }}</span
-      >
+      <span class="text-sm text-dark">{{
+        formattedDate(subComment.datePosted)
+      }}</span>
       <!-- End:SubComment Date -->
     </div>
   </div>
@@ -53,6 +52,15 @@ export default {
       // loading handler
       loading: true,
     }
+  },
+
+  methods: {
+    formattedDate(inputDate) {
+      const myDate = new Date(inputDate)
+      return `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
   },
 
   mounted() {
