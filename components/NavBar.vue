@@ -94,14 +94,29 @@
                   <!-- Start:Profile -->
                   <li class="nav-item mx-2">
                     <div class="nav-link ps-2 text-md dropdown">
+                      <!-- Start:Profile Image -->
+                      <!-- Profile Image if Authenticated -->
                       <img
-                        class="avatar avatar-sm dropdown-toggle p-0 m-0`"
+                        v-if="isAuthenticated"
+                        class="avatar avatar-sm dropdown-toggle p-0 m-0 img-fit shadow"
                         id="profileDropdownMenuButton"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
-                        src="@/assets/images/img-1.jpg"
-                        alt=""
+                        :src="loggedInUser.profileImage"
+                        alt="Avatar"
                       />
+
+                      <!-- Profile Image if not Authenticated -->
+                      <img
+                        v-if="!isAuthenticated"
+                        class="avatar avatar-sm dropdown-toggle p-0 m-0 img-fit shadow"
+                        id="profileDropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        :src="profileImage"
+                        alt="Avatar"
+                      />
+                      <!-- End:Profile Image -->
 
                       <!-- Start:DropDown Menu Items -->
                       <ul
@@ -197,7 +212,15 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'NavBar',
+
   props: {},
+
+  data() {
+    return {
+      profileImage: require('@/assets/images/img-1.jpg'),
+    }
+  },
+
   watch: {
     $route() {
       document.querySelectorAll('.nav-item').forEach(() => {
@@ -239,5 +262,10 @@ export default {
 
 #nav .navbar-nav .nuxt-link-exact-active {
   color: #e91e63;
+}
+
+.img-fit {
+  object-fit: cover !important;
+  object-position: center !important;
 }
 </style>
