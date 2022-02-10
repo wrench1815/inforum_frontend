@@ -318,9 +318,6 @@ export default {
         lastName: '',
         gender: '',
         dob: '',
-        birthMonth: '',
-        birthDay: '',
-        birthYear: '',
         email: '',
         confirmEmail: '',
         address: '',
@@ -339,33 +336,34 @@ export default {
     async logout() {
       await this.$auth.logout()
 
+      this.$router.push('/')
+
       this.$swal({
         title: 'Logged out',
         text: 'You have been logged out',
         type: 'success',
         timer: 2000,
       })
-
-      this.$router.push('/')
     },
 
     async resetInfo() {
-      this.user.firstName = this.loggedInUser.firstName
-      this.user.lastName = this.loggedInUser.lastName
-      this.user.gender = this.loggedInUser.gender
-      this.user.dob = ''
-      this.user.email = this.loggedInUser.email
-      this.user.confirmEmail = ''
-      this.user.address = ''
-      this.user.password = ''
-      this.user.newPassword = ''
-      this.user.confirmPassword = ''
+      this.user.firstName = await this.loggedInUser.firstName
+      this.user.lastName = await this.loggedInUser.lastName
+      this.user.gender = await this.loggedInUser.gender
+      this.user.dob = await this.loggedInUser.dob
+      this.user.email = await this.loggedInUser.email
+      this.user.confirmEmail = await ''
+      this.user.address = await this.loggedInUser.address
+      this.user.password = await ''
+      this.user.newPassword = await ''
+      this.user.confirmPassword = await ''
     },
   },
 
   mounted() {
-    this.loading = false
-    this.resetInfo()
+    this.resetInfo().then(() => {
+      this.loading = false
+    })
   },
 }
 </script>
