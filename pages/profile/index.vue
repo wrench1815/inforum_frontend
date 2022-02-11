@@ -225,7 +225,9 @@
                     <button class="btn btn-info" @click="resetInfo">
                       Reset
                     </button>
-                    <button class="btn btn-success">Update</button>
+                    <button class="btn btn-success" @click="updateInfo">
+                      Update
+                    </button>
                   </div>
                 </div>
               </div>
@@ -291,7 +293,10 @@
                   </li>
                 </ul>
                 <!-- End:Password Requirements -->
-                <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">
+                <button
+                  class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0"
+                  @click="updatePassword"
+                >
                   Update password
                 </button>
               </div>
@@ -321,6 +326,7 @@ export default {
         dob: '',
         email: '',
         confirmEmail: '',
+        profileImage: '',
         address: '',
         password: '',
         newPassword: '',
@@ -331,8 +337,10 @@ export default {
         firstName: '',
         lastName: '',
         email: '',
+        confirmEmail: '',
         gender: '',
         password: '',
+        newPassword: '',
         confirmPassword: '',
       },
     }
@@ -356,6 +364,7 @@ export default {
       })
     },
 
+    // Reset all the fields
     async resetInfo() {
       this.user.firstName = await this.loggedInUser.firstName
       this.user.lastName = await this.loggedInUser.lastName
@@ -364,27 +373,164 @@ export default {
       this.user.email = await this.loggedInUser.email
       this.user.confirmEmail = await ''
       this.user.address = await this.loggedInUser.address
+      this.user.profileImage = await this.loggedInUser.profileImage
       this.user.password = await ''
       this.user.newPassword = await ''
       this.user.confirmPassword = await ''
     },
 
+    // Update the user info
     async updateInfo() {
-      const user = {
+      const userData = {
+        id: this.loggedInUser.id,
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         gender: Number(this.user.gender),
         dob: this.user.dob,
         email: this.user.email,
         address: this.user.address,
+        profileImage: this.user.profileImage,
+      }
+
+      this.validateFirstName()
+      this.validateLastName()
+      this.validateEmail()
+      this.validateConfirmEmail()
+      this.validateGender()
+
+      if (
+        this.helpTexts.firstName === '' &&
+        this.helpTexts.lastName === '' &&
+        this.helpTexts.email === '' &&
+        this.helpTexts.confirmEmail === '' &&
+        this.helpTexts.gender === ''
+      ) {
+        await this.$axios
+          .$patch(`User/update/${this.loggedInUser.id}`, userData)
+          .then((res) => {
+            if (res.status == 200) {
+              this.$auth.fetchUser().then(() => {
+                this.$swal({
+                  title: 'Success',
+                  icon: 'success',
+                  html: 'Your profile has been updated.',
+                  button: 'OK',
+                }).then(() => {
+                  this.resetInfo()
+                })
+              })
+            } else {
+              this.$swal({
+                title: 'Error',
+                icon: 'error',
+                html: 'Something went wrong.</br>Please try again.',
+                button: 'OK',
+              })
+            }
+          })
+          .catch((err) => {
+            this.$swal({
+              title: 'Error',
+              icon: 'error',
+              html: 'Something went wrong.</br>Please try again.',
+              button: 'OK',
+            })
+          })
+      } else {
+        this.$swal({
+          title: 'Validation Error',
+          icon: 'info',
+          html: `Please fix the errors below.</br>${this.helpTexts.firstName}${this.helpTexts.lastName}${this.helpTexts.gender}${this.helpTexts.email}${this.helpTexts.confirmEmail}`,
+          button: 'OK',
+        })
+      }
+    },
+
+    // update password
+    async updatePassword() {
+      const userData = {
+        password: this.user.newPassword,
+      }
+
+      this.validatePassword()
+      this.validateNewPassword()
+      this.validateConfirmPassword()
+
+      if (
+        this.helpTexts.password === '' &&
+        this.helpTexts.newPassword === '' &&
+        this.helpTexts.confirmPassword === ''
+      ) {
+        const logInData = {
+          email: this.loggedInUser.email,
+          password: this.user.password,
+        }
+
+        this.$axios
+          .$post('User/login', logInData)
+          .then((res) => {
+            if (this.user.password != this.user.newPassword) {
+              this.$axios
+                .$post(`User/change-password/${this.loggedInUser.id}`, userData)
+                .then((r) => {
+                  if (r.status == 200) {
+                    this.loading = true
+                    this.$auth.logout()
+
+                    this.$swal({
+                      title: 'Success',
+                      icon: 'success',
+                      html: 'Your Password has been updated.<br/>Please login again.',
+                    }).then(() => {
+                      this.$router.push('/login')
+                    })
+                  }
+                })
+            } else {
+              this.$swal({
+                title: 'Error',
+                icon: 'error',
+                html: 'New password cannot be the same as old password.',
+                button: 'OK',
+              })
+            }
+          })
+          .catch((err) => {
+            if (err.response.status == 404) {
+              this.$swal({
+                title: 'Error',
+                icon: 'error',
+                html: `Incorrect Password<br/>Please try again.`,
+                button: 'OK',
+              })
+
+              return false
+            } else {
+              this.$swal({
+                title: 'Error',
+                icon: 'error',
+                html: `Something went wrong.</br>Please try again.`,
+                button: 'OK',
+              })
+
+              return false
+            }
+          })
+      } else {
+        this.$swal({
+          title: 'Validation Error',
+          icon: 'info',
+          html: `Please fix the errors below.</br>${this.helpTexts.password}${this.helpTexts.newPassword}${this.helpTexts.confirmPassword}`,
+          button: 'OK',
+        })
       }
     },
 
     // for firstname validation
     validateFirstName() {
-      if (this.firstName.length < 3) {
+      if (this.user.firstName.length < 3) {
         this.helpTexts.firstName =
-          '<b>First Name</b>: Must be atleast 3 Characters long'
+          '<b>First Name</b>: Must be atleast 3 Characters long<br/>'
       } else {
         this.helpTexts.firstName = ''
       }
@@ -392,9 +538,9 @@ export default {
 
     // for lastname validation
     validateLastName() {
-      if (this.lastName.length < 3) {
+      if (this.user.lastName.length < 3) {
         this.helpTexts.lastName =
-          '<b>Last Name</b>: Must be atleast 3 Characters long'
+          '<b>Last Name</b>: Must be atleast 3 Characters long<br/>'
       } else {
         this.helpTexts.lastName = ''
       }
@@ -404,10 +550,25 @@ export default {
     validateEmail() {
       var re =
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      if (!re.test(this.email)) {
-        this.helpTexts.email = '<b>Email</b>: Must be a valid Email Address'
+      if (!re.test(this.user.email)) {
+        this.helpTexts.email =
+          '<b>Email</b>: Must be a valid Email Address<br/>'
       } else {
         this.helpTexts.email = ''
+      }
+    },
+
+    // for confirm email validation
+    validateConfirmEmail() {
+      if (this.user.confirmEmail != '') {
+        if (this.user.email != this.user.confirmEmail) {
+          this.helpTexts.confirmEmail =
+            '<b>Confirm Email</b>: Email does not match<br/>'
+        } else {
+          this.helpTexts.confirmEmail = ''
+        }
+      } else {
+        this.helpTexts.confirmEmail = ''
       }
     },
 
@@ -415,19 +576,31 @@ export default {
     validatePassword() {
       var re =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
-      if (!re.test(this.password)) {
+      if (!re.test(this.user.password)) {
         this.helpTexts.password =
-          '<b>Password</b>: Must be 6 characters long, containing atleast 1 of Capital, Small, Numeric and Special Character'
+          '<b>Password</b>: Must be 6 characters long, containing atleast 1 of Capital, Small, Numeric and Special Character<br/>'
       } else {
         this.helpTexts.password = ''
       }
     },
 
+    // for New password validation
+    validateNewPassword() {
+      var re =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
+      if (!re.test(this.user.newPassword)) {
+        this.helpTexts.newPassword =
+          '<b>New Password</b>: Must be 6 characters long, containing atleast 1 of Capital, Small, Numeric and Special Character<br/>'
+      } else {
+        this.helpTexts.newPassword = ''
+      }
+    },
+
     // for confirm password validation
     validateConfirmPassword() {
-      if (this.password != this.confirmPassword) {
+      if (this.user.newPassword != this.user.confirmPassword) {
         this.helpTexts.confirmPassword =
-          '<b>Confirm Password</b>: Password does not match'
+          '<b>Confirm Password</b>: Password does not match<br/>'
       } else {
         this.helpTexts.confirmPassword = ''
       }
@@ -435,8 +608,8 @@ export default {
 
     // for gender selector validation
     validateGender() {
-      if (this.gender == '') {
-        this.helpTexts.gender = '<b>Gender</b>: Select one from the list'
+      if (this.user.gender === '') {
+        this.helpTexts.gender = '<b>Gender</b>: Select one from the list<br/>'
       } else {
         this.helpTexts.gender = ''
       }
