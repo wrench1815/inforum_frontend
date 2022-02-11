@@ -313,6 +313,7 @@ export default {
   data() {
     return {
       loading: true,
+
       user: {
         firstName: '',
         lastName: '',
@@ -323,6 +324,15 @@ export default {
         address: '',
         password: '',
         newPassword: '',
+        confirmPassword: '',
+      },
+
+      helpTexts: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        gender: '',
+        password: '',
         confirmPassword: '',
       },
     }
@@ -357,6 +367,79 @@ export default {
       this.user.password = await ''
       this.user.newPassword = await ''
       this.user.confirmPassword = await ''
+    },
+
+    async updateInfo() {
+      const user = {
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        gender: Number(this.user.gender),
+        dob: this.user.dob,
+        email: this.user.email,
+        address: this.user.address,
+      }
+    },
+
+    // for firstname validation
+    validateFirstName() {
+      if (this.firstName.length < 3) {
+        this.helpTexts.firstName =
+          '<b>First Name</b>: Must be atleast 3 Characters long'
+      } else {
+        this.helpTexts.firstName = ''
+      }
+    },
+
+    // for lastname validation
+    validateLastName() {
+      if (this.lastName.length < 3) {
+        this.helpTexts.lastName =
+          '<b>Last Name</b>: Must be atleast 3 Characters long'
+      } else {
+        this.helpTexts.lastName = ''
+      }
+    },
+
+    // for email validation
+    validateEmail() {
+      var re =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (!re.test(this.email)) {
+        this.helpTexts.email = '<b>Email</b>: Must be a valid Email Address'
+      } else {
+        this.helpTexts.email = ''
+      }
+    },
+
+    // for password validation
+    validatePassword() {
+      var re =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
+      if (!re.test(this.password)) {
+        this.helpTexts.password =
+          '<b>Password</b>: Must be 6 characters long, containing atleast 1 of Capital, Small, Numeric and Special Character'
+      } else {
+        this.helpTexts.password = ''
+      }
+    },
+
+    // for confirm password validation
+    validateConfirmPassword() {
+      if (this.password != this.confirmPassword) {
+        this.helpTexts.confirmPassword =
+          '<b>Confirm Password</b>: Password does not match'
+      } else {
+        this.helpTexts.confirmPassword = ''
+      }
+    },
+
+    // for gender selector validation
+    validateGender() {
+      if (this.gender == '') {
+        this.helpTexts.gender = '<b>Gender</b>: Select one from the list'
+      } else {
+        this.helpTexts.gender = ''
+      }
     },
   },
 
