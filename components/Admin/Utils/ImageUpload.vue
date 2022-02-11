@@ -42,9 +42,10 @@
         <!-- cropper -->
         <div class="col-12" v-if="src != '' && showCropper">
           <cropper
-            class="cropper"
+            class="cropper max-height-vh-90"
             :src="src"
             :auto-zoom="true"
+            backgroundClass="bg-white"
             :stencil-props="{
               aspectRatio: 1 / 1,
             }"
@@ -55,7 +56,10 @@
         <!-- Cropped Image Preview -->
         <div class="col-12" v-show="show">
           <h3>Cropped Image</h3>
-          <div id="canvas"></div>
+          <div
+            class="d-flex justify-content-center img-fluid"
+            id="canvas"
+          ></div>
         </div>
       </div>
     </div>
