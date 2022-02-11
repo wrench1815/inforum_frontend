@@ -138,7 +138,7 @@ export default {
               })
 
               // changing route
-              this.$router.push(`/admin/Home/preview/${formData.id}`)
+              this.$router.push(`/admin/home/preview/${formData.id}`)
             }
           })
           // on failure
