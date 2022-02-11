@@ -116,7 +116,11 @@
                   <!-- Start:First Name -->
                   <div class="col-6">
                     <div class="input-group input-group-static">
-                      <label class="text-primary">First Name</label>
+                      <label class="text-primary"
+                        >First Name<span class="ms-1 text-danger"
+                          >*</span
+                        ></label
+                      >
                       <input
                         type="text"
                         class="form-control"
@@ -130,7 +134,9 @@
                   <!-- Start:Last Name -->
                   <div class="col-6">
                     <div class="input-group input-group-static">
-                      <label class="text-primary">Last Name</label>
+                      <label class="text-primary"
+                        >Last Name<span class="ms-1 text-danger">*</span></label
+                      >
                       <input
                         type="text"
                         class="form-control"
@@ -146,7 +152,9 @@
                   <!-- Start:Gender -->
                   <div class="col-sm-6 col-12">
                     <div class="input-group input-group-static mt-4 ms-0">
-                      <label class="text-primary">I'm</label>
+                      <label class="text-primary"
+                        >I'm<span class="ms-1 text-danger">*</span></label
+                      >
                       <select
                         class="form-control form-select"
                         v-model="user.gender"
@@ -178,7 +186,9 @@
                   <!-- Start:Email -->
                   <div class="col-sm-6 col-12">
                     <div class="input-group input-group-static">
-                      <label class="text-primary">Email</label>
+                      <label class="text-primary"
+                        >Email<span class="ms-1 text-danger">*</span></label
+                      >
                       <input
                         type="email"
                         class="form-control"
@@ -242,7 +252,11 @@
               <div class="card-body pt-0">
                 <!-- Start:Current Password -->
                 <div class="input-group input-group-static">
-                  <label class="text-primary">Current password</label>
+                  <label class="text-primary"
+                    >Current password<span class="ms-1 text-danger"
+                      >*</span
+                    ></label
+                  >
                   <input
                     type="password"
                     class="form-control"
@@ -253,7 +267,9 @@
 
                 <!-- Start:New Password -->
                 <div class="input-group input-group-static my-4">
-                  <label class="text-primary">New password</label>
+                  <label class="text-primary"
+                    >New password<span class="ms-1 text-danger">*</span></label
+                  >
                   <input
                     type="password"
                     class="form-control"
@@ -264,7 +280,11 @@
 
                 <!-- Start:Confirm Password -->
                 <div class="input-group input-group-static">
-                  <label class="text-primary">Confirm New password</label>
+                  <label class="text-primary"
+                    >Confirm New password<span class="ms-1 text-danger"
+                      >*</span
+                    ></label
+                  >
                   <input
                     type="password"
                     class="form-control"
