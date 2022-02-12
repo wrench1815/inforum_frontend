@@ -24,7 +24,7 @@
           </div>
           <div class="col-12" v-else>
             <div class="mx-4">
-              <div class="table-responsive border rounded-3">
+              <div class="table-responsive">
                 <table class="table align-items-center">
                   <thead>
                     <tr class="text-primary text-center text-md">
