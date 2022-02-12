@@ -26,7 +26,11 @@
       <ul class="navbar-nav">
         <!-- Start: Dashboard Home -->
         <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin">
+          <NuxtLink
+            class="nav-link text-dark"
+            to="/admin"
+            :active-class="'fix-active-link-bug'"
+          >
             <div
               class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
@@ -145,6 +149,15 @@ export default {
 <style scoped>
 #sidenav-collapse-main {
   height: 70vh !important;
+}
+
+#sidenav-main .navbar-nav .nuxt-link-active {
+  color: white !important;
+  background-image: linear-gradient(195deg, #ec407a 0%, #d81b60 100%);
+}
+
+#sidenav-main .navbar-nav .nuxt-link-active i {
+  color: white !important;
 }
 
 #sidenav-main .navbar-nav .nuxt-link-exact-active {
