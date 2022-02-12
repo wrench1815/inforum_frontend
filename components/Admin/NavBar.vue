@@ -1,7 +1,6 @@
 <template>
   <nav
-    class="mt-4 bg-white shadow-blur navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl"
-    id="navbarBlur"
+    class="mt-4 bg-white shadow-blur navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky top-0 z-index-sticky"
     navbar-scroll="true"
   >
     <div class="container-fluid py-1 px-3">
@@ -25,13 +24,45 @@
         <h6 class="font-weight-bolder mb-0">Dashboard Home</h6>
       </nav>
       <div
-        class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+        class="collapse navbar-collapse d-flex justify-content-end"
         id="navbar"
       >
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group input-group-outline">
-            <label class="form-label">Type here...</label>
-            <input type="text" class="form-control" />
+          <div class="dropdown">
+            <div
+              class="dropdown-toggle"
+              type="button"
+              id="AdminProfileDrop"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                class="avatar img-fit"
+                :src="loggedInUser.profileImage"
+                alt=""
+              />
+            </div>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start"
+              aria-labelledby="AdminProfileDrop"
+            >
+              <li>
+                <NuxtLink class="dropdown-item" to="/profile">Profile</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink class="dropdown-item" to="/admin">Dash</NuxtLink>
+              </li>
+              <li>
+                <div class="dropdown-divider border-dark opacity-5"></div>
+              </li>
+              <li>
+                <div class="dropdown-item">
+                  <NuxtLink class="btn btn-sm btn-danger m-0" to="/logout"
+                    >Logout<i class="ms-2 fas fa-sign-out-alt text-xs"></i
+                  ></NuxtLink>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -53,6 +84,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: ['crumbs'],
   computed: {
@@ -65,6 +98,11 @@ export default {
       }
     },
   },
+
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
+  },
+
   methods: {
     sideBarToggler() {
       document.body.classList.toggle('g-sidenav-pinned')
@@ -73,4 +111,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.img-fit {
+  object-position: center;
+  object-fit: cover;
+}
+</style>
