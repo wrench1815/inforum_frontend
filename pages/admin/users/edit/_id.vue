@@ -208,7 +208,13 @@
             <div class="col">
               <div class="input-group input-group-static mt-4 ms-0">
                 <label class="text-primary">Role</label>
-                <select class="form-control form-select" v-model="role">
+                <p
+                  class="form-control text-bold text-danger"
+                  v-if="loggedInUser.id == originalUser.id"
+                >
+                  Cannot change Role
+                </p>
+                <select class="form-control form-select" v-model="role" v-else>
                   <option disabled value="">Change Role</option>
                   <template v-for="role in roles">
                     <option :value="role.name" :key="role.id">
@@ -222,7 +228,10 @@
           </div>
 
           <div class="row mt-4">
-            <div class="col-12 d-flex justify-content-end gap-2">
+            <div
+              class="col-12 d-flex justify-content-end gap-2"
+              v-if="loggedInUser.id != originalUser.id"
+            >
               <button class="btn btn-info" @click="resetRole">Reset</button>
               <button class="btn btn-success" @click="changeRole">
                 Update
@@ -312,7 +321,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ImageUpload from '~/components/Admin/Utils/ImageUpload.vue'
+
 export default {
   layout: 'admin',
 
@@ -347,6 +358,10 @@ export default {
         newConfirmPasswordText: '',
       },
     }
+  },
+
+  computed: {
+    ...mapGetters(['loggedInUser']),
   },
 
   created() {
@@ -694,4 +709,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.avatar-fit {
+  object-fit: cover;
+  object-position: center;
+}
+</style>
