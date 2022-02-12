@@ -6,58 +6,9 @@
       </div>
     </div>
     <div class="container pt-7" v-if="!loading">
-      <div class="my-2 py-2">
+      <div class="my-2">
         <div class="row mb-5">
-          <div class="col-lg-3">
-            <!-- Start:Profile Nav -->
-            <div class="card position-sticky profile-top">
-              <ul class="nav flex-column bg-white border-radius-lg p-3">
-                <li class="nav-item">
-                  <a
-                    class="nav-link text-dark d-flex"
-                    data-scroll=""
-                    href="#profile"
-                  >
-                    <i class="fas fa-user-circle text-lg me-2"></i>
-                    <span class="text-sm">Profile</span>
-                  </a>
-                </li>
-                <li class="nav-item pt-2">
-                  <a
-                    class="nav-link text-dark d-flex"
-                    data-scroll=""
-                    href="#basic-info"
-                    style=""
-                  >
-                    <i class="fas fa-receipt text-lg me-2"></i>
-                    <span class="text-sm">Basic Info</span>
-                  </a>
-                </li>
-                <li class="nav-item pt-2">
-                  <a
-                    class="nav-link text-dark d-flex"
-                    data-scroll=""
-                    href="#password"
-                    style=""
-                  >
-                    <i class="fas fa-lock text-lg me-2"></i>
-                    <span class="text-sm">Change Password</span>
-                  </a>
-                </li>
-
-                <li class="nav-item pt-2">
-                  <button
-                    class="btn btn-danger btn-sm ms-2 text-capitalize"
-                    @click="logout"
-                  >
-                    <i class="fas fa-sign-out-alt text-sm me-2"></i>Logout
-                  </button>
-                </li>
-              </ul>
-            </div>
-            <!-- Start:Profile Nav -->
-          </div>
-          <div class="col-lg-9 mt-lg-0 mt-4">
+          <div class="col-12">
             <!-- Start:Profile Card -->
             <div class="card card-body" id="profile">
               <div class="row justify-content-center align-items-center">
