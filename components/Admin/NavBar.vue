@@ -47,16 +47,20 @@
               aria-labelledby="AdminProfileDrop"
             >
               <li>
-                <NuxtLink class="dropdown-item" to="/profile">Profile</NuxtLink>
+                <NuxtLink class="dropdown-item text-dark" to="/profile"
+                  >Profile</NuxtLink
+                >
               </li>
               <li>
-                <NuxtLink class="dropdown-item" to="/admin">Dash</NuxtLink>
+                <NuxtLink class="dropdown-item text-dark" to="/admin"
+                  >Dash</NuxtLink
+                >
               </li>
               <li>
-                <div class="dropdown-divider border-dark opacity-5"></div>
+                <div class="dropdown-divider border-dark opacity-4"></div>
               </li>
               <li>
-                <div class="dropdown-item">
+                <div class="dropdown-item text-dark">
                   <NuxtLink class="btn btn-sm btn-danger m-0" to="/logout"
                     >Logout<i class="ms-2 fas fa-sign-out-alt text-xs"></i
                   ></NuxtLink>
