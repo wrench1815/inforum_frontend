@@ -11,25 +11,120 @@
       <!-- End:loading -->
 
       <!-- Start:loaded -->
-      <div class="card p-4" v-if="!loading">
+      <div class="card-body px-3" v-if="!loading">
         <div class="row">
-          <div class="col-12">
-            <h1 class="mb-3">User</h1>
+          <!-- profile navigation-->
+          <div class="col-12 mb-3 card card-body">
+            <div class="row justify-content-start align-items-center">
+              <!-- Start:Profile Image -->
+              <div class="col-auto">
+                <div class="avatar-xl position-relative">
+                  <img
+                    :src="user.profileImage"
+                    alt="img"
+                    class="w-100 rounded-circle shadow-sm avatar-xl avatar-fit"
+                  />
+                </div>
+              </div>
+              <!-- End:Profile Image -->
+
+              <div class="col-auto my-auto">
+                <div class="h-100">
+                  <!-- Start:User Name -->
+                  <h5 class="mb-1 font-weight-bolder">
+                    {{ user.firstName + ' ' + user.lastName }}
+                  </h5>
+                  <!-- End:User Name -->
+
+                  <!-- Start:User Role -->
+                  <p class="mb-0 font-weight-normal text-sm">
+                    {{ role }}
+                  </p>
+                  <!-- End:User Role -->
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-12 mb-3">
-            <h4 class="">
-              <span class="me-1">By</span>
-              <span class="text-primary mx-1">{{
-                user.firstName + ' ' + user.lastName
-              }}</span
-              >(<span class="text-info mx-1">{{ user.email }}</span
-              >(<span class="text-info mx-1">{{ getGender(user.gender) }}</span
-              >(<span class="text-info mx-1"> Role: {{ role }}</span
-              >) <span class="mx-1">on</span
-              ><span class="mx-1 text-primary">{{
-                formattedDate(user.dateJoined)
-              }}</span>
-            </h4>
+
+          <!-- change basic info -->
+          <div class="card mt-3">
+            <div class="card-header">
+              <h3>User Info</h3>
+            </div>
+
+            <div class="card-body pt-0">
+              <div class="border-top mt-n3 mb-3"></div>
+              <!-- Start:Full Name -->
+              <div class="row">
+                <div class="col-md-4 col-12 text-primary">Full Name</div>
+                <div class="col-md-8 col-12 text-dark">
+                  {{ user.firstName + ' ' + user.lastName }}
+                </div>
+              </div>
+              <!-- End:Full Name -->
+
+              <!-- Start:Gender -->
+              <div class="row my-3">
+                <div class="col-md-4 col-12 text-primary">Gender</div>
+                <div class="col-md-8 col-12 text-dark">{{ getGender(user.gender) }}</div>
+              </div>
+              <!-- End:Gender -->
+
+              <!-- Start:DOB -->
+              <div class="row my-3">
+                <div class="col-md-4 col-12 text-primary">Birth Date</div>
+                <div class="col-md-8 col-12 text-dark" v-if="user.dob">
+                  {{ formattedDate(user.dob) }}
+                </div>
+                <div class="col-md-8 col-12 text-dark" v-else>-----</div>
+              </div>
+              <!-- End:DOB -->
+
+              <!-- Start:Email -->
+              <div class="row my-3">
+                <div class="col-md-4 col-12 text-primary">Email</div>
+                <div class="col-md-8 col-12 text-dark">{{ user.email }}</div>
+              </div>
+              <!-- End:Email -->
+
+              <!-- Start:Address -->
+              <div class="row my-3">
+                <div class="col-md-4 col-12 text-primary">Address</div>
+                <div class="col-md-8 col-12 text-dark" v-if="user.address">
+                  {{ user.address }}
+                </div>
+                <div class="col-md-8 col-12 text-dark" v-else>-----</div>
+              </div>
+              <!-- End:Address -->
+
+              <!-- Start:Role -->
+              <div class="row my-3">
+                <div class="col-md-4 col-12 text-primary">Role</div>
+                <div class="col-md-8 col-12 text-dark">{{ role }}</div>
+              </div>
+              <!-- End:Role -->
+
+              <!-- Start:Date Joined -->
+              <div class="row my-3">
+                <div class="col-md-4 col-12 text-primary">Date Joined</div>
+                <div class="col-md-8 col-12 text-dark">
+                  {{ formattedDate(user.dateJoined) }}
+                </div>
+              </div>
+              <!-- End:Date Joined -->
+
+              <div class="border-top"></div>
+              <div class="row mt-3">
+                <div class="col-12 d-flex justify-content-end">
+                  <NuxtLink
+                    class="btn btn-success"
+                    :to="`/admin/users/edit/${user.id}`"
+                  >
+                    <i class="fas fa-edit"></i> Edit
+                  </NuxtLink>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -60,6 +155,19 @@ export default {
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
     },
 
+    // convert string date to calander date
+    stringToCalenderDate(d) {
+      if (d) {
+        const date = new Date(d)
+        const year = String(date.getFullYear())
+        const month = String(date.getMonth() + 1).padStart(2, '0')
+        const day = String(date.getDate()).padStart(2, '0')
+        return `${year}-${month}-${day}`
+      }
+
+      return null
+    },
+
     getGender(n) {
       let gender = ''
       switch (n) {
@@ -86,7 +194,10 @@ export default {
       .$get(`/User/single/${this.$route.params.id}`)
       .then((res) => {
         this.user = res.user
+        this.user.dob = this.stringToCalenderDate(res.user.dob)
         this.role = res.userRole[0]
+      })
+      .then(() => {
         this.loading = false
       })
       .catch((error) => {
@@ -108,4 +219,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.avatar-fit {
+  object-position: center center;
+  object-fit: cover;
+}
+</style>
