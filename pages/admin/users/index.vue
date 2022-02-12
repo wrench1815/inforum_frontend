@@ -28,10 +28,10 @@
                 <table class="table align-items-center">
                   <thead>
                     <tr class="text-primary text-center text-md">
-                      <th class="text-uppercase">S.NO</th>
+                      <th class="text-uppercase">Profile Image</th>
                       <th class="text-uppercase">Full Name</th>
+                      <th class="text-uppercase">Role</th>
                       <th class="text-uppercase">Gender</th>
-                      <th class="text-uppercase">Profile</th>
                       <th class="text-uppercase text-center ps-2">Email</th>
                       <th class="text-uppercase text-center ps-2">
                         Date Joined
@@ -45,11 +45,20 @@
                       v-for="(user, index) in users"
                       :key="user.id"
                     >
-                      <!-- sno start -->
-                      <td class="text-center">
-                        {{ index + 1 }}
+                      <!-- Start: profile-->
+                      <td class="d-flex align-center justify-content-center">
+                        <span
+                          class="avatar avatar-md rounded-circle shadow-card"
+                        >
+                          <img
+                            :src="user.profileImage"
+                            class="avatar avatar-md rounded-circle img-fit"
+                            alt="avatar"
+                          />
+                        </span>
                       </td>
-                      <!-- sno end -->
+                      <!-- End: profile-->
+
                       <!-- Start:Full Name -->
                       <td class="text-bold">
                         <NuxtLink
@@ -61,21 +70,17 @@
                       </td>
                       <!-- End:Full Name -->
 
+                      <!-- sno start -->
+                      <td class="text-center">
+                        {{ user.userRole }}
+                      </td>
+                      <!-- sno end -->
+
                       <!-- Start: Gender-->
                       <td class="text-center">
                         {{ getGender(user.gender) }}
                       </td>
                       <!-- End: Gender-->
-
-                      <!-- Start: profile-->
-                      <td class="d-flex align-center justify-content-center">
-                        <span
-                          class="avatar avatar-md rounded-circle shadow-card"
-                        >
-                          <img :src="user.profileImage" alt="avatar" />
-                        </span>
-                      </td>
-                      <!-- End: profile-->
 
                       <!-- Start:Email -->
                       <td class="text-center">
@@ -289,4 +294,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.img-fit {
+  object-fit: cover;
+  object-position: center;
+}
+</style>
