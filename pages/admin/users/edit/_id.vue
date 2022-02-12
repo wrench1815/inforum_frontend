@@ -406,7 +406,7 @@ export default {
     resetRole() {
       this.$swal({
         title: 'Success',
-        text: 'Role Has Been Successfully Reset',
+        text: 'Role has been Successfully Reset',
         icon: 'success',
         button: 'OK',
       })
@@ -458,7 +458,7 @@ export default {
     resetBasicData() {
       this.$swal({
         title: 'Success',
-        text: 'Basic Data Has Been Successfully Reset',
+        text: 'Data has been Successfully Reset',
         icon: 'success',
         button: 'OK',
       })
