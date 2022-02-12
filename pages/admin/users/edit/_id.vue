@@ -212,7 +212,7 @@
                   class="form-control text-bold text-danger"
                   v-if="loggedInUser.id == originalUser.id"
                 >
-                  Cannot change Role
+                  Cannot change your own role
                 </p>
                 <select class="form-control form-select" v-model="role" v-else>
                   <option disabled value="">Change Role</option>
