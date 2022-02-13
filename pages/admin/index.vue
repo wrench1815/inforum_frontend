@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AdminNavBar v-bind:crumbs="['Home']" />
+    <AdminNavBar />
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">

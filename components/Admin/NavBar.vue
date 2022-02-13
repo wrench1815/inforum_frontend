@@ -7,7 +7,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <!-- Default crumb -->
-          <li class="breadcrumb-item text-sm">
+          <li class="breadcrumb-item text-md">
             <NuxtLink class="opacity-5 text-dark" to="/admin"
               >Dashboard</NuxtLink
             >
@@ -15,13 +15,19 @@
 
           <!-- Active crumb -->
           <li
-            class="breadcrumb-item text-sm text-dark active"
+            class="breadcrumb-item text-md text-capitalize"
             aria-current="page"
+            v-for="crumb in crumbs"
+            :key="crumb.name"
           >
-            Dashboard Home
+            <NuxtLink class="opacity-5 text-dark" :to="crumb.url">
+              {{ crumb.name }}
+            </NuxtLink>
           </li>
         </ol>
-        <h6 class="font-weight-bolder mb-0">Dashboard Home</h6>
+        <h6 class="font-weight-bolder mb-0 text-capitalize">
+          {{ lastElement.name }}
+        </h6>
       </nav>
       <div
         class="collapse navbar-collapse d-flex justify-content-end"
@@ -91,7 +97,51 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['crumbs'],
+  data() {
+    return {
+      crumbs: [],
+      lastElement: {},
+      utils: {
+        // get crumbs from url
+        getCrumbs(url) {
+          return url.split('/', 3).filter((item) => item != '')
+        },
+
+        // get url from crumb
+        getUrl(crumbs) {
+          return ['', ...crumbs].join('/')
+        },
+
+        // get breadcrumbs list containing breadcrumb object with data
+        getBreadCrumb(crumbs) {
+          return crumbs.map((item, i) => {
+            return {
+              name: this.fixString(item),
+              url: this.getUrl(crumbs.slice(0, i + 1)),
+            }
+          })
+        },
+
+        // last element of list
+        lastElement(list) {
+          return list[list.length - 1]
+        },
+
+        // fixes string error
+        fixString(string) {
+          const list = string.split('-')
+          return list.map((item) => this.capitalizeString(item)).join(' ')
+        },
+
+        // capitalizes string
+        capitalizeString(string) {
+          const list = string.split('')
+          list[0] = list[0].toUpperCase()
+          return list.join('')
+        },
+      },
+    }
+  },
   computed: {
     crumbClass: function () {
       for (let item = 0; item < crumbs.length; item++) {
@@ -111,6 +161,17 @@ export default {
     sideBarToggler() {
       document.body.classList.toggle('g-sidenav-pinned')
     },
+  },
+
+  mounted() {
+    const url = this.$route.fullPath
+    const crumbs = this.utils.getCrumbs(url)
+    const breadCrumbs = this.utils.getBreadCrumb(crumbs)
+    const lastElement = this.utils.lastElement(breadCrumbs)
+
+    // changing data
+    this.crumbs = breadCrumbs
+    this.lastElement = lastElement
   },
 }
 </script>

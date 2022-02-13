@@ -36,7 +36,7 @@
             >
               <i class="fas fa-tachometer-alt"></i>
             </div>
-            <span class="nav-link-text ms-1">Dashboard Home</span>
+            <span class="nav-link-text ms-1">Dashboard</span>
           </NuxtLink>
         </li>
         <!-- End: Dashboard Home -->
