@@ -1,9 +1,9 @@
 <template>
-  <!-- card -->
   <div>
     <div v-if="loading">
       <h3 class="text-center">Loading.....</h3>
     </div>
+    <!-- card -->
     <div
       class="border border-radius-2xl bg-white mb-3 shadow-lg"
       v-if="!loading"
@@ -11,24 +11,23 @@
       <!-- card top -->
       <div class="p-3 border-bottom">
         <div class="d-flex justify-content-start gap-3">
-          <!-- Start:Profile image -->
+          <!-- profile image -->
           <span class="avatar avatar-md rounded-circle shadow-card">
             <img
               class="avatar avatar-md rounded-circle img-fit"
-              :src="author.profileImage"
+              :src="queryAuthor.profileImage"
               alt="avatar"
             />
           </span>
-          <!-- End:Profile image -->
 
           <span class="d-flex flex-column justify-content-center custom-gap">
             <!-- name -->
             <span class="text-bold text-md text-dark">{{
-              author.firstName + ' ' + author.lastName
+              queryAuthor.firstName + ' ' + queryAuthor.lastName
             }}</span>
 
             <!-- date-uploaded -->
-            <span class="text-xs text-dark">{{
+            <span class="text-xs link-dark">{{
               dateFormatted(query.datePosted)
             }}</span>
           </span>
@@ -38,13 +37,11 @@
       <!-- card middle -->
       <div class="p-3">
         <!-- Start:Query Title -->
-        <NuxtLink :to="`/forum/query/${query.slug}`">
-          <h3 class="link-primary">{{ query.title }}</h3>
-        </NuxtLink>
+        <h3>{{ query.title }}</h3>
         <!-- End:Query Title -->
 
         <!-- Start:Query Description -->
-        <p class="custom-paragraph">
+        <p>
           {{ query.description }}
         </p>
         <!-- End:Query Description -->
@@ -82,16 +79,67 @@
           ><span class="ms-1" v-else>Answers</span>
         </button>
       </div>
+
+      <!-- Comments -->
+      <div>
+        <!-- Create Comment -->
+        <CommentBox />
+
+        <!-- Comments Meta Data -->
+        <ForumTopHeading />
+
+        <!-- Start:Answers List -->
+        <template v-if="queryAnswers.pagination.totalCount">
+          <div>
+            <ForumAnswer
+              v-for="answer in queryAnswers.answers"
+              :key="answer.id"
+              :answer="answer"
+            />
+          </div>
+          <div class="text-center my-3">
+            <div
+              class="link-primary d-inline-block cursor-pointer"
+              @click="loadMoreAnswers"
+            >
+              Load More...
+            </div>
+          </div>
+        </template>
+        <!-- End:Answers List -->
+
+        <!-- Start:No Answers Fallback -->
+        <template v-else>
+          <div class="p-3">
+            <p class="text-center text-capitalize">No Answers yet</p>
+          </div>
+        </template>
+        <!-- End:No Answers Fallback -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import CommentHeading from '~/components/Forum/CommentHeading.vue'
+import Comment from '~/components/Forum/Comment.vue'
+import CommentBox from '~/components/Forum/CommentBox.vue'
+
 export default {
-  name: 'QuestionCard',
+  name: 'CompleteQuery',
+
+  components: {
+    CommentHeading,
+    Comment,
+    CommentBox,
+  },
 
   props: {
     query: {
+      type: Object,
+      required: true,
+    },
+    queryAuthor: {
       type: Object,
       required: true,
     },
@@ -100,8 +148,7 @@ export default {
   data() {
     return {
       loading: true,
-      author: Object,
-      queryAnswers: Object,
+      queryAnswers: {},
     }
   },
 
@@ -112,23 +159,18 @@ export default {
         weekday: 'short',
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
     },
+
+    loadMoreAnswers() {},
   },
 
   mounted() {
     this.$axios
-      .$get(`User/single/${this.query.authorId}`)
-      .then((res) => {
-        this.author = res.user
+      .$get(`ForumAnswer?queryId=${this.query.id}`)
+      .then((r) => {
+        this.queryAnswers = r
       })
       .then(() => {
-        this.$axios
-          .$get(`ForumAnswer?queryId=${this.query.id}`)
-          .then((r) => {
-            this.queryAnswers = r
-          })
-          .then(() => {
-            this.loading = false
-          })
+        this.loading = false
       })
   },
 }
@@ -137,13 +179,6 @@ export default {
 <style scoped>
 .custom-gap {
   gap: 0.15rem !important;
-}
-
-.custom-paragraph {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
 }
 
 .img-fit {

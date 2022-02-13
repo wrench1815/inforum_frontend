@@ -545,6 +545,14 @@ export default {
           })
       })
   },
+  methods: {
+    getDatePosted() {
+      const myDate = new Date(this.post.datePosted)
+      return `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+  },
 }
 </script>
 
