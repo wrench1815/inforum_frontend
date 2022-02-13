@@ -25,11 +25,13 @@
                 >Header Image</span
               >
               <br />
-              <img
-                class="img-fluid"
-                :src="homeData.headerImageLink"
-                alt="header image"
-              />
+              <div class="d-flex justify-content-center py-3">
+                <img
+                  class="img-fluid"
+                  :src="homeData.headerImageLink"
+                  alt="header image"
+                />
+              </div>
             </div>
           </div>
         </div>

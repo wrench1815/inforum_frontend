@@ -72,15 +72,27 @@ export default {
       }
 
       await this.$axios.$put(`/Categories/${formData.id}`, formData)
-      // redirect to home after 5 seconds counter sweet alerts 2
+
+      let timerInterval
+
       this.$swal({
         title: 'Success!',
-        html: 'Category updated successfully. <br /> Redirecting in 5 Seconds.',
+        html: 'Category updated successfully. <br /> Redirecting in <b></b> Seconds.',
         type: 'success',
         icon: 'success',
         timer: 5000,
         showConfirmButton: false,
         timerProgressBar: true,
+        didOpen: () => {
+          this.$swal.showLoading()
+          const b = this.$swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Math.ceil(this.$swal.getTimerLeft() / 1000)
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        },
       }).then(() => {
         this.$router.push('/admin/category')
       })

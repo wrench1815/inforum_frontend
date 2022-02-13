@@ -18,8 +18,8 @@
       >
       <div class="border-top border-primary mb-1"></div>
       <p class="card-text d-flex justify-content-between">
-        <small class="text-info">March 02, 2021</small>
-        <small class="text-info">John Doe</small>
+        <small class="text-info">{{ normalizedDate }}</small>
+        <small class="text-info">{{ authorFullName }}</small>
       </p>
     </div>
   </div>
@@ -34,7 +34,58 @@ export default {
       required: true,
     },
   },
+
+  data() {
+    return {
+      authorFullName: '',
+      normalizedDate: '',
+    }
+  },
+
+  methods: {
+    getDatePosted(postDate) {
+      const myDate = new Date(postDate)
+      this.normalizedDate = `${myDate.toLocaleString('default', {
+        weekday: 'short',
+      })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
+    getAuthor(authorId) {
+      this.$axios.$get(`/User/single/${authorId}`).then((res) => {
+        var fullName = `${res.user.firstName} ${res.user.lastName}`
+        this.authorFullName = fullName
+      })
+    },
+  },
+
+  created() {
+    this.getDatePosted(this.post.datePosted)
+    this.getAuthor(this.post.authorId)
+  },
 }
 </script>
 
-<style></style>
+<style scoped>
+.cover-img {
+  object-fit: cover;
+}
+
+.custom-paragraph {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.8s ease;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.2);
+}
+</style>

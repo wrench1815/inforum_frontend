@@ -86,6 +86,34 @@
                     </div>
                   </div>
                   <!-- End:Category -->
+
+                  <!-- Start:Author -->
+                  <div class="col">
+                    <div class="input-group input-group-static my-4">
+                      <label class="text-primary">Author</label>
+                      <select
+                        class="form-select form-control w-100 ps-3 mt-3"
+                        v-model="postData.authorId"
+                      >
+                        <option disabled>Select Post Author</option>
+                        <template v-for="user in users">
+                          <option
+                            v-if="user.id == postData.authorId"
+                            :key="user.id"
+                            :value="user.id"
+                            selected
+                          >
+                            {{ user.firstName }} {{ user.lastName }}
+                          </option>
+
+                          <option v-else :key="user.id" :value="user.id">
+                            {{ user.firstName }} {{ user.lastName }}
+                          </option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- End:Author -->
                 </div>
                 <!-- Start:Submit Button -->
                 <div class="text-end mt-4">
@@ -123,7 +151,11 @@ export default {
 
   async asyncData({ $axios, $config }) {
     const categories = await $axios.$get('/Categories')
-    return { categories }
+    const editors = await $axios.$get(`/User/list/editor`)
+    const admins = await $axios.$get(`/User/list/admin`)
+    const users = [...editors.users, ...admins.users]
+
+    return { categories, editors, admins, users }
   },
 
   created() {
@@ -141,6 +173,7 @@ export default {
         description: this.postData.description,
         excerpt: this.postData.excerpt,
         categoryId: parseInt(this.postData.categoryId),
+        authorId: this.postData.authorId,
       }
 
       await this.$axios.$put(`/BlogPosts/${formData.id}`, formData)

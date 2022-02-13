@@ -41,19 +41,34 @@
                     <div class="input-group input-group-static mt-4">
                       <label class="text-primary">Choose Heading Image</label>
                       <div class="form-control">
-                        <input type="file" />
+                        <!-- Image upload component -->
+                        <FullImageUpload
+                          :uploadFolder="'home'"
+                          @uploadImageUrl="handleImageUrl($event)"
+                          v-if="showImageUploader"
+                        />
+                        <div
+                          class="d-flex justify-content-start"
+                          v-if="!showImageUploader"
+                        >
+                          <button class="btn btn-success" @click="showUploader">
+                            Change Image
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="col">
-                    <div class="input-group input-group-static my-4">
-                      <label class="text-primary">Preview Image</label>
-                      <div class="form-control">
+                  <div class="col-12" v-if="!showImageUploader">
+                    <div>
+                      <h3 class="text-center pb-3 pt-5 text-primary">
+                        Header Image
+                      </h3>
+                      <div class="d-flex justify-content-center">
                         <img
-                          class="img-fluid"
                           :src="homeData.headerImageLink"
-                          alt="heading image"
+                          alt="Header Image"
+                          class="img-fluid"
                         />
                       </div>
                     </div>
@@ -75,42 +90,96 @@
 </template>
 
 <script>
+import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
 export default {
   layout: 'admin',
+  components: {
+    FullImageUpload,
+  },
   data() {
     return {
       homeData: {},
+      showImageUploader: false,
     }
   },
 
   created() {
     const blogPost = this.$axios.$get(`/Home/${this.$route.params.id}`)
-    blogPost.then((res) => {
-      this.homeData = res
-    })
+    // on success
+    blogPost
+      .then((res) => {
+        this.homeData = res
+      })
+      // on failure
+      .catch((err) => {
+        // trigerring modal
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Network Error',
+          text: 'Unable to fetch home data',
+          showCloseButton: true,
+          showConfirmButton: false,
+        })
+      })
   },
 
   methods: {
+    async handleImageUrl(url) {
+      this.showImageUploader = false
+      this.homeData.headerImageLink = url
+    },
+    showUploader() {
+      this.showImageUploader = true
+      this.homeData.headerImageLink = ''
+    },
     async updateHome() {
       const formData = {
         id: this.$route.params.id,
         heading: this.homeData.heading,
         subHeading: this.homeData.subHeading,
-
-        // this is hard coded untill we implement image upload
-        headerImageLink:
-          'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8YmxvZ3x8fHx8fDE2NDExNzQ2MTg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800',
+        headerImageLink: this.homeData.headerImageLink,
       }
 
-      // form validation
+      // on successful validation
       if (
         formData.heading !== '' &&
         formData.subHeading !== '' &&
         formData.headerImageLink !== ''
       ) {
-        await this.$axios.$put(`/Home/${formData.id}`, formData)
-        this.$router.push(`/admin/Home/preview/${formData.id}`)
-      } else {
+        await this.$axios
+          .$put(`/Home/${formData.id}`, formData)
+          .then((res) => {
+            // on success
+            if (res.status === 200) {
+              const message = res.message
+
+              // trigerring modal
+              this.$swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated',
+                text:
+                  message.charAt(0).toUpperCase() +
+                  message.slice(1).toLowerCase(),
+              })
+
+              // changing route
+              this.$router.push(`/admin/home/preview/${formData.id}`)
+            }
+          })
+          // on failure
+          .catch((err) => {
+            // trigerring modal
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Cannot update home data',
+              showCloseButton: true,
+              showConfirmButton: false,
+            })
+          })
+      }
+      // on unsuccessful validation
+      else {
         this.$swal.fire({
           icon: 'error',
           title: 'Error',

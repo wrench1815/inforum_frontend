@@ -26,13 +26,17 @@
       <ul class="navbar-nav">
         <!-- Start: Dashboard Home -->
         <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin">
+          <NuxtLink
+            class="nav-link text-dark"
+            to="/admin"
+            :active-class="'fix-active-link-bug'"
+          >
             <div
               class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
               <i class="fas fa-tachometer-alt"></i>
             </div>
-            <span class="nav-link-text ms-1">Dashboard Home</span>
+            <span class="nav-link-text ms-1">Dashboard</span>
           </NuxtLink>
         </li>
         <!-- End: Dashboard Home -->
@@ -49,19 +53,6 @@
           </NuxtLink>
         </li>
         <!-- End: Home -->
-
-        <!-- Start: Test Page -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/test">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-vial opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Test Page</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Test Page -->
 
         <!-- Start: Blogpost -->
         <li class="nav-item">
@@ -88,6 +79,57 @@
           </NuxtLink>
         </li>
         <!-- End: Category -->
+
+        <!-- Start: Contact Form -->
+        <li class="nav-item">
+          <NuxtLink class="nav-link text-dark" to="/admin/contact-form">
+            <div
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
+            >
+              <i class="fas fa-envelope-open-text opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Contact Form</span>
+          </NuxtLink>
+        </li>
+        <!-- End: Contact Form -->
+
+        <!-- Start: Image Upload -->
+        <li class="nav-item">
+          <NuxtLink class="nav-link text-dark" to="/admin/img-upload-test">
+            <div
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
+            >
+              <i class="fas fa-vial opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Image Upload Test</span>
+          </NuxtLink>
+        </li>
+        <!-- End: Image Upload -->
+        <!-- Start: Comments -->
+        <li class="nav-item">
+          <NuxtLink class="nav-link text-dark" to="/admin/comments">
+            <div
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
+            >
+              <i class="fas fa-comment opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Comments</span>
+          </NuxtLink>
+        </li>
+        <!-- End: Comments -->
+
+        <!-- Start: Users -->
+        <li class="nav-item">
+          <NuxtLink class="nav-link text-dark" to="/admin/users">
+            <div
+              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
+            >
+              <i class="fas fa-user opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Users</span>
+          </NuxtLink>
+        </li>
+        <!-- End: Users -->
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">
@@ -119,6 +161,15 @@ export default {
 <style scoped>
 #sidenav-collapse-main {
   height: 70vh !important;
+}
+
+#sidenav-main .navbar-nav .nuxt-link-active {
+  color: white !important;
+  background-image: linear-gradient(195deg, #ec407a 0%, #d81b60 100%);
+}
+
+#sidenav-main .navbar-nav .nuxt-link-active i {
+  color: white !important;
 }
 
 #sidenav-main .navbar-nav .nuxt-link-exact-active {

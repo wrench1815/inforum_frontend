@@ -13,56 +13,64 @@
 
           <div class="col-12">
             <div class="card-body position-relative">
-              <form v-on:submit.prevent="addHome">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="input-group input-group-static my-4">
-                      <label class="text-primary">Heading</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        v-model="home.heading"
+              <div class="row">
+                <div class="col-12">
+                  <div class="input-group input-group-static my-4">
+                    <label class="text-primary">Heading</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="home.heading"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="input-group input-group-static mt-4">
+                    <label class="text-primary">Sub Heading</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      v-model="home.subHeading"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-12" v-if="home.showImageUploader">
+                  <div class="input-group input-group-static mt-4">
+                    <label class="text-primary mb-2"
+                      >Choose Heading Image</label
+                    >
+                    <div class="form-control">
+                      <!-- Image upload component -->
+                      <FullImageUpload
+                        :uploadFolder="'home'"
+                        @uploadImageUrl="handleImageUrl($event)"
                       />
                     </div>
                   </div>
+                </div>
 
-                  <div class="col-12">
-                    <div class="input-group input-group-static mt-4">
-                      <label class="text-primary">Sub Heading</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        v-model="home.subHeading"
+                <div class="col-12" v-if="home.headerImageLink">
+                  <div>
+                    <h3 class="text-center pb-3 pt-5 text-primary">
+                      Header Image
+                    </h3>
+                    <div class="d-flex justify-content-center">
+                      <img
+                        :src="home.headerImageLink"
+                        alt="Header Image"
+                        class="img-fluid"
                       />
                     </div>
                   </div>
-
-                  <div class="col-12">
-                    <div class="input-group input-group-static mt-4">
-                      <label class="text-primary">Choose Heading Image</label>
-                      <div class="form-control">
-                        <input type="file" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <template v-if="home.headerImageLink">
-                    <div class="col">
-                      <div class="input-group input-group-static my-4">
-                        <label class="text-primary">Preview Image</label>
-                        <div class="form-control">
-                          <img class="img-fluid" src="" alt="heading image" />
-                        </div>
-                      </div>
-                    </div>
-                  </template>
                 </div>
-                <div class="text-end mt-4">
-                  <button type="submit" class="btn bg-gradient-primary mb-0">
-                    Add Home
-                  </button>
-                </div>
-              </form>
+              </div>
+              <div class="text-end mt-4">
+                <button @click="addHome" class="btn bg-gradient-primary mb-0">
+                  Add Home
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -73,37 +81,93 @@
 </template>
 
 <script>
+import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
 export default {
   layout: 'admin',
+  components: {
+    FullImageUpload,
+  },
   data() {
     return {
       home: {
         heading: '',
         subHeading: '',
         headerImageLink: '',
+        showImageUploader: true,
       },
     }
   },
 
   methods: {
-    async addHome() {
+    async handleImageUrl(url) {
+      this.home.showImageUploader = false
+      this.home.headerImageLink = url
+    },
+    async addHome(e) {
+      e.preventDefault()
+
       const formData = {
         heading: this.home.heading,
         subHeading: this.home.subHeading,
-
-        // this is hard coded untill we implement image upload
-        headerImageLink:
-          'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8YmxvZ3x8fHx8fDE2NDExNzQ2MTg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800',
+        headerImageLink: this.home.headerImageLink,
       }
 
+      // on successful validation
       if (
         formData.heading !== '' &&
         formData.subHeading !== '' &&
         formData.headerImageLink !== ''
       ) {
-        await this.$axios.$post(`/Home`, formData)
-        this.$router.push(`/admin/Home`)
-      } else {
+        await this.$axios
+          .$post(`/Home`, formData)
+          .then((res) => {
+            // on success
+            if (res.status === 201) {
+              const message = res.message
+              let timerInterval
+
+              // trigerring modal
+              this.$swal
+                .fire({
+                  icon: 'success',
+                  type: 'success',
+                  title: 'Successfully Added',
+                  html: `${message}<br />Redirecting in <b></b> Seconds.`,
+                  timer: 2000,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                  didOpen: () => {
+                    this.$swal.showLoading()
+                    const b = this.$swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                      b.textContent = Math.ceil(
+                        this.$swal.getTimerLeft() / 1000
+                      )
+                    }, 100)
+                  },
+                  willClose: () => {
+                    clearInterval(timerInterval)
+                  },
+                })
+                .then(() => {
+                  this.$router.push(`/admin/Home`)
+                })
+            }
+          })
+          // on failure
+          .catch((err) => {
+            // trigerring modal
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Cannot add home data',
+              showCloseButton: true,
+              showConfirmButton: false,
+            })
+          })
+      }
+      // on unsuccessful validation
+      else {
         this.$swal.fire({
           icon: 'error',
           title: 'Error',
