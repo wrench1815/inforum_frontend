@@ -38,7 +38,7 @@
       <!-- card middle -->
       <div class="p-3">
         <!-- Start:Query Title -->
-        <NuxtLink to="/forum">
+        <NuxtLink :to="`/forum/query/${query.slug}`">
           <h3 class="link-primary">{{ query.title }}</h3>
         </NuxtLink>
         <!-- End:Query Title -->
