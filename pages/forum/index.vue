@@ -31,7 +31,7 @@ export default {
     this.$axios
       .$get('ForumQuery')
       .then((res) => {
-        this.queries = res.forumquery
+        this.queries = res.forumQuery
       })
       .then(() => {
         this.loading = false

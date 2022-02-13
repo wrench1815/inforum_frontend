@@ -66,7 +66,8 @@
           class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
         >
           <i class="fa fa-thumbs-up" />
-          10 Votes
+          {{ query.vote }}<span class="" v-if="query.vote == 1">Vote</span
+          ><span class="ms-1" v-else>Votes</span>
         </button>
 
         <!-- actions-->
@@ -75,7 +76,10 @@
           class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
         >
           <i class="fa fa-comment" />
-          5 Answers
+          {{ queryAnswers.pagination.totalCount
+          }}<span class="ms-1" v-if="queryAnswers.pagination.totalCount == 1"
+            >Answer</span
+          ><span class="ms-1" v-else>Answers</span>
         </button>
       </div>
     </div>
@@ -97,6 +101,7 @@ export default {
     return {
       loading: true,
       author: Object,
+      queryAnswers: Object,
     }
   },
 
@@ -116,7 +121,14 @@ export default {
         this.author = res.user
       })
       .then(() => {
-        this.loading = false
+        this.$axios
+          .$get(`ForumAnswer?queryId=${this.query.id}`)
+          .then((r) => {
+            this.queryAnswers = r
+          })
+          .then(() => {
+            this.loading = false
+          })
       })
   },
 }
