@@ -12,10 +12,9 @@
       <div class="card py-4" v-if="!loading">
         <div class="row">
           <div class="col-12">
-            <h2 class="mx-4">Contact Forms</h2>
-            <!-- <div class="border-bottom"></div> -->
+            <h2 class="mx-4">Users</h2>
           </div>
-          <div class="col-12 text-center" v-if="contactForms.length == 0">
+          <div class="col-12 text-center" v-if="users.length == 0">
             <img
               class="img-fluid w-50"
               src="~assets/svg/Empty-amico.svg"
@@ -29,50 +28,81 @@
                 <table class="table align-items-center">
                   <thead>
                     <tr class="text-primary text-center text-md">
+                      <th class="text-uppercase">Profile Image</th>
                       <th class="text-uppercase">Full Name</th>
+                      <th class="text-uppercase">Role</th>
+                      <th class="text-uppercase">Gender</th>
                       <th class="text-uppercase text-center ps-2">Email</th>
-                      <th class="text-uppercase text-center ps-2">Date</th>
+                      <th class="text-uppercase text-center ps-2">
+                        Date Joined
+                      </th>
                       <th class="text-uppercase">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark text-"
-                      v-for="form in contactForms"
-                      :key="form.id"
+                      v-for="(user, index) in users"
+                      :key="user.id"
                     >
+                      <!-- Start: profile-->
+                      <td class="d-flex align-center justify-content-center">
+                        <span
+                          class="avatar avatar-md rounded-circle shadow-card"
+                        >
+                          <img
+                            :src="user.profileImage"
+                            class="avatar avatar-md rounded-circle img-fit"
+                            alt="avatar"
+                          />
+                        </span>
+                      </td>
+                      <!-- End: profile-->
+
                       <!-- Start:Full Name -->
                       <td class="text-bold">
                         <NuxtLink
                           class="link-info"
-                          :to="`/admin/contact-form/preview/${form.id}`"
+                          :to="`/admin/users/preview/${user.id}`"
                         >
-                          {{ form.fullName }}
+                          {{ user.firstName + ' ' + user.lastName }}
                         </NuxtLink>
                       </td>
                       <!-- End:Full Name -->
 
+                      <!-- sno start -->
+                      <td class="text-center">
+                        {{ user.userRole }}
+                      </td>
+                      <!-- sno end -->
+
+                      <!-- Start: Gender-->
+                      <td class="text-center">
+                        {{ getGender(user.gender) }}
+                      </td>
+                      <!-- End: Gender-->
+
                       <!-- Start:Email -->
                       <td class="text-center">
-                        {{ form.email }}
+                        {{ user.email }}
                       </td>
                       <!-- End:Email -->
 
                       <!-- Start:Created On -->
                       <td class="text-center">
-                        {{ formattedDate(form.createdOn) }}
+                        {{ formattedDate(user.dateJoined) }}
                       </td>
                       <!-- End:Created On -->
 
                       <!-- Start:Actions -->
                       <td>
                         <div class="d-flex justify-content-center">
-                          <NuxtLink :to="`/admin/contact-form/edit/${form.id}`">
+                          <NuxtLink :to="`/admin/users/edit/${user.id}`">
                             <i class="fas fa-edit text-warning mx-2"></i>
                           </NuxtLink>
                           <a
                             class="cursor-pointer mx-2"
-                            @click="deleteContactForm(form.id)"
+                            @click="deleteUser(user.id)"
                           >
                             <i class="fas fa-trash text-danger"></i>
                           </a>
@@ -104,8 +134,8 @@
           <div class="col-12">
             <!-- <div class="border-bottom"></div> -->
             <div class="d-flex justify-content-end mx-4 mt-4">
-              <NuxtLink class="btn btn-success" to="/admin/contact-form/add"
-                >Add Contact Form</NuxtLink
+              <NuxtLink class="btn btn-success" to="/admin/users/add"
+                >Add New User</NuxtLink
               >
             </div>
           </div>
@@ -123,11 +153,11 @@ export default {
 
   data() {
     return {
-      contactForms: Object,
+      users: [],
       // handle loading state
       loading: true,
       // handle pagination
-      pageSize: 10,
+      pageSize: 8,
       pagination: {},
       pages: [],
     }
@@ -135,13 +165,12 @@ export default {
 
   methods: {
     getData(pageNumber) {
-      const forms = this.$axios.$get(
-        `/ContactForms?PageNumber=${pageNumber}&PageSize=${this.pageSize}`
+      const users = this.$axios.$get(
+        `/User/list?PageNumber=${pageNumber}&PageSize=${this.pageSize}`
       )
-
-      forms
+      users
         .then((res) => {
-          this.contactForms = res.forms
+          this.users = res.users
           this.pagination = res.pagination
           this.pages = [...Array(this.pagination.totalPages).keys()].map(
             (page) => page + 1
@@ -183,8 +212,8 @@ export default {
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
     },
 
-    // deletes the Contact Form
-    deleteContactForm(id) {
+    // deletes the user
+    deleteUser(id) {
       const customAlert = this.$swal.mixin({
         customClass: {
           confirmButton: 'btn btn-danger me-1',
@@ -205,7 +234,7 @@ export default {
         .then(async (result) => {
           if (result.isConfirmed) {
             await this.$axios
-              .$delete(`/ContactForms/${id}`)
+              .$post(`/User/delete/${id}`)
               .then((res) => {
                 if (res.status == 200) {
                   this.$swal({
@@ -213,9 +242,7 @@ export default {
                     title: 'Item Deleted',
                     text: res.message,
                   }).then(() => {
-                    this.contactForms = this.contactForms.filter(
-                      (item) => item.id != id
-                    )
+                    this.users = this.users.filter((item) => item.id != id)
 
                     let currentPage
 
@@ -239,6 +266,26 @@ export default {
           }
         })
     },
+
+    getGender(n) {
+      let gender = ''
+      switch (n) {
+        case 0:
+          gender = 'Male'
+          break
+
+        case 1:
+          gender = 'Female'
+          break
+        case 2:
+          gender = 'Unspecified'
+          break
+        default:
+          gender = 'Default'
+          break
+      }
+      return gender
+    },
   },
 
   mounted() {
@@ -247,4 +294,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.img-fit {
+  object-fit: cover;
+  object-position: center;
+}
+</style>

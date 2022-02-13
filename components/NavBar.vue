@@ -179,14 +179,14 @@
                         <!-- Start:Logout -->
                         <li v-if="isAuthenticated">
                           <div class="dropdown-item">
-                            <div
+                            <NuxtLink
                               class="btn btn-sm btn-danger m-0 text-xs"
-                              @click="logout"
+                              to="/logout"
                             >
                               Logout<i
                                 class="ms-2 fas fa-sign-out-alt text-xs"
                               ></i>
-                            </div>
+                            </NuxtLink>
                           </div>
                         </li>
                         <!-- End:Logout -->
