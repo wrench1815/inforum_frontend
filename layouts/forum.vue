@@ -82,7 +82,7 @@ export default {
 .middle {
   grid-column: 1/13;
   grid-row: 3/13;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .right {

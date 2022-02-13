@@ -3,7 +3,7 @@
   <div class="border border-radius-2xl bg-white mb-3 shadow-lg">
     <!-- card top -->
     <div class="p-3 border-bottom">
-      <NuxtLink class="d-flex justify-content-start gap-3" to="/">
+      <div class="d-flex justify-content-start gap-3">
         <!-- profile image -->
         <span class="avatar avatar-md rounded-circle shadow-card">
           <img src="https://i.pravatar.cc/100" alt="avatar" />
@@ -14,21 +14,25 @@
           <span class="text-bold text-md text-dark"> John Doe </span>
 
           <!-- date-uploaded -->
-          <span class="text-xs link-dark">01/02/2020</span>
+          <span class="text-xs text-dark">{{ query.datePosted }}</span>
         </span>
-      </NuxtLink>
+      </div>
     </div>
 
     <!-- card middle -->
     <div class="p-3">
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus
-        ullam, velit ipsam dolores voluptates enim voluptatum exercitationem
-        fugiat a impedit quas. Similique nihil, nesciunt aut recusandae, fugit
-        tempore sint sed est vel amet suscipit quod earum ratione repellendus
-        fugit tempore sint sed est vel amet suscipit quod earum ratione
-        repellendus fugit tempore sint sed est vel amet suscipit quod earum
-        ratione repellendus
+      <!-- Start:Query Title -->
+      <NuxtLink to="/forum">
+        <h3 class="link-primary">{{ query.title }}</h3>
+      </NuxtLink>
+      <!-- End:Query Title -->
+      <p class="custom-paragraph">
+        {{ query.description }}
+      </p>
+      <p
+        class="bg-secondary text-white rounded-3 mb-0 text-sm px-2 py-1 d-inline-block"
+      >
+        {{ query.category.name }}
       </p>
     </div>
 
@@ -47,10 +51,9 @@
       <button
         type="button"
         class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
-        @click="showComments"
       >
         <i class="fa fa-comment" />
-        5 Comments
+        5 Answers
       </button>
     </div>
 
@@ -87,11 +90,20 @@ import Comment from '~/components/Forum/Comment.vue'
 import CommentBox from '~/components/Forum/CommentBox.vue'
 export default {
   name: 'QuestionCard',
+
   components: {
     CommentHeading,
     Comment,
     CommentBox,
   },
+
+  props: {
+    query: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
       isCommentsVisible: false,
@@ -126,5 +138,12 @@ export default {
 <style scoped>
 .custom-gap {
   gap: 0.15rem !important;
+}
+
+.custom-paragraph {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 </style>
