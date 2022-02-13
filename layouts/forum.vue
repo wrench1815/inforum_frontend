@@ -7,7 +7,7 @@
       </div>
 
       <!-- left -->
-      <div class="left bg-white shadow-lg rounded-3">
+      <div class="left">
         <ForumLeftSideBar />
       </div>
 
@@ -64,7 +64,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .nav-custom {
@@ -73,19 +73,21 @@ export default {
 }
 
 .left {
-  display: none;
-  overflow-y: scroll;
+  display: block;
+  grid-column: 1/13;
+  grid-row: 2/4;
+  overflow-y: auto;
 }
 
 .middle {
   grid-column: 1/13;
-  grid-row: 2/13;
+  grid-row: 3/13;
   overflow-y: scroll;
 }
 
 .right {
   display: none;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 /* sm */
@@ -94,6 +96,18 @@ export default {
 
 /* md  */
 @media (min-width: 768px) {
+  .grid {
+    gap: 1rem;
+  }
+  .left {
+    grid-column: 1/2;
+    grid-row: 2/13;
+    overflow-y: auto;
+  }
+  .middle {
+    grid-column: 2/13;
+    grid-row: 2/13;
+  }
 }
 
 /* lg  */

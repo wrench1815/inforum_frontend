@@ -1,6 +1,11 @@
 <template>
   <div class="text-center">
-    <RightSideItem v-for="item in items" :key="item" />
+    <h3 class="text-center">Categories</h3>
+    <div class="bg-dark mb-1">
+      <NuxtLink to="/" class="text-white">
+        <p class="text-2xl mb-0 py-2">Content</p>
+      </NuxtLink>
+    </div>
   </div>
 </template>
 
