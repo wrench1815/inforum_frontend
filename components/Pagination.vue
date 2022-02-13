@@ -93,10 +93,14 @@ export default {
   props: ['pagination', 'pageSize', 'pages'],
   methods: {
     firstPage() {
-      this.$emit('getFirstPage')
+      if (this.pagination.hasPrevious) {
+        this.$emit('getFirstPage')
+      }
     },
     lastPage() {
-      this.$emit('getLastPage')
+      if (this.pagination.hasNext) {
+        this.$emit('getLastPage')
+      }
     },
     nextPage() {
       if (this.pagination.hasNext) {

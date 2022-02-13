@@ -60,7 +60,8 @@
             <div
               class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
-              <i class="fas fa-vial opacity-10"></i>
+              <i class="fas fa-pen-nib opacity-10"></i>
+              <!-- <i class="fa-solid fa-pen-nib"></i> -->
             </div>
             <span class="nav-link-text ms-1">Blog Post</span>
           </NuxtLink>
@@ -73,7 +74,7 @@
             <div
               class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
-              <i class="fas fa-vial opacity-10"></i>
+              <i class="fas fa-list opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Category</span>
           </NuxtLink>
@@ -94,7 +95,7 @@
         <!-- End: Contact Form -->
 
         <!-- Start: Image Upload -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <NuxtLink class="nav-link text-dark" to="/admin/img-upload-test">
             <div
               class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
@@ -103,7 +104,7 @@
             </div>
             <span class="nav-link-text ms-1">Image Upload Test</span>
           </NuxtLink>
-        </li>
+        </li> -->
         <!-- End: Image Upload -->
         <!-- Start: Comments -->
         <li class="nav-item">
