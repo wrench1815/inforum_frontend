@@ -13,6 +13,7 @@
 
 <script>
 import QuestionCard from '~/components/Forum/QuestionCard.vue'
+
 export default {
   layout: 'forum',
 

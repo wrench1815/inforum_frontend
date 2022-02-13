@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-center d-flex flex-row flex-md-column justify-content-between bg-white align-items-center rounded-3 px-3 py-2 gap-md-3"
+    class="text-center d-flex flex-row flex-md-column justify-content-between bg-white align-items-center rounded-3 px-3 py-2 gap-md-3 shadow-lg"
   >
     <!-- Start:Forum Home Link -->
     <div class="">

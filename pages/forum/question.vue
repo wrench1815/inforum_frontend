@@ -5,6 +5,7 @@
 </template>
 <script>
 import CompleteQuestion from '~/components/Forum/CompleteQuestion.vue'
+
 export default {
   layout: 'forum',
   components: {
