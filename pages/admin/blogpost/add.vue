@@ -24,8 +24,21 @@
                       />
                     </div>
                   </div>
-
                   <!-- End:Title -->
+
+                  <!-- Start:Image Upload -->
+                  <div class="col-12">
+                    <div class="input-group input-group-static my-4">
+                      <label class="text-primary">Upload Image</label>
+                    </div>
+                    <!-- Image upload component -->
+                    <FullImageUpload
+                      :uploadFolder="'uploads'"
+                      @uploadImageUrl="handleImageUrl($event)"
+                    />
+                    <div class="border-bottom"></div>
+                  </div>
+                  <!-- End: Image Upload -->
 
                   <!-- Start:Content -->
                   <div class="col-12">
@@ -111,12 +124,14 @@
 
 <script>
 import RichTextEditor from '../../../components/Admin/Utils/RichTextEditor'
+import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
 
 export default {
   layout: 'admin',
 
   components: {
     RichTextEditor,
+    FullImageUpload,
   },
 
   data() {
@@ -139,6 +154,45 @@ export default {
   },
 
   methods: {
+    copyUrl(url) {
+      const customAlert = this.$swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success ms-1',
+        },
+        buttonsStyling: false,
+      })
+
+      customAlert
+        .fire({
+          icon: 'question',
+          title: 'Are you sure ?',
+          text: `Copy Uploaded Image Url`,
+          confirmButtonText: 'Copy',
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            const result = navigator.clipboard.writeText(url)
+            result
+              .then(() => {
+                this.$swal.fire({
+                  icon: 'success',
+                  title: 'Copied',
+                  text: 'Uploaded Image Url Copied Successfully',
+                })
+              })
+              .catch(() => {
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Cannot Copy',
+                  text: 'Unable to copy uploaded image url',
+                })
+              })
+          }
+        })
+    },
+    async handleImageUrl(url) {
+      this.copyUrl(url)
+    },
     async addPost() {
       const data = {
         title: this.postTitle,
