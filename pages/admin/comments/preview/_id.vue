@@ -74,4 +74,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.img-fit {
+  object-position: center;
+  object-fit: cover;
+}
+</style>
