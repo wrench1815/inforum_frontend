@@ -1,11 +1,7 @@
 <template>
   <div class="text-center">
-    <h3 class="text-center">Categories</h3>
-    <div class="bg-dark mb-1">
-      <NuxtLink to="/" class="text-white">
-        <p class="text-2xl mb-0 py-2">Content</p>
-      </NuxtLink>
-    </div>
+    <h3>Categories</h3>
+    <ForumRightSideItem v-for="cat in categories" :key="cat.id" :cat="cat" />
   </div>
 </template>
 
@@ -18,8 +14,15 @@ export default {
   },
   data() {
     return {
-      items: [...Array(20).keys()],
+      loading: true,
+      categories: {},
     }
+  },
+
+  mounted() {
+    this.$axios.$get('/Categories').then((res) => {
+      this.categories = res
+    })
   },
 }
 </script>
