@@ -7,19 +7,22 @@
           <div class="col-12">
             <h2 class="mx-4">Home</h2>
           </div>
-          <div class="col-12" v-if="homeData.length == 0">
-            <h1>No Home Available</h1>
+          <div class="col-12 text-center" v-if="homeData.length == 0">
+            <img
+              class="img-fluid w-50"
+              src="~assets/svg/Empty-amico.svg"
+              alt="Feels Empty"
+            />
+            <h3 class="mx-4">Feels Empty.</h3>
           </div>
-          <div class="col-12" v-else>
+          <div class="col-12 mb-4" v-else>
             <div class="mx-4">
               <div class="table-responsive">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-primary text-center text-md">
-                      <th class="text-uppercase">id</th>
-                      <th class="text-uppercase text-start ps-2">Heading</th>
+                      <th class="text-uppercase">Heading</th>
                       <th class="text-uppercase">Sub Heading</th>
-                      <th class="text-uppercase">Header Image Link</th>
                       <th class="text-uppercase">Actions</th>
                     </tr>
                   </thead>
@@ -30,11 +33,8 @@
                       :key="home.id"
                       :pkey="home.id"
                     >
-                      <td class="text-bold">
-                        {{ home.id }}
-                      </td>
                       <td
-                        class="text-capitalize text-start link-info cursor-pointer custom-paragraph"
+                        class="text-capitalize text-center link-info cursor-pointer custom-paragraph"
                       >
                         <NuxtLink
                           class="link-info text-bold"
@@ -42,14 +42,11 @@
                           >{{ home.heading }}</NuxtLink
                         >
                       </td>
-                      <td class="text-capitalize text-start custom-paragraph">
+                      <td class="text-capitalize text-center custom-paragraph">
                         {{ home.subHeading }}
                       </td>
-                      <td class="text-center custom-paragraph">
-                        {{ home.headerImageLink }}
-                      </td>
                       <td>
-                        <div class="d-flex justify-content-evenly">
+                        <div class="d-flex justify-content-center gap-5">
                           <NuxtLink :to="`/admin/home/edit/${home.id}`">
                             <i class="fas fa-edit text-warning"></i>
                           </NuxtLink>
@@ -68,7 +65,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12" v-if="homeData.length == 0">
           <div class="d-flex justify-content-end mx-4 mt-4">
             <NuxtLink class="btn btn-success" to="/admin/home/add"
               >Add Home</NuxtLink
