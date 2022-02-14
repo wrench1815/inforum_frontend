@@ -1,23 +1,23 @@
 <template>
-  <div class="py-3">
-    <form v-on:submit.prevent="addSubComment">
-      <!-- Start:SubComment Input -->
+  <div class="p-3 border-top">
+    <form v-on:submit.prevent="addAnswer">
+      <!--Start:Answer Area -->
       <div class="input-group input-group-outline">
         <textarea
-          class="form-control border p-2 mb-2 textarea-focus"
-          rows="4"
-          placeholder="Leave your comment here"
-          v-model="subCommentInput"
+          class="form-control p-2 mb-2 textarea-focus"
+          rows="5"
+          placeholder="Leave your Answer here"
+          v-model="answer"
         ></textarea>
       </div>
-      <!-- End:SubComment Input -->
+      <!--End:Answer Area -->
 
       <div class="d-flex justify-content-end align-items-center">
-        <!-- Start:Submit Button -->
+        <!-- Start:Submit -->
         <button class="btn btn-primary btn-sm rounded-pill m-0" type="submit">
-          Leave a Comment
+          Send
         </button>
-        <!-- End:Submit Button -->
+        <!-- End:Submit -->
       </div>
     </form>
   </div>
@@ -27,15 +27,15 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'AddSubComment',
+  name: 'AddAnswer',
 
   props: {
-    commentId: Number,
+    queryId: Number,
   },
 
   data() {
     return {
-      subCommentInput: '',
+      answer: '',
     }
   },
 
@@ -44,28 +44,29 @@ export default {
   },
 
   methods: {
-    addSubComment() {
-      let subCommentLength = this.subCommentInput.length
+    addAnswer() {
+      let answerLength = this.answer.length
+
       if (this.isAuthenticated) {
-        if (subCommentLength >= 3) {
-          const subCommentData = {
-            description: this.subCommentInput,
-            commentId: this.commentId,
+        if (answerLength >= 10) {
+          const answerData = {
+            answer: this.answer,
             userId: this.loggedInUser.id,
+            queryId: this.queryId,
           }
 
           this.$axios
-            .$post(`/SubComments`, subCommentData)
+            .$post(`/ForumAnswer`, answerData)
             .then((res) => {
               if (res.status == 201) {
-                // wmit event to parent component on success
-                this.$emit('sub-comment-added')
+                // emit event to parent component on success
+                this.$emit('answer-added')
 
                 let timerInterval
 
                 this.$swal({
                   title: 'Success!',
-                  html: 'Thank you for leaving a comment!',
+                  html: 'Thank you for leaving an Answer.',
                   type: 'success',
                   icon: 'success',
                   timer: 2000,
@@ -100,7 +101,7 @@ export default {
         } else {
           this.$swal({
             title: 'Too Short!',
-            html: 'Comment must be at least 3 characters long!',
+            html: 'Answer must be at least 10 characters long!',
             type: 'info',
             icon: 'info',
             showConfirmButton: true,
@@ -108,8 +109,8 @@ export default {
         }
       } else {
         this.$swal({
-          title: 'You need to be logged in to Comment',
-          text: 'Please login or Signup to Comment',
+          title: 'You need to be logged in to Answer',
+          text: 'Please login or Signup to Answer',
           type: 'warning',
           showCancelButton: true,
           showCloseButton: true,
