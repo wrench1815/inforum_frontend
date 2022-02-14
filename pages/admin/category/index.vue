@@ -106,7 +106,6 @@ export default {
           title: 'Error',
           text: 'Unable to load data',
         })
-        this.$router.go(-1)
       })
   },
   methods: {

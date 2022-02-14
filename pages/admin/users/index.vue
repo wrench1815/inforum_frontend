@@ -5,9 +5,7 @@
     <!-- content -->
     <div class="container-fluid py-4">
       <!-- Start:Contact Forms -->
-      <div class="card py-4" v-if="loading">
-        <h1 class="text-center">Loading...</h1>
-      </div>
+      <Loading v-if="loading" />
       <!-- Start:Contact Forms -->
       <div class="card py-4" v-if="!loading">
         <div class="row">
@@ -42,7 +40,7 @@
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark text-"
-                      v-for="(user, index) in users"
+                      v-for="user in users"
                       :key="user.id"
                     >
                       <!-- Start: profile-->
@@ -148,8 +146,13 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 export default {
   layout: 'admin',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {
@@ -186,6 +189,13 @@ export default {
           setTimeout(() => {
             window.scroll(0, 0)
           }, 0)
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Unable to fetch data',
+          })
         })
     },
     firstPage() {

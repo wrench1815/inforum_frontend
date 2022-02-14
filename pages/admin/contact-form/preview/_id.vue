@@ -119,8 +119,6 @@ export default {
           icon: 'error',
           html: `${msg}`,
         })
-
-        this.$router.go(-1)
       })
   },
 }

@@ -85,7 +85,6 @@ export default {
           title: 'Error',
           text: 'Unable to fetch data',
         })
-        this.$router.go(-1)
       })
   },
 }

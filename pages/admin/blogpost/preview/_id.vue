@@ -176,15 +176,11 @@ export default {
           })
       })
       .catch((err) => {
-        this.$swal
-          .fire({
-            icon: 'error',
-            title: 'Cannot fetch post data',
-            text: 'Unable to fetch post data, try refreshing the page',
-          })
-          .then(() => {
-            this.$router.go(-1)
-          })
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Cannot fetch post data',
+          text: 'Unable to fetch post data, try refreshing the page',
+        })
       })
   },
 }

@@ -155,7 +155,6 @@ export default {
           title: 'Cannot fetch data',
           text: 'Unable to fetch home data, try refreshing the page',
         })
-        this.$router.go(-1)
       })
   },
 }

@@ -366,30 +366,8 @@ export default {
 
   created() {
     const user = this.$axios.$get(`/User/single/${this.$route.params.id}`)
-    user.then((res) => {
-      this.originalUser = res.user
-      this.firstName = res.user.firstName
-      this.lastName = res.user.lastName
-      this.email = res.user.email
-      this.profileImage = res.user.profileImage
-      this.gender = res.user.gender
-      this.profileImage = res.user.profileImage
-      this.role = res.userRole[0]
-      this.originalRole = res.userRole[0]
-      this.dob = this.stringToCalenderDate(res.user.dob)
-      this.address = res.user.address ? res.user.address : ''
-    })
-
-    const roles = this.$axios.$get('/User/roles/list')
-    roles.then((res) => {
-      this.roles = res.roles
-    })
-  },
-
-  methods: {
-    getUpdatedData() {
-      const user = this.$axios.$get(`/User/single/${this.$route.params.id}`)
-      user.then((res) => {
+    user
+      .then((res) => {
         this.originalUser = res.user
         this.firstName = res.user.firstName
         this.lastName = res.user.lastName
@@ -402,6 +380,52 @@ export default {
         this.dob = this.stringToCalenderDate(res.user.dob)
         this.address = res.user.address ? res.user.address : ''
       })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Unable to fetch data',
+        })
+      })
+
+    const roles = this.$axios.$get('/User/roles/list')
+    roles
+      .then((res) => {
+        this.roles = res.roles
+      })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Unable to fetch data',
+        })
+      })
+  },
+
+  methods: {
+    getUpdatedData() {
+      const user = this.$axios.$get(`/User/single/${this.$route.params.id}`)
+      user
+        .then((res) => {
+          this.originalUser = res.user
+          this.firstName = res.user.firstName
+          this.lastName = res.user.lastName
+          this.email = res.user.email
+          this.profileImage = res.user.profileImage
+          this.gender = res.user.gender
+          this.profileImage = res.user.profileImage
+          this.role = res.userRole[0]
+          this.originalRole = res.userRole[0]
+          this.dob = this.stringToCalenderDate(res.user.dob)
+          this.address = res.user.address ? res.user.address : ''
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Unable to fetch data',
+          })
+        })
     },
     resetRole() {
       this.$swal({

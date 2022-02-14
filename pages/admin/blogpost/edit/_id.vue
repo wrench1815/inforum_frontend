@@ -513,7 +513,6 @@ export default {
           title: 'Failed',
           text: 'Failed to load data',
         })
-        this.$router.go(-1)
       })
   },
 }
