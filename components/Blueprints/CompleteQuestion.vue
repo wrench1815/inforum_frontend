@@ -57,10 +57,10 @@
     <!-- Comments -->
     <div v-show="isCommentsVisible">
       <!-- Create Comment -->
-      <CommentBox />
+      <BlueprintsCommentBox />
 
       <!-- Comments Meta Data -->
-      <CommentHeading />
+      <BlueprintsCommentHeading />
 
       <!-- Actual Comments -->
       <template v-if="comments.length">
@@ -82,16 +82,8 @@
 </template>
 
 <script>
-import CommentHeading from '~/components/Forum/CommentHeading.vue'
-import Comment from '~/components/Forum/Comment.vue'
-import CommentBox from '~/components/Forum/CommentBox.vue'
 export default {
   name: 'QuestionCard',
-  components: {
-    CommentHeading,
-    Comment,
-    CommentBox,
-  },
   data() {
     return {
       isCommentsVisible: true,

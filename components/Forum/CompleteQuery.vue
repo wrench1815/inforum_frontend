@@ -37,13 +37,11 @@
       <!-- card middle -->
       <div class="p-3">
         <!-- Start:Query Title -->
-        <h3>{{ query.title }}</h3>
+        <h1>{{ query.title }}</h1>
         <!-- End:Query Title -->
 
         <!-- Start:Query Description -->
-        <p>
-          {{ query.description }}
-        </p>
+        <div v-html="query.description"></div>
         <!-- End:Query Description -->
 
         <!-- Start:Query Category -->
@@ -88,7 +86,7 @@
         <ForumAddAnswer :queryId="query.id" v-on:answer-added="getAnswers()" />
         <!-- End:Add Answer -->
 
-        <!-- Comments Meta Data -->
+        <!-- Answers Meta Data -->
         <ForumTopHeading />
 
         <!-- Start:Answers List -->

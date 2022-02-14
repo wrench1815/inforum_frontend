@@ -70,7 +70,7 @@
                   <!-- End:Answer Meta -->
 
                   <div v-show="isSubAnswersVisible">
-                    <!-- SubComments -->
+                    <!-- Sub Answer -->
                     <ForumSubAnswer
                       v-for="subAnswer in subAnswers.subAnswers"
                       :key="subAnswer.id"
@@ -111,7 +111,7 @@
           </div>
         </div>
       </div>
-      <!-- End:Comment Data -->
+      <!-- End:Answer Data -->
     </div>
   </div>
 </template>

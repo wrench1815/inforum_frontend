@@ -55,12 +55,15 @@
           </div>
 
           <div v-show="isSubCommentBoxVisible">
-            <AddSubComment />
+            <BlueprintsAddSubComment />
           </div>
 
           <div v-show="isSubCommentsVisible">
             <!-- SubComments -->
-            <SubComment v-for="subComment in subComments" :key="subComment" />
+            <BlueprintsSubComment
+              v-for="subComment in subComments"
+              :key="subComment"
+            />
           </div>
         </div>
       </div>
@@ -69,17 +72,10 @@
 </template>
 
 <script>
-import SubComment from '~/components/Forum/SubComment.vue'
-import AddSubComment from '~/components/Forum/AddSubComment.vue'
-
 export default {
   name: 'Comment',
   props: {
     content: String,
-  },
-  components: {
-    SubComment,
-    AddSubComment,
   },
   data() {
     return {

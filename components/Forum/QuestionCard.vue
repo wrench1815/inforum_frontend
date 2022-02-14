@@ -43,12 +43,6 @@
         </NuxtLink>
         <!-- End:Query Title -->
 
-        <!-- Start:Query Description -->
-        <p class="custom-paragraph">
-          {{ query.description }}
-        </p>
-        <!-- End:Query Description -->
-
         <!-- Start:Query Category -->
         <p
           class="bg-secondary text-white rounded-3 mb-0 text-sm px-2 py-1 d-inline-block"
