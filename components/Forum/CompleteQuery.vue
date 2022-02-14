@@ -57,7 +57,7 @@
 
       <!-- card bottom -->
       <div class="p-3 d-flex justify-content-start gap-5 border-top">
-        <!-- votes -->
+        <!-- Start:Votes -->
         <button
           type="button"
           class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
@@ -66,8 +66,9 @@
           {{ query.vote }}<span class="" v-if="query.vote == 1">Vote</span
           ><span class="ms-1" v-else>Votes</span>
         </button>
+        <!-- End:Votes -->
 
-        <!-- actions-->
+        <!-- Start:Answers count-->
         <button
           type="button"
           class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
@@ -78,6 +79,7 @@
             >Answer</span
           ><span class="ms-1" v-else>Answers</span>
         </button>
+        <!-- End:Answers count-->
       </div>
 
       <!-- Start:Answers-->

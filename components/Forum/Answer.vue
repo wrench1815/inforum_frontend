@@ -1,9 +1,9 @@
 <template>
   <div>
-    <!-- Start:Comment User -->
+    <!-- Start:Answer User -->
     <div class="border-top p-3">
       <div class="d-flex justify-content-start gap-3">
-        <!-- Start:profile image -->
+        <!-- Start:Profile Image -->
         <span class="avatar avatar-md rounded-circle shadow-card">
           <img
             class="avatar avatar-md rounded-circle img-fit"
@@ -11,7 +11,7 @@
             alt="avatar"
           />
         </span>
-        <!-- End:Profile image -->
+        <!-- End:Profile Image -->
 
         <!-- Start:User Info -->
         <span class="d-flex flex-column justify-content-center custom-gap">
@@ -30,24 +30,25 @@
         <!-- End:User Info -->
       </div>
     </div>
-    <!-- End:Comment User -->
+    <!-- End:Answer User -->
 
-    <!-- Start:Comment Data -->
+    <!-- Start:Answer Data -->
     <div class="p-3 border-top container-fluid">
       <div class="row">
         <div class="col-12">
-          <!-- Comment -->
+          <!-- Start:Answer Content -->
           <p>
             {{ answer }}
           </p>
+          <!-- End:Answer Content -->
 
-          <!-- comment meta data -->
+          <!-- Start:Answer Meta -->
           <div class="d-flex justify-content-end align-items-center">
             <div class="d-flex align-items-center gap-4">
               <button
                 type="button"
                 class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
-                @click="toggleSubComments"
+                @click="toggleSubAnswers"
               >
                 <i class="fa fa-reply" />
                 5 Replies
@@ -55,21 +56,25 @@
               <button
                 type="button"
                 class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
-                @click="toggleSubCommentBox"
+                @click="toggleSubAddAnswer"
               >
                 <i class="fa fa-comment" />
-                Comment
+                Answer
               </button>
             </div>
           </div>
+          <!-- End:Answer Meta -->
 
-          <div v-show="isSubCommentBoxVisible">
-            <AddSubComment />
+          <div v-show="isSubAddAnswerVisible">
+            <ForumAddSubAnswer />
           </div>
 
-          <div v-show="isSubCommentsVisible">
+          <div v-show="isSubAnswersVisible">
             <!-- SubComments -->
-            <SubComment v-for="subComment in subComments" :key="subComment" />
+            <ForumSubAnswer
+              v-for="subComment in subComments"
+              :key="subComment"
+            />
           </div>
         </div>
       </div>
@@ -101,18 +106,18 @@ export default {
     return {
       loading: true,
       subComments: [...Array(5).keys()],
-      isSubCommentsVisible: false,
-      isSubCommentBoxVisible: false,
+      isSubAnswersVisible: false,
+      isSubAddAnswerVisible: false,
       answerUser: {},
     }
   },
 
   methods: {
-    toggleSubComments() {
-      this.isSubCommentsVisible = !this.isSubCommentsVisible
+    toggleSubAnswers() {
+      this.isSubAnswersVisible = !this.isSubAnswersVisible
     },
-    toggleSubCommentBox() {
-      this.isSubCommentBoxVisible = !this.isSubCommentBoxVisible
+    toggleSubAddAnswer() {
+      this.isSubAddAnswerVisible = !this.isSubAddAnswerVisible
     },
 
     dateFormatted(dat) {
