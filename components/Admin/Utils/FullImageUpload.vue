@@ -48,7 +48,9 @@
 <script>
 export default {
   name: 'FullImageUpload',
+
   props: ['uploadFolder'],
+
   data() {
     return {
       // image source from device
@@ -61,6 +63,7 @@ export default {
       showFileUpload: true,
     }
   },
+
   methods: {
     cleanSetup() {
       this.src = ''
@@ -71,6 +74,7 @@ export default {
       this.showUploading = false
       this.showFileUpload = true
     },
+
     uploadImage() {
       if (this.isUpload) {
         this.show = false
@@ -81,14 +85,26 @@ export default {
           folder: this.uploadFolder ? this.uploadFolder : 'uploads',
           uploadPreset: 'front_upload',
         })
-        instance.then((res) => {
-          this.cloudSource = res.url
-          this.showUploading = false
-          this.$emit('uploadImageUrl', res.url)
-          this.cleanSetup()
-        })
+        instance
+          .then((res) => {
+            this.cloudSource = res.url
+            this.showUploading = false
+            this.$emit('uploadImageUrl', res.url)
+            this.cleanSetup()
+          })
+          .catch((err) => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Uploading Failed',
+              text: 'Unable to upload image',
+              showCloseButton: true,
+              showConfirmButton: false,
+            })
+            this.cleanSetup()
+          })
       }
     },
+
     async selectFile(e) {
       const file = e.target.files[0]
       if (!file) {

@@ -82,11 +82,14 @@
 
 <script>
 import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
+
 export default {
   layout: 'admin',
+
   components: {
     FullImageUpload,
   },
+
   data() {
     return {
       home: {
@@ -103,6 +106,7 @@ export default {
       this.home.showImageUploader = false
       this.home.headerImageLink = url
     },
+
     async addHome(e) {
       e.preventDefault()
 

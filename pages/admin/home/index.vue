@@ -2,7 +2,12 @@
   <div>
     <AdminNavBar />
     <div class="container-fluid py-4">
-      <div class="card py-4">
+      <!-- Start: Loading-->
+      <Loading v-if="loading" />
+      <!-- End: Loading-->
+
+      <!-- Content -->
+      <div class="card py-4" v-if="!loading">
         <div class="row">
           <div class="col-12">
             <h2 class="mx-4">Home</h2>
@@ -13,7 +18,7 @@
               src="~assets/svg/Empty-amico.svg"
               alt="Feels Empty"
             />
-            <h3 class="mx-4">Feels Empty.</h3>
+            <h3 class="mx-4">No Home Data</h3>
           </div>
           <div class="col-12 mb-4" v-else>
             <div class="mx-4">
@@ -78,12 +83,22 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   layout: 'admin',
-  async asyncData({ $axios, $config }) {
-    const homeData = await $axios.$get('/home')
-    return { homeData }
+
+  components: {
+    Loading,
   },
+
+  data() {
+    return {
+      homeData: [],
+      loading: true,
+    }
+  },
+
   methods: {
     deleteHome(id) {
       const customAlert = this.$swal.mixin({
@@ -117,6 +132,31 @@ export default {
           }
         })
     },
+  },
+
+  mounted() {
+    const homeData = this.$axios.$get('/home')
+    homeData
+      .then((res) => {
+        this.homeData = res
+        // handle loading state
+        if (this.loading) {
+          this.loading = false
+        }
+      }) // Scroll to top on page change
+      .then(() => {
+        setTimeout(() => {
+          window.scroll(0, 0)
+        }, 0)
+      })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Cannot fetch data',
+          text: 'Unable to fetch home data, try refreshing the page',
+        })
+        this.$router.go(-1)
+      })
   },
 }
 </script>
