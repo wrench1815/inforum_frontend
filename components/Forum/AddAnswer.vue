@@ -109,8 +109,8 @@ export default {
         }
       } else {
         this.$swal({
-          title: 'You need to be logged in to answer',
-          text: 'Please login or Signup to answer',
+          title: 'You need to be logged in to Answer',
+          text: 'Please login or Signup to Answer',
           type: 'warning',
           showCancelButton: true,
           showCloseButton: true,
