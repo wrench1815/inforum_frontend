@@ -60,7 +60,9 @@
                         @click="toggleSubAnswers"
                       >
                         <i class="fa fa-reply" />
-                        5 Replies
+                        {{ answerCount }}
+                        <template v-if="answerCount == 1">Answer</template>
+                        <template v-else>Answers</template>
                       </button>
                     </div>
                     <!-- Start:Answer List Toggle -->
@@ -93,11 +95,14 @@
                         @click="toggleSubAddAnswer"
                       >
                         <i class="fa fa-comment" />
-                        Answer
+                        Reply
                       </button>
                     </div>
                     <div v-show="isSubAddAnswerVisible">
-                      <ForumAddSubAnswer />
+                      <ForumAddSubAnswer
+                        v-on:sub-answer-added="refreshSubAnswers()"
+                        :answerId="answer.id"
+                      />
                     </div>
                   </div>
                 </div>
@@ -112,9 +117,6 @@
 </template>
 
 <script>
-import SubComment from '~/components/Forum/SubComment.vue'
-import AddSubComment from '~/components/Forum/AddSubComment.vue'
-
 export default {
   name: 'Answer',
 
@@ -125,15 +127,9 @@ export default {
     },
   },
 
-  components: {
-    SubComment,
-    AddSubComment,
-  },
-
   data() {
     return {
       loading: true,
-      subComments: [...Array(5).keys()],
       isSubAnswersVisible: false,
       isSubAddAnswerVisible: false,
       answerUser: {},
@@ -199,6 +195,8 @@ export default {
             this.subAnswers = subAns
           })
           .then(() => {
+            this.answerCount = this.subAnswers.pagination.totalCount
+
             this.loading = false
             if (this.subAnswers.pagination.totalCount == 0) {
               this.isSubAddAnswerVisible = true

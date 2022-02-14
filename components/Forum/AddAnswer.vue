@@ -119,7 +119,6 @@ export default {
           confirmButtonText: 'Login',
           cancelButtonText: 'Signup',
         }).then((result) => {
-          console.log(result)
           if (result.isConfirmed) {
             this.$router.push('/login')
           } else if (result.isDismissed && result.dismiss === 'cancel') {
