@@ -20,7 +20,7 @@
 
     <!-- Start:Forum Add Query Link -->
     <div class="">
-      <NuxtLink to="/forum" class="text-dark py-2">
+      <NuxtLink to="/forum/query/add" class="text-dark py-2">
         <i class="fas fa-plus text-2xl"></i>
       </NuxtLink>
     </div>
