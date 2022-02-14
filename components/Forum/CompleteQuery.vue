@@ -88,7 +88,7 @@
         <ForumAddAnswer :queryId="query.id" v-on:answer-added="getAnswers()" />
         <!-- End:Add Answer -->
 
-        <!-- Comments Meta Data -->
+        <!-- Answers Meta Data -->
         <ForumTopHeading />
 
         <!-- Start:Answers List -->

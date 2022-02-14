@@ -25,7 +25,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import SubCommentVue from '../Blog/SubComment.vue'
 
 export default {
   name: 'AddSubAnswer',
@@ -126,8 +125,6 @@ export default {
           }
         })
       }
-
-      // TODO: comment post logic
     },
   },
 }
