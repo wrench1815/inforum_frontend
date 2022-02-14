@@ -59,12 +59,60 @@ export default {
   },
 
   methods: {
+    categoryValidator(name) {
+      if (name) {
+        return name.length > 0
+      } else {
+        return false
+      }
+    },
     async addCategory() {
       const data = {
         name: this.categoryName,
       }
-      await this.$axios.$post('/Categories', data)
-      this.$router.push(`/admin/category`)
+      if (this.categoryValidator(data.name)) {
+        this.$axios
+          .$post('/Categories', data)
+          .then((res) => {
+            let timerInterval
+            this.$swal({
+              title: 'Success!',
+              html: 'Category created successfully. <br /> Redirecting in <b></b> Seconds.',
+              type: 'success',
+              icon: 'success',
+              timer: 2000,
+              showConfirmButton: false,
+              timerProgressBar: true,
+              didOpen: () => {
+                this.$swal.showLoading()
+                const b = this.$swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Math.ceil(this.$swal.getTimerLeft() / 1000)
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              },
+            }).then(() => {
+              this.$router.push('/admin/category')
+            })
+          })
+          .catch((err) => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Failed',
+              text: 'Category cannot be created, may already exists, or something went wrong ',
+              confirmButtonText: 'Try Again',
+            })
+          })
+      } else {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Validation Error',
+          text: 'Category cannot be empty',
+          confirmButtonText: 'Try Again',
+        })
+      }
     },
   },
 }
