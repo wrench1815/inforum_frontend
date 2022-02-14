@@ -44,8 +44,6 @@ export default {
 
   methods: {
     addComment() {
-      console.log(this.commentInput)
-
       let commentLength = this.commentInput.length
 
       if (commentLength >= 3) {
@@ -54,13 +52,10 @@ export default {
           postId: this.postId,
           userId: this.loggedInUser.id,
         }
-        console.log(commentData)
 
         this.$axios
           .$post(`/Comments`, commentData)
           .then((res) => {
-            console.log(res)
-
             if (res.status == 201) {
               // emit event to parent component on success
               this.$emit('comment-added')
@@ -93,7 +88,6 @@ export default {
             }
           })
           .catch((err) => {
-            console.log(err)
             this.$swal({
               title: 'Error!',
               html: 'Something went wrong!<br>Please try again.',
