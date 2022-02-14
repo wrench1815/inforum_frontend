@@ -4,10 +4,11 @@
 
     <!-- content -->
     <div class="container-fluid py-4">
-      <!-- Start: Comments -->
-      <div class="card py-4" v-if="loading">
-        <h1 class="text-center">Loading...</h1>
-      </div>
+      <!-- Start: Loading-->
+      <Loading v-if="loading" />
+      <!-- End: Loading-->
+
+      <!-- Start: BlogPosts -->
       <div class="card py-4" v-if="!loading">
         <div class="row">
           <div class="col-12">
@@ -111,18 +112,23 @@
           </div>
         </div>
       </div>
-      <!-- End:Comments -->
+      <!-- End: BlogPosts -->
     </div>
   </div>
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 import ProfileImage from '~/components/Admin/ProfileImage.vue'
+
 export default {
   layout: 'admin',
+
   components: {
     ProfileImage,
+    Loading,
   },
+
   data() {
     return {
       blogPosts: [],
@@ -133,10 +139,6 @@ export default {
       pagination: {},
       pages: [],
     }
-  },
-  async asyncData({ $axios, $config }) {
-    const posts = await $axios.$get('/BlogPosts')
-    return { posts }
   },
 
   methods: {
@@ -164,22 +166,36 @@ export default {
             window.scroll(0, 0)
           }, 0)
         })
+        .catch((err) => {
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Cannot fetch data',
+            text: 'Unable to fetch blog posts, try refreshing the page',
+          })
+          this.$router.go(-1)
+        })
     },
+
     firstPage() {
       this.getData(1)
     },
+
     lastPage() {
       this.getData(this.pagination.totalPages)
     },
+
     nextPage() {
       this.getData(this.pagination.currentPage + 1)
     },
+
     previousPage() {
       this.getData(this.pagination.currentPage - 1)
     },
+
     selectedPage(pageNumber) {
       this.getData(pageNumber)
     },
+
     formattedDate(inputDate) {
       const myDate = new Date(inputDate)
       return `${myDate.toLocaleString('default', {
