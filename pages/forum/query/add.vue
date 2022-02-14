@@ -111,6 +111,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  middleware: ['auth'],
+
   layout: 'forum',
 
   data() {
