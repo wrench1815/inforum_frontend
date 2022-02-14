@@ -4,20 +4,35 @@
       <h4>Loading....</h4>
     </div>
     <div v-if="!loading">
-      <p>
-        <a href="#" class="link-primary font-weight-bold">John Doe: </a> Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Enim ipsa non
-        praesentium nobis cum? Earum quae eveniet est adipisci aliquam? Velit
-      </p>
-      <div class="d-flex justify-content-between align-items-center">
-        <span class="text-sm">4d ago</span>
-        <button
-          type="button"
-          class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
+      <!-- Start:Sub Answer -->
+      <div>
+        <div
+          class="text-primary font-weight-bold fs-5 me-2 d-flex gap-2 align-items-end"
         >
-          <i class="fa fa-thumbs-up" />
-          5 Replies
-        </button>
+          <span class="avatar avatar-sm shadow">
+            <img
+              :src="user.user.profileImage"
+              alt="logo"
+              class="avatar avatar-sm img-fit-cover"
+            />
+          </span>
+
+          <!-- Start:Full Name -->
+          <span class="text-bold text-lg text-warning">{{
+            user.user.firstName + ' ' + user.user.lastName
+          }}</span>
+          <!-- End:Full Name -->
+        </div>
+        <div class="p p-2">
+          {{ subAnswer.answer }}
+        </div>
+      </div>
+      <!-- Start:Sub Answer -->
+
+      <div class="d-flex justify-content-start">
+        <div class="text-sm text-dark">
+          {{ formattedDate(subAnswer.datePosted) }}
+        </div>
       </div>
     </div>
   </div>
@@ -47,8 +62,22 @@ export default {
     },
   },
 
-  mounted() {},
+  mounted() {
+    this.$axios
+      .$get(`/User/single/${this.subAnswer.userId}`)
+      .then((res) => {
+        this.user = res
+      })
+      .then(() => {
+        this.loading = false
+      })
+  },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.img-fit-cover {
+  object-fit: cover;
+  object-position: center;
+}
+</style>
