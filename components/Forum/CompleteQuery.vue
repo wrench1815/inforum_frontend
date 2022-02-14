@@ -80,10 +80,11 @@
         </button>
       </div>
 
-      <!-- Comments -->
+      <!-- Start:Answers-->
       <div>
-        <!-- Create Comment -->
-        <CommentBox />
+        <!-- Start:Add Answer -->
+        <ForumAddAnswer :queryId="query.id" v-on:answer-added="getAnswers()" />
+        <!-- End:Add Answer -->
 
         <!-- Comments Meta Data -->
         <ForumTopHeading />
@@ -97,12 +98,13 @@
               :answer="answer"
             />
           </div>
-          <div class="text-center my-3">
+          <div class="text-center">
             <div
-              class="link-primary d-inline-block cursor-pointer"
+              class="link-primary my-3 d-inline-block cursor-pointer"
+              v-if="queryAnswers.pagination.hasNext"
               @click="loadMoreAnswers"
             >
-              Load More...
+              Load more....
             </div>
           </div>
         </template>
@@ -116,23 +118,14 @@
         </template>
         <!-- End:No Answers Fallback -->
       </div>
+      <!-- End:Answers-->
     </div>
   </div>
 </template>
 
 <script>
-import CommentHeading from '~/components/Forum/CommentHeading.vue'
-import Comment from '~/components/Forum/Comment.vue'
-import CommentBox from '~/components/Forum/CommentBox.vue'
-
 export default {
   name: 'CompleteQuery',
-
-  components: {
-    CommentHeading,
-    Comment,
-    CommentBox,
-  },
 
   props: {
     query: {
@@ -149,6 +142,7 @@ export default {
     return {
       loading: true,
       queryAnswers: {},
+      pageNumber: 1,
     }
   },
 
@@ -160,18 +154,39 @@ export default {
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
     },
 
-    loadMoreAnswers() {},
+    getAnswers() {
+      if (!this.loading) {
+        this.loading = true
+      }
+
+      // fetch Answers of Query
+      this.$axios
+        .$get(`ForumAnswer?queryId=${this.query.id}`)
+        .then((r) => {
+          this.queryAnswers = r
+        })
+        .then(() => {
+          this.loading = false
+        })
+    },
+
+    loadMoreAnswers() {
+      this.pageNumber = this.pageNumber + 1
+      this.$axios
+        .$get(
+          `ForumAnswer?pageNumber=${this.pageNumber}&queryId=${this.query.id}`
+        )
+        .then((res) => {
+          this.queryAnswers.answers = this.queryAnswers.answers.concat(
+            res.answers
+          )
+          this.queryAnswers.pagination = res.pagination
+        })
+    },
   },
 
   mounted() {
-    this.$axios
-      .$get(`ForumAnswer?queryId=${this.query.id}`)
-      .then((r) => {
-        this.queryAnswers = r
-      })
-      .then(() => {
-        this.loading = false
-      })
+    this.getAnswers()
   },
 }
 </script>
