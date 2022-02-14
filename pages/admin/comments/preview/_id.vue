@@ -56,9 +56,11 @@ export default {
   components: {
     ProfileImage,
   },
-  async asyncData({ $axios, $config, params }) {
-    const comment = await $axios.$get(`/Comments/${params.id}`)
-    return { comment }
+
+  data() {
+    return {
+      comment: {},
+    }
   },
 
   methods: {
@@ -70,7 +72,22 @@ export default {
     },
   },
 
-  mounted() {},
+  created() {
+    const comment = this.$axios.$get(`/Comments/${this.$route.params.id}`)
+
+    comment
+      .then((res) => {
+        this.comment = res
+      })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Unable to fetch data',
+        })
+        this.$router.go(-1)
+      })
+  },
 }
 </script>
 

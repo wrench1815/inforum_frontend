@@ -67,10 +67,19 @@ export default {
   },
   created() {
     const subComment = this.$axios.$get(`/SubComments/${this.$route.params.id}`)
-    subComment.then((res) => {
-      this.oldSubComment = res
-      this.subComment = res.description
-    })
+    subComment
+      .then((res) => {
+        this.oldSubComment = res
+        this.subComment = res.description
+      })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Unable to fetch data',
+        })
+        this.$router.go(-1)
+      })
   },
   methods: {
     validateSubComment() {
