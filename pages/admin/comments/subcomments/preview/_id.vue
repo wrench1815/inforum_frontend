@@ -51,9 +51,10 @@ export default {
   components: {
     ProfileImage,
   },
-  async asyncData({ $axios, $config, params }) {
-    const subComment = await $axios.$get(`/SubComments/${params.id}`)
-    return { subComment }
+  data() {
+    return {
+      subComment: {},
+    }
   },
 
   methods: {
@@ -65,7 +66,20 @@ export default {
     },
   },
 
-  mounted() {},
+  created() {
+    const subComment = this.$axios.$get(`/SubComments/${this.$route.params.id}`)
+    subComment
+      .then((res) => {
+        this.subComment = res
+      })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Unable to fetch data',
+        })
+      })
+  },
 }
 </script>
 

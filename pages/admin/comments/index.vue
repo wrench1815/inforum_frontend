@@ -5,9 +5,7 @@
     <!-- content -->
     <div class="container-fluid py-4">
       <!-- Start: Comments -->
-      <div class="card py-4" v-if="loading">
-        <h1 class="text-center">Loading...</h1>
-      </div>
+      <Loading v-if="loading" />
       <div class="card py-4" v-if="!loading">
         <div class="row">
           <div class="col-12">
@@ -104,11 +102,13 @@
 
 <script>
 import ProfileImage from '~/components/Admin/ProfileImage.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
 export default {
   layout: 'admin',
 
   components: {
     ProfileImage,
+    Loading,
   },
   data() {
     return {
@@ -146,6 +146,13 @@ export default {
           setTimeout(() => {
             window.scroll(0, 0)
           }, 0)
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Unable to fetch data',
+          })
         })
     },
     firstPage() {

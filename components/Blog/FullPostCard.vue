@@ -5,7 +5,15 @@
         :to="`/blog/${post.slug}`"
         class="card-image cursor-pointer h-100 w-100 ratio ratio-16x9 border-radius-top-end-2xl border-radius-top-end-md-0 border-radius-top-start-2xl border-radius-bottom-start-md-2xl img-hover-zoom"
       >
-        <img class="cover-img" src="@/assets/images/img-1.jpg" />
+        <img
+          class="cover-img"
+          :src="
+            post.featureImage
+              ? post.featureImage
+              : 'https://res.cloudinary.com/inforum/image/upload/v1644820069/Defaults/img-1_nvdef7.jpg'
+          "
+          :alt="post.title"
+        />
       </NuxtLink>
     </div>
     <div

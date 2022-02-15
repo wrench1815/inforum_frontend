@@ -6,7 +6,11 @@
       <header>
         <div
           class="page-header min-vh-95 header-image"
-          :style="`background-image: url(${img})`"
+          :style="`background-image: url(${
+            post.featureImage
+              ? post.featureImage
+              : 'https://res.cloudinary.com/inforum/image/upload/v1644820069/Defaults/img-1_nvdef7.jpg'
+          })`"
           loading="lazy"
         >
           <span class="mask bg-gradient-dark opacity-6"></span>

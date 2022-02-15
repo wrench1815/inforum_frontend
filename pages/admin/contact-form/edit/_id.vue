@@ -202,7 +202,7 @@ export default {
               html: 'Contact Form updated Successfully. <br /> Redirecting in <b></b> Seconds.',
               type: 'success',
               icon: 'success',
-              timer: 5000,
+              timer: 2000,
               showConfirmButton: false,
               timerProgressBar: true,
               didOpen: () => {

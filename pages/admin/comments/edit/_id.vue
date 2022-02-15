@@ -67,10 +67,18 @@ export default {
   },
   created() {
     const comment = this.$axios.$get(`/Comments/${this.$route.params.id}`)
-    comment.then((res) => {
-      this.oldComment = res
-      this.comment = res.description
-    })
+    comment
+      .then((res) => {
+        this.oldComment = res
+        this.comment = res.description
+      })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Unable to fetch data',
+        })
+      })
   },
   methods: {
     validateComment() {

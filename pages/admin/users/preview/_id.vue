@@ -5,9 +5,7 @@
     <!-- Start:content -->
     <div class="container-fluid py-4">
       <!-- Start:loading -->
-      <div class="text-center" v-if="loading">
-        <h2>Loading...</h2>
-      </div>
+      <Loading v-if="loading" />
       <!-- End:loading -->
 
       <!-- Start:loaded -->
@@ -66,7 +64,9 @@
               <!-- Start:Gender -->
               <div class="row my-3">
                 <div class="col-md-4 col-12 text-primary">Gender</div>
-                <div class="col-md-8 col-12 text-dark">{{ getGender(user.gender) }}</div>
+                <div class="col-md-8 col-12 text-dark">
+                  {{ getGender(user.gender) }}
+                </div>
               </div>
               <!-- End:Gender -->
 
@@ -135,8 +135,13 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 export default {
   layout: 'admin',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

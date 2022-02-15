@@ -4,13 +4,21 @@
 
     <!-- content -->
     <div class="container-fluid py-4">
-      <div class="card py-4">
+      <!-- Start: Loading-->
+      <Loading v-if="loading" />
+      <!-- End: Loading-->
+      <div class="card py-4" v-if="!loading">
         <div class="row">
           <div class="col-12">
             <h2 class="mx-4">Site Categories</h2>
           </div>
           <div class="col-12" v-if="categories.length == 0">
-            <h1>No Categories Added</h1>
+            <img
+              class="img-fluid w-50"
+              src="~assets/svg/Empty-amico.svg"
+              alt="Feels Empty"
+            />
+            <h3 class="mx-4">No Categories Yet</h3>
           </div>
           <div class="col-12" v-else>
             <div class="mx-4">
@@ -18,7 +26,7 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-primary text-center text-md">
-                      <th class="text-uppercase">Id</th>
+                      <th class="text-uppercase">S.No</th>
                       <th class="text-uppercase text-center ps-2">Name</th>
                       <th class="text-uppercase">Actions</th>
                     </tr>
@@ -26,11 +34,11 @@
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark text-"
-                      v-for="category in categories"
+                      v-for="(category, index) in categories"
                       :key="category.id"
                     >
                       <td class="text-bold">
-                        {{ category.id }}
+                        {{ index + 1 }}
                       </td>
                       <td
                         class="text-capitalize text-center text-info text-bold"
@@ -70,14 +78,36 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 export default {
   layout: 'admin',
 
-  async asyncData({ $axios, $config }) {
-    const categories = await $axios.$get('/Categories')
-    return { categories }
+  components: {
+    Loading,
   },
 
+  data() {
+    return {
+      loading: true,
+      categories: [],
+    }
+  },
+
+  created() {
+    const categories = this.$axios.$get('/Categories')
+    categories
+      .then((res) => {
+        this.categories = res
+        this.loading = false
+      })
+      .catch((err) => {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Unable to load data',
+        })
+      })
+  },
   methods: {
     // Delete the Category
     deleteCategory(id) {
