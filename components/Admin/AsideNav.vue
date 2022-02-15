@@ -41,109 +41,17 @@
         </li>
         <!-- End: Dashboard Home -->
 
-        <!-- Start: Home -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/home">
+        <!-- dynamic stuff -->
+        <li class="nav-item" v-for="(route, index) in routes" :key="index">
+          <NuxtLink class="nav-link text-dark" :to="'/admin' + route.link">
             <div
               class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
             >
-              <i class="fas fa-home opacity-10"></i>
+              <i :class="'fas opacity-10' + ' ' + route.icon"></i>
             </div>
-            <span class="nav-link-text ms-1">Home</span>
+            <span class="nav-link-text ms-1">{{ route.name }}</span>
           </NuxtLink>
         </li>
-        <!-- End: Home -->
-
-        <!-- Start: Blogpost -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/blogpost">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-pen-nib opacity-10"></i>
-              <!-- <i class="fa-solid fa-pen-nib"></i> -->
-            </div>
-            <span class="nav-link-text ms-1">Blog Post</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Blogpost -->
-
-        <!-- Start: Category -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/category">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-list opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Category</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Category -->
-
-        <!-- Start: Contact Form -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/contact-form">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-envelope-open-text opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Contact Form</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Contact Form -->
-
-        <!-- Start: Image Upload -->
-        <!-- <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/img-upload-test">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-vial opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Image Upload Test</span>
-          </NuxtLink>
-        </li> -->
-        <!-- End: Image Upload -->
-        <!-- Start: Comments -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/comments">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-comment opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Comments</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Comments -->
-
-        <!-- Start: Users -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/users">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-user opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Users</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Users -->
-
-        <!-- Start: Forum -->
-        <li class="nav-item">
-          <NuxtLink class="nav-link text-dark" to="/admin/forum">
-            <div
-              class="text-dark text-center me-2 d-flex align-items-center justify-content-center"
-            >
-              <i class="fas fa-comments opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Forum</span>
-          </NuxtLink>
-        </li>
-        <!-- End: Forum -->
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">
@@ -157,6 +65,49 @@
 <script>
 export default {
   name: 'AsideNav',
+  data() {
+    return {
+      routes: [
+        {
+          name: 'Blog Post',
+          link: '/blogpost',
+          icon: 'fa-pen-nib',
+        },
+        {
+          name: 'Category',
+          link: '/category',
+          icon: 'fa-list',
+        },
+        {
+          name: 'Comments',
+          link: '/comments',
+          icon: 'fa-comment',
+        },
+        {
+          name: 'Contact Forms',
+          link: '/contact-form',
+          icon: 'fa-envelope-open-text',
+        },
+        {
+          name: 'Forum',
+          link: '/forum',
+          icon: 'fa-comments',
+        },
+        {
+          name: 'Home',
+          link: '/home',
+          icon: 'fa-home',
+        },
+        {
+          name: 'Users',
+          link: '/users',
+          icon: 'fa-user',
+        },
+      ].sort(
+        (first, second) => first.name.toLowerCase() > second.name.toLowerCase()
+      ),
+    }
+  },
   methods: {
     sideBarToggler() {
       document.body.classList.toggle('g-sidenav-pinned')

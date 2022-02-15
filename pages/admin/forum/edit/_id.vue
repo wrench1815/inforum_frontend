@@ -27,15 +27,13 @@
                   <!-- End:Title -->
                   <div class="col-12">
                     <div class="input-group input-group-static mt-4">
-                      <label class="text-primary"
+                      <label class="text-primary mb-2"
                         >Description <span class="text-danger">*</span></label
                       >
-                      <textarea
-                        name="exerpt"
-                        class="form-control"
-                        rows="4"
+                      <ForumRichTextEditor
                         v-model="description"
-                      ></textarea>
+                        :content="description"
+                      />
                     </div>
                   </div>
                   <!-- Start:Category -->

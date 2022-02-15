@@ -21,7 +21,9 @@
                       :classNames="'avatar avatar-xxl p-0 m-0 img-fit shadow'"
                     />
                   </NuxtLink>
-                  <div class="d-flex gap-2 mt-2">
+                  <div
+                    class="d-flex gap-2 mt-2 flex-wrap justify-content-center"
+                  >
                     <span class="mb-2 badge rounded-pill bg-success">
                       {{ query.category.name }}
                     </span>
@@ -37,20 +39,28 @@
                   </div>
                 </div>
                 <div class="text-center mb-3 mt-5">
-                  <span class="mb-2 badge rounded-pill bg-gradient-faded-info">
+                  <span
+                    class="mb-2 badge text-lg rounded-pill bg-gradient-faded-info"
+                  >
                     Title
                   </span>
-                  <p>
+                  <p class="h3">
                     {{ query.title }}
                   </p>
                 </div>
-                <div class="text-center mb-3 mt-4">
-                  <span class="mb-2 badge rounded-pill bg-gradient-primary">
-                    Description
-                  </span>
-                  <p>
-                    {{ query.description }}
-                  </p>
+                <div class="row">
+                  <div class="col"></div>
+                  <div class="col-10 col-md-8">
+                    <div class="text-center mb-3 mt-4">
+                      <span
+                        class="mb-2 badge text-lg rounded-pill bg-gradient-primary"
+                      >
+                        Description
+                      </span>
+                    </div>
+                    <div v-html="query.description"></div>
+                  </div>
+                  <div class="col"></div>
                 </div>
                 <div class="d-flex justify-content-end gap-3 pt-4">
                   <NuxtLink
