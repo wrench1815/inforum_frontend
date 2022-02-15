@@ -47,7 +47,7 @@
                         {{ index + 1 }}
                       </td>
                       <td
-                        class="text-capitalize text-start link-info cursor-pointer"
+                        class="text-capitalize text-start link-info cursor-pointer custom-paragraph"
                       >
                         <NuxtLink
                           class="link-info text-bold"
@@ -251,4 +251,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.custom-paragraph {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
