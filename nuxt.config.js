@@ -137,7 +137,7 @@ export default {
 
   publicRuntimeConfig: {
     axios: {
-      baseUrl: 'http://localhost:5064/api',
+      baseUrl: process.env.API_URL,
     },
   },
 }
