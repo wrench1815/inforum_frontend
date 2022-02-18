@@ -2,7 +2,12 @@
   <div class="text-center">
     <h3>Categories</h3>
     <div class="border-top mb-2"></div>
-    <ForumRightSideItem v-for="cat in categories" :key="cat.id" :cat="cat" />
+    <ForumRightSideItem
+      v-for="cat in categories"
+      :key="cat.id"
+      :cat="cat"
+      :typeBtn="true"
+    />
   </div>
 </template>
 

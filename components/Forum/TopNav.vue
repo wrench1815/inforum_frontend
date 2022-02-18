@@ -4,7 +4,7 @@
       <div
         class="d-flex align-items-center justify-content-between align-content-center px-3"
       >
-        <NuxtLink class="navbar-brand fs-4" to="/">
+        <NuxtLink class="navbar-brand fs-4 link-dark" to="/">
           <img src="@/assets/icon.jpg" width="25rem" alt="logo" class="mb-1" />
           <span>Inforum</span>
         </NuxtLink>
@@ -42,9 +42,14 @@
                   >Profile</NuxtLink
                 >
               </li>
-              <li>
-                <NuxtLink class="dropdown-item text-dark" to="/admin"
+              <li v-if="loggedInUserRole != 'User'">
+                <NuxtLink class="dropdown-item text-dark" to="/dash"
                   >Dash</NuxtLink
+                >
+              </li>
+              <li v-if="loggedInUserRole == 'Admin'">
+                <NuxtLink class="dropdown-item text-dark" to="/admin"
+                  >Admin</NuxtLink
                 >
               </li>
               <li>

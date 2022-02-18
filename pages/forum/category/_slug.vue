@@ -3,19 +3,25 @@
     <div v-if="loading">
       <h2 class="text-center">Loading.....</h2>
     </div>
+
     <div v-if="!loading">
-      <h3 class="card card-body">Recent Queries</h3>
-      <NotFound v-if="queries.pagination.totalCount == 0" />
+      <h3 class="card card-body">Forum Queries</h3>
+
+      <NotFound
+        :message="'No Forum Post Found!'"
+        v-if="queryList.pagination.totalCount == 0"
+      />
+
       <template v-else>
         <ForumQuestionCard
-          v-for="query in queries.forumQuery"
+          v-for="query in queryList.forumQuery"
           :key="query.id"
           :query="query"
         />
         <div class="text-center">
           <div
             class="link-primary my-3 d-inline-block cursor-pointer"
-            v-if="queries.pagination.hasNext"
+            v-if="queryList.pagination.hasNext"
             @click="loadMoreQueries"
           >
             Load more.... <i class="fas fa-"></i>
@@ -33,7 +39,8 @@ export default {
   data() {
     return {
       loading: true,
-      queries: {},
+      categorySlug: this.$route.params.slug,
+      queryList: {},
       pageNumber: 1,
     }
   },
@@ -43,12 +50,14 @@ export default {
       this.pageNumber = this.pageNumber + 1
 
       this.$axios
-        .$get(`ForumQuery?pageNumber=${this.pageNumber}`)
+        .$get(
+          `ForumQuery?pageNumber=${this.pageNumber}&categorySlug=${this.categorySlug}`
+        )
         .then((res) => {
-          this.queries.forumQuery = this.queries.forumQuery.concat(
+          this.queryList.forumQuery = this.queryList.forumQuery.concat(
             res.forumQuery
           )
-          this.queries.pagination = res.pagination
+          this.queryList.pagination = res.pagination
         })
         .catch((err) => {
           let msg
@@ -71,9 +80,9 @@ export default {
 
   mounted() {
     this.$axios
-      .$get('ForumQuery')
+      .$get(`/ForumQuery?categorySlug=${this.categorySlug}`)
       .then((res) => {
-        this.queries = res
+        this.queryList = res
       })
       .then(() => {
         this.loading = false
@@ -97,4 +106,4 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style></style>

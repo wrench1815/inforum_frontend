@@ -12,7 +12,7 @@
 
     <!-- Start:Forum Category List Link -->
     <div class="">
-      <NuxtLink to="/forum" class="text-dark py-2">
+      <NuxtLink to="/forum/category" class="text-dark py-2">
         <i class="fas fa-list-ul text-2xl"></i>
       </NuxtLink>
     </div>
