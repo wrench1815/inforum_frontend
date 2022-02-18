@@ -28,7 +28,7 @@
 
     <!-- Start:Forum Add Query Link -->
     <div class="">
-      <NuxtLink to="/forum" class="text-dark py-2">
+      <NuxtLink to="/forum/query/edit/list" class="text-dark py-2">
         <i class="fas fa-edit text-2xl"></i>
       </NuxtLink>
     </div>

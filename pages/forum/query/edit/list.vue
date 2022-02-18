@@ -15,7 +15,9 @@
       >
         <NotFound :message="'No Query Posted Yet.'" />
 
-        <NuxtLink to="/forum/query/add" class="btn btn-primary mt-2 align-self-center"
+        <NuxtLink
+          to="/forum/query/add"
+          class="btn btn-primary mt-2 align-self-center"
           >Add Query</NuxtLink
         >
       </div>
@@ -65,7 +67,9 @@ export default {
       this.pageNumber = this.pageNumber + 1
 
       this.$axios
-        .$get(`ForumQuery?pageNumber=${this.pageNumber}`)
+        .$get(
+          `ForumQuery?authorId=${this.loggedInUser.id}&pageNumber=${this.pageNumber}`
+        )
         .then((res) => {
           this.queries.forumQuery = this.queries.forumQuery.concat(
             res.forumQuery
@@ -93,12 +97,28 @@ export default {
 
   mounted() {
     this.$axios
-      .$get(`ForumQuery`)
+      .$get(`ForumQuery?authorId=${this.loggedInUser.id}`)
       .then((res) => {
         this.queries = res
       })
       .then(() => {
         this.loading = false
+      })
+      .catch((err) => {
+        let msg
+
+        try {
+          msg = res.message
+        } catch (error) {
+          msg = 'Unable to fetch Queries.<br/>Please Try Again Later.'
+        }
+
+        this.$swal({
+          title: 'Error',
+          icon: 'error',
+          type: 'error',
+          html: `${msg}`,
+        })
       })
   },
 }
