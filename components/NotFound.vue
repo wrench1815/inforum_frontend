@@ -1,13 +1,15 @@
 <template>
-  <div class="row">
-    <div class="col-12 text-center">
-      <img
-        class="img-fluid w-50"
-        src="~assets/svg/Empty-amico.svg"
-        alt="Feels Empty"
-      />
-      <h3 class="mx-4" v-if="message">{{ message }}</h3>
-      <h3 class="mx-4" v-else>Feels Empty.</h3>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center">
+        <img
+          class="img-fluid w-50"
+          src="~assets/svg/Empty-amico.svg"
+          alt="Feels Empty"
+        />
+        <h3 class="mx-4" v-if="message">{{ message }}</h3>
+        <h3 class="mx-4" v-else>Feels Empty.</h3>
+      </div>
     </div>
   </div>
 </template>

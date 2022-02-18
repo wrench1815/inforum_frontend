@@ -79,6 +79,20 @@
         </button>
         <!-- End:Answers count-->
       </div>
+      <!-- Start:Edit Option -->
+      <template v-if="isAuthenticated">
+        <template v-if="loggedInUser.id == query.authorId">
+          <div class="border-top"></div>
+          <div class="card-body">
+            <NuxtLink
+              :to="`/forum/query/edit/${query.slug}`"
+              class="btn btn-info"
+              >Edit Query</NuxtLink
+            >
+          </div>
+        </template>
+      </template>
+      <!-- End:Edit Option -->
 
       <!-- Start:Answers-->
       <div>
@@ -124,6 +138,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'CompleteQuery',
 
@@ -144,6 +160,10 @@ export default {
       queryAnswers: {},
       pageNumber: 1,
     }
+  },
+
+  computed: {
+    ...mapGetters(['loggedInUser', 'isAuthenticated']),
   },
 
   methods: {

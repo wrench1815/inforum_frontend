@@ -248,6 +248,8 @@ export default {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
+        profileImage:
+          'https://res.cloudinary.com/inforum/image/upload/v1644480589/Defaults/c1cnefxvbi5qlmj85mmn.png',
         gender: Number(this.gender),
         password: this.password,
       }

@@ -4,10 +4,8 @@
       <h2 class="text-center">Loading.....</h2>
     </div>
     <div v-if="!loading">
-      <!-- blur position-sticky top-0 bg- z-index-sticky px-3 border-radius-bottom-end-2xl border-radius-bottom-start-2xl shadow-blur -->
       <div class="card card-body">
         <h3 class="">Categories</h3>
-        <!-- <div class="text-center"></div> -->
         <div class="p-2">
           <div class="row gap-3">
             <div

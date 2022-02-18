@@ -4,14 +4,6 @@
       <h2 class="text-center">Loading.....</h2>
     </div>
     <div v-if="!loading">
-      <!--
-        {
-        "title": "string",
-        "description": "string",
-        "categoryId": 0,
-        "authorId": "string"
-       }
-       -->
       <div class="card card-body">
         <h3>Add a new Query</h3>
         <form v-on:submit.prevent="addForumQuery">
