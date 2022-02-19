@@ -8,9 +8,35 @@
           <img src="@/assets/icon.jpg" width="25rem" alt="logo" class="mb-1" />
           <span>Inforum</span>
         </NuxtLink>
-        <!-- <div><i class="fas fa-search fs-5"></i></div> -->
+
+        <div
+          class="d-block d-sm-none ms-auto me-2 text-primary"
+          v-if="$route.name != 'forum-search'"
+          @click="openSearchSwal"
+        >
+          <i class="fas fa-search fs-5"></i>
+        </div>
+
+        <div
+          class="d-none d-sm-flex align-items-center gap-2"
+          v-if="$route.name != 'forum-search'"
+        >
+          <form v-on:submit.prevent="onSearch">
+            <div class="input-group input-group-outline">
+              <span class="me-n4 my-auto text-primary text-test" id="searchIcon"
+                ><i class="fas fa-search"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control form-pad"
+                placeholder="Search"
+                v-model="searchQuery"
+              />
+            </div>
+          </form>
+        </div>
+
         <div>
-          <!-- <i class="fas fa-user-astronaut fs-5"></i> -->
           <div class="dropdown">
             <div
               class="dropdown-toggle"
@@ -92,14 +118,54 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'TopNav',
 
+  watchQuery: ['query'],
+
   data() {
     return {
       profileImage: require('@/assets/images/img-1.jpg'),
+      searchQuery: '',
     }
   },
 
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
+  },
+
+  methods: {
+    openSearchSwal() {
+      const { value: searchQuery } = this.$swal({
+        title: 'What you wanna Search?',
+        input: 'text',
+        icon: 'question',
+        inputPlaceholder: 'Search',
+        confirmButtonText: 'Search',
+        showCloseButton: true,
+        inputValidator: (value) => {
+          if (value.length < 3) {
+            return 'Cannot be smaller than 3 characters'
+          }
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$router.push({
+            name: 'forum-search',
+            params: {
+              query: result.value,
+            },
+          })
+        }
+      })
+    },
+
+    onSearch() {
+      this.$router.push({
+        name: 'forum-search',
+        params: {
+          query: this.searchQuery,
+        },
+      })
+      this.searchQuery = ''
+    },
   },
 }
 </script>
@@ -108,5 +174,18 @@ export default {
 .img-fit {
   object-position: center;
   object-fit: cover;
+}
+
+.input-group-outline input {
+  border: 2px solid #d2d6da !important;
+}
+
+.input-group-outline input:focus {
+  border: 2px solid #e91e63 !important;
+}
+
+.input-group.input-group-outline .form-control {
+  padding: 0.4rem 0.75rem !important;
+  padding-left: 1.7rem !important;
 }
 </style>
