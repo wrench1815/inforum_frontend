@@ -35,7 +35,7 @@
     <!-- End:Forum Add Query Link -->
 
     <!-- Start:Logout Link -->
-    <div class="">
+    <div v-if="isAuthenticated">
       <NuxtLink to="/logout" class="text-danger py-2">
         <i class="fas fa-sign-out-alt text-2xl"></i>
       </NuxtLink>
@@ -45,12 +45,15 @@
 </template>
 
 <script>
-import LeftSideItem from '~/components/Forum/LeftSideItem.vue'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LeftSideBar',
-  components: {
-    LeftSideItem,
+
+  computed: {
+    ...mapGetters(['isAuthenticated']),
   },
+
   data() {
     return {
       items: [...Array(20).keys()],
