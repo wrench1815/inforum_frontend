@@ -59,9 +59,11 @@
         <button
           type="button"
           class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
+          :class="{ 'text-info': voted }"
+          @click="vote"
         >
           <i class="fa fa-thumbs-up" />
-          {{ query.vote }}<span class="" v-if="query.vote == 1">Vote</span
+          {{ query.vote }}<span class="ms-1" v-if="query.vote == 1">Vote</span
           ><span class="ms-1" v-else>Votes</span>
         </button>
         <!-- End:Votes -->
@@ -148,6 +150,7 @@ export default {
       type: Object,
       required: true,
     },
+
     queryAuthor: {
       type: Object,
       required: true,
@@ -159,6 +162,7 @@ export default {
       loading: true,
       queryAnswers: {},
       pageNumber: 1,
+      voted: false,
     }
   },
 
@@ -172,6 +176,30 @@ export default {
       return `${myDate.toLocaleString('default', {
         weekday: 'short',
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
+    vote() {
+      var voteData = {
+        forumId: this.query.id,
+        userId: this.loggedInUser.id,
+      }
+
+      this.$axios.$post(`ForumQuery/vote`, voteData).then((res) => {
+        if (res.status == 200) {
+          this.$axios
+            .$get(`ForumQuery/${this.query.id}`)
+            .then((qur) => {
+              this.query.vote = qur.vote
+            })
+            .then(() => {
+              this.$axios
+                .$post(`ForumQuery/vote/status`, voteData)
+                .then((stat) => {
+                  this.voted = stat.voteExist
+                })
+            })
+        }
+      })
     },
 
     getAnswers() {
@@ -206,7 +234,19 @@ export default {
   },
 
   mounted() {
-    this.getAnswers()
+    var voteData = {
+      forumId: this.query.id,
+      userId: this.loggedInUser.id,
+    }
+
+    this.$axios
+      .$post(`ForumQuery/vote/status`, voteData)
+      .then((stat) => {
+        this.voted = stat.voteExist
+      })
+      .then(() => {
+        this.getAnswers()
+      })
   },
 }
 </script>
