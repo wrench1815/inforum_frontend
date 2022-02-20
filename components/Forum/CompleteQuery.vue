@@ -57,10 +57,21 @@
       <div class="p-3 d-flex justify-content-start gap-5 border-top">
         <!-- Start:Votes -->
         <button
+          v-if="isAuthenticated"
           type="button"
           class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
           :class="{ 'text-info': voted }"
           @click="vote"
+        >
+          <i class="fa fa-thumbs-up" />
+          {{ query.vote }}<span class="ms-1" v-if="query.vote == 1">Vote</span
+          ><span class="ms-1" v-else>Votes</span>
+        </button>
+
+        <button
+          v-if="!isAuthenticated"
+          type="button"
+          class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
         >
           <i class="fa fa-thumbs-up" />
           {{ query.vote }}<span class="ms-1" v-if="query.vote == 1">Vote</span
@@ -234,19 +245,23 @@ export default {
   },
 
   mounted() {
-    var voteData = {
-      forumId: this.query.id,
-      userId: this.loggedInUser.id,
-    }
+    if (this.isAuthenticated) {
+      var voteData = {
+        forumId: this.query.id,
+        userId: this.loggedInUser.id,
+      }
 
-    this.$axios
-      .$post(`ForumQuery/vote/status`, voteData)
-      .then((stat) => {
-        this.voted = stat.voteExist
-      })
-      .then(() => {
-        this.getAnswers()
-      })
+      this.$axios
+        .$post(`ForumQuery/vote/status`, voteData)
+        .then((stat) => {
+          this.voted = stat.voteExist
+        })
+        .then(() => {
+          this.getAnswers()
+        })
+    } else {
+      this.getAnswers()
+    }
   },
 }
 </script>
