@@ -24,6 +24,9 @@
       <NuxtLink :to="`/blog/${post.slug}`" class="btn btn-primary"
         >Read More</NuxtLink
       >
+      <NuxtLink v-if="dashCard" :to="`/blog/${post.slug}`" class="btn btn-info"
+        >Edit</NuxtLink
+      >
       <div class="border-top border-primary mb-1"></div>
       <p class="card-text d-flex justify-content-between">
         <small class="text-info">{{ normalizedDate }}</small>
@@ -40,6 +43,10 @@ export default {
     post: {
       type: Object,
       required: true,
+    },
+    dashCard: {
+      type: Boolean,
+      default: false,
     },
   },
 
