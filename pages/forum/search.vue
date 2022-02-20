@@ -5,22 +5,65 @@
     </div>
 
     <div v-if="!loading">
-      <div
-        class="card card-body mb-3 flex-row gap-2 align-items-center justify-content-center"
-      >
-        <div class="input-group input-group-outline">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search"
-            v-model="searchQuery"
-          />
-        </div>
-        <button type="button" class="btn btn-success mb-0 btn-round">
-          <i class="fas fa-search"></i>
-        </button>
+      <div class="position-sticky top-0 z-index-sticky">
+        <form v-on:submit.prevent="onSearch">
+          <div
+            class="card card-body mb-3 flex-row gap-2 align-items-center justify-content-center"
+          >
+            <div class="input-group input-group-outline">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search"
+                v-model="searchQuery"
+              />
+            </div>
+            <button type="submit" class="btn btn-success mb-0 btn-round">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
       </div>
-      <h3 class="card card-body">Search Results</h3>
+
+      <section v-if="!showNothing">
+        <h3 class="card card-body">Search Results</h3>
+
+        <div>
+          <div
+            class="card card-body mt-3"
+            v-if="searchResults.pagination.totalCount == 0"
+          >
+            <NotFound :message="'Search returned Empty.'" />
+          </div>
+          <template v-else>
+            <ForumQuestionCard
+              v-for="query in searchResults.forumQuery"
+              :key="query.id"
+              :query="query"
+            />
+            <div class="text-center">
+              <div
+                class="link-primary my-3 d-inline-block cursor-pointer"
+                v-if="searchResults.pagination.hasNext"
+                @click="loadMoreQueries"
+              >
+                Load more.... <i class="fas fa-"></i>
+              </div>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <section v-if="showNothing">
+        <div class="card card-body mt-3 align-items-center">
+          <img
+            class="img-fluid w-60"
+            src="~assets/svg/Questions.svg"
+            alt="Nothing to Search"
+          />
+          <h4>Nothing to Search</h4>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -32,12 +75,124 @@ export default {
   data() {
     return {
       loading: true,
-      searchQuery: this.$router.currentRoute.params.query,
+      searchQuery: this.$router.currentRoute.params.query || '',
+      searchResults: {},
+      showNothing: false,
+      pageNumber: 1,
     }
   },
 
+  methods: {
+    onSearch() {
+      if (this.searchQuery.length < 3) {
+        this.$swal({
+          title: 'Validation Error',
+          icon: 'info',
+          type: 'info',
+          text: 'Cannot be smaller than 3 characters',
+        })
+      } else {
+        this.$axios
+          .$get(`ForumQuery?search=${this.searchQuery}`)
+          .then((res) => {
+            this.searchResults = res
+          })
+          .then(() => {
+            this.loading = false
+            this.showNothing = false
+          })
+          .catch((err) => {
+            this.$swal({
+              title: 'Error',
+              html: 'Something went wrong<br>Please try again',
+              icon: 'error',
+              button: 'Ok',
+            })
+          })
+      }
+    },
+
+    fetchSearchResults() {
+      if (this.searchQuery.length != 0) {
+        this.$axios
+          .$get(`ForumQuery?search=${this.searchQuery}`)
+          .then((res) => {
+            this.searchResults = res
+          })
+          .then(() => {
+            this.loading = false
+            this.showNothing = false
+          })
+          .catch((err) => {
+            this.$swal({
+              title: 'Error',
+              html: 'Something went wrong<br>Please try again',
+              icon: 'error',
+              button: 'Ok',
+            })
+          })
+      } else {
+        Promise.resolve()
+          .then(() => {
+            this.showNothing = true
+          })
+          .then(() => {
+            this.loading = false
+          })
+      }
+    },
+
+    loadMoreQueries() {
+      this.pageNumber = this.pageNumber + 1
+
+      this.$axios
+        .$get(
+          `ForumQuery?pageNumber=${this.pageNumber}&search=${this.searchQuery}`
+        )
+        .then((res) => {
+          this.searchResults.forumQuery = this.searchResults.forumQuery.concat(
+            res.forumQuery
+          )
+          this.searchResults.pagination = res.pagination
+        })
+        .catch((err) => {
+          let msg
+
+          try {
+            msg = res.message
+          } catch (error) {
+            msg = 'Unable to fetch Queries.<br/>Please Try Again Later.'
+          }
+
+          this.$swal({
+            title: 'Error',
+            icon: 'error',
+            type: 'error',
+            html: `${msg}`,
+          })
+        })
+    },
+  },
+
   mounted() {
-    this.loading = false
+    // this.$axios
+    //   .$get(`ForumQuery?search=${this.searchQuery}`)
+    //   .then((res) => {
+    //     this.searchResults = res
+    //   })
+    //   .then(() => {
+    //     this.loading = false
+    //   })
+    //   .catch((err) => {
+    //     this.$swal({
+    //       title: 'Error',
+    //       html: 'Something went wrong<br>Please try again',
+    //       icon: 'error',
+    //       button: 'Ok',
+    //     })
+    //   })
+
+    this.fetchSearchResults()
   },
 }
 </script>

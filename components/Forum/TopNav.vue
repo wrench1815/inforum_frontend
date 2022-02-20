@@ -9,6 +9,7 @@
           <span>Inforum</span>
         </NuxtLink>
 
+        <!-- Start:Search Swal -->
         <div
           class="d-block d-sm-none ms-auto me-2 text-primary"
           v-if="$route.name != 'forum-search'"
@@ -16,7 +17,9 @@
         >
           <i class="fas fa-search fs-5"></i>
         </div>
+        <!-- End:Search Swal -->
 
+        <!-- Start:Search Field -->
         <div
           class="d-none d-sm-flex align-items-center gap-2"
           v-if="$route.name != 'forum-search'"
@@ -35,7 +38,9 @@
             </div>
           </form>
         </div>
+        <!-- End:Search Field -->
 
+        <!-- Start:Menu Items -->
         <div>
           <div class="dropdown">
             <div
@@ -107,6 +112,7 @@
             </ul>
           </div>
         </div>
+        <!-- End:Menu Items -->
       </div>
     </nav>
   </div>
@@ -158,13 +164,23 @@ export default {
     },
 
     onSearch() {
-      this.$router.push({
-        name: 'forum-search',
-        params: {
-          query: this.searchQuery,
-        },
-      })
-      this.searchQuery = ''
+      if (this.searchQuery.length < 3) {
+        this.$swal({
+          title: 'Validation Error',
+          icon: 'info',
+          type: 'info',
+          text: 'Cannot be smaller than 3 characters',
+        })
+      } else {
+        this.$router.push({
+          name: 'forum-search',
+          params: {
+            query: this.searchQuery,
+          },
+        })
+
+        this.searchQuery = ''
+      }
     },
   },
 }
