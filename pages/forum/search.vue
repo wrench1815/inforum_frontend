@@ -1,10 +1,14 @@
 <template>
   <div>
+    <!-- Start:Loading -->
     <div v-if="loading">
       <h2 class="text-center">Loading.....</h2>
     </div>
+    <!-- End:Loading -->
 
+    <!-- Start:Not Loading -->
     <div v-if="!loading">
+      <!-- Start:Search Bar -->
       <div class="position-sticky top-0 z-index-sticky">
         <form v-on:submit.prevent="onSearch">
           <div
@@ -24,23 +28,34 @@
           </div>
         </form>
       </div>
+      <!-- End:Search Bar -->
 
+      <!-- Start:If Searched -->
       <section v-if="!showNothing">
+        <!-- Search Title -->
         <h3 class="card card-body">Search Results</h3>
 
         <div>
+          <!-- Start:If Empty Result -->
           <div
             class="card card-body mt-3"
             v-if="searchResults.pagination.totalCount == 0"
           >
             <NotFound :message="'Search returned Empty.'" />
           </div>
+          <!-- End:If Empty Result -->
+
+          <!-- Start:If Not Empty -->
           <template v-else>
+            <!-- Start:Query -->
             <ForumQuestionCard
               v-for="query in searchResults.forumQuery"
               :key="query.id"
               :query="query"
             />
+            <!-- End:Query -->
+
+            <!-- Start:Load More -->
             <div class="text-center">
               <div
                 class="link-primary my-3 d-inline-block cursor-pointer"
@@ -50,9 +65,12 @@
                 Load more.... <i class="fas fa-"></i>
               </div>
             </div>
+            <!-- End:Load More -->
           </template>
+          <!-- End:If Not Empty -->
         </div>
       </section>
+      <!-- End:If Searched -->
 
       <section v-if="showNothing">
         <div class="card card-body mt-3 align-items-center">
@@ -65,6 +83,7 @@
         </div>
       </section>
     </div>
+    <!-- End:Not Loading -->
   </div>
 </template>
 
@@ -83,6 +102,7 @@ export default {
   },
 
   methods: {
+    // Search Query
     onSearch() {
       if (this.searchQuery.length < 3) {
         this.$swal({
@@ -112,6 +132,7 @@ export default {
       }
     },
 
+    // fetch Queries on passing param
     fetchSearchResults() {
       if (this.searchQuery.length != 0) {
         this.$axios
@@ -142,6 +163,7 @@ export default {
       }
     },
 
+    // Load More Queries
     loadMoreQueries() {
       this.pageNumber = this.pageNumber + 1
 
@@ -156,42 +178,17 @@ export default {
           this.searchResults.pagination = res.pagination
         })
         .catch((err) => {
-          let msg
-
-          try {
-            msg = res.message
-          } catch (error) {
-            msg = 'Unable to fetch Queries.<br/>Please Try Again Later.'
-          }
-
           this.$swal({
             title: 'Error',
             icon: 'error',
             type: 'error',
-            html: `${msg}`,
+            html: `'Unable to fetch Queries.<br/>Please Try Again Later.'`,
           })
         })
     },
   },
 
   mounted() {
-    // this.$axios
-    //   .$get(`ForumQuery?search=${this.searchQuery}`)
-    //   .then((res) => {
-    //     this.searchResults = res
-    //   })
-    //   .then(() => {
-    //     this.loading = false
-    //   })
-    //   .catch((err) => {
-    //     this.$swal({
-    //       title: 'Error',
-    //       html: 'Something went wrong<br>Please try again',
-    //       icon: 'error',
-    //       button: 'Ok',
-    //     })
-    //   })
-
     this.fetchSearchResults()
   },
 }

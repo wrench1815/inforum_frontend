@@ -19,7 +19,7 @@
         </div>
         <!-- End:Search Swal -->
 
-        <!-- Start:Search Field -->
+        <!-- Start:Search Bar -->
         <div
           class="d-none d-sm-flex align-items-center gap-2"
           v-if="$route.name != 'forum-search'"
@@ -38,9 +38,9 @@
             </div>
           </form>
         </div>
-        <!-- End:Search Field -->
+        <!-- End:Search Bar -->
 
-        <!-- Start:Menu Items -->
+        <!-- Start:DropDown Menu Items -->
         <div>
           <div class="dropdown">
             <div
@@ -50,42 +50,60 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
+              <!-- Start:Fallback Profile Image -->
               <img
                 v-if="!isAuthenticated"
                 class="avatar avatar-sm img-fit"
                 :src="profileImage"
                 alt=""
               />
+              <!-- End:Fallback Profile Image -->
+
+              <!-- Start:User Profile Image -->
               <img
                 v-if="isAuthenticated"
                 class="avatar avatar-sm img-fit"
                 :src="loggedInUser.profileImage"
                 alt=""
               />
+              <!-- End:User Profile Image -->
             </div>
+
+            <!-- Start:Authentiicated Menu -->
             <ul
               v-if="isAuthenticated"
               class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start"
               aria-labelledby="AdminProfileDrop"
             >
+              <!-- Start:User Profile -->
               <li>
                 <NuxtLink class="dropdown-item text-dark" to="/profile"
                   >Profile</NuxtLink
                 >
               </li>
+              <!-- End:User Profile -->
+
+              <!-- Start:Dash -->
               <li v-if="loggedInUserRole != 'User'">
                 <NuxtLink class="dropdown-item text-dark" to="/dash"
                   >Dash</NuxtLink
                 >
               </li>
+              <!-- End:Dash -->
+
+              <!-- Start:Admin -->
               <li v-if="loggedInUserRole == 'Admin'">
                 <NuxtLink class="dropdown-item text-dark" to="/admin"
                   >Admin</NuxtLink
                 >
               </li>
+              <!-- End:Admin -->
+
               <li>
                 <div class="dropdown-divider border-dark opacity-4"></div>
               </li>
+
+              <!-- Start:Logout -->
               <li>
                 <div class="dropdown-item text-dark">
                   <NuxtLink class="btn btn-sm btn-danger m-0" to="/logout"
@@ -93,26 +111,36 @@
                   ></NuxtLink>
                 </div>
               </li>
+              <!-- End:Logout -->
             </ul>
+            <!-- End:Authentiicated Menu -->
+
+            <!-- Start:Un-Authentiicated Menu -->
             <ul
               v-if="!isAuthenticated"
               class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start"
               aria-labelledby="AdminProfileDrop"
             >
+              <!-- Start:Login -->
               <li>
                 <NuxtLink class="dropdown-item text-dark" to="/login"
                   >Login<i class="ms-2 fas fa-sign-in-alt"></i
                 ></NuxtLink>
               </li>
+              <!-- End:Login -->
+
+              <!-- Start:Logout -->
               <li>
                 <NuxtLink class="dropdown-item text-dark" to="/signup"
                   >Sign Up<i class="ms-2 fas fa-user-plus"></i
                 ></NuxtLink>
               </li>
+              <!-- End:Logout -->
             </ul>
+            <!-- End:Un-Authentiicated Menu -->
           </div>
         </div>
-        <!-- End:Menu Items -->
+        <!-- End:DropDown Menu Items -->
       </div>
     </nav>
   </div>
@@ -138,6 +166,7 @@ export default {
   },
 
   methods: {
+    // Search Swal
     openSearchSwal() {
       const { value: searchQuery } = this.$swal({
         title: 'What you wanna Search?',
@@ -163,6 +192,7 @@ export default {
       })
     },
 
+    // Search Bar
     onSearch() {
       if (this.searchQuery.length < 3) {
         this.$swal({
