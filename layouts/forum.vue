@@ -12,13 +12,13 @@
       </div>
 
       <!-- middle -->
-      <div class="middle pe-2">
+      <div class="middle pe-1">
         <nuxt />
       </div>
 
       <!-- right -->
-      <div class="right bg-white shadow-lg rounded-3">
-        <ForumRightSideBar />
+      <div class="right pe-1">
+        <ForumRightSideBar class="bg-white shadow-lg rounded-3" />
       </div>
     </div>
   </div>
@@ -52,14 +52,6 @@ export default {
 </script>
 
 <style scoped>
-/* here i have chosen 12 cols and 12 rows as you can see in repeat() function . You can choose any number of your choice and customize it with full freedom. You can specify each block length uniquely also . 1fr means it will take available space */
-
-/* concept of grid lines: if no of cols is 3 then no of grid lines will be 4 because imagine: |  |   |   |  4 lines will be required to create 3 cols right. This is same for the rows. Just a one extra */
-
-/* grid rows and grid cols property works this way: this is like index in 2d matrix ... from how this line to that line. or you can choose span it will take available space automatically. But i like to be as explicit as possible */
-
-/* if can't understand anything ..ask anytime. or refer docs to get more out of grid. I know only 2 % of css-grid. */
-
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);

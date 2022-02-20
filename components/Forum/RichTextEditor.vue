@@ -37,22 +37,27 @@ export default {
           'italic',
           'underline',
           'link',
+          '|',
           'bulletedList',
           'numberedList',
+          '|',
+          'code',
+          'codeBlock',
           '|',
           'alignment',
           'outdent',
           'indent',
-          '|',
-          'code',
-          'codeBlock',
           '|',
           'blockQuote',
           'undo',
           'redo',
           'highlight',
         ],
-        /* Alignment, AutoImage, Autoformat, Autolink, BlockQuote, Bold, CloudServices, Code, CodeBlock, Essentials, FontBackgroundColor, FontColor, FontFamily, FontSize, Heading, Highlight, HorizontalLine, Image, ImageCaption, ImageInsert, ImageResize, ImageStyle, ImageToolbar, ImageUpload, Indent, IndentBlock, Italic, Link, LinkImage, List, ListStyle, MathType, MediaEmbed, MediaEmbedToolbar, PageBreak, Paragraph, PasteFromOffice, RemoveFormat, SimpleUploadAdapter, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials, SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Strikethrough, Subscript, Superscript, Table, TableCellProperties, TableProperties, TableToolbar, TextTransformation, Title, TodoList, Underline, WordCount */
+        /*
+        Plugins List
+        ///////////////////////////////
+        Alignment, AutoImage, Autoformat, Autolink, BlockQuote, Bold, CloudServices, Code, CodeBlock, Essentials, FontBackgroundColor, FontColor, FontFamily, FontSize, Heading, Highlight, HorizontalLine, Image, ImageCaption, ImageInsert, ImageResize, ImageStyle, ImageToolbar, ImageUpload, Indent, IndentBlock, Italic, Link, LinkImage, List, ListStyle, MathType, MediaEmbed, MediaEmbedToolbar, PageBreak, Paragraph, PasteFromOffice, RemoveFormat, SimpleUploadAdapter, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials, SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Strikethrough, Subscript, Superscript, Table, TableCellProperties, TableProperties, TableToolbar, TextTransformation, Title, TodoList, Underline, WordCount
+        */
         removePlugins: [
           'Title',
           'ImageCaption',

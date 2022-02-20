@@ -12,7 +12,7 @@
 
     <!-- Start:Forum Category List Link -->
     <div class="">
-      <NuxtLink to="/forum" class="text-dark py-2">
+      <NuxtLink to="/forum/category" class="text-dark py-2">
         <i class="fas fa-list-ul text-2xl"></i>
       </NuxtLink>
     </div>
@@ -28,14 +28,14 @@
 
     <!-- Start:Forum Add Query Link -->
     <div class="">
-      <NuxtLink to="/forum" class="text-dark py-2">
+      <NuxtLink to="/forum/query/edit/list" class="text-dark py-2">
         <i class="fas fa-edit text-2xl"></i>
       </NuxtLink>
     </div>
     <!-- End:Forum Add Query Link -->
 
     <!-- Start:Logout Link -->
-    <div class="">
+    <div v-if="isAuthenticated">
       <NuxtLink to="/logout" class="text-danger py-2">
         <i class="fas fa-sign-out-alt text-2xl"></i>
       </NuxtLink>
@@ -45,12 +45,15 @@
 </template>
 
 <script>
-import LeftSideItem from '~/components/Forum/LeftSideItem.vue'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'LeftSideBar',
-  components: {
-    LeftSideItem,
+
+  computed: {
+    ...mapGetters(['isAuthenticated']),
   },
+
   data() {
     return {
       items: [...Array(20).keys()],

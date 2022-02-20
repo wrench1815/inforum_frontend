@@ -6,7 +6,7 @@
     <div v-if="!loading">
       <div class="card card-body">
         <h3>Add a new Query</h3>
-        <form v-on:submit.prevent="addForumQuery">
+        <form v-on:submit.prevent="editForumQuery">
           <div class="row">
             <!-- Start:Title -->
             <div class="col-12">
@@ -41,6 +41,7 @@
               </div>
               <ForumRichTextEditor
                 v-model="queryDescription"
+                :content="queryDescription"
                 @keyup="validateDescription"
               />
 
@@ -89,7 +90,7 @@
           <!-- Start:Submit Button -->
           <div class="text-end mt-4">
             <button type="submit" class="btn bg-gradient-primary mb-0">
-              Add Query
+              Update Query
             </button>
           </div>
           <!-- Start:Submit Button -->
@@ -110,10 +111,12 @@ export default {
   data() {
     return {
       loading: true,
+      query: '',
       queryTitle: '',
       queryDescription: '',
       queryCategory: '',
       categories: [],
+      querySlug: this.$route.params.slug,
       helpTexts: {
         title: '',
         description: '',
@@ -153,12 +156,15 @@ export default {
       }
     },
 
-    addForumQuery() {
+    editForumQuery() {
       const queryData = {
+        id: this.query.id,
         title: this.queryTitle,
         description: this.queryDescription,
         categoryId: Number(this.queryCategory),
         authorId: this.loggedInUser.id,
+        datePosted: this.query.datePosted,
+        vote: this.query.vote,
       }
 
       this.validateTitle()
@@ -171,12 +177,12 @@ export default {
         this.helpTexts.category == ''
       ) {
         this.$axios
-          .$post(`/ForumQuery`, queryData)
+          .$put(`/ForumQuery/${this.query.id}`, queryData)
           .then((res) => {
-            if (res.status == 201) {
+            if (res.status == 200) {
               this.$swal({
                 title: 'Success',
-                text: 'Query added successfully',
+                text: 'Query Updated Successfully',
                 icon: 'success',
                 button: 'Ok',
               }).then(() => {
@@ -216,10 +222,20 @@ export default {
         this.categories = cats
       })
       .then(() => {
-        this.loading = false
+        this.$axios
+          .$get(`ForumQuery/slug/${this.querySlug}`)
+          .then((res) => {
+            this.query = res
+            this.queryTitle = res.title
+            this.queryDescription = res.description
+            this.queryCategory = res.categoryId
+          })
+          .then(() => {
+            this.loading = false
+          })
       })
   },
 }
 </script>
 
-<style scoped></style>
+<style></style>

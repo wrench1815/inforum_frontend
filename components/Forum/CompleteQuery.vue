@@ -59,9 +59,11 @@
         <button
           type="button"
           class="btn bg-gradient-white w-auto m-0 p-0 text-sm"
+          :class="{ 'text-info': voted }"
+          @click="vote"
         >
           <i class="fa fa-thumbs-up" />
-          {{ query.vote }}<span class="" v-if="query.vote == 1">Vote</span
+          {{ query.vote }}<span class="ms-1" v-if="query.vote == 1">Vote</span
           ><span class="ms-1" v-else>Votes</span>
         </button>
         <!-- End:Votes -->
@@ -79,6 +81,20 @@
         </button>
         <!-- End:Answers count-->
       </div>
+      <!-- Start:Edit Option -->
+      <template v-if="isAuthenticated">
+        <template v-if="loggedInUser.id == query.authorId">
+          <div class="border-top"></div>
+          <div class="card-body">
+            <NuxtLink
+              :to="`/forum/query/edit/${query.slug}`"
+              class="btn btn-info"
+              >Edit Query</NuxtLink
+            >
+          </div>
+        </template>
+      </template>
+      <!-- End:Edit Option -->
 
       <!-- Start:Answers-->
       <div>
@@ -124,6 +140,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'CompleteQuery',
 
@@ -132,6 +150,7 @@ export default {
       type: Object,
       required: true,
     },
+
     queryAuthor: {
       type: Object,
       required: true,
@@ -143,7 +162,12 @@ export default {
       loading: true,
       queryAnswers: {},
       pageNumber: 1,
+      voted: false,
     }
+  },
+
+  computed: {
+    ...mapGetters(['loggedInUser', 'isAuthenticated']),
   },
 
   methods: {
@@ -152,6 +176,30 @@ export default {
       return `${myDate.toLocaleString('default', {
         weekday: 'short',
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
+    vote() {
+      var voteData = {
+        forumId: this.query.id,
+        userId: this.loggedInUser.id,
+      }
+
+      this.$axios.$post(`ForumQuery/vote`, voteData).then((res) => {
+        if (res.status == 200) {
+          this.$axios
+            .$get(`ForumQuery/${this.query.id}`)
+            .then((qur) => {
+              this.query.vote = qur.vote
+            })
+            .then(() => {
+              this.$axios
+                .$post(`ForumQuery/vote/status`, voteData)
+                .then((stat) => {
+                  this.voted = stat.voteExist
+                })
+            })
+        }
+      })
     },
 
     getAnswers() {
@@ -186,7 +234,19 @@ export default {
   },
 
   mounted() {
-    this.getAnswers()
+    var voteData = {
+      forumId: this.query.id,
+      userId: this.loggedInUser.id,
+    }
+
+    this.$axios
+      .$post(`ForumQuery/vote/status`, voteData)
+      .then((stat) => {
+        this.voted = stat.voteExist
+      })
+      .then(() => {
+        this.getAnswers()
+      })
   },
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="m-1 btn btn-sm" :class="randomClass">
-    <NuxtLink to="/" class="text-white">
+    <NuxtLink :to="`/forum/category/${cat.slug}`" class="text-white">
       <p class="mb-0">{{ cat.name }}</p>
     </NuxtLink>
   </div>
