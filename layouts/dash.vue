@@ -5,7 +5,7 @@
       <div class="left">
         <DashSideMenu />
       </div>
-      <div class="middle">
+      <div class="middle max-height-vh-100">
         <Nuxt />
       </div>
     </div>
