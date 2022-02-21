@@ -24,6 +24,10 @@
           <small class="text-info">{{ normalizedDate }}</small>
           <span class="text-primary">|</span>
           <span class="text-info">{{ authorFullName }}</span>
+          <span class="text-primary">|</span>
+          <span class="text-warning"
+            >{{ post.star }}<i class="ms-1 fas fa-star"></i
+          ></span>
         </p>
         <NuxtLink class="card-title h3 pb-3" :to="`/blog/${post.slug}`">{{
           post.title
