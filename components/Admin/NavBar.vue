@@ -58,7 +58,7 @@
                 >
               </li>
               <li>
-                <NuxtLink class="dropdown-item text-dark" to="/admin"
+                <NuxtLink class="dropdown-item text-dark" to="/dash"
                   >Dash</NuxtLink
                 >
               </li>

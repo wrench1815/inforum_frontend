@@ -1,11 +1,11 @@
 <template>
-  <div class="card border-radius-2xl">
+  <div class="card border-radius-2xl border-bottom-hover">
     <NuxtLink
       :to="`/blog/${post.slug}`"
       class="card-image border-radius-top-start-2xl border-radius-top-end-2xl cursor-pointer img-hover-zoom"
     >
       <img
-        class="img-fluid"
+        class="img-fluid aspect-16-9 cover-img"
         :src="
           post.featureImage
             ? post.featureImage
@@ -21,8 +21,17 @@
       <p class="custom-paragraph">
         {{ post.excerpt }}
       </p>
-      <NuxtLink :to="`/blog/${post.slug}`" class="btn btn-primary"
+      <NuxtLink
+        :to="`/blog/${post.slug}`"
+        class="btn btn-primary"
+        v-if="!dashCard"
         >Read More</NuxtLink
+      >
+      <NuxtLink
+        v-if="dashCard"
+        :to="`/dash/post/edit/${post.slug}`"
+        class="btn btn-info"
+        >Edit</NuxtLink
       >
       <div class="border-top border-primary mb-1"></div>
       <p class="card-text d-flex justify-content-between">
@@ -40,6 +49,10 @@ export default {
     post: {
       type: Object,
       required: true,
+    },
+    dashCard: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -78,11 +91,23 @@ export default {
   object-fit: cover;
 }
 
+.aspect-16-9 {
+  aspect-ratio: 16/9;
+}
+
 .custom-paragraph {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
+}
+
+.border-bottom-hover {
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.8s ease-out;
+}
+.border-bottom-hover:hover {
+  border-bottom: 2px solid #e91e63 !important;
 }
 
 .img-hover-zoom {
