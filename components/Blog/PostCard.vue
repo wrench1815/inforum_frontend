@@ -34,10 +34,13 @@
         >Edit</NuxtLink
       >
       <div class="border-top border-primary mb-1"></div>
-      <p class="card-text d-flex justify-content-between">
+      <div class="card-text d-flex justify-content-around flex-wrap gap-2">
         <small class="text-info">{{ normalizedDate }}</small>
         <small class="text-info">{{ authorFullName }}</small>
-      </p>
+        <div class="text-warning">
+          {{ post.star }}<i class="ms-1 fas fa-star"></i>
+        </div>
+      </div>
     </div>
   </div>
 </template>
