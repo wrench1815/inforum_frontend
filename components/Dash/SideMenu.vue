@@ -5,7 +5,7 @@
     <NuxtLink class="text-dark" to="/dash">
       <i class="fas fa-tachometer-alt"></i>
     </NuxtLink>
-    <NuxtLink class="text-dark" to="/dash">
+    <NuxtLink class="text-dark" to="/dash/post/add">
       <i class="fas fa-plus"></i>
     </NuxtLink>
     <NuxtLink class="text-dark" to="/dash/post/list">
