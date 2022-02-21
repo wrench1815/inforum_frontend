@@ -41,6 +41,12 @@
                   }}</span>
                 </p>
 
+                <div
+                  class="d-flex justify-content-center my-2 align-items-center text-lg text-warning"
+                >
+                  <span>{{ post.star }}<i class="ms-1 fas fa-star"></i></span>
+                </div>
+
                 <!-- category -->
                 <div class="d-flex justify-content-center">
                   <span
@@ -83,7 +89,7 @@
                 <div
                   v-html="post.description"
                   id="postContent"
-                  class="py-3 px-lg-5"
+                  class="py-3 px-lg-3"
                 ></div>
 
                 <div class="border-top mb-4"></div>
@@ -143,9 +149,11 @@ export default {
         figures[i]
           .getElementsByTagName('img')[0]
           .classList.add('figure-img', 'img-fluid', 'shadow-lg')
-        figures[i]
-          .getElementsByTagName('figcaption')[0]
-          .classList.add('figure-caption', 'text-center', 'text-bold')
+        if (figures[i].getElementsByTagName('figcaption').length < 0) {
+          figures[i]
+            .getElementsByTagName('figcaption')[0]
+            .classList.add('figure-caption', 'text-center', 'text-bold')
+        }
       }
     },
     joinName(first, last) {
@@ -186,4 +194,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.cover-img {
+  object-fit: cover;
+}
+</style>
