@@ -65,6 +65,36 @@
 
         <hr />
 
+        <!-- Start:Star -->
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 ms-auto me-auto d-flex justify-content-center">
+              <h5 class="text-center">Liked the Post? Leave a Star.</h5>
+            </div>
+
+            <div class="col-lg-9 ms-auto me-auto d-flex justify-content-center">
+              <i v-if="!isAuthenticated" class="fas fa-star fa-2x"></i>
+              <i
+                v-if="isAuthenticated"
+                class="fas fa-star fa-2x"
+                :class="{ 'text-warning': stared }"
+                @click="star"
+              ></i>
+            </div>
+
+            <div
+              class="col-lg-9 ms-auto me-auto d-flex justify-content-center mt-2 text-"
+            >
+              <p class="text-dark">
+                Total Stars:<span class="ms-1 text-warning">{{
+                  post.star
+                }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- End:Star -->
+
         <!-- Start:Comments -->
         <section class="py-7">
           <div class="container">
@@ -83,6 +113,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -90,7 +122,12 @@ export default {
       author: '',
       loading: true,
       img: '',
+      stared: false,
     }
+  },
+
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser']),
   },
 
   methods: {
@@ -99,6 +136,31 @@ export default {
       return `${myDate.toLocaleString('default', {
         weekday: 'short',
       })}, ${myDate.getDate()}-${myDate.getMonth() + 1}-${myDate.getFullYear()}`
+    },
+
+    star() {
+      if (this.isAuthenticated) {
+        const starContent = {
+          blogPostId: this.post.id,
+          userId: this.loggedInUser.id,
+        }
+        this.$axios.$post(`BlogPosts/star`, starContent).then((sr) => {
+          if (sr.status == 200) {
+            this.$axios
+              .$get(`/BlogPosts/slug/${this.$route.params.slug}`)
+              .then((rep) => {
+                this.post.star = rep.star
+              })
+              .then(() => {
+                this.$axios
+                  .$post(`BlogPosts/star/status`, starContent)
+                  .then((stat) => {
+                    this.stared = stat.starExist
+                  })
+              })
+          }
+        })
+      }
     },
   },
 
@@ -154,6 +216,27 @@ export default {
               }
             }
           })
+          .then(() => {
+            if (this.isAuthenticated) {
+              const starContent = {
+                blogPostId: this.post.id,
+                userId: this.loggedInUser.id,
+              }
+              this.$axios
+                .$post(`BlogPosts/star/status`, starContent)
+                .then((stat) => {
+                  this.stared = stat.starExist
+                })
+            }
+          })
+      })
+      .catch((erre) => {
+        this.$swal({
+          title: 'Error',
+          type: 'error',
+          icon: 'error',
+          html: `Failed to load post.<br/>Try again later.`,
+        })
       })
   },
 }
