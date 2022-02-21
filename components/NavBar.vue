@@ -158,7 +158,7 @@
                         >
                           <NuxtLink
                             class="dropdown-item text-dark"
-                            to="/profile"
+                            to="/dash"
                             >Dash</NuxtLink
                           >
                         </li>
