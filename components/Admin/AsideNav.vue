@@ -41,7 +41,7 @@
         </li>
         <!-- End: Dashboard Home -->
 
-        <!-- dynamic stuff -->
+        <!-- Start:Dynamic Nav List -->
         <li class="nav-item" v-for="(route, index) in routes" :key="index">
           <NuxtLink class="nav-link text-dark" :to="'/admin' + route.link">
             <div
@@ -52,6 +52,7 @@
             <span class="nav-link-text ms-1">{{ route.name }}</span>
           </NuxtLink>
         </li>
+        <!-- End:Dynamic Nav List -->
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">
@@ -144,11 +145,5 @@ export default {
 
 #sidenav-main .navbar-nav .nuxt-link-exact-active i {
   color: white !important;
-}
-
-@media (min-width: 1200px) {
-  .custom-shadow {
-    box-shadow: none !important;
-  }
 }
 </style>

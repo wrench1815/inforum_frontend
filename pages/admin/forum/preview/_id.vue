@@ -50,7 +50,7 @@
                 </div>
                 <div class="row">
                   <div class="col"></div>
-                  <div class="col-10 col-md-8">
+                  <div class="col-12">
                     <div class="text-center mb-3 mt-4">
                       <span
                         class="mb-2 badge text-lg rounded-pill bg-gradient-primary"
