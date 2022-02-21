@@ -145,9 +145,12 @@ export default {
                 figures[i]
                   .getElementsByTagName('img')[0]
                   .classList.add('figure-img', 'img-fluid', 'shadow-lg')
-                figures[i]
-                  .getElementsByTagName('figcaption')[0]
-                  .classList.add('figure-caption', 'text-center', 'text-bold')
+
+                if (figures[i].getElementsByTagName('figcaption').length > 0) {
+                  figures[i]
+                    .getElementsByTagName('figcaption')[0]
+                    .classList.add('figure-caption', 'text-center', 'text-bold')
+                }
               }
             }
           })

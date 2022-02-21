@@ -1,5 +1,5 @@
 <template>
-  <div class="card border-radius-2xl border-bottom-hover">
+  <div class="card border-radius-2xl">
     <NuxtLink
       :to="`/blog/${post.slug}`"
       class="card-image border-radius-top-start-2xl border-radius-top-end-2xl cursor-pointer img-hover-zoom"
@@ -100,14 +100,6 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
-}
-
-.border-bottom-hover {
-  border-bottom: 2px solid transparent !important;
-  transition: all 0.8s ease-out;
-}
-.border-bottom-hover:hover {
-  border-bottom: 2px solid #e91e63 !important;
 }
 
 .img-hover-zoom {

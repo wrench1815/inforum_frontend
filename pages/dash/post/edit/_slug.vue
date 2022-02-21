@@ -193,9 +193,7 @@
       </div>
       <!-- Start:Submit Button -->
       <div class="text-end mt-4">
-        <button type="submit" class="btn bg-gradient-info">
-          Update Post
-        </button>
+        <button type="submit" class="btn bg-gradient-info">Update Post</button>
       </div>
       <!-- Start:Submit Button -->
     </form>
@@ -206,7 +204,6 @@
 import RichTextEditor from '../../../../components/Admin/Utils/RichTextEditor'
 import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
 import CharacterCounter from '~/components/Admin/Utils/CharacterCount.vue'
-import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   layout: 'dash',
@@ -215,7 +212,6 @@ export default {
     RichTextEditor,
     FullImageUpload,
     CharacterCounter,
-    Loading,
   },
 
   data() {
@@ -339,9 +335,9 @@ export default {
 
       customAlert
         .fire({
-          icon: 'question',
-          title: 'Copy Image',
-          text: `Copy Uploaded Image Url`,
+          icon: 'info',
+          title: 'Image Uploaded',
+          html: `Image Uploaded Successfully<br/>Copy Uploaded Image Url`,
           confirmButtonText: 'Copy',
         })
         .then(async (result) => {
@@ -409,10 +405,10 @@ export default {
           .then((res) => {
             this.$swal.fire({
               icon: 'success',
-              title: 'Blog Post Was Updated',
+              title: 'Sucess',
               text: 'Blog post was updated successfully',
             })
-            this.$router.push(`/admin/blogpost/preview/${data.id}`)
+            this.$router.push(`/dash/post/list`)
           })
           .catch((err) => {
             this.$swal.fire({
