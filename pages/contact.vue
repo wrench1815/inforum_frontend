@@ -13,48 +13,9 @@
                   <div class="card-body p-5 position-relative">
                     <h2 class="text-white">Contact Information</h2>
                     <p class="text-white opacity-8 mb-4">
-                      Fill up the form and our Team will get back to you within
-                      24 hours.
+                      Fill up the form and We will get back to you as Soon as
+                      Possible.
                     </p>
-                    <div class="d-flex p-2 text-white">
-                      <i class="fas fa-phone-alt text-sm"></i>
-                      <span class="text-sm opacity-8 ps-3">+91 1234567890</span>
-                    </div>
-                    <div class="d-flex p-2 text-white">
-                      <i class="fas fa-envelope text-sm"></i>
-                      <span class="text-sm opacity-8 ps-3"
-                        >contact@inforum.com</span
-                      >
-                    </div>
-                    <div class="d-flex p-2 text-white">
-                      <i class="fas fa-map-marker-alt text-sm"></i>
-                      <span class="text-sm opacity-8 ps-3"
-                        >123 Void City <br />
-                        Void, Blackhole</span
-                      >
-                    </div>
-                    <div class="mt-4">
-                      <a
-                        class="btn btn-icon-only btn-link text-white btn-lg mb-0"
-                      >
-                        <i class="fab fa-facebook"></i>
-                      </a>
-                      <a
-                        class="btn btn-icon-only btn-link text-white btn-lg mb-0"
-                      >
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a
-                        class="btn btn-icon-only btn-link text-white btn-lg mb-0"
-                      >
-                        <i class="fab fa-dribbble"></i>
-                      </a>
-                      <a
-                        class="btn btn-icon-only btn-link text-white btn-lg mb-0"
-                      >
-                        <i class="fab fa-instagram"></i>
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
