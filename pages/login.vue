@@ -171,7 +171,8 @@ export default {
           this.$swal({
             title: 'Error',
             icon: 'error',
-            text: err.response.data.message,
+            type: 'error',
+            html: `Unable to login.<br/>Try Again.`,
           })
         }
       } else {
