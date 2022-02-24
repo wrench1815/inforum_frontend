@@ -249,7 +249,7 @@ export default {
         lastName: this.lastName,
         email: this.email,
         profileImage:
-          'https://res.cloudinary.com/inforum/image/upload/v1644480589/Defaults/c1cnefxvbi5qlmj85mmn.png',
+          'https://res.cloudinary.com/inforum/image/upload/v1645625776/Defaults/profile_image_dummy_oawg87.png',
         gender: Number(this.gender),
         password: this.password,
       }
@@ -282,7 +282,7 @@ export default {
         } catch (err) {
           this.$swal({
             title: 'Error',
-            text: err.response.data.message,
+            html: `Failed to register!<br/>Try Again Later.`,
             icon: 'error',
             confirmButtonText: 'Try Again',
           })
