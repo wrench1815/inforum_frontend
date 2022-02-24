@@ -11,12 +11,17 @@
 
     <!-- Start:Popular Queries-->
     <div v-else class="container-flui px-3">
-      <ForumPopularQuery
-        class="my-3"
-        v-for="query in popularQueries.forumQuery"
-        :key="query.id"
-        :query="query"
-      />
+      <template v-if="popularQueries">
+        <ForumPopularQuery
+          class="my-3"
+          v-for="query in popularQueries.forumQuery"
+          :key="query.id"
+          :query="query"
+        />
+      </template>
+      <div v-else>
+        <p>No Popular Queries</p>
+      </div>
     </div>
     <!-- End:Popular Queries-->
 
@@ -35,14 +40,19 @@
     <!-- End:Loading -->
 
     <!-- Start:Categories -->
-    <template v-else>
-      <ForumRightSideItem
-        v-for="cat in categories"
-        :key="cat.id"
-        :cat="cat"
-        :typeBtn="true"
-      />
-    </template>
+    <div class="pb-2" v-else>
+      <template v-if="categories">
+        <ForumRightSideItem
+          v-for="cat in categories"
+          :key="cat.id"
+          :cat="cat"
+          :typeBtn="true"
+        />
+      </template>
+      <template else>
+        <p>No Categories to show</p>
+      </template>
+    </div>
     <!-- End:Categories -->
 
     <!-- End:Categories Section -->
@@ -56,8 +66,8 @@ export default {
   data() {
     return {
       loading: true,
-      categories: {},
-      popularQueries: {},
+      categories: null,
+      popularQueries: null,
     }
   },
 
@@ -65,13 +75,21 @@ export default {
     this.$axios
       .$get(`ForumQuery?pageSize=5&voteSort=true`)
       .then((res) => {
-        this.popularQueries = res
+        if (res.pagination.totalCount > 0) {
+          this.popularQueries = res
+        } else {
+          this.popularQueries = null
+        }
       })
       .then(() => {
         this.$axios
           .$get('/Categories')
           .then((cats) => {
-            this.categories = cats
+            if (cats.length > 0) {
+              this.categories = cats
+            } else {
+              this.categories = null
+            }
           })
           .then(() => {
             this.loading = false
