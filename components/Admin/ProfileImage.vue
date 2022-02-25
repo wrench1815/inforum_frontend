@@ -13,7 +13,7 @@ export default {
     return {
       profileImage: '',
       fallBackImage:
-        'https://res.cloudinary.com/inforum/image/upload/v1645727885/Defaults/profile_image_dummy_2_eofkz4.png',
+        'https://res.cloudinary.com/inforum/image/upload/v1645625776/Defaults/profile_image_dummy_oawg87.png',
       defaultStyles: 'avatar avatar-sm  p-0 m-0 img-fit shadow',
     }
   },

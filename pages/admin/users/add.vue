@@ -212,7 +212,7 @@ export default {
         gender: Number(this.gender),
         password: this.password,
         profileImage:
-          'https://res.cloudinary.com/inforum/image/upload/v1644480589/Defaults/c1cnefxvbi5qlmj85mmn.png',
+          'https://res.cloudinary.com/inforum/image/upload/v1645625776/Defaults/profile_image_dummy_oawg87.png',
       }
       this.validateFirstName()
       this.validateLastName()

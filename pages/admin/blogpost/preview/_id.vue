@@ -21,7 +21,7 @@
                     :src="
                       post.featureImage
                         ? post.featureImage
-                        : 'https://res.cloudinary.com/inforum/image/upload/v1644820069/Defaults/img-1_nvdef7.jpg'
+                        : 'https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg'
                     "
                   />
                 </div>
