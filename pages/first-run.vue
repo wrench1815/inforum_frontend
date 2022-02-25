@@ -293,6 +293,7 @@ export default {
             this.$swal({
               title: 'Processing',
               icon: 'info',
+              text: 'Please wait while we process your request.',
 
               didOpen: () => {
                 this.$swal.showLoading()
@@ -305,7 +306,7 @@ export default {
 
                     this.$swal({
                       title: 'Success',
-                      html: `Admin registered successfully.<br/>Database also Seeded.`,
+                      html: `Admin registered successfully.<br/>Database Seeding Finished.`,
                       icon: 'success',
                       timer: 2000,
                       showConfirmButton: false,
