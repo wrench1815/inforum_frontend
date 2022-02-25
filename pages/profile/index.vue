@@ -57,6 +57,30 @@
             </div>
             <!-- End:Profile Card -->
 
+            <!-- change profile image -->
+            <div class="card mt-4">
+              <div class="card-header">
+                <h4>Change Profile Image</h4>
+              </div>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col">
+                    <!-- Image upload component -->
+                    <ImageUpload
+                      :uploadFolder="'profiles'"
+                      @uploadImageUrl="selectedProfile($event)"
+                    />
+                  </div>
+                </div>
+
+                <!-- <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-end gap-2">
+              <button class="btn btn-info">Reset</button>
+              <button class="btn btn-success">Update</button>
+            </div>
+          </div> -->
+              </div>
+            </div>
             <!-- Start:Basic Info Card -->
             <div class="card mt-4" id="basic-info">
               <div class="card-header">
@@ -282,9 +306,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ImageUpload from '~/components/Admin/Utils/ImageUpload.vue'
 
 export default {
   middleware: 'auth',
+
+  components: {
+    ImageUpload,
+  },
 
   data() {
     return {
@@ -417,6 +446,58 @@ export default {
       }
     },
 
+    async selectedProfile(url) {
+      const data = {
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
+        gender: Number(this.user.gender),
+        profileImage: url,
+        dob: this.user.dob,
+        address: this.user.address,
+      }
+
+      const result = this.$axios.$patch(
+        `/User/update/${this.loggedInUser.id}`,
+        data
+      )
+
+      result
+        .then(() => {
+          this.$swal({
+            title: 'Success',
+            text: 'User Image Updated Successfully',
+            icon: 'success',
+            button: 'OK',
+          })
+          this.user.profileImage = url
+          this.$auth
+            .fetchUser()
+            .then(() => {
+              this.resetInfo()
+            })
+            .catch((err) => {
+              this.$swal({
+                title: 'Error',
+                text: 'Failed to Fetch User Info',
+                icon: 'error',
+                confirmButtonText: 'Try Again',
+              })
+            })
+        })
+        .catch((err) => {
+          this.$swal({
+            title: 'Error',
+            text: 'Failed to Update User Image',
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+          })
+        })
+    },
+
+    editProfilePicture() {
+      this.editProfile = true
+    },
     // update password
     async updatePassword() {
       const userData = {
