@@ -2,7 +2,11 @@
   <div>
     <AdminNavBar />
 
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" v-if="loading">
+      <Loading />
+    </div>
+
+    <div class="container-fluid py-4" v-if="!loading">
       <!-- profile navigation-->
       <div class="card card-body">
         <div class="row justify-content-start align-items-center">
@@ -323,12 +327,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import ImageUpload from '~/components/Admin/Utils/ImageUpload.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   layout: 'admin',
 
   components: {
     ImageUpload,
+    Loading,
   },
 
   data() {
@@ -345,6 +351,7 @@ export default {
       confirmNewPassword: '',
       dob: '',
       address: '',
+      loading: true,
       role: '',
       roles: [],
       FormHelpTexts: {
@@ -364,7 +371,7 @@ export default {
     ...mapGetters(['loggedInUser']),
   },
 
-  created() {
+  mounted() {
     const user = this.$axios.$get(`/User/single/${this.$route.params.id}`)
     user
       .then((res) => {
@@ -380,18 +387,22 @@ export default {
         this.dob = this.stringToCalenderDate(res.user.dob)
         this.address = res.user.address ? res.user.address : ''
       })
-      .catch((err) => {
-        this.$swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Unable to fetch data',
-        })
-      })
-
-    const roles = this.$axios.$get('/User/roles/list')
-    roles
-      .then((res) => {
-        this.roles = res.roles
+      .then(() => {
+        this.$axios
+          .$get('/User/roles/list')
+          .then((res) => {
+            this.roles = res.roles
+          })
+          .then(() => {
+            this.loading = false
+          })
+          .catch((err) => {
+            this.$swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Unable to fetch data',
+            })
+          })
       })
       .catch((err) => {
         this.$swal.fire({

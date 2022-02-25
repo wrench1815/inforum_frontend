@@ -84,11 +84,18 @@
 
 <script>
 import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   layout: 'admin',
   components: {
     FullImageUpload,
   },
+
+  components: {
+    Loading,
+  },
+
   data() {
     return {
       homeData: {},
