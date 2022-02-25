@@ -11,7 +11,7 @@
 
     <!-- Start:Popular Queries-->
     <div v-else class="container-flui px-3">
-      <template v-if="popularQueries">
+      <template v-if="showPopular">
         <ForumPopularQuery
           class="my-3"
           v-for="query in popularQueries.forumQuery"
@@ -41,7 +41,7 @@
 
     <!-- Start:Categories -->
     <div class="pb-2" v-else>
-      <template v-if="categories">
+      <template v-if="showCategory">
         <ForumRightSideItem
           v-for="cat in categories"
           :key="cat.id"
@@ -49,7 +49,7 @@
           :typeBtn="true"
         />
       </template>
-      <template else>
+      <template v-else>
         <p>No Categories to show</p>
       </template>
     </div>
@@ -66,8 +66,10 @@ export default {
   data() {
     return {
       loading: true,
-      categories: null,
-      popularQueries: null,
+      categories: {},
+      popularQueries: {},
+      showCategory: false,
+      showPopular: false,
     }
   },
 
@@ -77,8 +79,10 @@ export default {
       .then((res) => {
         if (res.pagination.totalCount > 0) {
           this.popularQueries = res
+          this.showPopular = true
         } else {
-          this.popularQueries = null
+          this.popularQueries = {}
+          this.showPopular = false
         }
       })
       .then(() => {
@@ -87,8 +91,10 @@ export default {
           .then((cats) => {
             if (cats.length > 0) {
               this.categories = cats
+              this.showCategory = true
             } else {
-              this.categories = null
+              this.categories = {}
+              this.showCategory = false
             }
           })
           .then(() => {
