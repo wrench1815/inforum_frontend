@@ -1,9 +1,9 @@
 <template>
-  <div class="mt- mb-4">
+  <div class="mb-4">
     <section class="container-fluid">
       <div class="row">
         <div
-          class="col-12 pb- mb-6 card card-body text-center border-radius-top-end-0 border-radius-top-start-0"
+          class="col-12 mb-6 card card-body text-center border-radius-top-end-0 border-radius-top-start-0"
         >
           <nav>
             <NuxtLink class="navbar-brand link-dark fs-4" to="/">
