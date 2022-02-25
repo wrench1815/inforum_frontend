@@ -20,26 +20,12 @@ export default {
     ],
 
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       // Roboto Font
       {
         rel: 'stylesheet',
         type: 'text/css',
         href: '/global/css/fonts.css',
-      },
-
-      // Nucleo Icons css
-      {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: '/global/css/nucleo-icons.css',
-      },
-
-      // Nucleo Icons svg
-      {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: '/global/css/nucleo-svg.css',
       },
     ],
 
