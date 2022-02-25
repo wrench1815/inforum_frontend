@@ -1,39 +1,45 @@
 <template>
-  <div class="card-body pt-0">
-    <div
-      class="card card-body gap-3 d-flex flex-column flex-md-row justify-content-start align-items-center"
-    >
-      <div>
-        <img
-          class="img-fit img-fluid avatar-custom shadow-card"
-          :src="loggedInUser.profileImage"
-          alt="Avatar"
-        />
-      </div>
+  <div>
+    <loading v-if="loading" />
 
-      <div>
-        <h3>
-          {{ loggedInUser.firstName + ' ' + loggedInUser.lastName }}
-        </h3>
-        <p class="text-primary">{{ loggedInUser.email }}</p>
-        <p class="text-info">{{ loggedInUserRole }}</p>
-        <p class="">10 Posts written so far</p>
-      </div>
-    </div>
-
-    <div class="mt-3">
-      <h3 class="card card-body mb-3">Popular Posts</h3>
-      <div class="row g-4">
-        <div v-if="loading" class="col-lg-4 col-md-6">
-          <h5>Loading....</h5>
+    <div class="card-body pt-0" v-if="!loading">
+      <div
+        class="card card-body gap-3 d-flex flex-column flex-md-row justify-content-start align-items-center"
+      >
+        <div>
+          <img
+            class="img-fit img-fluid avatar-custom shadow-card"
+            :src="loggedInUser.profileImage"
+            alt="Avatar"
+          />
         </div>
-        <div
-          v-if="!loading"
-          class="col-lg-4 col-md-6"
-          v-for="post in popularPosts.posts"
-          :key="post.id"
-        >
-          <LazyBlogPostCard :dashCard="true" :post="post" />
+
+        <div>
+          <h3>
+            {{ loggedInUser.firstName + ' ' + loggedInUser.lastName }}
+          </h3>
+          <p class="text-primary">{{ loggedInUser.email }}</p>
+          <p class="text-info">{{ loggedInUserRole }}</p>
+          <p class="">
+            {{ popularPosts.pagination.totalCount }} Posts written so far
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <h3 class="card card-body mb-3">Popular Posts</h3>
+        <div class="row g-4">
+          <div v-if="loading" class="col-lg-4 col-md-6">
+            <h5>Loading....</h5>
+          </div>
+          <div
+            v-if="!loading"
+            class="col-lg-4 col-md-6"
+            v-for="post in popularPosts.posts"
+            :key="post.id"
+          >
+            <LazyBlogPostCard :dashCard="true" :post="post" />
+          </div>
         </div>
       </div>
     </div>
@@ -42,8 +48,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
+  components: { Loading },
   middleware: ['auth', 'isEditor'],
 
   layout: 'dash',
