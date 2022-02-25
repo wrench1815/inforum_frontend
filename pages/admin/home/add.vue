@@ -15,17 +15,6 @@
             <div class="card-body position-relative">
               <div class="row">
                 <div class="col-12">
-                  <div class="input-group input-group-static my-4">
-                    <label class="text-primary">Heading</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      v-model="home.heading"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-12">
                   <div class="input-group input-group-static mt-4">
                     <label class="text-primary">Sub Heading</label>
                     <input
@@ -51,14 +40,14 @@
                   </div>
                 </div>
 
-                <div class="col-12" v-if="home.headerImageLink">
+                <div class="col-12" v-if="home.headerImage">
                   <div>
                     <h3 class="text-center pb-3 pt-5 text-primary">
                       Header Image
                     </h3>
                     <div class="d-flex justify-content-center">
                       <img
-                        :src="home.headerImageLink"
+                        :src="home.headerImage"
                         alt="Header Image"
                         class="img-fluid"
                       />
@@ -93,9 +82,8 @@ export default {
   data() {
     return {
       home: {
-        heading: '',
         subHeading: '',
-        headerImageLink: '',
+        headerImage: '',
         showImageUploader: true,
       },
     }
@@ -104,24 +92,19 @@ export default {
   methods: {
     async handleImageUrl(url) {
       this.home.showImageUploader = false
-      this.home.headerImageLink = url
+      this.home.headerImage = url
     },
 
     async addHome(e) {
       e.preventDefault()
 
       const formData = {
-        heading: this.home.heading,
         subHeading: this.home.subHeading,
-        headerImageLink: this.home.headerImageLink,
+        headerImage: this.home.headerImage,
       }
 
       // on successful validation
-      if (
-        formData.heading !== '' &&
-        formData.subHeading !== '' &&
-        formData.headerImageLink !== ''
-      ) {
+      if (formData.subHeading !== '' && formData.headerImage !== '') {
         await this.$axios
           .$post(`/Home`, formData)
           .then((res) => {
@@ -175,7 +158,7 @@ export default {
         this.$swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Heading, Sub Heading and Header Image Cannot Be Empty',
+          text: 'Sub Heading and Header Image Cannot Be Empty',
           showCloseButton: true,
           showConfirmButton: false,
         })

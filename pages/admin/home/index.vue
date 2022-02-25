@@ -22,12 +22,11 @@
           </div>
           <div class="col-12 mb-4" v-else>
             <div class="mx-4">
-              <div class="table-responsive">
+              <div class="table-responsive border rounded-3">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-primary text-center text-md">
-                      <th class="text-uppercase">Heading</th>
-                      <th class="text-uppercase">Sub Heading</th>
+                      <th class="text-uppercase">Site Sub Heading</th>
                       <th class="text-uppercase">Actions</th>
                     </tr>
                   </thead>
@@ -38,17 +37,12 @@
                       :key="home.id"
                       :pkey="home.id"
                     >
-                      <td
-                        class="text-capitalize text-center link-info cursor-pointer custom-paragraph"
-                      >
+                      <td class="link-info cursor-pointer custom-paragraph">
                         <NuxtLink
                           class="link-info text-bold"
                           :to="`/admin/home/preview/${home.id}`"
-                          >{{ home.heading }}</NuxtLink
+                          >{{ home.subHeading }}</NuxtLink
                         >
-                      </td>
-                      <td class="text-capitalize text-center custom-paragraph">
-                        {{ home.subHeading }}
                       </td>
                       <td>
                         <div class="d-flex justify-content-center gap-5">

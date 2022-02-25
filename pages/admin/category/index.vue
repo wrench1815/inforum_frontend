@@ -22,7 +22,7 @@
           </div>
           <div class="col-12" v-else>
             <div class="mx-4">
-              <div class="table-responsive">
+              <div class="table-responsive border rounded-3">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-primary text-center text-md">

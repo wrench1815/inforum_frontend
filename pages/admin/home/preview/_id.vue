@@ -8,37 +8,29 @@
       <Loading v-if="loading" />
       <!-- End: Loading-->
 
-      <div class="card py-4" v-if="!loading">
+      <div class="card card-body" v-if="!loading">
         <div class="row">
           <div class="col-12">
-            <h2 class="mx-4 mb-5 text-center">Home Preview</h2>
+            <h2 class="mb-5">Home Preview</h2>
           </div>
+
+          <div class="col-12 col-md-4 text-primary h5">Sub Heading</div>
+          <div class="col-12 col-md-8 text-dark h5">
+            {{ homeData.subHeading }}
+          </div>
+          <div class="my-2 col-12"></div>
+          <div class="col-12 col-md-4 text-primary h5">Header Image</div>
+          <div class="col-12 col-md-8">
+            <div class="d-flex justify-content-center py-3">
+              <img
+                class="img-fluid shadow-blur rounded-3"
+                :src="homeData.headerImage"
+                alt="header image"
+              />
+            </div>
+          </div>
+
           <div class="col-12 d-flex flex-column align-items-center">
-            <div class="mx-4 mb-5 text-center">
-              <span class="mb-2 badge rounded-pill bg-primary text-md"
-                >Heading</span
-              >
-              <h4 class="text-capitalize">{{ homeData.heading }}</h4>
-            </div>
-            <div class="mx-4 mb-5 text-center">
-              <span class="mb-2 badge rounded-pill bg-primary text-md"
-                >Sub Heading</span
-              >
-              <h5 class="text-capitalize">{{ homeData.subHeading }}</h5>
-            </div>
-            <div class="mx-4 text-center">
-              <span class="mb-3 badge rounded-pill bg-primary text-md"
-                >Header Image</span
-              >
-              <br />
-              <div class="d-flex justify-content-center py-3">
-                <img
-                  class="img-fluid"
-                  :src="homeData.headerImageLink"
-                  alt="header image"
-                />
-              </div>
-            </div>
             <!-- Quick Action -->
             <div class="d-flex justify-content-end align-self-end me-5 mt-5">
               <NuxtLink
