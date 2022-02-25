@@ -11,7 +11,11 @@
             <h2 class="mx-4">Edit Home</h2>
           </div>
 
-          <div class="col-12">
+          <div class="col-12" v-if="loading">
+            <loading />
+          </div>
+
+          <div class="col-12" v-if="!loading">
             <div class="card-body position-relative">
               <form v-on:submit.prevent="updateHome">
                 <div class="row mt-4">
@@ -89,6 +93,7 @@ export default {
     return {
       homeData: {},
       showImageUploader: false,
+      loading: true,
     }
   },
 
@@ -98,6 +103,9 @@ export default {
     blogPost
       .then((res) => {
         this.homeData = res
+      })
+      .then(() => {
+        this.loading = false
       })
       // on failure
       .catch((err) => {
