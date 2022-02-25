@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- title -->
-                <h1 class="text-center my-3 text-capitalize">
+                <h1 class="text-center my-3">
                   {{ post.title }}
                 </h1>
 
@@ -55,33 +55,28 @@
                   >
                 </div>
 
-                <!-- short description -->
-                <div class="text-center my-4">
-                  <div class="d-flex justify-content-center">
-                    <span
-                      class="badge rounded-pill bg-gradient-success text-md mb-3"
-                      >Short Description</span
-                    >
+                <div class="row mt-4">
+                  <!-- Start:Short Description -->
+                  <div class="col-12 col-md-4 text-success h5">
+                    Short Description
                   </div>
-                  <div>
+                  <div class="col-12 col-md-8 text-dark">
                     <p>
                       {{ post.shortDescription }}
                     </p>
                   </div>
-                </div>
-                <!-- excerpt -->
-                <div class="text-center my-4">
-                  <div class="d-flex justify-content-center">
-                    <span
-                      class="badge rounded-pill bg-gradient-warning text-md mb-3"
-                      >Excerpt</span
-                    >
+                  <!-- End:Short Description -->
+
+                  <!-- Start:Excerpt -->
+                  <div class="col-12 col-md-4 text-warning text-gradient h5">
+                    Excerpt
                   </div>
-                  <div>
+                  <div class="col-12 col-md-8 text-dark">
                     <p>
                       {{ post.excerpt }}
                     </p>
                   </div>
+                  <!-- End:Excerpt -->
                 </div>
 
                 <div class="border-top mt-4"></div>
@@ -149,7 +144,7 @@ export default {
         figures[i]
           .getElementsByTagName('img')[0]
           .classList.add('figure-img', 'img-fluid', 'shadow-lg')
-        if (figures[i].getElementsByTagName('figcaption').length < 0) {
+        if (figures[i].getElementsByTagName('figcaption').length > 0) {
           figures[i]
             .getElementsByTagName('figcaption')[0]
             .classList.add('figure-caption', 'text-center', 'text-bold')

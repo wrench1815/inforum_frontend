@@ -46,9 +46,7 @@
                       <td class="text-bold">
                         {{ post.id }}
                       </td>
-                      <td
-                        class="text-capitalize text-start link-info cursor-pointer"
-                      >
+                      <td class="text-start link-info cursor-pointer">
                         <NuxtLink
                           class="link-info text-bold"
                           :to="`/admin/blogpost/preview/${post.id}`"
@@ -100,14 +98,13 @@
               />
 
               <!-- End:Pagination -->
-
-              <div class="col-12">
-                <div class="d-flex justify-content-end mx-4">
-                  <NuxtLink class="btn btn-success" to="/admin/blogpost/add"
-                    >Add Post</NuxtLink
-                  >
-                </div>
-              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex justify-content-end mx-4">
+              <NuxtLink class="btn btn-success" to="/admin/blogpost/add"
+                >Add Post</NuxtLink
+              >
             </div>
           </div>
         </div>
