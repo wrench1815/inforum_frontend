@@ -9,6 +9,10 @@
             <div class="border-bottom"></div>
           </div>
 
+          <div class="col-12" v-if="loading">
+            <h3 class="mx-3">Loading...</h3>
+          </div>
+
           <!-- Start:Contact Form Add Form -->
           <div class="col-12">
             <div class="card-body position-relative">
@@ -55,6 +59,7 @@ export default {
     return {
       comment: '',
       oldComment: {},
+      loading: true,
 
       // for error handling
       FormHelpTexts: {
@@ -65,12 +70,15 @@ export default {
   computed: {
     ...mapGetters(['loggedInUser', 'loggedInUserRole']),
   },
-  created() {
+  mounted() {
     const comment = this.$axios.$get(`/Comments/${this.$route.params.id}`)
     comment
       .then((res) => {
         this.oldComment = res
         this.comment = res.description
+      })
+      .then(() => {
+        this.loading = false
       })
       .catch((err) => {
         this.$swal.fire({

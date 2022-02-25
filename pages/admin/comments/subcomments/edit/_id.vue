@@ -8,9 +8,11 @@
             <h2 class="mx-4">Edit Sub Comment</h2>
             <div class="border-bottom"></div>
           </div>
-
+          <div class="col-12" v-if="loading">
+            <h3 class="mx-3">Loading...</h3>
+          </div>
           <!-- Start:Contact Form Add Form -->
-          <div class="col-12">
+          <div class="col-12" v-if="!loading">
             <div class="card-body position-relative">
               <form v-on:submit.prevent="updateSubComment">
                 <!-- Start:Full Name -->
@@ -55,6 +57,7 @@ export default {
     return {
       subComment: '',
       oldSubComment: {},
+      loading: true,
 
       // for error handling
       FormHelpTexts: {
@@ -65,12 +68,15 @@ export default {
   computed: {
     ...mapGetters(['loggedInUser', 'loggedInUserRole']),
   },
-  created() {
+  mounted() {
     const subComment = this.$axios.$get(`/SubComments/${this.$route.params.id}`)
     subComment
       .then((res) => {
         this.oldSubComment = res
         this.subComment = res.description
+      })
+      .then(() => {
+        this.loading = false
       })
       .catch((err) => {
         this.$swal.fire({
