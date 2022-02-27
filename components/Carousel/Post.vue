@@ -1,26 +1,26 @@
 <template>
-  <div class="container mt-6 card ">
+  <div class="container mt-6 card">
     <div class="row pt-4">
       <div class="col">
-        <h3>See Popular Queries</h3>
+        <h3>See Popular Blog Posts</h3>
         <section class="pb-7 pt-3 position-relative">
-          <div id="popular-query-carousel" class="carousel slide carousel-team">
+          <div id="carousel-popular-posts" class="carousel slide carousel-team">
             <div class="carousel-inner">
               <div class="carousel-item active" v-if="showCaro_1">
-                <CarouselQCard :query="popularQueryCaro_1" />
+                <CarouselPCard :post="popularPostCaro_1" />
               </div>
 
               <div
                 class="carousel-item"
                 v-if="showRest"
-                v-for="caro in popularQueryCaro_n"
+                v-for="caro in popularPostCaro_n"
                 :key="caro.id"
               >
-                <CarouselQCard :query="caro" />
+                <CarouselPCard :post="caro" />
               </div>
 
               <div class="carousel-item" :class="actionClass">
-                <CarouselQCtaCard />
+                <CarouselPCtaCard />
               </div>
             </div>
 
@@ -28,7 +28,7 @@
             <div class="position-relative mt-n6">
               <a
                 class="carousel-control-prev text-dark position-absolute bottom-0 end-0 ms-auto"
-                href="#popular-query-carousel"
+                href="#carousel-popular-posts"
                 role="button"
                 data-bs-slide="prev"
                 style=""
@@ -41,7 +41,7 @@
               </a>
               <a
                 class="carousel-control-next text-dark position-absolute bottom-0 end-0 ms-auto ms-4"
-                href="#popular-query-carousel"
+                href="#carousel-popular-posts"
                 role="button"
                 data-bs-slide="next"
                 style=""
@@ -63,39 +63,39 @@
 
 <script>
 export default {
-  name: 'Query',
+  name: 'Post',
 
   data() {
     return {
-      popularQuery: [],
-      popularQueryCaro_1: {},
-      popularQueryCaro_n: [],
+      popularPost: [],
+      popularPostCaro_1: {},
+      popularPostCaro_n: [],
       showCaro_1: false,
       showRest: false,
-      popQEmpty: false,
+      popPEmpty: false,
       actionClass: '',
     }
   },
 
   mounted() {
     this.$axios
-      .$get('ForumQuery?PageSize=5&voteSort=true')
-      .then((popq) => {
-        this.popularQuery = popq.forumQuery
-        this.popularQueryCaro_1 = popq.forumQuery.slice(0, 1)[0]
-        this.popularQueryCaro_n = popq.forumQuery.slice(1)
+      .$get('BlogPosts?PageSize=5&starSort=true')
+      .then((pop) => {
+        this.popularPost = pop.posts
+        this.popularPostCaro_1 = pop.posts.slice(0, 1)[0]
+        this.popularPostCaro_n = pop.posts.slice(1)
       })
       .then(() => {
-        if (this.popularQueryCaro_1.length != 0) {
+        if (this.popularPostCaro_1.length != 0) {
           this.showCaro_1 = true
         }
 
-        if (this.popularQueryCaro_n.length != 0) {
+        if (this.popularPostCaro_n.length != 0) {
           this.showRest = true
         }
 
-        if (this.popularQuery.length == 0) {
-          this.popQEmpty = true
+        if (this.popularPost.length == 0) {
+          this.popPEmpty = true
           this.actionClass = 'active'
         }
       })
@@ -103,7 +103,7 @@ export default {
         this.$swal({
           title: 'Error',
           icon: 'error',
-          text: 'Failed to fetch Popular Queries',
+          text: 'Failed to fetch Popular Posts',
         })
       })
   },
