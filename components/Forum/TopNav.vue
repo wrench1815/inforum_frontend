@@ -156,7 +156,8 @@ export default {
 
   data() {
     return {
-      profileImage: require('@/assets/images/img-1.jpg'),
+      profileImage:
+        'https://res.cloudinary.com/inforum/image/upload/v1645625776/Defaults/profile_image_dummy_oawg87.png',
       searchQuery: '',
     }
   },

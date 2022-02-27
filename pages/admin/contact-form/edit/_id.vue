@@ -104,6 +104,7 @@ export default {
       contactFormEmail: '',
       contactFormMessage: '',
       contactFormCreatedOn: '',
+      loading: true,
 
       // for error handling
       FormHelpTexts: {
@@ -114,16 +115,28 @@ export default {
     }
   },
 
-  created() {
+  mounted() {
     const contactForm = this.$axios.$get(
       `/ContactForms/${this.$route.params.id}`
     )
-    contactForm.then((res) => {
-      this.contactFormFullName = res.fullName
-      this.contactFormEmail = res.email
-      this.contactFormMessage = res.message
-      this.contactFormCreatedOn = res.createdOn
-    })
+    contactForm
+      .then((res) => {
+        this.contactFormFullName = res.fullName
+        this.contactFormEmail = res.email
+        this.contactFormMessage = res.message
+        this.contactFormCreatedOn = res.createdOn
+      })
+      .then(() => {
+        this.loading = false
+      })
+      .catch((err) => {
+        this.$swal({
+          type: 'error',
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to Fetch Data',
+        })
+      })
   },
 
   methods: {

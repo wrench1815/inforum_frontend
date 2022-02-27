@@ -6,7 +6,8 @@
     <div v-if="!loading">
       <div class="card card-body">
         <h3 class="">Categories</h3>
-        <div class="p-2">
+
+        <div class="p-2" v-if="categories">
           <div class="row gap-3">
             <div
               class="col-auto border card card-body hover-border"
@@ -17,6 +18,10 @@
             </div>
           </div>
         </div>
+
+        <template v-else>
+          <NotFound class="p-2 border-top" :message="'No Categories to Show.'" />
+        </template>
       </div>
     </div>
   </div>
@@ -29,7 +34,7 @@ export default {
   data() {
     return {
       loading: true,
-      categories: {},
+      categories: null,
     }
   },
 
@@ -37,7 +42,11 @@ export default {
     this.$axios
       .$get('Categories')
       .then((res) => {
-        this.categories = res
+        if (res.length > 0) {
+          this.categories = res
+        } else {
+          this.categories = null
+        }
       })
       .then(() => {
         this.loading = false

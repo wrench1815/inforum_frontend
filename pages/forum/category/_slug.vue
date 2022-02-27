@@ -8,7 +8,7 @@
       <h3 class="card card-body">Forum Queries</h3>
 
       <NotFound
-        :message="'No Forum Post Found!'"
+        :message="`No Forum Post Found for '${categorySlug}' !`"
         v-if="queryList.pagination.totalCount == 0"
       />
 

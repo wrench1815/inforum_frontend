@@ -37,10 +37,12 @@
                   <p>
                     At <span class="text-info text-bold">Inforum</span>,
                     accessible from
-                    <a href="#" class="link-info text-bold">Inforum</a>, one of
-                    our main priorities is the privacy of our visitors. This
-                    Privacy Policy document contains types of information that
-                    is collected and recorded by koka.com and how we use it.
+                    <NuxtLink to="/" class="link-info text-bold"
+                      >Inforum</NuxtLink
+                    >, one of our main priorities is the privacy of our
+                    visitors. This Privacy Policy document contains types of
+                    information that is collected and recorded by koka.com and
+                    how we use it.
                   </p>
 
                   <p>

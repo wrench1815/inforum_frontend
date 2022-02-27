@@ -6,7 +6,11 @@
     <div class="container-fluid py-4">
       <div class="card py-2 py-sm-4">
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 mx-4" v-if="loading">
+            <h3>Loading...</h3>
+          </div>
+          
+          <div class="col-12" v-if="!loading">
             <div class="container py-1">
               <div class="px-auto">
                 <div class="d-flex flex-column align-items-center gap-2">
@@ -54,6 +58,7 @@ export default {
   data() {
     return {
       subComment: {},
+      loading: true,
     }
   },
 
@@ -66,11 +71,14 @@ export default {
     },
   },
 
-  created() {
+  mounted() {
     const subComment = this.$axios.$get(`/SubComments/${this.$route.params.id}`)
     subComment
       .then((res) => {
         this.subComment = res
+      })
+      .then(() => {
+        this.loading = false
       })
       .catch((err) => {
         this.$swal.fire({

@@ -27,7 +27,7 @@
                     </div>
                     <!-- Image upload component -->
                     <FullImageUpload
-                      :uploadFolder="'testing'"
+                      :uploadFolder="'feature_image'"
                       @uploadImageUrl="handleFeatureImage($event)"
                     />
                     <div class="border-bottom"></div>

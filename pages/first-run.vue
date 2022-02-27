@@ -1,18 +1,65 @@
 <template>
-  <div>
-    <AdminNavBar />
-    <div class="container-fluid py-4">
-      <div class="card py-4">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="mx-4">Add User</h2>
-            <div class="border-bottom"></div>
+  <div class="mb-4">
+    <section class="container-fluid">
+      <div class="row">
+        <div
+          class="col-12 mb-6 card card-body text-center border-radius-top-end-0 border-radius-top-start-0"
+        >
+          <nav>
+            <NuxtLink class="navbar-brand link-dark fs-4" to="/">
+              <img
+                src="@/assets/icon.jpg"
+                width="25rem"
+                alt="logo"
+                class="mb-1"
+              />
+              <span>Inforum</span>
+            </NuxtLink>
+          </nav>
+          <h1 class="text-center">First Run</h1>
+          <h4 class="text-center">
+            This page Will Guide on how to Setup the Site for First Time.
+          </h4>
+          <div class="text-center">
+            <div class="text-lg border border-danger p-2 d-inline-block">
+              <span class="text-danger"
+                ><i class="fas fa-exclamation-triangle"></i
+              ></span>
+              <span class="text-danger"
+                >Do note that once done, it is not Possible to Access this Route
+                Again so be Carefull with the Information Entered.</span
+              >
+            </div>
           </div>
+          <div class="text-center p mt-2">
+            The Process is quite Simple. Just enter the Valid Information for
+            Admin Account and press Register. This Information will be used to
+            Create an Admin Account for the Site along with a Default User, a
+            base Category and seed some Important Database Information.
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Start:Contact Form Add Form -->
-          <div class="col-12">
-            <div class="card-body position-relative">
-              <form role="form" class="text-start" @submit="signup">
+    <section class="container">
+      <div class="row">
+        <div class="col-lg-7 col-md-7 col-12 mx-auto">
+          <div class="card z-index-0">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div
+                class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1"
+              >
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+                  Admin Account
+                </h4>
+                <p class="text-white font-weight-bolder text-center mt-2 mb-0">
+                  Enter Valid Information Below for Admin
+                </p>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Start:Sign Up Form -->
+              <form role="form" class="text-start" @submit="register">
                 <div class="row">
                   <div class="col-md-6">
                     <!-- Start:First Name -->
@@ -155,28 +202,30 @@
                 <!-- End:Confirm Password Validation -->
 
                 <!-- Start:Action Button -->
-                <div class="text-center d-flex justify-content-end">
+                <div class="text-center">
                   <button
                     type="submit"
-                    class="btn bg-gradient-primary my-4 mb-2"
+                    class="btn bg-gradient-primary w-100 my-4 mb-2"
                   >
-                    Create
+                    Register
                   </button>
                 </div>
                 <!-- End:Action Button -->
               </form>
+              <!-- End:Sign Up Form -->
             </div>
           </div>
-          <!-- End:Contact Form Add Form -->
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
 export default {
-  layout: 'admin',
+  middleware: 'firstRun',
+
+  layout: 'firstRun',
 
   data() {
     return {
@@ -186,6 +235,8 @@ export default {
       gender: '',
       password: '',
       confirmPassword: '',
+
+      // for Validation
       FormHelpTexts: {
         firstNameText: '',
         lastNameText: '',
@@ -198,21 +249,21 @@ export default {
   },
 
   methods: {
-    async signup(e) {
+    async register(e) {
       e.preventDefault()
       if (this.password == this.confirmPassword) {
-        this.userSignup()
+        this.adminRegister()
       }
     },
-    async userSignup() {
+    async adminRegister() {
       const data = {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        gender: Number(this.gender),
-        password: this.password,
         profileImage:
           'https://res.cloudinary.com/inforum/image/upload/v1645625776/Defaults/profile_image_dummy_oawg87.png',
+        gender: Number(this.gender),
+        password: this.password,
       }
       this.validateFirstName()
       this.validateLastName()
@@ -229,26 +280,56 @@ export default {
         this.FormHelpTexts.passwordText == '' &&
         this.FormHelpTexts.confirmPasswordText == ''
       ) {
-        const result = this.$axios.$post('/user/register', data)
+        this.$swal({
+          title: 'Are you sure?',
+          text: 'You will be Register as Admin with the Provided Information.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, register!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true,
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            this.$swal({
+              title: 'Processing',
+              icon: 'info',
+              text: 'Please wait while we process your request.',
 
-        result
-          .then(() => {
-            this.$swal({
-              title: 'Success',
-              text: 'New User created successfully',
-              icon: 'success',
-              button: 'OK',
+              didOpen: () => {
+                this.$swal.showLoading()
+
+                this.$axios
+                  .post('FirstRun', data)
+                  .then((response) => {
+                    this.$swal.hideLoading()
+                    this.$swal.close()
+
+                    this.$swal({
+                      title: 'Success',
+                      html: `Admin registered successfully.<br/>Database Seeding Finished.`,
+                      icon: 'success',
+                      timer: 2000,
+                      showConfirmButton: false,
+                    }).then(() => {
+                      this.$router.push('/login')
+                    })
+                  })
+                  .catch((error) => {
+                    this.$swal.hideLoading()
+                    this.$swal.close()
+
+                    this.$swal({
+                      title: 'Error',
+                      text: 'Something went wrong',
+                      icon: 'error',
+                      timer: 2000,
+                      showConfirmButton: false,
+                    })
+                  })
+              },
             })
-            this.$router.push('/admin/users')
-          })
-          .catch((err) => {
-            this.$swal({
-              title: 'Error',
-              text: err.response.data.message,
-              icon: 'error',
-              confirmButtonText: 'Try Again',
-            })
-          })
+          }
+        })
       } else {
         this.$swal({
           title: 'Error',
@@ -321,4 +402,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.header-img {
+  background-image: url('~/assets/curved-images/curved13.jpg');
+  background-size: cover;
+}
+</style>

@@ -167,7 +167,7 @@ export default {
     },
   },
 
-  created() {
+  mounted() {
     const answer = this.$axios.$get(`/ForumAnswer/${this.$route.params.id}`)
     answer
       .then((res) => {
@@ -175,6 +175,8 @@ export default {
       })
       .then(() => {
         this.answer = this.oldAnswer.answer
+      })
+      .then(() => {
         this.loading = false
       })
       .catch((err) => {

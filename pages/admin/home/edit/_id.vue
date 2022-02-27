@@ -11,21 +11,14 @@
             <h2 class="mx-4">Edit Home</h2>
           </div>
 
-          <div class="col-12">
+          <div class="col-12" v-if="loading">
+            <loading />
+          </div>
+
+          <div class="col-12" v-if="!loading">
             <div class="card-body position-relative">
               <form v-on:submit.prevent="updateHome">
                 <div class="row mt-4">
-                  <div class="col-12">
-                    <div class="input-group input-group-static my-4">
-                      <label class="text-primary">Heading</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        v-model="homeData.heading"
-                      />
-                    </div>
-                  </div>
-
                   <div class="col-12">
                     <div class="input-group input-group-static mt-4">
                       <label class="text-primary">Sub Heading</label>
@@ -66,7 +59,7 @@
                       </h3>
                       <div class="d-flex justify-content-center">
                         <img
-                          :src="homeData.headerImageLink"
+                          :src="homeData.headerImage"
                           alt="Header Image"
                           class="img-fluid"
                         />
@@ -91,24 +84,35 @@
 
 <script>
 import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   layout: 'admin',
   components: {
     FullImageUpload,
   },
+
+  components: {
+    Loading,
+  },
+
   data() {
     return {
       homeData: {},
       showImageUploader: false,
+      loading: true,
     }
   },
 
-  created() {
+  mounted() {
     const blogPost = this.$axios.$get(`/Home/${this.$route.params.id}`)
     // on success
     blogPost
       .then((res) => {
         this.homeData = res
+      })
+      .then(() => {
+        this.loading = false
       })
       // on failure
       .catch((err) => {
@@ -126,26 +130,21 @@ export default {
   methods: {
     async handleImageUrl(url) {
       this.showImageUploader = false
-      this.homeData.headerImageLink = url
+      this.homeData.headerImage = url
     },
     showUploader() {
       this.showImageUploader = true
-      this.homeData.headerImageLink = ''
+      this.homeData.headerImage = ''
     },
     async updateHome() {
       const formData = {
         id: this.$route.params.id,
-        heading: this.homeData.heading,
         subHeading: this.homeData.subHeading,
-        headerImageLink: this.homeData.headerImageLink,
+        headerImage: this.homeData.headerImage,
       }
 
       // on successful validation
-      if (
-        formData.heading !== '' &&
-        formData.subHeading !== '' &&
-        formData.headerImageLink !== ''
-      ) {
+      if (formData.subHeading !== '' && formData.headerImage !== '') {
         await this.$axios
           .$put(`/Home/${formData.id}`, formData)
           .then((res) => {
@@ -183,7 +182,7 @@ export default {
         this.$swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Heading, Sub Heading and Header Image Cannot Be Empty',
+          text: 'Sub Heading and Header Image Cannot Be Empty',
           showCloseButton: true,
           showConfirmButton: false,
         })

@@ -92,6 +92,8 @@ export default {
     answer
       .then((res) => {
         this.answer = res
+      })
+      .then(() => {
         this.loading = false
       })
       .catch((error) => {
