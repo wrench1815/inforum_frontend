@@ -1,6 +1,7 @@
 <template>
   <nav
-    class="mt-4 bg-white shadow-blur navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky top-0 z-index-sticky"
+    class="mt-4 bg-white shadow-blur navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl"
+    :class="stickyClasses"
     navbar-scroll="true"
   >
     <div class="container-fluid py-1 px-3">
@@ -101,6 +102,7 @@ export default {
     return {
       crumbs: [],
       lastElement: {},
+      // stickyClasses: '',
       utils: {
         // get crumbs from url
         getCrumbs(url) {
@@ -142,7 +144,10 @@ export default {
       },
     }
   },
+
   computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
+
     crumbClass: function () {
       for (let item = 0; item < crumbs.length; item++) {
         if ((item = this.crumbs.length - 1)) {
@@ -151,10 +156,20 @@ export default {
         return ''
       }
     },
-  },
 
-  computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
+    // set sticky class for route name
+    stickyClasses: function () {
+      if (this.$route.name == 'admin-blogpost-add') {
+        return ''
+      } else if (this.$route.name == 'admin-blogpost-edit-id') {
+        return ''
+      } else if (this.$route.name == 'admin-forum-add') {
+        return ''
+      } else if (this.$route.name == 'admin-forum-edit-id') {
+        return ''
+      }
+      return 'position-sticky top-0 z-index-sticky'
+    },
   },
 
   methods: {
@@ -162,6 +177,16 @@ export default {
       document.body.classList.toggle('g-sidenav-pinned')
     },
   },
+
+  // watch: {
+  //   $route() {
+  //     if (this.$route.name == 'admin-blogpost-add') {
+  //       this.stickyClasses = ''
+  //     } else {
+  //       this.stickyClasses = 'position-sticky top-0 z-index-sticky'
+  //     }
+  //   },
+  // },
 
   mounted() {
     const url = this.$route.fullPath

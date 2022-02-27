@@ -6,7 +6,7 @@
     >
       <div class="row align-items-center">
         <div class="col-md-5 ms-lg-auto">
-          <NuxtLink :to="`/`">
+          <NuxtLink :to="`/blog/${post.slug}`">
             <div class="p-3">
               <div class="cursor-pointer img-hover-zoom border-radius-2xl">
                 <img
@@ -28,7 +28,7 @@
           <h1
             class="text-dark display-5 font-weight-bolder fadeIn2 fadeInBottom"
           >
-            <NuxtLink :to="`/`">{{ post.title }}</NuxtLink>
+            <NuxtLink :to="`/blog/${post.slug}`">{{ post.title }}</NuxtLink>
           </h1>
           <p class="my-4 lead text-dark d-none d-lg-block">
             {{ post.excerpt }}

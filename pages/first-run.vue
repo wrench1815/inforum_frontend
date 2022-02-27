@@ -299,7 +299,7 @@ export default {
                 this.$swal.showLoading()
 
                 this.$axios
-                  .post('FirstRun', data)
+                  .$post('FirstRun', data)
                   .then((response) => {
                     this.$swal.hideLoading()
                     this.$swal.close()

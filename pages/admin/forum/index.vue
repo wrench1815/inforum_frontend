@@ -26,7 +26,7 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr class="text-primary text-center text-md">
-                      <th class="text-uppercase">S.No</th>
+                      <th class="text-uppercase">Id</th>
                       <th class="text-uppercase text-start ps-2">
                         Query Title
                       </th>
@@ -40,11 +40,11 @@
                   <tbody>
                     <tr
                       class="align-middle text-center text-dark"
-                      v-for="(query, index) in queries"
+                      v-for="query in queries"
                       :key="query.id"
                     >
                       <td class="text-bold">
-                        {{ index + 1 }}
+                        {{ query.id }}
                       </td>
                       <td
                         class="text-capitalize text-start link-info cursor-pointer custom-paragraph"
