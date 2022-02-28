@@ -6,7 +6,11 @@ export const getters = {
 
   // Returns curretly Logged In User data
   loggedInUser(state) {
-    return state.auth.user.user
+    if (state.auth.loggedIn) {
+      return state.auth.user.user
+    } else {
+      return null
+    }
   },
 
   // Returns curretly Logged In User Role

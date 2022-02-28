@@ -7,7 +7,7 @@
       <header>
         <div class="page-header min-vh-100">
           <div
-            class="header-bg-image w-lg-55 w-md-50 w-sm-100 w-100 position-absolute fixed-top ms-auto h-100 z-index-0"
+            class="header-bg-image w-lg-65 w-md-80 w-sm-100 w-100 position-absolute fixed-top ms-auto h-100 z-index-0 border-radius-bottom-start-md-circle border-radius-top-end-md-circle border-radius-bottom-start-pill border-radius-top-end-pill shadow-blur"
             loading="lazy"
             :style="{
               'background-image': 'url(' + homeData.headerImage + ')',
@@ -106,6 +106,6 @@ export default {
 .header-bg-image {
   background-repeat: no-repeat;
   background-position: top left;
-  background-size: fit;
+  background-size: cover;
 }
 </style>

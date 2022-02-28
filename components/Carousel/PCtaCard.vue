@@ -5,7 +5,9 @@
         <div class="col-md-5 ms-lg-auto">
           <NuxtLink :to="`/`">
             <div class="p-3">
-              <div class="cursor-pointer img-hover-zoom border-radius-2xl">
+              <div
+                class="cursor-pointer img-hover-zoom border-radius-2xl shadow-blur"
+              >
                 <img
                   class="w-100 border-radius-xl max-height-500 img-cover aspect-9-16"
                   src="https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg"
@@ -16,7 +18,7 @@
             </div>
           </NuxtLink>
         </div>
-        <div class="col-md-5 me-lg-auto position-relative">
+        <div class="col-md-6 me-lg-auto position-relative">
           <h1
             class="text-dark display-5 font-weight-bolder fadeIn2 fadeInBottom"
           >
