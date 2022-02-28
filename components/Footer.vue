@@ -12,9 +12,9 @@
                 Inforum
               </p>
             </NuxtLink>
-            <a href="mailto:contact@inforum.com" class="link-dark"
+            <a href="mailto:inforum1815@gmail.com" class="link-dark"
               ><span class="badge bg-secondary mb-2">Email</span>
-              contact@inforum.com</a
+              inforum1815@gmail.com</a
             >
           </div>
 

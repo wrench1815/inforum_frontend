@@ -270,7 +270,7 @@ export default {
                 this.$swal({
                   icon: 'error',
                   title: 'Error',
-                  text: 'Unable to Delete Contact Form',
+                  text: 'Unable to Delete the User.',
                 })
               })
           }

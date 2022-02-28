@@ -8,7 +8,9 @@
         <div class="col-md-5 ms-lg-auto">
           <NuxtLink :to="`/blog/${post.slug}`">
             <div class="p-3">
-              <div class="cursor-pointer img-hover-zoom border-radius-2xl">
+              <div
+                class="cursor-pointer img-hover-zoom border-radius-2xl shadow-blur"
+              >
                 <img
                   class="w-100 border-radius-xl max-height-500 img-cover aspect-9-16"
                   :src="post.featureImage"
@@ -19,7 +21,7 @@
             </div>
           </NuxtLink>
         </div>
-        <div class="col-md-5 me-lg-auto position-relative">
+        <div class="col-md-7 me-lg-auto position-relative">
           <h6
             class="opacity-7 text-uppercase font-weight-bolder text-sm border border-warning bg-warning text-light d-inline-block rounded-3 px-2 py-1"
           >
