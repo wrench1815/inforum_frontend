@@ -402,9 +402,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.header-img {
-  background-image: url('~/assets/curved-images/curved13.jpg');
-  background-size: cover;
-}
-</style>
+<style scoped></style>

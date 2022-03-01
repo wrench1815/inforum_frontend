@@ -4,8 +4,7 @@
       <div class="page-header min-vh-100">
         <div
           class="header-bg-image w-lg- w-md- w-sm- w-100 position-absolute fixed-top me-auto h-100 z-index-0"
-          id="HeaderBgImage"
-          loading="lazy"
+          lazy-background="~/assets/svg/quit-animated.svg"
         ></div>
         <div class="container">
           <div class="row">
@@ -54,7 +53,6 @@ export default {
 
 <style scoped>
 .header-bg-image {
-  background-image: url(~assets/svg/quit-animated.svg);
   background-repeat: no-repeat;
   background-position: top left;
   background-size: fit;

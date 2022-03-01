@@ -2,7 +2,10 @@
   <div>
     <!-- Start:Header -->
     <header class="bg-gradient-dark">
-      <div class="page-header header-bg-image min-vh-75">
+      <div
+        class="page-header header-bg-image min-vh-75"
+        lazy-background="~/assets/images/3d-render.jpg"
+      >
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container">
           <div class="row justify-content-center">
@@ -107,7 +110,6 @@ export default {
 
 <style scoped>
 .header-bg-image {
-  background-image: url(@/assets/images/3d-render.jpg);
   background-repeat: no-repeat;
   background-position: top left;
   background-size: cover;

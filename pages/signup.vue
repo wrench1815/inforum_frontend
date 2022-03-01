@@ -1,7 +1,7 @@
 <template>
   <div
     class="page-header align-items-start min-vh-100 header-img"
-    loading="lazy"
+    lazy-background="~/assets/curved-images/curved13.jpg"
   >
     <span class="mask bg-gradient-dark opacity-6">
       <LazyParticles
@@ -361,7 +361,6 @@ export default {
 
 <style scoped>
 .header-img {
-  background-image: url('~/assets/curved-images/curved13.jpg');
   background-size: cover;
 }
 </style>

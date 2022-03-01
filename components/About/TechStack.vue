@@ -8,11 +8,14 @@
             <a class="d-block blur-shadow-image ratio ratio-16x9">
               <img
                 src="~/assets/images/technology.jpg"
-                alt="img-colored-shadow"
+                alt="Technology"
                 class="img-fluid border-radius-lg img-cover-top"
               />
             </a>
-            <div class="colored-shadow shadow-bg"></div>
+            <div
+              class="colored-shadow"
+              lazy-background="~/assets/images/technology.jpg"
+            ></div>
           </div>
           <div class="card-body text-center">
             <h5 class="font-weight-norma text-primary">Tech Stack</h5>
@@ -33,7 +36,7 @@
                 class="img-fluid"
                 src="~/assets/svg/nuxt-colored.svg"
                 width="90rem"
-                alt=""
+                alt="Nuxt"
               />
               <h5 class="nuxt-text-primary">
                 <a
@@ -59,6 +62,7 @@
                 class="img-fluid py-4"
                 src="~/assets/svg/dotnet-logo-text-logo-Purple.svg"
                 width="135rem"
+                alt="ASP"
               />
               <h5 class="asp-text-primary mt-n2">
                 <a
@@ -85,7 +89,7 @@
                 class="img-fluid py-2"
                 width="90rem"
                 src="~/assets/svg/bootstrap-logo.svg"
-                alt=""
+                alt="Bootstrap"
               />
               <h5 class="bootstrap-text-primary">
                 <a
@@ -111,7 +115,7 @@
                 class="img-fluid py-2"
                 src="~/assets/svg/cloudinary_cloud_glyph_regular.svg"
                 width="109rem"
-                alt=""
+                alt="Cloudinary"
               />
               <h5 class="cloudinary-text-primary">
                 <a
@@ -138,7 +142,7 @@
                 class="img-fluid py-2"
                 width="90rem"
                 src="~/assets/svg/microsoft-sql-server-logo.svg"
-                alt=""
+                alt="SQL Server"
               />
               <h5 class="sql-server-text-primary">
                 <a
@@ -205,9 +209,5 @@ export default {
 .img-cover-top {
   object-fit: cover;
   object-position: center 20%;
-}
-
-.shadow-bg {
-  background-image: url(@/assets/images/technology.jpg);
 }
 </style>
