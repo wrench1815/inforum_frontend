@@ -116,11 +116,11 @@
 
         <!-- Start:10 Popular Queries -->
         <div class="col-12 mt-3">
-          <div class="card">
+          <div class="card card-body">
             <div class="card-header border-bottom pb-0 pt-3">
               <h3>Top 10 Forum Queries</h3>
             </div>
-            <div class="table-responsive border rounded-3">
+            <div class="table-responsive border rounded-3 mt-3 pb-2">
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr class="text-primary text-center text-md">
@@ -176,11 +176,11 @@
 
         <!-- Start:10 Popular Posts -->
         <div class="col-12 mt-3">
-          <div class="card">
+          <div class="card card-body">
             <div class="card-header border-bottom pb-0 pt-3">
               <h3>Top 10 Blog Posts</h3>
             </div>
-            <div class="table-responsive border rounded-3">
+            <div class="table-responsive border rounded-3 mt-3 pb-2">
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr class="text-primary text-center text-md">
