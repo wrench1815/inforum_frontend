@@ -7,7 +7,7 @@
       <!-- Start:SubComment -->
       <div>
         <div
-          class="text-primary font-weight-bold fs-5 me-2 d-flex gap-2 align-items-end"
+          class="text-primary font-weight-bold fs-5 me-2 d-flex gap-2 align-items-center"
         >
           <span class="avatar avatar-sm shadow">
             <img

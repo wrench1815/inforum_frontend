@@ -1,41 +1,39 @@
 <template>
   <div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 ms-auto me-auto"><h3>Comments</h3></div>
-        <template v-if="loading">
-          <section class="col-12 ms-auto me-auto">
-            <h3>Loading....</h3>
-          </section>
-        </template>
-        <template v-if="!loading">
-          <div class="col-12 ms-auto me-auto">
-            <template>
-              <!-- Start:Commnet Input Box -->
-              <BlogAddComment
-                :postId="postId"
-                v-on:comment-added="getComments()"
-              />
-              <!-- End:Commnet Input Box -->
+    <div class="row">
+      <div class="col-12 ms-auto me-auto"><h3>Comments</h3></div>
+      <template v-if="loading">
+        <section class="col-12 ms-auto me-auto">
+          <h3>Loading....</h3>
+        </section>
+      </template>
+      <template v-if="!loading">
+        <div class="col-12 ms-auto me-auto">
+          <template>
+            <!-- Start:Commnet Input Box -->
+            <BlogAddComment
+              :postId="postId"
+              v-on:comment-added="getComments()"
+            />
+            <!-- End:Commnet Input Box -->
 
-              <template v-for="comment in comments.comments">
-                <!-- Start:Blog Comment -->
-                <BlogComment :comment="comment" />
-                <!-- Start:Blog Comment -->
-              </template>
+            <template v-for="comment in comments.comments">
+              <!-- Start:Blog Comment -->
+              <BlogComment :comment="comment" />
+              <!-- Start:Blog Comment -->
             </template>
+          </template>
+        </div>
+        <div class="col-12 ms-auto me-auto text-center">
+          <div
+            class="link-primary cursor-pointer d-inline"
+            v-if="comments.pagination.hasNext"
+            @click="loadMoreComments()"
+          >
+            Load more....
           </div>
-          <div class="col-12 ms-auto me-auto text-center">
-            <div
-              class="link-primary cursor-pointer d-inline"
-              v-if="comments.pagination.hasNext"
-              @click="loadMoreComments()"
-            >
-              Load more....
-            </div>
-          </div>
-        </template>
-      </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>

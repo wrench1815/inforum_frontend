@@ -6,11 +6,11 @@
     <div v-if="!loading">
       <!-- Start:Commenter -->
       <div class="border-top p-3">
-        <div class="d-flex justify-content-start gap-3">
+        <div class="d-flex justify-content-start align-items-center gap-3">
           <!-- Start:Profile Image -->
-          <span class="avatar avatar-md rounded-circle shadow-card">
+          <span class="avatar avatar-md shadow-card">
             <img
-              class="avatar avatar-md rounded-circle img-fit-cover"
+              class="avatar avatar-md img-fit-cover"
               :src="user.user.profileImage"
               alt="avatar"
             />
