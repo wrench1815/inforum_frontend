@@ -125,5 +125,9 @@ export default {
     axios: {
       baseUrl: process.env.API_URL,
     },
+
+    hImage: process.env.H_IMAGE,
+    aImage: process.env.A_IMAGE,
+    vImage: process.env.V_IMAGE,
   },
 }
