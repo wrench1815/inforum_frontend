@@ -148,4 +148,10 @@ export default {
     aImage: process.env.A_IMAGE,
     vImage: process.env.V_IMAGE,
   },
+
+  // Customize the progress-bar
+  loading: '~/components/FullLoading.vue',
+
+  // custom loading indicator
+  loadingIndicator: '~/components/loading-indicator.html',
 }
