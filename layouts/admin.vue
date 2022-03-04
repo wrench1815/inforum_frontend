@@ -2,13 +2,7 @@
   <div>
     <AdminAsideNav class="aside-index" />
     <main
-      class="
-        main-content
-        position-relative
-        max-height-vh-100
-        h-100
-        border-radius-lg
-      "
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
     >
       <!-- <AdminNavBar /> -->
       <Nuxt />
@@ -19,6 +13,8 @@
 
 <script>
 export default {
+  middleware: ['auth', 'isAdmin'],
+
   head() {
     return {
       bodyAttrs: {

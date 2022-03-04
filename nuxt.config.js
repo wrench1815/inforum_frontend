@@ -20,26 +20,12 @@ export default {
     ],
 
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       // Roboto Font
       {
         rel: 'stylesheet',
         type: 'text/css',
         href: '/global/css/fonts.css',
-      },
-
-      // Nucleo Icons css
-      {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: '/global/css/nucleo-icons.css',
-      },
-
-      // Nucleo Icons svg
-      {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: '/global/css/nucleo-svg.css',
       },
     ],
 
@@ -74,17 +60,98 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
+    // https://github.com/avil13/vue-sweetalert2
+    'vue-sweetalert2/nuxt',
+
+    // https://auth.nuxtjs.org
+    '@nuxtjs/auth-next',
+
+    // https://cloudinary.nuxtjs.org
+    '@nuxtjs/cloudinary',
+
+    // https://gitlab.com/broj42/nuxt-lazy-load#readme
+    [
+      'nuxt-lazy-load',
+      {
+        images: true,
+        videos: true,
+        audios: true,
+        iframes: true,
+        native: false,
+        directiveOnly: false,
+
+        // To remove class set value to false
+        loadingClass: 'isLoading',
+        loadedClass: 'isLoaded',
+        appendClass: 'lazyLoad',
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  // sweetalert2 configuration: https://sweetalert2.github.io
+  sweetalert: {
+    // confirmButtonColor: '#4caf50',
+    // cancelButtonColor: '#f44335',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    buttonsStyling: false,
+    customClass: {
+      confirmButton: 'btn btn-success mx-2',
+      cancelButton: 'btn btn-danger mx-2',
+      denyButton: 'btn btn-warning mx-2',
+    },
+  },
+
+  // Auth module configuration: https://auth.nuxtjs.org/setup
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          maxAge: 604800, // 1 week
+        },
+        user: {
+          property: false,
+        },
+        endpoints: {
+          login: {
+            url: '/User/login',
+            method: 'post',
+          },
+          user: { url: '/User/me', method: 'get' },
+          logout: false,
+        },
+      },
+    },
+  },
+
+  // Cloudinary Configuration https://cloudinary.nuxtjs.org/options
+  cloudinary: {
+    cloudName: process.env.CLOUDNAME,
+    apiKey: process.env.CLOUD_API_KEY,
+    apiSecret: process.env.CLOUD_API_SECRET,
+    secure: true,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   publicRuntimeConfig: {
     axios: {
-      baseUrl: 'http://localhost:5064/api',
+      baseUrl: process.env.API_URL,
     },
+
+    hImage: process.env.H_IMAGE,
+    aImage: process.env.A_IMAGE,
+    vImage: process.env.V_IMAGE,
   },
+
+  // Customize the progress-bar
+  loading: '~/components/FullLoading.vue',
+
+  // custom loading indicator
+  loadingIndicator: '~/components/loading-indicator.html',
 }

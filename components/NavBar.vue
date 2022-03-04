@@ -6,23 +6,19 @@
       <div class="row">
         <div class="col-12">
           <nav
-            class="
-              navbar-light navbar navbar-expand-lg
-              border-radius-xl
-              position-absolute
-              my-3
-              start-0
-              end-0
-              top-0
-              border-bottom
-              z-index-3
-              shadow
-              mx-4
-            "
+            class="navbar-light navbar navbar-expand-lg border-radius-xl position-absolute my-3 start-0 end-0 top-0 border-bottom z-index-3 shadow mx-4"
             id="nav"
           >
             <div class="container">
-              <NuxtLink class="navbar-brand fs-4" to="/"> Inforum </NuxtLink>
+              <NuxtLink class="navbar-brand fs-4" to="/">
+                <img
+                  src="@/assets/icon.jpg"
+                  width="25rem"
+                  alt="logo"
+                  class="mb-1"
+                />
+                <span>Inforum</span>
+              </NuxtLink>
 
               <button
                 class="navbar-toggler shadow-none ms-2"
@@ -43,19 +39,13 @@
                 class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0"
                 id="navigation"
               >
-                <ul class="navbar-nav navbar-nav-hover ms-auto">
+                <ul
+                  class="navbar-nav navbar-nav-hover ms-auto d-flex align-items-lg-center align-items-start"
+                >
                   <!-- Home Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/"
                     >
                       Home
@@ -65,15 +55,7 @@
                   <!-- Forum Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/forum"
                     >
                       Forum
@@ -83,15 +65,7 @@
                   <!-- Blog Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/blog"
                     >
                       Blog
@@ -101,15 +75,7 @@
                   <!-- Contact Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/contact"
                     >
                       Contact
@@ -118,37 +84,115 @@
                   <!-- About Link -->
                   <li class="nav-item mx-2">
                     <NuxtLink
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
+                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/about"
                     >
                       About
                     </NuxtLink>
                   </li>
 
+                  <!-- Start:Profile -->
                   <li class="nav-item mx-2">
-                    <a
-                      class="
-                        nav-link
-                        ps-2
-                        d-flex
-                        justify-content-between
-                        cursor-pointer
-                        align-items-center
-                        text-md
-                      "
-                      href="/admin"
-                    >
-                      Admin
-                    </a>
+                    <div class="nav-link ps-2 text-md dropdown">
+                      <!-- Start:Profile Image -->
+                      <!-- Profile Image if Authenticated -->
+                      <img
+                        v-if="isAuthenticated"
+                        class="avatar avatar-sm dropdown-toggle p-0 m-0 img-fit shadow"
+                        id="profileDropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        :src="loggedInUser.profileImage"
+                        alt="Avatar"
+                      />
+
+                      <!-- Profile Image if not Authenticated -->
+                      <img
+                        v-if="!isAuthenticated"
+                        class="avatar avatar-sm dropdown-toggle p-0 m-0 img-fit shadow"
+                        id="profileDropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        :src="profileImage"
+                        alt="Avatar"
+                      />
+                      <!-- End:Profile Image -->
+
+                      <!-- Start:DropDown Menu Items -->
+                      <ul
+                        class="dropdown-menu position-absolute"
+                        aria-labelledby="profileDropdownMenuButton"
+                      >
+                        <!-- Start:Profile Link -->
+                        <li v-if="isAuthenticated">
+                          <NuxtLink
+                            class="dropdown-item text-dark"
+                            to="/profile"
+                            >Profile</NuxtLink
+                          >
+                        </li>
+                        <!-- End:Profile Link -->
+
+                        <!-- Start:Login Link -->
+                        <li v-if="!isAuthenticated">
+                          <NuxtLink class="dropdown-item text-dark" to="/login"
+                            >Login<i class="ms-2 fas fa-sign-in-alt"></i
+                          ></NuxtLink>
+                        </li>
+                        <!-- End:login Link -->
+
+                        <!-- Start:Sign Up Link -->
+                        <li v-if="!isAuthenticated">
+                          <NuxtLink class="dropdown-item text-dark" to="/signup"
+                            >Sign Up<i class="ms-2 fas fa-user-plus"></i
+                          ></NuxtLink>
+                        </li>
+                        <!-- End:Sign Up Link -->
+
+                        <!-- Start:Dash Link -->
+                        <li
+                          v-if="
+                            loggedInUserRole == 'Editor' ||
+                            loggedInUserRole == 'Admin'
+                          "
+                        >
+                          <NuxtLink class="dropdown-item text-dark" to="/dash"
+                            >Dash</NuxtLink
+                          >
+                        </li>
+                        <!-- End:Dash Link -->
+
+                        <!-- Start:Admin Link -->
+                        <li v-if="loggedInUserRole == 'Admin'">
+                          <NuxtLink class="dropdown-item text-dark" to="/admin"
+                            >Admin</NuxtLink
+                          >
+                        </li>
+                        <!-- End:Admin Link -->
+
+                        <li v-if="isAuthenticated">
+                          <hr class="dropdown-divider border-dark" />
+                        </li>
+
+                        <!-- Start:Logout -->
+                        <li v-if="isAuthenticated">
+                          <div class="dropdown-item">
+                            <NuxtLink
+                              class="btn btn-sm btn-danger m-0 text-xs"
+                              to="/logout"
+                            >
+                              Logout<i
+                                class="ms-2 fas fa-sign-out-alt text-xs"
+                              ></i>
+                            </NuxtLink>
+                          </div>
+                        </li>
+                        <!-- End:Logout -->
+                      </ul>
+                      <!-- End:DropDown Menu Items -->
+                    </div>
                   </li>
+                  <!-- End:Profile -->
                 </ul>
               </div>
             </div>
@@ -162,9 +206,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'NavBar',
+
   props: {},
+
+  data() {
+    return {
+      profileImage:
+        'https://res.cloudinary.com/inforum/image/upload/v1645625776/Defaults/profile_image_dummy_oawg87.png',
+    }
+  },
+
   watch: {
     $route() {
       document.querySelectorAll('.nav-item').forEach(() => {
@@ -174,6 +229,25 @@ export default {
           .querySelector('.navbar-toggler')
           .setAttribute('aria-expanded', false)
       })
+    },
+  },
+
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser', 'loggedInUserRole']),
+  },
+
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+
+      this.$swal({
+        title: 'Logged out',
+        text: 'You have been logged out',
+        type: 'success',
+        timer: 2000,
+      })
+
+      this.$router.push('/')
     },
   },
 }
@@ -187,5 +261,10 @@ export default {
 
 #nav .navbar-nav .nuxt-link-exact-active {
   color: #e91e63;
+}
+
+.img-fit {
+  object-fit: cover !important;
+  object-position: center !important;
 }
 </style>
