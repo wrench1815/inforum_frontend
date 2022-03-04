@@ -7,9 +7,9 @@
       <div class="card py-2 py-sm-4">
         <div class="row">
           <div class="col-12 mx-4" v-if="loading">
-            <h3>Loading...</h3>
+            <Loading class="bg-transparent shadow-none" />
           </div>
-          
+
           <div class="col-12" v-if="!loading">
             <div class="container py-1">
               <div class="px-auto">
@@ -49,12 +49,17 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 import ProfileImage from '~/components/Admin/ProfileImage.vue'
+
 export default {
   layout: 'admin',
+
   components: {
     ProfileImage,
+    Loading,
   },
+
   data() {
     return {
       subComment: {},

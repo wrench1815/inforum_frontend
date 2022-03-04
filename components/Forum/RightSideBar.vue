@@ -5,7 +5,7 @@
     <div class="border-top mb-2"></div>
     <!-- Start:Loading -->
     <template v-if="loading">
-      <h5>Loading....</h5>
+      <Loading class="bg-transparent shadow-none" />
     </template>
     <!-- End:Loading -->
 
@@ -35,7 +35,7 @@
 
     <!-- Start:Loading -->
     <template v-if="loading">
-      <h5>Loading....</h5>
+      <Loading class="bg-transparent shadow-none" />
     </template>
     <!-- End:Loading -->
 
@@ -60,8 +60,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   name: 'RightSideBar',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

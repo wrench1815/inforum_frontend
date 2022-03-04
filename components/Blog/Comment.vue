@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <h4>Loading...</h4>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <div v-if="!loading">
       <!-- Start:Commenter -->
@@ -114,6 +114,7 @@
 <script>
 import SubComment from '~/components/Blog/SubComment.vue'
 import AddSubComment from '~/components/Blog/AddSubComment.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   name: 'Comment',
@@ -125,6 +126,7 @@ export default {
   components: {
     SubComment,
     AddSubComment,
+    Loading,
   },
 
   data() {

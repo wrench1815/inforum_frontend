@@ -4,7 +4,7 @@
       <div class="col-12 ms-auto me-auto"><h3>Comments</h3></div>
       <template v-if="loading">
         <section class="col-12 ms-auto me-auto">
-          <h3>Loading....</h3>
+          <Loading class="bg-transparent shadow-none" />
         </section>
       </template>
       <template v-if="!loading">
@@ -39,8 +39,13 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 export default {
   name: 'FullComment',
+
+  components: {
+    Loading,
+  },
 
   props: {
     postId: Number,

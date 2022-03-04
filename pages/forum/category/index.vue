@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <h2 class="text-center">Loading.....</h2>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <div v-if="!loading">
       <div class="card card-body">
@@ -20,7 +20,10 @@
         </div>
 
         <template v-else>
-          <NotFound class="p-2 border-top" :message="'No Categories to Show.'" />
+          <NotFound
+            class="p-2 border-top"
+            :message="'No Categories to Show.'"
+          />
         </template>
       </div>
     </div>
@@ -28,8 +31,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   layout: 'forum',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

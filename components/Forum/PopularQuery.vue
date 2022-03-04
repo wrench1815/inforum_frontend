@@ -19,7 +19,6 @@ export default {
 
   data() {
     return {
-      loading: true,
       popularQueries: {},
       textcols: [
         'text-primary',

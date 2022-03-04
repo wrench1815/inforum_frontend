@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="loading" class="container mt-7"><h4>Loading Data...</h4></div>
+    <div v-if="loading" class="container mt-7">
+      <Loading class="bg-transparent shadow-none" />
+    </div>
     <div v-if="!loading">
       <!-- Start:Header -->
       <header>
@@ -108,9 +110,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 import { mapGetters } from 'vuex'
 
 export default {
+  components: {
+    Loading,
+  },
+
   data() {
     return {
       post: '',

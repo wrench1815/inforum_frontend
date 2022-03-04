@@ -9,7 +9,7 @@
             <div class="border-bottom"></div>
           </div>
           <div class="col-12" v-if="loading">
-            <h3 class="mx-3">Loading...</h3>
+            <Loading class="mx-3 bg-transparent shadow-none" />
           </div>
           <!-- Start:Contact Form Add Form -->
           <div class="col-12" v-if="!loading">
@@ -49,9 +49,15 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 import { mapGetters } from 'vuex'
+
 export default {
   layout: 'admin',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

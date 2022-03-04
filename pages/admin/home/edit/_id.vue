@@ -12,7 +12,7 @@
           </div>
 
           <div class="col-12" v-if="loading">
-            <loading />
+            <Loading />
           </div>
 
           <div class="col-12" v-if="!loading">
