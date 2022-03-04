@@ -1,6 +1,9 @@
 <template>
   <section class="bg-gradient-dark mx-0 px-0">
-    <div class="page-header blog-bg-image min-vh-75">
+    <div
+      class="page-header blog-bg-image min-vh-75"
+      lazy-background="~/assets/images/catalog.jpg"
+    >
       <span class="mask bg-gradient-faded-dark opacity-7"></span>
       <div class="container">
         <div class="row justify-content-center">
@@ -28,7 +31,6 @@ export default {
 
 <style scoped>
 .blog-bg-image {
-  background-image: url(@/assets/images/catalog.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

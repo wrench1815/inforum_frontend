@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="container pt-7" v-if="loading">
-      <div class="text-center">
-        <h2>Loading....</h2>
-      </div>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <div class="container pt-7" v-if="!loading">
       <div class="my-2">
@@ -72,13 +70,6 @@
                     />
                   </div>
                 </div>
-
-                <!-- <div class="row mt-4">
-            <div class="col-12 d-flex justify-content-end gap-2">
-              <button class="btn btn-info">Reset</button>
-              <button class="btn btn-success">Update</button>
-            </div>
-          </div> -->
               </div>
             </div>
             <!-- Start:Basic Info Card -->
@@ -306,13 +297,16 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
 import ImageUpload from '~/components/Admin/Utils/ImageUpload.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   middleware: 'auth',
 
   components: {
     ImageUpload,
+    Loading,
   },
 
   data() {

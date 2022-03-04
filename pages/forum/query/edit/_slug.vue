@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <h2 class="text-center">Loading.....</h2>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <div v-if="!loading">
       <div class="card card-body">
@@ -101,12 +101,18 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 import { mapGetters } from 'vuex'
 
 export default {
   middleware: ['auth'],
 
   layout: 'forum',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

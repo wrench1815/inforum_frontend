@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Loading from '../Admin/Utils/Loading.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   name: 'PCard',

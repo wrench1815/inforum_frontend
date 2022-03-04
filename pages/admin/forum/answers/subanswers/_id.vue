@@ -4,7 +4,6 @@
 
     <!-- content -->
     <div class="container-fluid py-4">
-      <!-- add loading component later -->
       <Loading v-if="loading" />
 
       <div class="card py-4" v-if="!loading">

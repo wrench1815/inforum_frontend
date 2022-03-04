@@ -1,17 +1,14 @@
 <template>
   <div>
-    <div v-if="loading" class="container mt-7"><h4>Loading Data...</h4></div>
+    <div v-if="loading" class="container mt-7">
+      <Loading class="bg-transparent shadow-none" />
+    </div>
     <div v-if="!loading">
       <!-- Start:Header -->
       <header>
         <div
           class="page-header min-vh-95 header-image"
-          :style="`background-image: url(${
-            post.featureImage
-              ? post.featureImage
-              : 'https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg'
-          })`"
-          loading="lazy"
+          :lazy-background="post.featureImage"
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
           <div class="container">
@@ -113,9 +110,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 import { mapGetters } from 'vuex'
 
 export default {
+  components: {
+    Loading,
+  },
+
   data() {
     return {
       post: '',

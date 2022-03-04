@@ -3,7 +3,10 @@
     <div>
       <!-- Start:Header -->
       <header>
-        <div class="page-header min-vh-95 header-image" loading="lazy">
+        <div
+          class="page-header min-vh-95 header-image"
+          lazy-background="~/assets/images/key-hole.jpg"
+        >
           <span class="mask bg-gradient-dark opacity-6"></span>
           <div class="container">
             <div class="row">
@@ -194,7 +197,6 @@ export default {}
 
 <style scoped>
 .header-image {
-  background-image: url(~assets/images/key-hole.jpg);
   background-size: cover;
   transform: translate3d(0px, 0px, 0px);
 }

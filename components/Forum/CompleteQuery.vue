@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <h3 class="text-center">Loading.....</h3>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <!-- card -->
     <div
@@ -151,10 +151,15 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'CompleteQuery',
+
+  components: {
+    Loading,
+  },
 
   props: {
     query: {

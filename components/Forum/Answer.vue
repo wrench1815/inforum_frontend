@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <h4>Loading....</h4>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <div v-if="!loading">
       <!-- Start:Answer User -->
@@ -117,8 +117,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   name: 'Answer',
+
+  components: {
+    Loading,
+  },
 
   props: {
     answer: {

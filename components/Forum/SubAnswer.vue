@@ -1,7 +1,7 @@
 <template>
   <div class="p-2 mt-3 bg-gray-200 rounded-3 shadow">
     <div v-if="loading">
-      <h4>Loading....</h4>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <div v-if="!loading">
       <!-- Start:Sub Answer -->
@@ -39,8 +39,12 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   name: 'SubAnswer',
+
+  components: { Loading },
 
   props: {
     subAnswer: Object,

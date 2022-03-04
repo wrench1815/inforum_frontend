@@ -5,7 +5,7 @@
     </h3>
     <div class="row g-4">
       <div v-if="loading" class="col-lg-4 col-md-6">
-        <h5>Loading....</h5>
+        <Loading class="bg-transparent shadow-none" />
       </div>
 
       <div
@@ -31,10 +31,15 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   layout: 'dash',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

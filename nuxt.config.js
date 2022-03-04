@@ -69,6 +69,24 @@ export default {
 
     // https://cloudinary.nuxtjs.org
     '@nuxtjs/cloudinary',
+
+    // https://gitlab.com/broj42/nuxt-lazy-load#readme
+    [
+      'nuxt-lazy-load',
+      {
+        images: true,
+        videos: true,
+        audios: true,
+        iframes: true,
+        native: false,
+        directiveOnly: false,
+
+        // To remove class set value to false
+        loadingClass: 'isLoading',
+        loadedClass: 'isLoaded',
+        appendClass: 'lazyLoad',
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -130,4 +148,10 @@ export default {
     aImage: process.env.A_IMAGE,
     vImage: process.env.V_IMAGE,
   },
+
+  // Customize the progress-bar
+  loading: '~/components/FullLoading.vue',
+
+  // custom loading indicator
+  loadingIndicator: '~/components/loading-indicator.html',
 }

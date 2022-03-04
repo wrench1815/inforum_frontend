@@ -1,6 +1,13 @@
 <template>
   <div class="card py-4">
-    <h1 class="text-center">Loading...</h1>
+    <div class="card-body text-center">
+      <img
+        class="img-fluid"
+        src="~/assets/svg/ball-triangle.svg"
+        width="90px"
+        alt="Bars"
+      />
+    </div>
   </div>
 </template>
 

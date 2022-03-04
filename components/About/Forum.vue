@@ -1,6 +1,9 @@
 <template>
   <section class="bg-gradient-dark mx-0 px-0">
-    <div class="page-header forum-bg-image min-vh-75">
+    <div
+      class="page-header forum-bg-image min-vh-75"
+      lazy-background="~/assets/images/Online-Media.jpg"
+    >
       <span class="mask bg-gradient-faded-dark opacity-7"></span>
       <div class="container">
         <div class="row justify-content-center">
@@ -31,7 +34,6 @@ export default {
 
 <style scoped>
 .forum-bg-image {
-  background-image: url(@/assets/images/Online-Media.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

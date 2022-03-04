@@ -11,8 +11,9 @@
             <div class="border-bottom"></div>
           </div>
 
+          <Loading class="bg-transparent shadow-none" v-if="loading" />
           <!-- Start:Contact Form Update Form -->
-          <div class="col-12">
+          <div class="col-12" v-if="!loading">
             <div class="card-body position-relative">
               <form v-on:submit.prevent="updateContactForm">
                 <!-- Start:Full Name -->
@@ -95,8 +96,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   layout: 'admin',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

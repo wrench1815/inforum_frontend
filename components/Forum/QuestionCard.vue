@@ -2,7 +2,7 @@
   <!-- card -->
   <div>
     <div v-if="loading">
-      <h3 class="text-center">Loading.....</h3>
+      <Loading class="bg-transparent shadow-none" />
     </div>
     <div
       class="border border-radius-2xl bg-white mb-3 shadow-lg"
@@ -81,8 +81,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   name: 'QuestionCard',
+
+  components: {
+    Loading,
+  },
 
   props: {
     query: {

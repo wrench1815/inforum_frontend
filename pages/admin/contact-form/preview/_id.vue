@@ -6,7 +6,7 @@
     <div class="container-fluid py-4">
       <!-- Start:loading -->
       <div class="text-center" v-if="loading">
-        <h2>Loading...</h2>
+        <Loading class="bg-transparent shadow-none" />
       </div>
       <!-- End:loading -->
 
@@ -78,8 +78,14 @@
 </template>
 
 <script>
+import Loading from '~/components/Admin/Utils/Loading.vue'
+
 export default {
   layout: 'admin',
+
+  components: {
+    Loading,
+  },
 
   data() {
     return {

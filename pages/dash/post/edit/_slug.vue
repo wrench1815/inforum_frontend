@@ -1,9 +1,9 @@
 <template>
   <div class="card-body pt-0">
     <h3 class="card card-body">Edit Post</h3>
-    <div class="card card-body mt-3" v-if="loading">
-      <h4>Loading....</h4>
-    </div>
+
+    <Loading class="mt-3" v-if="loading" />
+
     <form
       v-on:submit.prevent="updatePost"
       class="card card-body mt-3"
@@ -204,6 +204,7 @@
 import RichTextEditor from '../../../../components/Admin/Utils/RichTextEditor'
 import FullImageUpload from '~/components/Admin/Utils/FullImageUpload.vue'
 import CharacterCounter from '~/components/Admin/Utils/CharacterCount.vue'
+import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   layout: 'dash',
@@ -212,6 +213,7 @@ export default {
     RichTextEditor,
     FullImageUpload,
     CharacterCounter,
+    Loading,
   },
 
   data() {
