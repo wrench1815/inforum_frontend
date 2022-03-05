@@ -141,9 +141,9 @@ export default {
           uploadPreset: 'front_upload',
         })
         instance.then((res) => {
-          this.cloudSource = res.url
+          this.cloudSource = res.secure_url
           this.showUploading = false
-          this.$emit('uploadImageUrl', res.url)
+          this.$emit('uploadImageUrl', res.secure_url)
           this.cleanSetup()
         })
       }

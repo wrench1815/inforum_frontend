@@ -41,7 +41,7 @@
         <!-- End:Query Title -->
 
         <!-- Start:Query Description -->
-        <div v-html="query.description"></div>
+        <div v-lazy-load="query.description"></div>
         <!-- End:Query Description -->
 
         <!-- Start:Query Category -->

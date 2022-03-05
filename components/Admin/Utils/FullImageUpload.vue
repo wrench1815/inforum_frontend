@@ -37,7 +37,11 @@
         <div class="col-12" v-if="show">
           <h2 class="text-center py-2">Image Preview</h2>
           <div class="d-flex justify-content-center py-2">
-            <img :src="src" alt="Image Preview" class="img-fluid max-height-vh-100" />
+            <img
+              :src="src"
+              alt="Image Preview"
+              class="img-fluid max-height-vh-100"
+            />
           </div>
         </div>
       </div>
@@ -87,9 +91,9 @@ export default {
         })
         instance
           .then((res) => {
-            this.cloudSource = res.url
+            this.cloudSource = res.secure_url
             this.showUploading = false
-            this.$emit('uploadImageUrl', res.url)
+            this.$emit('uploadImageUrl', res.secure_url)
             this.cleanSetup()
           })
           .catch((err) => {
