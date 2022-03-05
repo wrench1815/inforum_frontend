@@ -14,6 +14,7 @@
           src="/favicon.png"
           class="navbar-brand-img h-100"
           alt="main_logo"
+          v-lazy-load
         />
         <span class="ms-1 font-weight-bold text-dark">Inforum Dashboard</span>
       </NuxtLink>

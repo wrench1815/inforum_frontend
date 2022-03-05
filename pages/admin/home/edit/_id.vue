@@ -62,6 +62,7 @@
                           :src="homeData.headerImage"
                           alt="Header Image"
                           class="img-fluid"
+                          v-lazy-load
                         />
                       </div>
                     </div>

@@ -16,6 +16,7 @@
                   width="25rem"
                   alt="logo"
                   class="mb-1"
+                  v-lazy-load
                 />
                 <span>Inforum</span>
               </NuxtLink>

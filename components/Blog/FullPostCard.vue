@@ -13,6 +13,7 @@
               : 'https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg'
           "
           :alt="post.title"
+          v-lazy-load
         />
       </NuxtLink>
     </div>

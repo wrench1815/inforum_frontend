@@ -11,6 +11,7 @@
             class="img-fit img-fluid avatar-custom shadow-card"
             :src="loggedInUser.profileImage"
             alt="Avatar"
+            v-lazy-load
           />
         </div>
 

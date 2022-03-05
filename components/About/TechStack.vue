@@ -10,6 +10,7 @@
                 src="~/assets/images/technology.jpg"
                 alt="Technology"
                 class="img-fluid border-radius-lg img-cover-top"
+                v-lazy-load
               />
             </a>
             <div
@@ -37,6 +38,7 @@
                 src="~/assets/svg/nuxt-colored.svg"
                 width="90rem"
                 alt="Nuxt"
+                v-lazy-load
               />
               <h5 class="nuxt-text-primary">
                 <a
@@ -63,6 +65,7 @@
                 src="~/assets/svg/dotnet-logo-text-logo-Purple.svg"
                 width="135rem"
                 alt="ASP"
+                v-lazy-load
               />
               <h5 class="asp-text-primary mt-n2">
                 <a
@@ -90,6 +93,7 @@
                 width="90rem"
                 src="~/assets/svg/bootstrap-logo.svg"
                 alt="Bootstrap"
+                v-lazy-load
               />
               <h5 class="bootstrap-text-primary">
                 <a
@@ -116,6 +120,7 @@
                 src="~/assets/svg/cloudinary_cloud_glyph_regular.svg"
                 width="109rem"
                 alt="Cloudinary"
+                v-lazy-load
               />
               <h5 class="cloudinary-text-primary">
                 <a
@@ -143,6 +148,7 @@
                 width="90rem"
                 src="~/assets/svg/microsoft-sql-server-logo.svg"
                 alt="SQL Server"
+                v-lazy-load
               />
               <h5 class="sql-server-text-primary">
                 <a

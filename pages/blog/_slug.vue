@@ -26,6 +26,7 @@
                     width="25rem"
                     :alt="`${author.user.firstName} ${author.user.lastName}`"
                     class="mb-1 avatar img-fit"
+                    v-lazy-load
                   />
                   <span class=""
                     >{{ author.user.firstName }}

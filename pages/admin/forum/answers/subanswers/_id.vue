@@ -16,6 +16,7 @@
               class="img-fluid w-50"
               src="~assets/svg/Empty-amico.svg"
               alt="Feels Empty"
+              v-lazy-load
             />
             <h3 class="mx-4">No Sub Answers Yet</h3>
           </div>

@@ -17,6 +17,7 @@
               class="img-fluid w-50"
               src="~assets/svg/Empty-amico.svg"
               alt="Feels Empty"
+              v-lazy-load
             />
             <h3 class="mx-4">No Home Data</h3>
           </div>

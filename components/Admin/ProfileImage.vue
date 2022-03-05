@@ -3,6 +3,7 @@
     :class="isAvatar ? defaultStyles : classNames"
     :src="profileImage"
     alt="Avatar"
+    v-lazy-load
   />
 </template>
 

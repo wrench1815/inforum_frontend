@@ -17,6 +17,7 @@
               class="img-fluid w-50"
               src="~assets/svg/Empty-amico.svg"
               alt="Feels Empty"
+              v-lazy-load
             />
             <h3 class="mx-4">Feels Empty.</h3>
           </div>
@@ -52,6 +53,7 @@
                             :src="user.profileImage"
                             class="avatar avatar-md rounded-circle img-fit"
                             alt="avatar"
+                            v-lazy-load
                           />
                         </span>
                       </td>

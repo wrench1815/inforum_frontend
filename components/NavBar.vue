@@ -16,6 +16,7 @@
                   width="25rem"
                   alt="logo"
                   class="mb-1"
+                  v-lazy-load
                 />
                 <span>Inforum</span>
               </NuxtLink>
@@ -104,6 +105,7 @@
                         aria-expanded="false"
                         :src="loggedInUser.profileImage"
                         alt="Avatar"
+                        v-lazy-load
                       />
 
                       <!-- Profile Image if not Authenticated -->
@@ -115,6 +117,7 @@
                         aria-expanded="false"
                         :src="profileImage"
                         alt="Avatar"
+                        v-lazy-load
                       />
                       <!-- End:Profile Image -->
 

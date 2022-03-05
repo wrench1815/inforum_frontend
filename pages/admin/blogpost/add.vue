@@ -44,6 +44,7 @@
                           :src="postFeatureImage"
                           alt="Feature Image"
                           class="img-fluid"
+                          v-lazy-load
                         />
                       </div>
                       <div class="border-bottom"></div>

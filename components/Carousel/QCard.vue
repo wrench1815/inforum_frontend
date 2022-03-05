@@ -25,6 +25,7 @@
                 class="avatar avatar-lg rounded-circle img-fit"
                 :src="user.profileImage"
                 alt="avatar"
+                v-lazy-load
               />
             </span>
             <span class="d-flex flex-column">

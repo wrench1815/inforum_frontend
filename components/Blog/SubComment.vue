@@ -14,6 +14,7 @@
               :src="user.user.profileImage"
               alt="logo"
               class="avatar avatar-sm img-fit-cover"
+              v-lazy-load
             />
           </span>
 

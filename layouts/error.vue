@@ -11,6 +11,7 @@
               width="25rem"
               alt="logo"
               class="mb-1"
+              v-lazy-load
             />
             <span>Inforum</span>
           </NuxtLink>
@@ -22,7 +23,8 @@
             <img
               class="img-fluid w-sm-90 w-md-80 w-lg-70 w-xl-60 w-xxl-50"
               :src="require(`~/assets/svg/error.svg`)"
-              alt=""
+              alt="Error"
+              v-lazy-load
             />
           </div>
           <div>
@@ -42,7 +44,8 @@
             <img
               class="img-fluid w-sm-90 w-md-80 w-lg-70 w-xl-60 w-xxl-50"
               :src="require(`~/assets/svg/fetch-failed.svg`)"
-              alt=""
+              alt="Error"
+              v-lazy-load
             />
           </div>
           <div>
@@ -62,7 +65,8 @@
             <img
               class="img-fluid w-80 w-md-60 w-lg-50 w-xl-40 w-xxl-30"
               :src="require(`~/assets/svg/access-denied.svg`)"
-              alt=""
+              alt="Error"
+              v-lazy-load
             />
           </div>
           <div>

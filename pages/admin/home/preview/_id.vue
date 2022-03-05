@@ -26,6 +26,7 @@
                 class="img-fluid shadow-blur rounded-3"
                 :src="homeData.headerImage"
                 alt="header image"
+                v-lazy-load
               />
             </div>
           </div>

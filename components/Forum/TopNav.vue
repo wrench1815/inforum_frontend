@@ -5,7 +5,13 @@
         class="d-flex align-items-center justify-content-between align-content-center px-3"
       >
         <NuxtLink class="navbar-brand fs-4 link-dark" to="/">
-          <img src="@/assets/icon.jpg" width="25rem" alt="logo" class="mb-1" />
+          <img
+            src="@/assets/icon.jpg"
+            width="25rem"
+            alt="logo"
+            class="mb-1"
+            v-lazy-load
+          />
           <span>Inforum</span>
         </NuxtLink>
 
@@ -55,7 +61,8 @@
                 v-if="!isAuthenticated"
                 class="avatar avatar-sm img-fit"
                 :src="profileImage"
-                alt=""
+                alt="Avatar"
+                v-lazy-load
               />
               <!-- End:Fallback Profile Image -->
 
@@ -64,7 +71,8 @@
                 v-if="isAuthenticated"
                 class="avatar avatar-sm img-fit"
                 :src="loggedInUser.profileImage"
-                alt=""
+                alt="Avatar"
+                v-lazy-load
               />
               <!-- End:User Profile Image -->
             </div>

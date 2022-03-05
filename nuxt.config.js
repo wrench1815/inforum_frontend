@@ -83,7 +83,7 @@ export default {
         audios: true,
         iframes: true,
         native: false,
-        directiveOnly: false,
+        directiveOnly: true,
 
         // To remove class set value to false
         loadingClass: 'isLoading',

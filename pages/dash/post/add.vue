@@ -39,6 +39,7 @@
                 :src="postFeatureImage"
                 alt="Feature Image"
                 class="img-fluid max-height-vh-100"
+                v-lazy-load
               />
             </div>
             <div class="border-bottom"></div>

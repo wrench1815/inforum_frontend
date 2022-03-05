@@ -21,6 +21,7 @@
                     :src="user.profileImage"
                     alt="img"
                     class="w-100 rounded-circle shadow-sm avatar-xl avatar-fit"
+                    v-lazy-load
                   />
                 </div>
               </div>

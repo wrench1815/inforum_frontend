@@ -8,7 +8,12 @@
           <div class="col-lg d-flex flex-column align-items-center">
             <NuxtLink to="/" class="d-flex align-items-center">
               <p class="text-muted d-block text-2xl text-center text-lg-start">
-                <img src="../assets/icon.jpg" alt="logo" class="w-15 w-lg-25" />
+                <img
+                  src="../assets/icon.jpg"
+                  alt="logo"
+                  class="w-15 w-lg-25"
+                  v-lazy-load
+                />
                 Inforum
               </p>
             </NuxtLink>

@@ -17,6 +17,7 @@
               class="avatar avatar-md rounded-circle img-fit"
               :src="queryAuthor.profileImage"
               alt="avatar"
+              v-lazy-load
             />
           </span>
 

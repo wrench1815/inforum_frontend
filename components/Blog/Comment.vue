@@ -13,6 +13,7 @@
               class="avatar avatar-md img-fit-cover"
               :src="user.user.profileImage"
               alt="avatar"
+              v-lazy-load
             />
           </span>
           <!-- End:Profile Image -->
