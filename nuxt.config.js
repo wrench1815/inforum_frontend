@@ -48,7 +48,11 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    {
+      src: '~/plugins/prism',
+    },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -79,7 +83,7 @@ export default {
         audios: true,
         iframes: true,
         native: false,
-        directiveOnly: false,
+        directiveOnly: true,
 
         // To remove class set value to false
         loadingClass: 'isLoading',

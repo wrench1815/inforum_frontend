@@ -47,9 +47,10 @@
                     </h3>
                     <div class="d-flex justify-content-center">
                       <img
-                        :src="home.headerImage"
+                        :data-src="home.headerImage"
                         alt="Header Image"
                         class="img-fluid"
+                        v-lazy-load
                       />
                     </div>
                   </div>

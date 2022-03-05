@@ -6,12 +6,13 @@
     >
       <img
         class="img-fluid aspect-16-9 cover-img"
-        :src="
+        :data-src="
           post.featureImage
             ? post.featureImage
             : 'https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg'
         "
         :alt="post.title"
+        v-lazy-load
       />
     </NuxtLink>
     <div class="card-body">

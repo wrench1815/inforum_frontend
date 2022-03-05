@@ -58,7 +58,7 @@
                         Description
                       </span>
                     </div>
-                    <div v-html="query.description"></div>
+                    <div v-lazy-load="query.description"></div>
                   </div>
                   <div class="col"></div>
                 </div>
@@ -89,6 +89,7 @@
 <script>
 import ProfileImage from '~/components/Admin/ProfileImage.vue'
 import Loading from '~/components/Admin/Utils/Loading.vue'
+import Prism from '~/plugins/prism'
 
 export default {
   layout: 'admin',
@@ -119,7 +120,10 @@ export default {
     query
       .then((res) => {
         this.query = res
+      })
+      .then(() => {
         this.loading = false
+        Prism.highlightAll()
       })
       .catch((error) => {
         let msg

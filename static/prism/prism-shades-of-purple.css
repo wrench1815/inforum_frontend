@@ -1,0 +1,201 @@
+/**
+ * Shades of Purple Theme for Prism.js
+ *
+ * @author Ahmad Awais <https://twitter.com/MrAhmadAwais/>
+ * @support Follow/tweet at https://twitter.com/MrAhmadAwais/
+ */
+
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #9efeff !important;
+  direction: ltr !important;
+  text-align: left !important;
+  white-space: pre !important;
+  word-spacing: normal !important;
+  word-break: normal !important;
+
+  -moz-tab-size: 4 !important;
+  -o-tab-size: 4 !important;
+  tab-size: 4 !important;
+
+  -webkit-hyphens: none !important;
+  -moz-hyphens: none !important;
+  -ms-hyphens: none !important;
+  hyphens: none !important;
+
+  font-family: 'Operator Mono', 'Fira Code', Consolas, Monaco, 'Andale Mono',
+    'Ubuntu Mono', monospace;
+  font-weight: 400 !important;
+  font-size: 17px !important;
+  line-height: 25px !important;
+  letter-spacing: 0.5px !important;
+  text-shadow: 0 1px #222245 !important;
+}
+
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection,
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
+  color: inherit !important;
+  background: #a599e9 !important;
+}
+
+/* Code blocks. */
+pre[class*='language-'] {
+  padding: 2em !important;
+  margin: 0.5em 0 !important;
+  overflow: auto !important;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #1e1e3f !important;
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em !important;
+  border-radius: 0.3em !important;
+}
+
+.token {
+  font-weight: 400 !important;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: #b362ff !important;
+}
+
+.token.delimiter,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule {
+  color: #ff9d00 !important;
+}
+
+.token.operator,
+.token.attr-name {
+  color: rgb(255, 180, 84) !important;
+}
+
+.token.punctuation {
+  color: #ffffff !important;
+}
+
+.token.boolean {
+  color: rgb(255, 98, 140) !important;
+}
+
+.token.tag,
+.token.tag .punctuation,
+.token.doctype,
+.token.builtin {
+  color: rgb(255, 157, 0) !important;
+}
+
+.token.entity,
+.token.symbol {
+  color: #6897bb !important;
+}
+
+.token.number {
+  color: #ff628c !important;
+}
+
+.token.property,
+.token.constant,
+.token.variable {
+  color: #ff628c !important;
+}
+
+.token.string,
+.token.char {
+  color: #a5ff90 !important;
+}
+
+.token.attr-value,
+.token.attr-value .punctuation {
+  color: #a5c261 !important;
+}
+
+.token.attr-value .punctuation:first-child {
+  color: #a9b7c6 !important;
+}
+
+.token.url {
+  color: #287bde !important;
+  text-decoration: underline !important;
+}
+
+.token.function {
+  color: rgb(250, 208, 0) !important;
+}
+
+.token.regex {
+  background: #364135 !important;
+}
+
+.token.bold {
+  font-weight: bold !important;
+}
+
+.token.italic {
+  font-style: italic !important;
+}
+
+.token.inserted {
+  background: #00ff00 !important;
+}
+
+.token.deleted {
+  background: #ff000d !important;
+}
+
+code.language-css .token.property,
+code.language-css .token.property + .token.punctuation {
+  color: #a9b7c6 !important;
+}
+
+code.language-css .token.id {
+  color: #ffc66d !important;
+}
+
+code.language-css .token.selector > .token.class,
+code.language-css .token.selector > .token.attribute,
+code.language-css .token.selector > .token.pseudo-class,
+code.language-css .token.selector > .token.pseudo-element {
+  color: #ffc66d !important;
+}
+
+.token.class-name {
+  color: #fb94ff !important;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  background: none !important;
+}
+
+.line-highlight.line-highlight {
+  margin-top: 36px !important;
+  background: linear-gradient(
+    to right,
+    rgba(179, 98, 255, 0.17),
+    transparent
+  ) !important;
+}
+
+.line-highlight.line-highlight:before,
+.line-highlight.line-highlight[data-end]:after {
+  content: '';
+}

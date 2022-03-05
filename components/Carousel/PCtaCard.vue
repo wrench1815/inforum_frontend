@@ -10,9 +10,9 @@
               >
                 <img
                   class="w-100 border-radius-xl max-height-500 img-cover aspect-9-16"
-                  src="https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg"
+                  data-src="https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg"
                   alt="Popular Post Feature Image"
-                  loading="lazy"
+                  v-lazy-load
                 />
               </div>
             </div>

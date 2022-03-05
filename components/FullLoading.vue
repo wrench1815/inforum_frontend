@@ -1,6 +1,11 @@
 <template>
   <div v-if="loading" class="loading-page">
-    <img class="loader" src="~/assets/svg/ball-triangle.svg" alt="Loader" />
+    <img
+      class="loader"
+      data-src="~/assets/svg/ball-triangle.svg"
+      alt="Loader"
+      v-lazy-load
+    />
   </div>
 </template>
 

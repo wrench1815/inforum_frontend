@@ -12,10 +12,11 @@
             <div class="container">
               <NuxtLink class="navbar-brand fs-4" to="/">
                 <img
-                  src="@/assets/icon.jpg"
+                  data-src="@/assets/icon.jpg"
                   width="25rem"
                   alt="logo"
                   class="mb-1"
+                  v-lazy-load
                 />
                 <span>Inforum</span>
               </NuxtLink>
@@ -102,8 +103,9 @@
                         id="profileDropdownMenuButton"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
-                        :src="loggedInUser.profileImage"
+                        :data-src="loggedInUser.profileImage"
                         alt="Avatar"
+                        v-lazy-load
                       />
 
                       <!-- Profile Image if not Authenticated -->
@@ -113,8 +115,9 @@
                         id="profileDropdownMenuButton"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
-                        :src="profileImage"
+                        :data-src="profileImage"
                         alt="Avatar"
+                        v-lazy-load
                       />
                       <!-- End:Profile Image -->
 

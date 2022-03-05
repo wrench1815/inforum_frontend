@@ -1,7 +1,6 @@
 <template>
   <nav
-    class="mt-4 bg-white shadow-blur navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl"
-    :class="stickyClasses"
+    class="mt-4 bg-white shadow-blur navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky top-0 z-index-sticky"
     navbar-scroll="true"
   >
     <div class="container-fluid py-1 px-3">
@@ -45,8 +44,9 @@
             >
               <img
                 class="avatar img-fit"
-                :src="loggedInUser.profileImage"
-                alt=""
+                :data-src="loggedInUser.profileImage"
+                alt="Profile Image"
+                v-lazy-load
               />
             </div>
             <ul
@@ -159,15 +159,15 @@ export default {
 
     // set sticky class for route name
     stickyClasses: function () {
-      if (this.$route.name == 'admin-blogpost-add') {
-        return ''
-      } else if (this.$route.name == 'admin-blogpost-edit-id') {
-        return ''
-      } else if (this.$route.name == 'admin-forum-add') {
-        return ''
-      } else if (this.$route.name == 'admin-forum-edit-id') {
-        return ''
-      }
+      // if (this.$route.name == 'admin-blogpost-add') {
+      //   return ''
+      // } else if (this.$route.name == 'admin-blogpost-edit-id') {
+      //   return ''
+      // } else if (this.$route.name == 'admin-forum-add') {
+      //   return ''
+      // } else if (this.$route.name == 'admin-forum-edit-id') {
+      //   return ''
+      // }
       return 'position-sticky top-0 z-index-sticky'
     },
   },

@@ -55,13 +55,6 @@
               />
             </div>
           </div>
-
-          <!-- <div class="row mt-4">
-            <div class="col-12 d-flex justify-content-end gap-2">
-              <button class="btn btn-info">Reset</button>
-              <button class="btn btn-success">Update</button>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -429,6 +422,11 @@ export default {
           this.originalRole = res.userRole[0]
           this.dob = this.stringToCalenderDate(res.user.dob)
           this.address = res.user.address ? res.user.address : ''
+        })
+        .then(() => {
+          if (this.originalUser.id == this.loggedInUser.id) {
+            this.$auth.fetchUser()
+          }
         })
         .catch((err) => {
           this.$swal.fire({

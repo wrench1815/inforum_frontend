@@ -15,8 +15,9 @@
           <span class="avatar avatar-md rounded-circle shadow-card">
             <img
               class="avatar avatar-md rounded-circle img-fit"
-              :src="author.profileImage"
+              :data-src="author.profileImage"
               alt="avatar"
+              v-lazy-load
             />
           </span>
           <!-- End:Profile image -->

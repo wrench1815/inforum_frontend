@@ -24,8 +24,9 @@
             <div class="d-flex justify-content-center py-3">
               <img
                 class="img-fluid shadow-blur rounded-3"
-                :src="homeData.headerImage"
+                :data-src="homeData.headerImage"
                 alt="header image"
+                v-lazy-load
               />
             </div>
           </div>

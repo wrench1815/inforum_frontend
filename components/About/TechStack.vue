@@ -7,9 +7,10 @@
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <a class="d-block blur-shadow-image ratio ratio-16x9">
               <img
-                src="~/assets/images/technology.jpg"
+                data-src="~/assets/images/technology.jpg"
                 alt="Technology"
                 class="img-fluid border-radius-lg img-cover-top"
+                v-lazy-load
               />
             </a>
             <div
@@ -34,9 +35,10 @@
             <div class="info">
               <img
                 class="img-fluid"
-                src="~/assets/svg/nuxt-colored.svg"
+                data-src="~/assets/svg/nuxt-colored.svg"
                 width="90rem"
                 alt="Nuxt"
+                v-lazy-load
               />
               <h5 class="nuxt-text-primary">
                 <a
@@ -60,9 +62,10 @@
             <div class="info">
               <img
                 class="img-fluid py-4"
-                src="~/assets/svg/dotnet-logo-text-logo-Purple.svg"
+                data-src="~/assets/svg/dotnet-logo-text-logo-Purple.svg"
                 width="135rem"
                 alt="ASP"
+                v-lazy-load
               />
               <h5 class="asp-text-primary mt-n2">
                 <a
@@ -88,8 +91,9 @@
               <img
                 class="img-fluid py-2"
                 width="90rem"
-                src="~/assets/svg/bootstrap-logo.svg"
+                data-src="~/assets/svg/bootstrap-logo.svg"
                 alt="Bootstrap"
+                v-lazy-load
               />
               <h5 class="bootstrap-text-primary">
                 <a
@@ -113,9 +117,10 @@
             <div class="info">
               <img
                 class="img-fluid py-2"
-                src="~/assets/svg/cloudinary_cloud_glyph_regular.svg"
+                data-src="~/assets/svg/cloudinary_cloud_glyph_regular.svg"
                 width="109rem"
                 alt="Cloudinary"
+                v-lazy-load
               />
               <h5 class="cloudinary-text-primary">
                 <a
@@ -141,8 +146,9 @@
               <img
                 class="img-fluid py-2"
                 width="90rem"
-                src="~/assets/svg/microsoft-sql-server-logo.svg"
+                data-src="~/assets/svg/microsoft-sql-server-logo.svg"
                 alt="SQL Server"
+                v-lazy-load
               />
               <h5 class="sql-server-text-primary">
                 <a
