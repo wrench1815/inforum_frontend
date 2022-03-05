@@ -62,6 +62,7 @@
                           :src="homeData.headerImage"
                           alt="Header Image"
                           class="img-fluid"
+                          v-lazy-load
                         />
                       </div>
                     </div>
@@ -88,11 +89,9 @@ import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   layout: 'admin',
-  components: {
-    FullImageUpload,
-  },
 
   components: {
+    FullImageUpload,
     Loading,
   },
 

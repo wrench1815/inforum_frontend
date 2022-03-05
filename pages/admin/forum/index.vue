@@ -15,8 +15,9 @@
           <div class="col-12 text-center" v-if="queries.length == 0">
             <img
               class="img-fluid w-50"
-              src="~assets/svg/Empty-amico.svg"
+              data-src="~assets/svg/Empty-amico.svg"
               alt="Feels Empty"
+              v-lazy-load
             />
             <h3 class="mx-4">No Queries yet</h3>
           </div>

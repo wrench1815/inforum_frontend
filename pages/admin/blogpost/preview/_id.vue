@@ -18,11 +18,12 @@
                 <div class="h-100 w-100 ratio ratio-16x9 my-3 my-lg-4">
                   <img
                     class="cover-img border-radius-2xl shadow-lg"
-                    :src="
+                    :data-src="
                       post.featureImage
                         ? post.featureImage
                         : 'https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg'
                     "
+                    v-lazy-load
                   />
                 </div>
 
@@ -82,7 +83,7 @@
                 <div class="border-top mt-4"></div>
                 <!-- content -->
                 <div
-                  v-html="post.description"
+                  v-lazy-load="post.description"
                   id="postContent"
                   class="py-3 px-lg-3"
                 ></div>
@@ -111,6 +112,7 @@
 
 <script>
 import Loading from '~/components/Admin/Utils/Loading.vue'
+import Prism from '~/plugins/prism'
 
 export default {
   layout: 'admin',
@@ -137,18 +139,11 @@ export default {
         images[i].classList.add('img-fluid', 'shadow-lg')
       }
 
-      // adds classes to figures and its sub-elements to make them responsive
-      const figures = postContent.getElementsByTagName('figure')
-      for (let i = 0; i < figures.length; i++) {
-        figures[i].classList.add('mx-auto')
-        figures[i]
-          .getElementsByTagName('img')[0]
-          .classList.add('figure-img', 'img-fluid', 'shadow-lg')
-        if (figures[i].getElementsByTagName('figcaption').length > 0) {
-          figures[i]
-            .getElementsByTagName('figcaption')[0]
-            .classList.add('figure-caption', 'text-center', 'text-bold')
-        }
+      // find all iframes
+      const iFrames = postContent.getElementsByTagName('iframe')
+      console.log(iFrames)
+      for (let i = 0; i < iFrames.length; i++) {
+        iFrames[i].classList.add('d-block', 'mx-auto')
       }
     },
     joinName(first, last) {
@@ -172,10 +167,13 @@ export default {
           .then((res) => {
             this.post = _post
             this.author = res
+          })
+          .then(() => {
             this.loading = false
           })
           .then(() => {
             this.postStyles()
+            Prism.highlightAll()
           })
       })
       .catch((err) => {

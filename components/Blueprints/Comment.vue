@@ -5,7 +5,7 @@
       <NuxtLink class="d-flex justify-content-start gap-3" to="/">
         <!-- profile image -->
         <span class="avatar avatar-md rounded-circle shadow-card">
-          <img src="https://i.pravatar.cc/100" alt="avatar" />
+          <img data-src="https://i.pravatar.cc/100" alt="avatar" v-lazy-load />
         </span>
 
         <span class="d-flex flex-column justify-content-center custom-gap">

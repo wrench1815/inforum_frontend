@@ -11,8 +11,9 @@
           <span class="avatar avatar-md shadow-card">
             <img
               class="avatar avatar-md img-fit-cover"
-              :src="user.user.profileImage"
+              :data-src="user.user.profileImage"
               alt="avatar"
+              v-lazy-load
             />
           </span>
           <!-- End:Profile Image -->

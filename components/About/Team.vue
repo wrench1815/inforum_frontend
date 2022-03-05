@@ -25,6 +25,7 @@
                       class="w-100 border-radius-md shadow-lg img-cover"
                       :src="$config.hImage"
                       alt="Profile Image"
+                      v-lazy-load
                     />
                   </div>
                 </div>
@@ -56,6 +57,7 @@
                       class="w-100 border-radius-md shadow-lg img-cover"
                       :src="$config.aImage"
                       alt="Profile Image"
+                      v-lazy-load
                     />
                   </div>
                 </div>
@@ -88,6 +90,7 @@
                       class="w-100 border-radius-md shadow-lg img-cover"
                       :src="$config.vImage"
                       alt="Profile Image"
+                      v-lazy-load
                     />
                   </div>
                 </div>

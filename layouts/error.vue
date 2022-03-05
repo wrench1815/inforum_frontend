@@ -7,10 +7,11 @@
         <nav>
           <NuxtLink class="navbar-brand link-dark fs-4" to="/">
             <img
-              src="@/assets/icon.jpg"
+              data-src="@/assets/icon.jpg"
               width="25rem"
               alt="logo"
               class="mb-1"
+              v-lazy-load
             />
             <span>Inforum</span>
           </NuxtLink>
@@ -21,8 +22,9 @@
           <div class="d-flex justify-content-center">
             <img
               class="img-fluid w-sm-90 w-md-80 w-lg-70 w-xl-60 w-xxl-50"
-              :src="require(`~/assets/svg/error.svg`)"
-              alt=""
+              :data-src="require(`~/assets/svg/error.svg`)"
+              alt="Error"
+              v-lazy-load
             />
           </div>
           <div>
@@ -41,8 +43,9 @@
           <div class="d-flex justify-content-center">
             <img
               class="img-fluid w-sm-90 w-md-80 w-lg-70 w-xl-60 w-xxl-50"
-              :src="require(`~/assets/svg/fetch-failed.svg`)"
-              alt=""
+              :data-src="require(`~/assets/svg/fetch-failed.svg`)"
+              alt="Error"
+              v-lazy-load
             />
           </div>
           <div>
@@ -61,8 +64,9 @@
           <div class="d-flex justify-content-center">
             <img
               class="img-fluid w-80 w-md-60 w-lg-50 w-xl-40 w-xxl-30"
-              :src="require(`~/assets/svg/access-denied.svg`)"
-              alt=""
+              :data-src="require(`~/assets/svg/access-denied.svg`)"
+              alt="Error"
+              v-lazy-load
             />
           </div>
           <div>

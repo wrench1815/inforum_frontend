@@ -15,8 +15,9 @@
           <span class="avatar avatar-md rounded-circle shadow-card">
             <img
               class="avatar avatar-md rounded-circle img-fit"
-              :src="queryAuthor.profileImage"
+              :data-src="queryAuthor.profileImage"
               alt="avatar"
+              v-lazy-load
             />
           </span>
 
@@ -41,7 +42,7 @@
         <!-- End:Query Title -->
 
         <!-- Start:Query Description -->
-        <div v-html="query.description"></div>
+        <div v-lazy-load="query.description"></div>
         <!-- End:Query Description -->
 
         <!-- Start:Query Category -->

@@ -76,8 +76,9 @@
         <div class="card card-body mt-3 align-items-center">
           <img
             class="img-fluid w-60"
-            src="~assets/svg/Questions.svg"
+            data-src="~assets/svg/Questions.svg"
             alt="Nothing to Search"
+            v-lazy-load
           />
           <h4>Nothing to Search</h4>
         </div>

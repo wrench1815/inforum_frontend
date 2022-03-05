@@ -13,9 +13,9 @@
               >
                 <img
                   class="w-100 border-radius-xl max-height-500 img-cover aspect-9-16"
-                  :src="post.featureImage"
+                  :data-src="post.featureImage"
                   alt="Popular Post Feature Image"
-                  loading="lazy"
+                  v-lazy-load
                 />
               </div>
             </div>
@@ -42,8 +42,9 @@
             <span class="avatar avatar-lg rounded-circle shadow-lg">
               <img
                 class="avatar avatar-lg rounded-circle img-fit"
-                :src="user.profileImage"
+                :data-src="user.profileImage"
                 alt="avatar"
+                v-lazy-load
               />
             </span>
             <span class="d-flex flex-column">
