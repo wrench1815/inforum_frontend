@@ -8,7 +8,7 @@
           <nav>
             <NuxtLink class="navbar-brand link-dark fs-4" to="/">
               <img
-                src="@/assets/icon.jpg"
+                data-src="@/assets/icon.jpg"
                 width="25rem"
                 alt="logo"
                 class="mb-1"

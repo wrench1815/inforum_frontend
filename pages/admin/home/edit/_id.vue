@@ -89,11 +89,9 @@ import Loading from '~/components/Admin/Utils/Loading.vue'
 
 export default {
   layout: 'admin',
-  components: {
-    FullImageUpload,
-  },
 
   components: {
+    FullImageUpload,
     Loading,
   },
 

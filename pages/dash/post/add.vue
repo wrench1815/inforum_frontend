@@ -36,7 +36,7 @@
             </div>
             <div class="d-flex justify-content-center">
               <img
-                :src="postFeatureImage"
+                :data-src="postFeatureImage"
                 alt="Feature Image"
                 class="img-fluid max-height-vh-100"
                 v-lazy-load

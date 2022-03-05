@@ -9,7 +9,7 @@
             <NuxtLink to="/" class="d-flex align-items-center">
               <p class="text-muted d-block text-2xl text-center text-lg-start">
                 <img
-                  src="@/assets/icon.jpg"
+                  data-src="@/assets/icon.jpg"
                   alt="logo"
                   class="w-15 w-lg-25"
                   v-lazy-load

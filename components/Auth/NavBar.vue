@@ -12,7 +12,7 @@
             <div class="container">
               <NuxtLink class="navbar-brand fs-4" to="/">
                 <img
-                  src="@/assets/icon.jpg"
+                  data-src="@/assets/icon.jpg"
                   width="25rem"
                   alt="logo"
                   class="mb-1"

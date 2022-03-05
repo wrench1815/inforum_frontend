@@ -11,7 +11,7 @@
       ></i>
       <NuxtLink class="navbar-brand m-0" to="/admin">
         <img
-          src="/favicon.png"
+          data-src="/favicon.png"
           class="navbar-brand-img h-100"
           alt="main_logo"
           v-lazy-load

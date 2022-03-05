@@ -1,7 +1,7 @@
 <template>
   <img
     :class="isAvatar ? defaultStyles : classNames"
-    :src="profileImage"
+    :data-src="profileImage"
     alt="Avatar"
     v-lazy-load
   />

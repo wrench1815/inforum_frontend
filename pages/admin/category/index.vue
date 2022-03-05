@@ -15,7 +15,7 @@
           <div class="col-12" v-if="categories.length == 0">
             <img
               class="img-fluid w-50"
-              src="~assets/svg/Empty-amico.svg"
+              data-src="~assets/svg/Empty-amico.svg"
               alt="Feels Empty"
               v-lazy-load
             />

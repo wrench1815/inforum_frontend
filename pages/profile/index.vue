@@ -14,7 +14,7 @@
                 <div class="col-sm-auto col-4">
                   <div class="avatar-xl position-relative">
                     <img
-                      :src="loggedInUser.profileImage"
+                      :data-src="loggedInUser.profileImage"
                       alt="img"
                       class="w-100 rounded-circle shadow-sm avatar-xl avatar-fit"
                       v-lazy-load

@@ -3,7 +3,7 @@
     <div class="card-body text-center">
       <img
         class="img-fluid"
-        src="~/assets/svg/ball-triangle.svg"
+        data-src="~/assets/svg/ball-triangle.svg"
         width="90px"
         alt="Loader"
         v-lazy-load

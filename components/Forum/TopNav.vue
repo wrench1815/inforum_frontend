@@ -6,7 +6,7 @@
       >
         <NuxtLink class="navbar-brand fs-4 link-dark" to="/">
           <img
-            src="@/assets/icon.jpg"
+            data-src="@/assets/icon.jpg"
             width="25rem"
             alt="logo"
             class="mb-1"
@@ -60,7 +60,7 @@
               <img
                 v-if="!isAuthenticated"
                 class="avatar avatar-sm img-fit"
-                :src="profileImage"
+                :data-src="profileImage"
                 alt="Avatar"
                 v-lazy-load
               />
@@ -70,7 +70,7 @@
               <img
                 v-if="isAuthenticated"
                 class="avatar avatar-sm img-fit"
-                :src="loggedInUser.profileImage"
+                :data-src="loggedInUser.profileImage"
                 alt="Avatar"
                 v-lazy-load
               />

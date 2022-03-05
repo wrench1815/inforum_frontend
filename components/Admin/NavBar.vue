@@ -44,7 +44,7 @@
             >
               <img
                 class="avatar img-fit"
-                :src="loggedInUser.profileImage"
+                :data-src="loggedInUser.profileImage"
                 alt="Profile Image"
                 v-lazy-load
               />

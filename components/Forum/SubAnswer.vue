@@ -11,7 +11,7 @@
         >
           <span class="avatar avatar-sm shadow">
             <img
-              :src="user.user.profileImage"
+              :data-src="user.user.profileImage"
               alt="logo"
               class="avatar avatar-sm img-fit-cover"
               v-lazy-load

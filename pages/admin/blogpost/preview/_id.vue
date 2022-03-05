@@ -18,7 +18,7 @@
                 <div class="h-100 w-100 ratio ratio-16x9 my-3 my-lg-4">
                   <img
                     class="cover-img border-radius-2xl shadow-lg"
-                    :src="
+                    :data-src="
                       post.featureImage
                         ? post.featureImage
                         : 'https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg'

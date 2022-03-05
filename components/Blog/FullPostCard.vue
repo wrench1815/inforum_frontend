@@ -7,7 +7,7 @@
       >
         <img
           class="cover-img"
-          :src="
+          :data-src="
             post.featureImage
               ? post.featureImage
               : 'https://res.cloudinary.com/inforum/image/upload/v1645626004/Defaults/open-book_xtbv4v.jpg'

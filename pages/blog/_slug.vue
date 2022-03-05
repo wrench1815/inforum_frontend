@@ -22,7 +22,7 @@
                 <!-- Start:Author -->
                 <div class="mt-3 text-white">
                   <img
-                    :src="author.user.profileImage"
+                    :data-src="author.user.profileImage"
                     width="25rem"
                     :alt="`${author.user.firstName} ${author.user.lastName}`"
                     class="mb-1 avatar img-fit"

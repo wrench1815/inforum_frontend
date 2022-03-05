@@ -15,7 +15,7 @@
           <div class="col-12 text-center" v-if="users.length == 0">
             <img
               class="img-fluid w-50"
-              src="~assets/svg/Empty-amico.svg"
+              data-src="~assets/svg/Empty-amico.svg"
               alt="Feels Empty"
               v-lazy-load
             />
@@ -50,7 +50,7 @@
                           class="avatar avatar-md rounded-circle shadow-card"
                         >
                           <img
-                            :src="user.profileImage"
+                            :data-src="user.profileImage"
                             class="avatar avatar-md rounded-circle img-fit"
                             alt="avatar"
                             v-lazy-load
