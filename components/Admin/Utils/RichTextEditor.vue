@@ -50,7 +50,6 @@ export default {
       default: '',
     },
   },
-
   data() {
     return {
       content: '',
