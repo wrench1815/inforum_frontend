@@ -40,7 +40,6 @@ export default {
   mounted() {
     const scrollEle = document.getElementById(this.eleId)
     scrollEle.addEventListener('scroll', () => {
-      console.log(scrollEle.scrollTop)
       if (scrollEle.scrollTop > 100) {
         this.visible = true
       } else {
