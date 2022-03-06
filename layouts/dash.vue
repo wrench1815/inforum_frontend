@@ -5,8 +5,9 @@
       <div class="left">
         <DashSideMenu />
       </div>
-      <div class="middle max-height-vh-100">
+      <div class="middle max-height-vh-100" id="middle">
         <Nuxt />
+        <ToUpEle :eleId="'middle'" />
       </div>
     </div>
   </div>

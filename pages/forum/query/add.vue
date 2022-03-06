@@ -153,7 +153,6 @@ export default {
     validateCategory() {
       if (this.queryCategory === '') {
         this.helpTexts.category = 'Please select a category'
-        console.log('cat')
       } else {
         this.helpTexts.category = ''
       }

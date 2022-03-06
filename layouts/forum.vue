@@ -12,8 +12,9 @@
       </div>
 
       <!-- middle -->
-      <div class="middle pe-1">
+      <div class="middle pe-1 position-relative" id="middle">
         <nuxt />
+        <ToUpEle :eleId="'middle'" />
       </div>
 
       <!-- right -->

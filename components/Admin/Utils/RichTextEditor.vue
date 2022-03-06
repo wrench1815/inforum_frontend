@@ -62,7 +62,7 @@ export default {
         content_style:
           'body { margin-left: 0.5rem; margin-right: 0.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }' +
           'img{ max-width: 100%; height: auto; }' +
-          'iframe{ display: block; margin: 0 auto; }',
+          'iframe{ display: block; margin: 0 auto; max-width: 100%; height: 100%; aspect-ratio: 16/9; }',
         // sets height
         height: '70vh',
         width: '100%',
