@@ -141,9 +141,13 @@ export default {
 
       // find all iframes
       const iFrames = postContent.getElementsByTagName('iframe')
-      console.log(iFrames)
       for (let i = 0; i < iFrames.length; i++) {
-        iFrames[i].classList.add('d-block', 'mx-auto')
+        iFrames[i].classList.add(
+          'd-block',
+          'mx-auto',
+          'img-fluid',
+          'aspect-ratio-16-9'
+        )
       }
     },
     joinName(first, last) {
@@ -190,5 +194,9 @@ export default {
 <style scoped>
 .cover-img {
   object-fit: cover;
+}
+
+>>> .aspect-ratio-16-9 {
+  aspect-ratio: 16/9;
 }
 </style>
