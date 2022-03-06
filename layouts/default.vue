@@ -3,6 +3,7 @@
     <LazyNavBar />
     <Nuxt />
     <LazyFooter />
+    <ToUp />
   </div>
 </template>
 

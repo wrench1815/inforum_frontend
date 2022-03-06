@@ -7,6 +7,7 @@
       <!-- <AdminNavBar /> -->
       <Nuxt />
       <AdminFooter />
+      <ToUp />
     </main>
   </div>
 </template>
