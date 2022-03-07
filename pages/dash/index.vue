@@ -2,7 +2,7 @@
   <div>
     <loading v-if="loading" />
 
-    <div class="mx-0 mx-md-2 pt-0" v-if="!loading">
+    <div class="card-body pt-0" v-if="!loading">
       <div
         class="card card-body gap-3 d-flex flex-column flex-md-row justify-content-start align-items-center"
       >

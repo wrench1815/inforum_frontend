@@ -48,6 +48,7 @@
                     <NuxtLink
                       class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-md"
                       to="/"
+                      :active-class="'fix-active-link-bug'"
                     >
                       Home
                     </NuxtLink>
@@ -263,6 +264,10 @@ export default {
 }
 
 #nav .navbar-nav .nuxt-link-exact-active {
+  color: #e91e63;
+}
+
+#nav .navbar-nav .nuxt-link-active {
   color: #e91e63;
 }
 
