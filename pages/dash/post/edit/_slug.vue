@@ -384,6 +384,7 @@ export default {
         shortDescription: this.postData.shortDescription,
         featureImage: this.postData.featureImage,
         datePosted: this.postData.datePosted,
+        star: this.postData.star,
       }
 
       // validations

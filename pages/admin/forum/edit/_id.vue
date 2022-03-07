@@ -180,6 +180,7 @@ export default {
           datePosted: this.query.datePosted,
           categoryId: Number(this.categoryId),
           authorId: this.query.authorId,
+          vote: this.query.vote,
         }
 
         await this.$axios
