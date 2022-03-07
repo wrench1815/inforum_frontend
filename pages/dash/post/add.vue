@@ -1,5 +1,5 @@
 <template>
-  <div class="card-body pt-0">
+  <div class="mx-0 mx-md-2 pt-0">
     <h3 class="card card-body">Add a New Post</h3>
 
     <Loading class="mt-3" v-if="loading" />

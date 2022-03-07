@@ -1,5 +1,5 @@
 <template>
-  <div class="card-body pt-0">
+  <div class="mx-0 mx-md-2 pt-0">
     <h3 class="card card-body d-flex flex-row mb-3">
       Blog Post by <span class="text-primary ms-2">You</span>
     </h3>
