@@ -20,7 +20,7 @@
     "nuxt-lazy-load": "^1.2.9",
     "particles.js": "^2.0.0",
     "prismjs": "^1.27.0",
-    "tinymce": "^5",
+    "tinymce": "^6",
     "vue-advanced-cropper": "^1.10.0",
     "vue-sweetalert2": "^5.0.2"
   },
