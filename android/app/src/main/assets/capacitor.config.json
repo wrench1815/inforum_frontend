@@ -1,0 +1,6 @@
+{
+	"appId": "com.inforum.app",
+	"appName": "Inforum",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
