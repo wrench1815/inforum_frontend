@@ -1,3 +1,21 @@
+// state
+export const state = () => ({
+  privacyAccepted: false,
+})
+
+// mutations
+export const mutations = {
+  acceptPrivacy(state) {
+    localStorage.setItem('privacyAccepted', true)
+    state.privacyAccepted = localStorage.getItem('privacyAccepted')
+  },
+
+  statusPrivacy(state) {
+    state.privacyAccepted = localStorage.getItem('privacyAccepted')
+  },
+}
+
+// getters
 export const getters = {
   // If any User is Logged in or not
   isAuthenticated(state) {

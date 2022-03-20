@@ -10,6 +10,7 @@
         <ToUpEle :eleId="'middle'" />
       </div>
     </div>
+    <PrivacyPolicy />
   </div>
 </template>
 
