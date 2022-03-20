@@ -3,7 +3,7 @@
     <div class="position-fixed bottom-0">
       <div class="d-flex flex-column">
         <a
-          class="btn btn-success btn-icon-only rounded-circle d-lg-none"
+          class="btn btn-success btn-icon-only rounded-circle d-lg-non d-none"
           @click="pageRefresh"
         >
           <span class="d-flex justify-content-center align-items-center"
