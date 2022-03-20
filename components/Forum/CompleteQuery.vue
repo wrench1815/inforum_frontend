@@ -154,6 +154,7 @@
 <script>
 import Loading from '~/components/Admin/Utils/Loading.vue'
 import { mapGetters } from 'vuex'
+import Prism from '~/plugins/prism'
 
 export default {
   name: 'CompleteQuery',
@@ -232,6 +233,9 @@ export default {
         })
         .then(() => {
           this.loading = false
+        })
+        .then(() => {
+          Prism.highlightAll()
         })
     },
 
