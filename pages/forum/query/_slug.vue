@@ -11,7 +11,6 @@
 
 <script>
 import Loading from '~/components/Admin/Utils/Loading.vue'
-import Prism from '~/plugins/prism'
 
 export default {
   layout: 'forum',
@@ -41,9 +40,6 @@ export default {
           })
           .then(() => {
             this.loading = false
-          })
-          .then(() => {
-            Prism.highlightAll()
           })
       })
       .catch((err) => {

@@ -4,6 +4,7 @@
     <Nuxt />
     <LazyFooter />
     <ToUp />
+    <PrivacyPolicy />
   </div>
 </template>
 

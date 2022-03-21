@@ -91,3 +91,7 @@ sw.*
 
 # lock files
 yarn.lock
+
+# ignore android for branches other than mobile-app
+# do note that it raises a merge conflict
+android/

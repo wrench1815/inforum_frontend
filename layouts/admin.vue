@@ -9,6 +9,7 @@
       <AdminFooter />
       <ToUp />
     </main>
+    <PrivacyPolicy />
   </div>
 </template>
 

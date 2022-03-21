@@ -22,6 +22,7 @@
         <ForumRightSideBar class="bg-white shadow-lg rounded-3" />
       </div>
     </div>
+    <PrivacyPolicy />
   </div>
 </template>
 
