@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MobileNetworkStatus />
     <LazyAuthNavBar />
     <Nuxt />
     <!-- <LazyAuthFooter /> -->

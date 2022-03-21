@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MobileNetworkStatus />
     <LazyNavBar />
     <div class="mt-7 container grid grid-height">
       <div class="left">

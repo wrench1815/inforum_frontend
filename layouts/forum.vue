@@ -23,6 +23,7 @@
       </div>
     </div>
     <PrivacyPolicy />
+    <MobileNetworkStatus />
   </div>
 </template>
 
