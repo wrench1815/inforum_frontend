@@ -1,13 +1,24 @@
 <template>
-  <div
-    class="position-fixed bottom-0 end-0 me-2 z-index-sticky"
-    v-show="visible"
-  >
-    <a class="btn btn-primary btn-icon-only rounded-circle" @click="toUp">
-      <span class="d-flex justify-content-center align-items-center"
-        ><i class="fas fa-chevron-up text-white text-lg mt-n1"></i
-      ></span>
-    </a>
+  <div class="position-fixed bottom-0 end-0 me-1 z-index-sticky">
+    <div class="d-flex flex-column">
+      <a
+        class="btn btn-success btn-icon-only rounded-circle d-lg-non d-none"
+        @click="pageRefresh"
+      >
+        <span class="d-flex justify-content-center align-items-center"
+          ><i class="fas fa-redo text-white text-lg reload-btn-margin"></i
+        ></span>
+      </a>
+      <a
+        class="btn btn-primary btn-icon-only rounded-circle"
+        @click="toUp"
+        v-show="visible"
+      >
+        <span class="d-flex justify-content-center align-items-center"
+          ><i class="fas fa-chevron-up text-white text-lg mt-n1"></i
+        ></span>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -22,6 +33,10 @@ export default {
   },
 
   methods: {
+    pageRefresh() {
+      location.reload()
+    },
+
     toUp() {
       setTimeout(() => {
         window.scroll(0, 0)
@@ -41,4 +56,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.reload-btn-margin {
+  margin-top: -0.1rem !important;
+}
+</style>
