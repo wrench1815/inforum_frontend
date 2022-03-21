@@ -2,7 +2,7 @@
   <div class="position-fixed bottom-0 end-0 me-1 z-index-sticky">
     <div class="d-flex flex-column">
       <a
-        class="btn btn-success btn-icon-only rounded-circle d-lg-non d-none"
+        class="btn btn-success btn-icon-only rounded-circle"
         @click="pageRefresh"
       >
         <span class="d-flex justify-content-center align-items-center"
